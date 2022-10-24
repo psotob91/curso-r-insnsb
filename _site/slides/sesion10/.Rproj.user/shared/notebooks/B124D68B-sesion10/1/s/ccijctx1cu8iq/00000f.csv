@@ -1,0 +1,4 @@
+"0","library(statmod)"
+"0","set.seed(2134)"
+"0","quant_res <- qresid(mod)"
+"0","ggqqplot(quant_res)"

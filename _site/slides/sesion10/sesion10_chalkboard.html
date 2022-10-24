@@ -1,0 +1,2658 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="sesion10_chalkboard_files/libs/clipboard/clipboard.min.js"></script>
+<script src="sesion10_chalkboard_files/libs/quarto-html/tabby.min.js"></script>
+<script src="sesion10_chalkboard_files/libs/quarto-html/popper.min.js"></script>
+<script src="sesion10_chalkboard_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="sesion10_chalkboard_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="sesion10_chalkboard_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="sesion10_chalkboard_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="sesion10_chalkboard_files/libs/quarto-contrib/reveal-auto-agenda-0.0.1/reveal-auto-agenda.css" rel="stylesheet">
+<link href="sesion10_chalkboard_files/libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="sesion10_chalkboard_files/libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.1.251">
+
+  <title>sesion10_chalkboard</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="sesion10_chalkboard_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="sesion10_chalkboard_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #b3b1ad; background-color: #0a0e14; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #b3b1ad; } /* Normal */
+    code span.al { color: #ff3333; background-color: #2a0f15; font-weight: bold; } /* Alert */
+    code span.an { color: #e6b673; } /* Annotation */
+    code span.at { color: #59c2ff; } /* Attribute */
+    code span.bn { color: #e6b450; } /* BaseN */
+    code span.bu { color: #95e6cb; } /* BuiltIn */
+    code span.cf { color: #ff8f40; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #95e6cb; } /* Char */
+    code span.cn { color: #ffee99; } /* Constant */
+    code span.co { color: #626a73; font-style: italic; } /* Comment */
+    code span.cv { color: #ffee99; } /* CommentVar */
+    code span.do { color: #626a73; } /* Documentation */
+    code span.dt { color: #ff8f40; } /* DataType */
+    code span.dv { color: #e6b450; } /* DecVal */
+    code span.er { color: #ff3333; text-decoration: underline; } /* Error */
+    code span.ex { color: #59c2ff; font-weight: bold; } /* Extension */
+    code span.fl { color: #e6b450; } /* Float */
+    code span.fu { color: #ffb454; } /* Function */
+    code span.im { color: #c2d94c; } /* Import */
+    code span.in { color: #e6b450; } /* Information */
+    code span.kw { color: #ff8f40; font-weight: bold; } /* Keyword */
+    code span.op { color: #f29668; } /* Operator */
+    code span.ot { color: #39bae6; } /* Other */
+    code span.pp { color: #f07178; } /* Preprocessor */
+    code span.re { color: #59c2ff; background-color: #173649; } /* RegionMarker */
+    code span.sc { color: #95e6cb; } /* SpecialChar */
+    code span.ss { color: #95e6cb; } /* SpecialString */
+    code span.st { color: #c2d94c; } /* String */
+    code span.va { color: #39bae6; } /* Variable */
+    code span.vs { color: #c2d94c; } /* VerbatimString */
+    code span.wa { color: #f07178; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="sesion10_chalkboard_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <link href="sesion10_chalkboard_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="sesion10_chalkboard_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="sesion10_chalkboard_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="sesion10_chalkboard_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-captioned.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-captioned) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-captioned.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-captioned .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-captioned .callout-caption  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-captioned.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-captioned.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-caption {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-caption {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-caption {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-captioned .callout-body > .callout-content > :last-child {
+    margin-bottom: 0.5rem;
+  }
+
+  .callout.callout-captioned .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-captioned) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-caption {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-caption {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-caption {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-caption {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-caption {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  
+  <script src="sesion10_chalkboard_files/libs/kePrint-0.0.1/kePrint.js"></script>
+  <link href="sesion10_chalkboard_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+  <script src="sesion10_chalkboard_files/libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+  <script src="sesion10_chalkboard_files/libs/plotly-binding-4.10.0/plotly.js"></script>
+  <script src="sesion10_chalkboard_files/libs/typedarray-0.1/typedarray.min.js"></script>
+  <script src="sesion10_chalkboard_files/libs/jquery-3.5.1/jquery.min.js"></script>
+  <link href="sesion10_chalkboard_files/libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+  <script src="sesion10_chalkboard_files/libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+  <link href="sesion10_chalkboard_files/libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
+  <script src="sesion10_chalkboard_files/libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+
+<section class="slide level2">
+
+<p><br>
+</p>
+<p><br>
+</p>
+<h1>
+Sesión 10
+</h1>
+<h2>
+<span class="plo">Curso: R Aplicado a los Proyectos de Investigación</span>
+</h2>
+<hr>
+<h3>
+<span class="negro">Percy Soto-Becerra, M.D., M.Sc(c)</span>
+</h3>
+<h4>
+<span class="negro">InkaStats Data Science Solutions | Medical Branch</span>
+</h4>
+<h4>
+<span class="negro">2022-10-24</span>
+</h4>
+<p><svg aria-hidden="true" role="img" viewbox="0 0 496 512" style="height:1em;width:0.97em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3 .3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5 .3-6.2 2.3zm44.2-1.7c-2.9 .7-4.9 2.6-4.6 4.9 .3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3 .7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3 .3 2.9 2.3 3.9 1.6 1 3.6 .7 4.3-.7 .7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3 .7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3 .7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg> &nbsp; <a href="https://github.com/psotob91" class="uri">https://github.com/psotob91</a></p>
+<p><img data-src="img/social-image-f22.png" class="absolute" style="top: 390px; left: 950px; width: 600px; "></p>
+<div class="cell">
+
+</div>
+</section>
+<section>
+<section class="title-slide slide level1 agenda-slide center">
+<h1>Medidas de frecuencia para datos categóricos</h1>
+<div class="agenda-heading">
+<p>Agenda</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-active">
+<p>Medidas de frecuencia para datos categóricos</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Medidas de asociación</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Regresión Logística Binaria</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Otras regresiones para datos binarios</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section id="probabilidad-teórica" class="slide level2">
+<h2>Probabilidad teórica</h2>
+<blockquote>
+<p>La <code>probabilidad</code> es una <code>medida</code> utilizada para evaluar la <code>incertidumbre</code>.</p>
+</blockquote>
+<ul>
+<li><p>Es una medida <code>teórica</code> (desconocida), que queremos <code>estimar</code>.</p></li>
+<li><p>Desde una perspectiva frecuentista, la <code>proporción</code> de eventos en infinitos experimentos aleatorios es una <code>probabilidad</code>.</p>
+<ul>
+<li>Usamos la <code>proporción observada</code> en la muestra para <code>aproximarnos</code> a la <code>probabilidad teórica</code>.</li>
+</ul></li>
+<li><p>Otra forma de ver la probabildiad es a través de los <code>odds de probabilidad</code>.</p></li>
+</ul>
+</section>
+<section id="proporción-según-diseño" class="slide level2">
+<h2>Proporción según diseño</h2>
+<ul>
+<li><p>En un estudio transversal, la <code>probabilidad</code> de <code>tener</code> una <code>enfermedad</code> es su <code>prevalencia</code>.</p>
+<ul>
+<li>Numerador incluye casos <code>nuevos</code> y <code>antiguos</code>.</li>
+<li><code>Denominador</code> es <code>toda</code> la <code>población de interés</code>.</li>
+</ul></li>
+<li><p>En un estudio de cohorte, la <code>probabilidad</code> de desarrollar una <code>enfermedad</code> es su <code>incidencia acumuada (IA)</code>.</p>
+<ul>
+<li>También llamada <code>riesgo absoluto</code>. En jerga epi: <code>riesgo</code> (a secas).</li>
+<li>Numerador solo inclute <code>casos nuevos</code>.</li>
+<li><code>Denominador</code> es población <code>sin evento</code> al <code>inicio</code> del <code>seguimiento</code>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="proporción" class="slide level2 scrollable">
+<h2>Proporción</h2>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Enfermedad</th>
+<th>No enfermedad</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Población</strong></td>
+<td>a</td>
+<td>b</td>
+<td>a + b</td>
+</tr>
+</tbody>
+</table>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Prevalencia</strong></p>
+<p><span class="math display">\[
+Prev = \frac{a}{a + b}
+\]</span></p>
+<p>Donde:</p>
+<p><span class="math inline">\(a\)</span> = Casos totales (<code>nuevos</code> y <code>antiguos</code>)</p>
+<p><span class="math inline">\(a+b\)</span> = <code>Toda la población de interés</code> en el punto/periodo de tiempo evaluado.</p>
+</div><div class="column" style="width:50%;">
+<p><strong>Incidencia acumulada</strong></p>
+<p><span class="math display">\[
+IA = \frac{a}{a+b}
+\]</span></p>
+<p>Donde:</p>
+<p><span class="math inline">\(a\)</span>: Solo incluye <code>casos nuevos</code> durante el seguimeinto.</p>
+<p><span class="math inline">\(a+b\)</span>: Toda la población <code>si y solo sí</code> al inicio todos ellos <code>no tenían la enfermedad</code>.</p>
+</div>
+</div>
+</section>
+<section id="prevalencia-versus-ia" class="slide level2">
+<h2>Prevalencia versus IA</h2>
+
+<img data-src="img/prev-inc.png" class="r-stretch quarto-figure-center"><p class="caption">Fuente: Principles of Epidemiology in Public Health Practice, Third Edition An Introduction to Applied Epidemiology and Biostatistics</p></section>
+<section id="odds" class="slide level2 scrollable">
+<h2>Odds</h2>
+<ul>
+<li><p>Sea una variable <span class="math inline">\(Y\)</span> que puede asumir dos valores 1 (ocurre el evento) o 0 (no ocurre el evento).</p></li>
+<li><p>La probabilidad de que ocurra el evento es:</p></li>
+</ul>
+<p><span class="math display">\[Pr(Y = 1) =  \frac{\text{Número de eventos}}{\text{Total de observaciones}}\]</span></p>
+<ul>
+<li>El odds de que ocurra el evento es solo un cambio de escala:</li>
+</ul>
+<p><span class="math display">\[Odds(Y = 1) = \frac{Pr(Y = 1)}{Pr(Y = 0)} = \frac{Pr(Y=1)}{1-Pr(Y=1)}\]</span></p>
+</section>
+<section id="odds-cont." class="slide level2">
+<h2>Odds (cont.)</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><p>Los odds son otra forma de presentar a las probabilidades.</p></li>
+<li><p>Mantienen la dirección de su relación con las probabilidades.</p></li>
+<li><p>Cuando las <span class="math inline">\(Pr\)</span> son pequeñas, los <span class="math inline">\(Odds \simeq Pr\)</span>.</p>
+<ul>
+<li>Sin embargo, ¡esto no justifica que se interpreten igual!</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:right;"> Pr </th>
+   <th style="text-align:right;"> Odds </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 0.00 </td>
+   <td style="text-align:right;"> 0.0000000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 0.01 </td>
+   <td style="text-align:right;"> 0.0101010 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 0.02 </td>
+   <td style="text-align:right;"> 0.0204082 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 0.03 </td>
+   <td style="text-align:right;"> 0.0309278 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 0.04 </td>
+   <td style="text-align:right;"> 0.0416667 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 0.05 </td>
+   <td style="text-align:right;"> 0.0526316 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="odds-versus-probabilidad" class="slide level2">
+<h2>Odds versus Probabilidad</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li><p>La probabilidad y el odds no son iguales.</p></li>
+<li><p>Odds diverge de Pr cuando el evento es más frecuente.</p></li>
+</ul>
+</div><div class="column" style="width:60%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="htmlwidget-65f1fbe80b967096cda6" style="width:100%;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-65f1fbe80b967096cda6">{"x":{"data":[{"x":[0.01,0.06,0.11,0.16,0.21,0.26,0.31,0.36,0.41,0.46,0.51,0.56,0.61,0.66,0.71,0.76,0.81,0.86,0.91,0.96],"y":[0.0101010101010101,0.0638297872340426,0.123595505617978,0.190476190476191,0.265822784810127,0.351351351351351,0.449275362318841,0.5625,0.694915254237288,0.851851851851852,1.04081632653061,1.27272727272727,1.56410256410256,1.94117647058824,2.44827586206897,3.16666666666667,4.26315789473684,6.14285714285715,10.1111111111111,24],"text":["Pr: 0.01<br />Odds:  0.01010101","Pr: 0.06<br />Odds:  0.06382979","Pr: 0.11<br />Odds:  0.12359551","Pr: 0.16<br />Odds:  0.19047619","Pr: 0.21<br />Odds:  0.26582278","Pr: 0.26<br />Odds:  0.35135135","Pr: 0.31<br />Odds:  0.44927536","Pr: 0.36<br />Odds:  0.56250000","Pr: 0.41<br />Odds:  0.69491525","Pr: 0.46<br />Odds:  0.85185185","Pr: 0.51<br />Odds:  1.04081633","Pr: 0.56<br />Odds:  1.27272727","Pr: 0.61<br />Odds:  1.56410256","Pr: 0.66<br />Odds:  1.94117647","Pr: 0.71<br />Odds:  2.44827586","Pr: 0.76<br />Odds:  3.16666667","Pr: 0.81<br />Odds:  4.26315789","Pr: 0.86<br />Odds:  6.14285714","Pr: 0.91<br />Odds: 10.11111111","Pr: 0.96<br />Odds: 24.00000000"],"type":"scatter","mode":"lines+markers","line":{"width":1.88976377952756,"color":"rgba(255,0,0,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(255,0,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(255,0,0,1)"}},"frame":null}],"layout":{"margin":{"t":30.6118721461187,"r":7.30593607305936,"b":44.5662100456621,"l":37.2602739726027},"plot_bgcolor":"rgba(255,255,255,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-0.0375,1.0075],"tickmode":"array","ticktext":["0.00","0.25","0.50","0.75","1.00"],"tickvals":[0,0.25,0.5,0.75,1],"categoryorder":"array","categoryarray":["0.00","0.25","0.50","0.75","1.00"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"Pr","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-1.18939393939394,25.199494949495],"tickmode":"array","ticktext":["0","5","10","15","20","25"],"tickvals":[0,5,10,15,20,25],"categoryorder":"array","categoryarray":["0","5","10","15","20","25"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"Odds","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":"transparent","line":{"color":"rgba(51,51,51,1)","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"51404537f0b":{"x":{},"y":{},"type":"scatter"},"514033169ce":{"x":{},"y":{}}},"cur_data":"51404537f0b","visdat":{"51404537f0b":["function (y) ","x"],"514033169ce":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="interpretación" class="slide level2">
+<h2>Interpretación</h2>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Prevalencia</a></li><li><a href="#tabset-1-2">Incidencia</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<p>Cuando se estima <strong>prevalencia</strong>:</p>
+<p>Si <span class="math inline">\(Pr = 0.6\)</span> entonces <span class="math inline">\(Odds = \frac{0.6}{1 - 0.6} = 1.5\)</span></p>
+<ul>
+<li><p><strong>Probabilidad:</strong> De cada 100 individuos*, se espera que 60 tengan el evento.</p></li>
+<li><p><strong>Odds:</strong> La probabilidad de tener el evento es 1.5 veces la probabilidad de no tenerlo.</p></li>
+</ul>
+<p>(*) En un punto/periodo de tiempo dado.</p>
+</div>
+<div id="tabset-1-2">
+<ul>
+<li>Cuando se estima <strong>incidencia acumulada</strong>:</li>
+</ul>
+<p>Si <span class="math inline">\(Pr = 0.6\)</span> entonces <span class="math inline">\(Odds = \frac{0.6}{1 - 0.6} = 1.5\)</span></p>
+<ul>
+<li><p><strong>Probabilidad:</strong> De cada 100 individuos*, se espera que 60 desarrollen el evento nuevo durante el seguimeinto.</p></li>
+<li><p><strong>Odds:</strong> La probabilidad de desearrollar un evento nuevo es 1.5 veces la probabilidad de no desarrollarlo*</p></li>
+</ul>
+<p>(*) En una población que al inicio no tenía el evento.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="diseño-de-estudio-y-probabilidadodds" class="slide level2">
+<h2>Diseño de estudio y probabilidad/odds</h2>
+<p><br>
+<br>
+</p>
+<table>
+<colgroup>
+<col style="width: 31%">
+<col style="width: 68%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Indicador</th>
+<th>Diseño de estudio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Prevalencia</td>
+<td>Transversal</td>
+</tr>
+<tr class="even">
+<td>Incidencia acumulada</td>
+<td>Cohorte / Ensayo Clínico (EC)</td>
+</tr>
+<tr class="odd">
+<td>Odds (prevalente)</td>
+<td>Transversal / Caso-control de casos prevalentes</td>
+</tr>
+<tr class="even">
+<td>Odds (incidente)</td>
+<td>Cohorte/EC/Caso-control de casos incidentes</td>
+</tr>
+</tbody>
+</table>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center">
+<h1>Medidas de asociación</h1>
+<div class="agenda-heading">
+<p>Agenda</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Medidas de frecuencia para datos categóricos</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Medidas de asociación</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Regresión Logística Binaria</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Otras regresiones para datos binarios</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section id="medidas-de-asociación-1" class="slide level2 scrollable">
+<h2>Medidas de asociación</h2>
+<p><br>
+<br>
+</p>
+<ul>
+<li><p>Podemos <code>comparar</code> las <code>probabilidades</code>del <code>desenlace</code> según niveles de otra <code>variable independiente</code> (p.&nbsp;ej., tratamiento, factor de riesgo, etc.).</p></li>
+<li><p>Podemos comparar las probabilidades mediante una <code>resta</code> o mediante una <code>división</code>.</p></li>
+<li><p>Nos centraremos en las medidas de asociación obtenidas mediante <code>división</code>.</p></li>
+</ul>
+</section>
+<section id="medidas-de-asociación-resumen" class="slide level2 scrollable">
+<h2>Medidas de asociación (resumen)</h2>
+<table style="width:99%;">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 52%">
+<col style="width: 27%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Medidas de asociación</th>
+<th>Definición</th>
+<th>Diseño de estudio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Razón de odds (OR)</td>
+<td><span class="math inline">\(OR = \frac{Odds(Evento|Expuestos)}{Odds(Evento|No~Expuestos)}\)</span></td>
+<td><ul>
+<li>Caso-Control (única medida)</li>
+</ul>
+<!-- -->
+<ul>
+<li>Todos los demás</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td>Razón de prevalencias</td>
+<td><span class="math inline">\(RP = \frac{Pr(Evento|Expuestos)}{Pr(Evento|No~Expuestos)}\)</span></td>
+<td><ul>
+<li>Transversal</li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td>Razón de riesgos</td>
+<td><span class="math inline">\(RR = \frac{Pr(Evento|Expuestos)}{Pr(Evento|No~Expuestos)}\)</span></td>
+<td><ul>
+<li><p>Cohorte</p></li>
+<li><p>Ensayo Clínico (EC)</p></li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cálculo-de-medidas-de-asociación" class="slide level2">
+<h2>Cálculo de medidas de asociación</h2>
+<p><br>
+</p>
+<div class="cell">
+
+</div>
+<ul>
+<li>Los siguientes resultados de un ensayo clínico muestran lo siguiente:</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Tratamiento </th>
+   <th style="text-align:right;"> Evento </th>
+   <th style="text-align:right;"> No_evento </th>
+   <th style="text-align:right;"> Total </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Placebo </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:right;"> 950 </td>
+   <td style="text-align:right;"> 1000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Tratamiento </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:right;"> 975 </td>
+   <td style="text-align:right;"> 1000 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</section>
+<section id="razón-de-riesgos" class="slide level2">
+<h2>Razón de riesgos</h2>
+<ul>
+<li>La razón de riesgos se calcularía de la siguiente manera:</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+
+<table class="table table-striped" style="font-size: 24px; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Tratamiento </th>
+   <th style="text-align:right;"> Evento </th>
+   <th style="text-align:right;"> No_evento </th>
+   <th style="text-align:right;"> Total </th>
+   <th style="text-align:left;"> Calculo_IA </th>
+   <th style="text-align:right;"> Incidencia </th>
+   <th style="text-align:left;"> Calculo_RR </th>
+   <th style="text-align:right;"> RR </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Placebo </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:right;"> 950 </td>
+   <td style="text-align:right;"> 1000 </td>
+   <td style="text-align:left;"> 50 / 1000 </td>
+   <td style="text-align:right;"> 0.050 </td>
+   <td style="text-align:left;"> 0.05 / 0.05 </td>
+   <td style="text-align:right;"> 1.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Tratamiento </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:right;"> 975 </td>
+   <td style="text-align:right;"> 1000 </td>
+   <td style="text-align:left;"> 25 / 1000 </td>
+   <td style="text-align:right;"> 0.025 </td>
+   <td style="text-align:left;"> 0.025 / 0.05 </td>
+   <td style="text-align:right;"> 0.5 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<ul>
+<li><strong>RR = 0.5 para Tratamiento.</strong></li>
+</ul>
+<blockquote>
+<p><strong>Interpretación:</strong> El riesgo de desarrollar el evento en el grupo tratado fue 50% menor que en el grupo placebo.</p>
+</blockquote>
+</section>
+<section id="razón-de-odds" class="slide level2">
+<h2>Razón de odds</h2>
+<ul>
+<li>La razón de odds (incidente) se calcularía de la siguiente manera:</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+
+<table class="table table-striped" style="font-size: 24px; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Tratamiento </th>
+   <th style="text-align:right;"> Evento </th>
+   <th style="text-align:right;"> No_evento </th>
+   <th style="text-align:right;"> Total </th>
+   <th style="text-align:left;"> Calculo_Odds </th>
+   <th style="text-align:right;"> Odds </th>
+   <th style="text-align:left;"> Calculo_OR </th>
+   <th style="text-align:right;"> OR </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Placebo </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:right;"> 950 </td>
+   <td style="text-align:right;"> 1000 </td>
+   <td style="text-align:left;"> 50 / 950 </td>
+   <td style="text-align:right;"> 0.0526316 </td>
+   <td style="text-align:left;"> 0.0526 / 0.0526 </td>
+   <td style="text-align:right;"> 1.0000000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Tratamiento </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:right;"> 975 </td>
+   <td style="text-align:right;"> 1000 </td>
+   <td style="text-align:left;"> 25 / 975 </td>
+   <td style="text-align:right;"> 0.0256410 </td>
+   <td style="text-align:left;"> 0.0256 / 0.0526 </td>
+   <td style="text-align:right;"> 0.4871795 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<ul>
+<li><strong>OR = 0.49 para Tratamiento.</strong></li>
+</ul>
+<blockquote>
+<p><strong>Interpretación:</strong> El odds de desarrollar el evento en el grupo tratado fue 49% menor que en el grupo placebo.</p>
+</blockquote>
+</section>
+<section id="razón-de-riesgos-y-de-odds-incidentes" class="slide level2">
+<h2>Razón de riesgos y de odds (incidentes)</h2>
+<p>&nbsp;</p>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li><p>Los <code>OR</code> y los <code>RR</code> se aproximan si el <code>evento</code> es <code>poco frecuente</code>.</p></li>
+<li><p>Pero si <code>evento</code> es <code>frecuente</code>, entonces <code>divergen</code>.</p></li>
+<li><p>Por ese motivo, los <code>OR no deben ser interpretados como RR</code>.</p></li>
+</ul>
+</div><div class="column" style="width:60%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="htmlwidget-cd1ed6d602b7ec771c87" style="width:100%;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-cd1ed6d602b7ec771c87">{"x":{"data":[{"x":[0.01,0.06,0.11,0.16,0.21,0.26,0.31,0.36,0.41,0.46,0.51,0.56,0.61,0.66,0.71,0.76,0.81,0.86,0.91,0.96],"y":[2.01010101010101,2.06382978723404,2.12359550561798,2.19047619047619,2.26582278481013,2.35135135135135,2.44927536231884,2.5625,2.69491525423729,2.85185185185185,3.04081632653061,3.27272727272727,3.56410256410256,3.94117647058824,4.44827586206897,5.16666666666667,6.26315789473684,8.14285714285715,12.1111111111111,26],"text":["Pr: 0.01<br />OR:  2.010101","Pr: 0.06<br />OR:  2.063830","Pr: 0.11<br />OR:  2.123596","Pr: 0.16<br />OR:  2.190476","Pr: 0.21<br />OR:  2.265823","Pr: 0.26<br />OR:  2.351351","Pr: 0.31<br />OR:  2.449275","Pr: 0.36<br />OR:  2.562500","Pr: 0.41<br />OR:  2.694915","Pr: 0.46<br />OR:  2.851852","Pr: 0.51<br />OR:  3.040816","Pr: 0.56<br />OR:  3.272727","Pr: 0.61<br />OR:  3.564103","Pr: 0.66<br />OR:  3.941176","Pr: 0.71<br />OR:  4.448276","Pr: 0.76<br />OR:  5.166667","Pr: 0.81<br />OR:  6.263158","Pr: 0.86<br />OR:  8.142857","Pr: 0.91<br />OR: 12.111111","Pr: 0.96<br />OR: 26.000000"],"type":"scatter","mode":"lines+markers","line":{"width":1.88976377952756,"color":"rgba(255,0,0,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(255,0,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(255,0,0,1)"}},"frame":null},{"x":[0.01,0.06,0.11,0.16,0.21,0.26,0.31,0.36,0.41,0.46,0.51,0.56,0.61,0.66,0.71,0.76,0.81,0.86,0.91,0.96],"y":[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],"text":["Pr: 0.01<br />RR: 2","Pr: 0.06<br />RR: 2","Pr: 0.11<br />RR: 2","Pr: 0.16<br />RR: 2","Pr: 0.21<br />RR: 2","Pr: 0.26<br />RR: 2","Pr: 0.31<br />RR: 2","Pr: 0.36<br />RR: 2","Pr: 0.41<br />RR: 2","Pr: 0.46<br />RR: 2","Pr: 0.51<br />RR: 2","Pr: 0.56<br />RR: 2","Pr: 0.61<br />RR: 2","Pr: 0.66<br />RR: 2","Pr: 0.71<br />RR: 2","Pr: 0.76<br />RR: 2","Pr: 0.81<br />RR: 2","Pr: 0.86<br />RR: 2","Pr: 0.91<br />RR: 2","Pr: 0.96<br />RR: 2"],"type":"scatter","mode":"lines+markers","line":{"width":1.88976377952756,"color":"rgba(0,0,255,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(0,0,255,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,0,255,1)"}},"frame":null}],"layout":{"margin":{"t":30.6118721461187,"r":7.30593607305936,"b":44.5662100456621,"l":37.2602739726027},"plot_bgcolor":"rgba(255,255,255,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-0.0375,1.0075],"tickmode":"array","ticktext":["0.00","0.25","0.50","0.75","1.00"],"tickvals":[0,0.25,0.5,0.75,1],"categoryorder":"array","categoryarray":["0.00","0.25","0.50","0.75","1.00"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"Pr","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.799999999999997,27.2000000000001],"tickmode":"array","ticktext":["10","20"],"tickvals":[10,20],"categoryorder":"array","categoryarray":["10","20"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"OR (red) or RR (blue)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":"transparent","line":{"color":"rgba(51,51,51,1)","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"514065a73e36":{"x":{},"y":{},"type":"scatter"},"514040534ab":{"x":{},"y":{}},"514054ab7b72":{"x":{},"y":{}},"514062ea7ab4":{"x":{},"y":{}}},"cur_data":"514065a73e36","visdat":{"514065a73e36":["function (y) ","x"],"514040534ab":["function (y) ","x"],"514054ab7b72":["function (y) ","x"],"514062ea7ab4":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="problemas-con-análisis-bivariado" class="slide level2">
+<h2>Problemas con análisis bivariado</h2>
+<p><br>
+</p>
+<ul>
+<li><p>¿Qué pasa si queremos ajustar por otra variable?</p></li>
+<li><p>¿Qué pasa si no tenemos una variable numérica y queremos relacionarla con el desenlace binario?</p></li>
+<li><p>En ambos casos, podemos realizar un modelo de regresión para datos binarios:</p>
+<ul>
+<li><p>Regresión logística binaria</p></li>
+<li><p>Regresión log-binomial</p></li>
+<li><p>Regresión de Poisson modificada</p></li>
+</ul></li>
+</ul>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center">
+<h1>Regresión Logística Binaria</h1>
+<div class="agenda-heading">
+<p>Agenda</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Medidas de frecuencia para datos categóricos</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Medidas de asociación</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Regresión Logística Binaria</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Otras regresiones para datos binarios</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section id="anatomía-de-la-regresión-logística-binaria" class="slide level2 scrollable">
+<h2>Anatomía de la Regresión logística binaria</h2>
+<ul>
+<li><p>Caso específico de Modelo Lineal Generalizado.</p></li>
+<li><p><strong>Componente sistemático:</strong></p></li>
+</ul>
+<p><span class="math display">\[logit(y_i) = log(Odds(y_i = 1)) = log(\frac{Pr(y_i = 1))}{1 - Pr(y_i = 1)}) = \eta_i\]</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><strong>Función de enlace:</strong></li>
+</ul>
+<p><span class="math display">\[\eta_i = \beta_0 + \beta_1x_{1i} + ...+ \beta_px_{ip}\]</span></p>
+</div><div class="column" style="width:50%;">
+<ul>
+<li><strong>Componente aleatorio:</strong></li>
+</ul>
+<p><span class="math display">\[y_i \sim Bernoulli(1, \pi_i)\]</span></p>
+</div>
+</div>
+<div class="cell">
+
+</div>
+</section>
+<section id="regresión-logística-binaria-cont." class="slide level2 scrollable">
+<h2>Regresión logística binaria (cont.)</h2>
+<ul>
+<li>Podemos estimar la <span class="math inline">\(Pr(y_i = 1)\)</span> a partir del <code>predictor lineal</code>: <span class="math inline">\(\pi_i = Pr(y_i = 1) = \frac{e^{\eta_i}}{1 + e^{\eta_i}}\)</span></li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>El modelo es lineal en escala <code>log odds</code>:</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="sesion10_chalkboard_files/figure-revealjs/unnamed-chunk-10-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>La ventaja de log odds es que <span class="math inline">\(-\infty &lt; log(odds) &lt;+\infty\)</span>.</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>Pero no lineal en escala <code>probabilidad</code>:</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="sesion10_chalkboard_files/figure-revealjs/unnamed-chunk-11-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>La ventaja es que devuelve un modelo cuya probabiidad predicha está entre 0 y 1.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="por-qué-no-usar-regresión-lineal" class="slide level2 scrollable">
+<h2>¿Por qué no usar regresión lineal?</h2>
+<ul>
+<li>Si usamos regresión lineal, el modelo quedaría planetado de esta manera:</li>
+</ul>
+<p><span class="math display">\[E(y_i) = Pr(y_i = 1) = \beta_0 + \beta_1x_{1i} + ...+ \beta_px_{ip}\]</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Entonces, el modelo predecirá probabilidades superiores a su rango 0-1:</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="sesion10_chalkboard_files/figure-revealjs/unnamed-chunk-12-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>Mientras que regresión logística devolverá probabilidades dentro de rango 0-1:</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="sesion10_chalkboard_files/figure-revealjs/unnamed-chunk-13-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="la-controversia-del-modelo-lineal-de-probabilidad" class="slide level2">
+<h2>La controversia del modelo lineal de probabilidad</h2>
+<p><br>
+</p>
+<ul>
+<li><p>Este modelo es conocido como <code>modelo de probabilidad linear</code>.</p>
+<ul>
+<li>No es útil para predicción, pero en econometría aún lo usan para explicación.</li>
+<li>El problema es que la validez del error estándar solo ocurre bajo ciertas condiciones. Es mejor usar modelos más apropiados.</li>
+</ul></li>
+<li><p>Algunos artículos:</p></li>
+</ul>
+<p><a href="https://pubmed.ncbi.nlm.nih.gov/31218050/" class="uri">https://pubmed.ncbi.nlm.nih.gov/31218050/</a></p>
+<p><a href="https://academic.oup.com/aje/article-abstract/123/1/174/49113?redirectedFrom=fulltext&amp;login=false" class="uri">https://academic.oup.com/aje/article-abstract/123/1/174/49113?redirectedFrom=fulltext&amp;login=false</a></p>
+<p><a href="https://academic.oup.com/aje/article/162/3/199/171116" class="uri">https://academic.oup.com/aje/article/162/3/199/171116</a></p>
+</section>
+<section id="la-controversia-del-modelo-lineal-de-probabilidad-1" class="slide level2">
+<h2>La controversia del modelo lineal de probabilidad</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p></p><div id="tweet-50646"></div><script>tweet={"url":"https:\/\/twitter.com\/MaartenvSmeden\/status\/1222927195640860673","author_name":"Maarten van Smeden","author_url":"https:\/\/twitter.com\/MaartenvSmeden","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EI stopped for a reason ;). Some folks have recently tried to re-introduce the &quot;linear probability model&quot;. I&#39;m sure it doesn&#39;t mean the end of the world if you use lpm&#39;s but I&#39;m not too impressed (so far). Why? I like odds ratios and I like my probabilities between 0 and 1\u003C\/p\u003E&mdash; Maarten van Smeden (@MaartenvSmeden) \u003Ca href=\"https:\/\/twitter.com\/MaartenvSmeden\/status\/1222927195640860673?ref_src=twsrc%5Etfw\"\u003EJanuary 30, 2020\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-50646").innerHTML = tweet["html"];</script><p></p>
+</div><div class="column" style="width:60%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/lpm.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="https://pubmed.ncbi.nlm.nih.gov/31218050/" class="uri">https://pubmed.ncbi.nlm.nih.gov/31218050/</a></p>
+</div>
+</div>
+</section>
+<section id="la-regresión-logística-retorna-or" class="slide level2">
+<h2>La regresión logística retorna OR</h2>
+<ul>
+<li><p>La regresión logística permite retonar directamente <code>razón de odds</code> (OR).</p></li>
+<li><p>Los coeficientes de regresión <span class="math inline">\(\beta\)</span> del modelo son <span class="math inline">\(log(OR)\)</span>, por lo tanto, podemos exponenciarlos para obtener los OR:</p></li>
+</ul>
+<p><span class="math display">\[\beta = log(OR)\]</span></p>
+<center>
+entonces
+</center>
+<p><span class="math display">\[e^\beta = OR\]</span></p>
+</section>
+<section id="casos-aplicado-1" class="slide level2 scrollable">
+<h2>Casos aplicado 1</h2>
+<div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Objetivo</a></li><li><a href="#tabset-2-2">OR e IC95%</a></li><li><a href="#tabset-2-3">Interpretación</a></li><li><a href="#tabset-2-4">Supuestos</a></li><li><a href="#tabset-2-5">check_model</a></li><li><a href="#tabset-2-6">Linealidad</a></li><li><a href="#tabset-2-7">Bernoulli</a></li><li><a href="#tabset-2-8">Punt. Influy.</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1">
+<ul>
+<li><p>Factores asociados a desarrollo de alergia en niños.</p></li>
+<li><p>Especificación del modelo</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(allergyc <span class="sc">~</span> smokem <span class="sc">+</span> smokef <span class="sc">+</span> allergym <span class="sc">+</span> allergyf, </span>
+<span id="cb1-2"><a href="#cb1-2"></a>           <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>), </span>
+<span id="cb1-3"><a href="#cb1-3"></a>           <span class="at">data =</span> datos_allergy)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = allergyc ~ smokem + smokef + allergym + allergyf, 
+    family = binomial(link = "logit"), data = datos_allergy)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.2345  -0.9159  -0.7282   1.3215   1.9142  
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)  -1.6577     0.1480 -11.204  &lt; 2e-16 ***
+smokem        0.4714     0.1477   3.191 0.001418 ** 
+smokef        0.5401     0.1416   3.813 0.000137 ***
+allergym      0.4657     0.1434   3.248 0.001161 ** 
+allergyf      0.3137     0.1356   2.314 0.020694 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 1386.9  on 1124  degrees of freedom
+Residual deviance: 1338.5  on 1120  degrees of freedom
+AIC: 1348.5
+
+Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-2-2">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>mod <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">tidy</span>(<span class="at">conf.int =</span> <span class="cn">TRUE</span>, <span class="at">exponentiate =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div id="kxrftulxfr" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+:where(#kxrftulxfr) .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+:where(#kxrftulxfr) .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#kxrftulxfr) .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+:where(#kxrftulxfr) .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+:where(#kxrftulxfr) .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+:where(#kxrftulxfr) .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#kxrftulxfr) .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+:where(#kxrftulxfr) .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+:where(#kxrftulxfr) .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+:where(#kxrftulxfr) .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+:where(#kxrftulxfr) .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+:where(#kxrftulxfr) .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+:where(#kxrftulxfr) .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+:where(#kxrftulxfr) .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+:where(#kxrftulxfr) .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+:where(#kxrftulxfr) .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+:where(#kxrftulxfr) .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#kxrftulxfr) .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+:where(#kxrftulxfr) .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+:where(#kxrftulxfr) .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#kxrftulxfr) .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+:where(#kxrftulxfr) .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+:where(#kxrftulxfr) .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+:where(#kxrftulxfr) .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#kxrftulxfr) .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+:where(#kxrftulxfr) .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+:where(#kxrftulxfr) .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+:where(#kxrftulxfr) .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#kxrftulxfr) .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#kxrftulxfr) .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#kxrftulxfr) .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#kxrftulxfr) .gt_left {
+  text-align: left;
+}
+
+:where(#kxrftulxfr) .gt_center {
+  text-align: center;
+}
+
+:where(#kxrftulxfr) .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+:where(#kxrftulxfr) .gt_font_normal {
+  font-weight: normal;
+}
+
+:where(#kxrftulxfr) .gt_font_bold {
+  font-weight: bold;
+}
+
+:where(#kxrftulxfr) .gt_font_italic {
+  font-style: italic;
+}
+
+:where(#kxrftulxfr) .gt_super {
+  font-size: 65%;
+}
+
+:where(#kxrftulxfr) .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+:where(#kxrftulxfr) .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+:where(#kxrftulxfr) .gt_indent_1 {
+  text-indent: 5px;
+}
+
+:where(#kxrftulxfr) .gt_indent_2 {
+  text-indent: 10px;
+}
+
+:where(#kxrftulxfr) .gt_indent_3 {
+  text-indent: 15px;
+}
+
+:where(#kxrftulxfr) .gt_indent_4 {
+  text-indent: 20px;
+}
+
+:where(#kxrftulxfr) .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">term</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">estimate</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">std.error</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">statistic</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">p.value</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">conf.low</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">conf.high</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">(Intercept)</td>
+<td class="gt_row gt_right">0.1905801</td>
+<td class="gt_row gt_right">0.1479590</td>
+<td class="gt_row gt_right">-11.203667</td>
+<td class="gt_row gt_right">3.911979e-29</td>
+<td class="gt_row gt_right">0.1417981</td>
+<td class="gt_row gt_right">0.2533683</td></tr>
+    <tr><td class="gt_row gt_left">smokem</td>
+<td class="gt_row gt_right">1.6022634</td>
+<td class="gt_row gt_right">0.1477348</td>
+<td class="gt_row gt_right">3.190968</td>
+<td class="gt_row gt_right">1.417968e-03</td>
+<td class="gt_row gt_right">1.2007109</td>
+<td class="gt_row gt_right">2.1435105</td></tr>
+    <tr><td class="gt_row gt_left">smokef</td>
+<td class="gt_row gt_right">1.7162328</td>
+<td class="gt_row gt_right">0.1416441</td>
+<td class="gt_row gt_right">3.813301</td>
+<td class="gt_row gt_right">1.371229e-04</td>
+<td class="gt_row gt_right">1.3013358</td>
+<td class="gt_row gt_right">2.2681936</td></tr>
+    <tr><td class="gt_row gt_left">allergym</td>
+<td class="gt_row gt_right">1.5930869</td>
+<td class="gt_row gt_right">0.1433559</td>
+<td class="gt_row gt_right">3.248374</td>
+<td class="gt_row gt_right">1.160666e-03</td>
+<td class="gt_row gt_right">1.2030369</td>
+<td class="gt_row gt_right">2.1110603</td></tr>
+    <tr><td class="gt_row gt_left">allergyf</td>
+<td class="gt_row gt_right">1.3684143</td>
+<td class="gt_row gt_right">0.1355733</td>
+<td class="gt_row gt_right">2.313528</td>
+<td class="gt_row gt_right">2.069365e-02</td>
+<td class="gt_row gt_right">1.0486014</td>
+<td class="gt_row gt_right">1.7845927</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-3">
+<ul>
+<li><p><code>smokem</code>: El odds de desarrollar alergia en niños de madres fumadoras es 1.6 veces el de niños de madres no fumadoras, controlando por antecedente de fumar de padre, alergia de madre y alergia de padre (OR = 1.6; IC95% 1.20 a 2.14; p &lt; 0.001).</p></li>
+<li><p><code>smokef</code>: El odds de desarrollar alergia en niños de papás fumadoras es 1.72 veces el de niños de papás no fumadoras, controlando por antecedente de fumar de madre, alergia de madre y alergia de padre (OR = 1.72; IC95% 1.30 a 2.27; p = 0.001.</p></li>
+<li><p><code>allergym</code>: El odds de desarrollar alergia en niños de madres con alergias es 1.59 veces el de niños de madres sin alergia, controlando por antecedente de fumar de madre, antecedente de fumar del papá, y alergia del papá (OR = 1.59; IC95% 1.20 a 2.11; p = 0.001).</p></li>
+<li><p><code>allergyf</code>: El odds de desarrollar alergia en niños de papás con alergias es 1.37 veces el de niños de papás sin alergia, controlando por antecedente de fumar de madre, antecedente de fumar del papá, y alergia de la madre (OR = 1.37; IC95% 1.05 a 1.78; p = 0.021).</p></li>
+</ul>
+</div>
+<div id="tabset-2-4">
+<ul>
+<li><p>Linealidad del <span class="math inline">\(logit(y_i = 1)\)</span> respecto a los predictores.</p></li>
+<li><p>Observaciones son independientes.</p></li>
+<li><p><span class="math inline">\(Y_i\)</span> sigue distribución de bernoulli.</p></li>
+<li><p>No problemas de regresión:</p>
+<ul>
+<li><p>No puntos influyentes</p></li>
+<li><p>No colinealidad: Solo cuando esta es un problema.</p></li>
+</ul></li>
+</ul>
+</div>
+<div id="tabset-2-5">
+<ul>
+<li>Panel de <code>check_model</code> será poco informativo. Es mejor usar otras funciones.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">check_model</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="sesion10_chalkboard_files/figure-revealjs/unnamed-chunk-17-1.png" width="960"></p>
+</div>
+</div>
+</div>
+<div id="tabset-2-6">
+<ul>
+<li>Todas las covariables son categóricas, por lo que la linealidad no es un problema en este modelo.</li>
+</ul>
+</div>
+<div id="tabset-2-7">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">library</span>(statmod)</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">set.seed</span>(<span class="dv">2134</span>)</span>
+<span id="cb5-3"><a href="#cb5-3"></a>quant_res <span class="ot">&lt;-</span> <span class="fu">qresid</span>(mod)</span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="fu">ggqqplot</span>(quant_res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="sesion10_chalkboard_files/figure-revealjs/unnamed-chunk-18-1.png" width="960"></p>
+</div>
+</div>
+</div>
+<div id="tabset-2-8">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="fu">influenceIndexPlot</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="sesion10_chalkboard_files/figure-revealjs/unnamed-chunk-19-1.png" width="960"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="casos-aplicado-2" class="slide level2 scrollable">
+<h2>Casos aplicado 2</h2>
+<div class="panel-tabset">
+<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Objetivo</a></li><li><a href="#tabset-3-2">OR e IC95%</a></li><li><a href="#tabset-3-3">Interpretación</a></li><li><a href="#tabset-3-4">Supuestos</a></li><li><a href="#tabset-3-5">check_model</a></li><li><a href="#tabset-3-6">Linealidad</a></li><li><a href="#tabset-3-7">Bernoulli</a></li><li><a href="#tabset-3-8">Punt. Influy.</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1">
+<ul>
+<li><p>Factores asociados a tener lumbalgia a 5 años de seguimeinto.</p></li>
+<li><p>Especificación del modelo</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(bp5 <span class="sc">~</span> bp0 <span class="sc">+</span> sex <span class="sc">+</span> age <span class="sc">+</span> phyocc <span class="sc">+</span> social, </span>
+<span id="cb7-2"><a href="#cb7-2"></a>           <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>), </span>
+<span id="cb7-3"><a href="#cb7-3"></a>           <span class="at">data =</span> datos_backpain)</span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = bp5 ~ bp0 + sex + age + phyocc + social, family = binomial(link = "logit"), 
+    data = datos_backpain)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-0.8376  -0.6390  -0.5445  -0.4522   2.2500  
+
+Coefficients:
+                    Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)         -2.32105    0.66735  -3.478 0.000505 ***
+bp0                 -0.07754    0.20862  -0.372 0.710123    
+sexfemale            0.37870    0.16619   2.279 0.022684 *  
+age                  0.01291    0.01446   0.893 0.371905    
+phyocc2 - low       -0.46094    0.31224  -1.476 0.139875    
+phyocc3 - moderate  -0.03143    0.28279  -0.111 0.911501    
+phyocc4 - heavy      0.44284    0.31320   1.414 0.157385    
+socialself employed -0.25900    0.23512  -1.102 0.270657    
+socialwhite collar  -0.01484    0.21221  -0.070 0.944266    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 992.22  on 1123  degrees of freedom
+Residual deviance: 971.86  on 1115  degrees of freedom
+  (195 observations deleted due to missingness)
+AIC: 989.86
+
+Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-3-2">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb9-2"><a href="#cb9-2"></a>mod <span class="sc">%&gt;%</span> </span>
+<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">tidy</span>(<span class="at">conf.int =</span> <span class="cn">TRUE</span>, <span class="at">exponentiate =</span> <span class="cn">TRUE</span>, ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 7
+  term                estimate std.error statistic  p.value conf.low conf.high
+  &lt;chr&gt;                  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)           0.0982    0.667    -3.48   0.000505   0.0261     0.358
+2 bp0                   0.925     0.209    -0.372  0.710      0.607      1.38 
+3 sexfemale             1.46      0.166     2.28   0.0227     1.06       2.03 
+4 age                   1.01      0.0145    0.893  0.372      0.985      1.04 
+5 phyocc2 - low         0.631     0.312    -1.48   0.140      0.343      1.17 
+6 phyocc3 - moderate    0.969     0.283    -0.111  0.912      0.564      1.72 
+7 phyocc4 - heavy       1.56      0.313     1.41   0.157      0.853      2.92 
+8 socialself employed   0.772     0.235    -1.10   0.271      0.481      1.21 
+9 socialwhite collar    0.985     0.212    -0.0699 0.944      0.650      1.50 </code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-3-3">
+<ul>
+<li><p><code>bp0</code>: El odds de tener dolor lumbar crónico en quienes reportaron antecedente de lumbalgia fue 7% menor que en quienes negaron antecedente de lumbalgia, luego de controlar por sexo, edad, nivel de actividad física y estatus social. Sin embargo, no se cuenta con suficiente evidencia estadística para concluir que la asociación exista en la población debido a la gran imprecisión de la estimación (OR = 0.93; 95%CI 0.61 a 1.38, p = 0.710).</p></li>
+<li><p><code>sex</code>: El odds de tener dolor lumbar crónica en mujeres fue 1.46 veces el de varones, luego de controlar por antecedente de lumbalgia, edad, nivel de actividad física y estatus social (OR = 1.46; 95%CI 1.06 a 2.03; p = 0.023).</p></li>
+<li><p><code>age</code>: El aumento en un año de edad se asocia a un aumento de 1.3% de los odds de tener dolor lumbar crónico, luego de controlar por sexo, antecedente de lumbalgia, nivel de actividad física y estatus social (OR = 1.01; 95%CI 0.98 a 1.04; p = 0.372). Teniendo en cuenta la incertidumbre de la estimación, no podemos afirmar si esta relación existe en la población.</p></li>
+<li><p><code>phyocc - low</code>: El odds de tener dolor lumbar crónico en quienes reportan niveles bajos de actividad física es 37% menor que en quienes reportan niveles de actividad física muy bajos, luego de controlar por sexo, antecedente de lumbalgia, edad y estatus social (OR = 0.63; 95%CI 0.34 a 1.17; p = 0.140). La gran varibabilidad muestral previene que podamos afirmar la existencia de una relación en la población.</p></li>
+<li><p><code>phyocc - moderate</code>: El odds de tener dolor lumbar crónico en quienes reportan niveles moderados de actividad física es 3% menor que en quienes reportan niveles de actividad física muy bajos, luego de controlar por sexo, antecedente de lumbalgia, edad y estatus social (OR = 0.97; 95%CI 0.56 a 1.72; p = 0.912). Teniendo en cuenta la incertidumbre de la estimación, no podemos afirmar si esta relación existe en la población.</p></li>
+<li><p><code>phyocc - heavy</code>: El odds de tener dolor lumbar crónico en quienes reportan niveles intensos de actividad física es 1.56 veces mayor que en quienes reportan niveles de actividad física muy bajos, luego de controlar por sexo, antecedente de lumbalgia, edad y estatus social (OR = 1.56; 95%CI 0.85 a 2.92; p = 0.157). Teniendo en cuenta la incertidumbre de la estimación, no podemos afirmar si esta relación existe en la población.</p></li>
+<li><p><code>socialself employed</code>: [completar]</p></li>
+<li><p><code>socialwhite collar</code>: [completar]</p></li>
+</ul>
+</div>
+<div id="tabset-3-4">
+<ul>
+<li><p>Linealidad del <span class="math inline">\(logit(y_i = 1)\)</span> respecto a los predictores.</p></li>
+<li><p>Observaciones son independientes.</p></li>
+<li><p><span class="math inline">\(Y_i\)</span> sigue distribución de bernoulli.</p></li>
+<li><p>No problemas de regresión:</p>
+<ul>
+<li><p>No puntos influyentes</p></li>
+<li><p>No colinealidad: Solo cuando esta es un problema.</p></li>
+</ul></li>
+</ul>
+</div>
+<div id="tabset-3-5">
+<ul>
+<li>Panel de check_model será poco informativo.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">library</span>(performance)</span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="fu">check_model</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="sesion10_chalkboard_files/figure-revealjs/unnamed-chunk-22-1.png" width="960"></p>
+</div>
+</div>
+</div>
+<div id="tabset-3-6">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">library</span>(ggeffects)</span>
+<span id="cb12-2"><a href="#cb12-2"></a>pr <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(mod, <span class="st">"age [all]"</span>)</span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="fu">plot</span>(pr, <span class="at">residuals =</span> <span class="cn">TRUE</span>, <span class="at">residuals.line =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="sesion10_chalkboard_files/figure-revealjs/unnamed-chunk-23-1.png" width="960"></p>
+</div>
+</div>
+</div>
+<div id="tabset-3-7">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">library</span>(statmod)</span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="fu">set.seed</span>(<span class="dv">2134</span>)</span>
+<span id="cb13-3"><a href="#cb13-3"></a>quant_res <span class="ot">&lt;-</span> <span class="fu">qresid</span>(mod)</span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="fu">ggqqplot</span>(quant_res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="sesion10_chalkboard_files/figure-revealjs/unnamed-chunk-24-1.png" width="960"></p>
+</div>
+</div>
+</div>
+<div id="tabset-3-8">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="fu">influenceIndexPlot</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="sesion10_chalkboard_files/figure-revealjs/unnamed-chunk-25-1.png" width="960"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center">
+<h1>Otras regresiones para datos binarios</h1>
+<div class="agenda-heading">
+<p>Agenda</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Medidas de frecuencia para datos categóricos</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Medidas de asociación</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Regresión Logística Binaria</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Otras regresiones para datos binarios</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section id="rr-rp-versus-or" class="slide level2">
+<h2>RR / RP versus OR</h2>
+<ul>
+<li><p>RR o RP son <code>más interpretables</code> a nivel <code>clínico</code> o de <code>Salud Pública</code>.</p></li>
+<li><p>Cuando el <code>evento es frecuente</code>, interpretar <code>odds</code> como <code>probabilidades</code> ocasiona una <code>sobreestimación</code> de las probabilidades.</p>
+<ul>
+<li>A un RR de 1.2 le puede corresponder un OR de 5. (¿cuál medida es la mejor?)</li>
+</ul></li>
+<li><p>Sin embargo, es un problea de interpretación.</p>
+<ul>
+<li>Si se interpreta apropiadamente, el OR no es malo en sí.</li>
+</ul></li>
+<li><p>El OR es fácil de estimar mediante una <code>regresión logística</code>.</p></li>
+<li><p>Sin embargo, si se desea estimar RR / RP, entonces debemos cambiar el enfoque de modelado.</p></li>
+</ul>
+</section>
+<section id="cómo-estimar-rr-rp" class="slide level2">
+<h2>¿Cómo estimar RR / RP?</h2>
+<ul>
+<li><p>Hay varios enfoques.</p>
+<ul>
+<li><p>Puede derivarse RR/RP de OR obtenidos mediante regresión logística.</p></li>
+<li><p>También podemos usar métodos de sobrevida.</p></li>
+</ul></li>
+<li><p>En investigación clínica o epidemiológica, comúnmente se usan estos dos enfoques:</p>
+<ul>
+<li><p>Regresión log-binomial</p></li>
+<li><p>Regresión de Poisson modificada.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="modelo-de-regresión-log-binomial" class="slide level2">
+<h2>Modelo de regresión log-binomial</h2>
+<p><br>
+</p>
+<ul>
+<li><p>Similar estructura que <code>regresión logística</code> (modelo <code>logit-binomial</code>).</p></li>
+<li><p>Asume que <span class="math inline">\(Y_i\)</span> sigue una distribución de bernoulli (caso particular de <code>binomial</code>).</p></li>
+<li><p>Cambia la función de enlace <code>logit()</code> por <code>log()</code>, lo que retorna <code>probabilidades</code>, ya no <code>odds</code>.</p></li>
+</ul>
+</section>
+<section id="regresión-log-binomial-anatomía" class="slide level2 scrollable">
+<h2>Regresión log-binomial: Anatomía</h2>
+<p><strong>Componente sistemático:</strong></p>
+<p><span class="math display">\[
+log(E(Y|x_{1i}, ..., x_{pi})) = log(E(Y_i)) = \eta_i = \beta_0 + \beta_1x_{1i} + ...+ \beta_px_{ip}
+\]</span></p>
+<ul>
+<li><p><span class="math inline">\(log()\)</span> es la <code>función de enlace</code> logaritmo nepereano.</p></li>
+<li><p><span class="math inline">\(\eta_i\)</span> es el <code>predictor linear</code>.</p></li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><strong>Función de enlace:</strong></li>
+</ul>
+<p><span class="math display">\[\eta_i = \beta_0 + \beta_1x_{1i} + ...+ \beta_px_{ip}\]</span></p>
+</div><div class="column" style="width:50%;">
+<ul>
+<li><strong>Componente aleatorio:</strong></li>
+</ul>
+<p><span class="math display">\[y_i \sim Bernoulli(1, \pi_i)\]</span></p>
+</div>
+</div>
+</section>
+<section id="estimación-de-probabilidad" class="slide level2">
+<h2>Estimación de probabilidad</h2>
+<ul>
+<li>Podemos estimar la <span class="math inline">\(Pr(y_i = 1)\)</span> a partir del <code>predictor lineal</code>:</li>
+</ul>
+<p><span class="math display">\[\pi_i = Pr(y_i = 1) = e^{\eta_i}\]</span></p>
+</section>
+<section id="la-regresión-log-binomial-retorna-rrrp" class="slide level2 scrollable">
+<h2>La regresión log-binomial retorna RR/RP</h2>
+<ul>
+<li><p>La regresión log-binomial permite retonar directamente <code>razón de prevalencias</code> (RP) o <code>razón de incidencias acumuladas</code> (RR) dependiendo del diseño.</p></li>
+<li><p>Los coeficientes de regresión <span class="math inline">\(\beta\)</span> del modelo son <span class="math inline">\(log(RR)\)</span> o <span class="math inline">\(log(RP)\)</span>, por lo tanto, podemos exponenciarlos para obtener los RR o RR:</p></li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Estudio transversal</strong></p>
+<p><span class="math display">\[\beta = log(RP)\]</span></p>
+<center>
+entonces
+</center>
+<p><span class="math display">\[e^\beta = RP\]</span></p>
+</div><div class="column" style="width:50%;">
+<p><strong>Estudio de cohortes</strong></p>
+<p><span class="math display">\[e^\beta = RR\]</span></p>
+<center>
+entonces
+</center>
+<p><span class="math display">\[\beta = log(RR)\]</span></p>
+</div>
+</div>
+<ul>
+<li>Asimismo, si el modelo es correcto la inferencia (valor p e IC95%) debería ser válida.</li>
+</ul>
+</section>
+<section id="problemas-con-la-regresión-log-binomial" class="slide level2 scrollable">
+<h2>Problemas con la regresión log-binomial</h2>
+<p><br>
+</p>
+<ul>
+<li><p>Usa una función de enlace no canónica para la distibución binomial</p></li>
+<li><p>Esto significa que no siempre se garantiza la convergencia del modelo.</p></li>
+<li><p>Si esto ocurre, debemos optar por un modelo que sí converga:</p>
+<ul>
+<li>Regresión de Poisson modificada</li>
+</ul></li>
+</ul>
+</section>
+<section id="modelo-de-regresión-poisson-modificado" class="slide level2 scrollable">
+<h2>Modelo de regresión Poisson modificado</h2>
+<p><br>
+</p>
+<ul>
+<li><p>Similar estructura que <code>regresión logística</code> (modelo <code>logit-binomial</code>) y que el modelo <code>log-binomial</code>.</p></li>
+<li><p>Aunque modelo de regresión de Poisson asume que <span class="math inline">\(Y_i\)</span> sigue una distribución de Poisson, se lo <code>modifica</code> para que este supuesto no importe.</p></li>
+<li><p>Cambia la función de enlace <code>logit()</code> por <code>log()</code>, lo que retorna <code>probabilidades</code>, ya no <code>odds</code>.</p></li>
+</ul>
+</section>
+<section id="regresión-poisson-modificado-anatomía" class="slide level2 scrollable">
+<h2>Regresión Poisson modificado: Anatomía</h2>
+<ul>
+<li>Su estructura es la misma que el modelo de regresión de Poisson:</li>
+</ul>
+<p><strong>Componente sistemático:</strong></p>
+<p><span class="math display">\[
+log(E(Y|x_{1i}, ..., x_{pi})) = log(E(Y_i)) = \eta_i = \beta_0 + \beta_1x_{1i} + ...+ \beta_px_{ip}
+\]</span></p>
+<ul>
+<li><p><span class="math inline">\(log()\)</span> es la <code>función de enlace</code> logaritmo nepereano.</p></li>
+<li><p><span class="math inline">\(\eta_i\)</span> es el <code>predictor linear</code>.</p></li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><strong>Función de enlace:</strong></li>
+</ul>
+<p><span class="math display">\[\eta_i = \beta_0 + \beta_1x_{1i} + ...+ \beta_px_{ip}\]</span></p>
+<ul>
+<li>Podemos estimar la <span class="math inline">\(Pr(y_i = 1)\)</span> a partir del <code>predictor lineal</code>:</li>
+</ul>
+<p><span class="math display">\[\pi_i = Pr(y_i = 1) = e^{\eta_i}\]</span></p>
+</div><div class="column" style="width:50%;">
+<ul>
+<li><strong>Componente aleatorio:</strong></li>
+</ul>
+<p><span class="math display">\[y_i \sim Poisson(\lambda = \pi_i)\]</span></p>
+</div>
+</div>
+<ul>
+<li><p><strong>Modificación del modelo</strong>:</p>
+<ul>
+<li>Para estimar apropiadamente la varianza de los <span class="math inline">\(\beta\)</span> y tener inferencias válidas (valor p e IC95% apropiados), el modelo aplica una estimación robusta de varianza tipo sandwich.</li>
+</ul></li>
+</ul>
+</section>
+<section id="la-regresión-de-poisson-también-retorna-rrrp" class="slide level2">
+<h2>La regresión de Poisson también retorna RR/RP</h2>
+<ul>
+<li><p>La regresión de Poisson permite retonar directamente <code>razón de prevalencias</code> (RP) o <code>razón de incidencias acumuladas</code> (RR) dependiendo del diseño.</p></li>
+<li><p>Los coeficientes de regresión <span class="math inline">\(\beta\)</span> del modelo son <span class="math inline">\(log(RR)\)</span> o <span class="math inline">\(log(RP)\)</span>, por lo tanto, podemos exponenciarlos para obtener los RR o RR:</p></li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Estudio transversal</strong></p>
+<p><span class="math display">\[\beta = log(RP)\]</span></p>
+<center>
+entonces
+</center>
+<p><span class="math display">\[e^\beta = RP\]</span></p>
+</div><div class="column" style="width:50%;">
+<p><strong>Estudio de cohortes</strong></p>
+<p><span class="math display">\[\beta = log(RP)\]</span></p>
+<center>
+entonces
+</center>
+<p><span class="math display">\[e^\beta = RR\]</span></p>
+</div>
+</div>
+<ul>
+<li><p>Sin embargo, si el modelo es correcto la inferencia no es válida salvo que se corrija la varianza.</p>
+<ul>
+<li>Ajuste robusto de varianza es opción más usada.</li>
+</ul></li>
+</ul>
+</section>
+<section id="casos-aplicados" class="slide level2 scrollable">
+<h2>Casos aplicados</h2>
+<ul>
+<li>Identificar factores asociados a que el niño tenga alergia.</li>
+</ul>
+<div class="panel-tabset">
+<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">Ejemplo 1</a></li><li><a href="#tabset-4-2">Ejemplo 2</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1">
+<ul>
+<li><p>Factores asociados a desarrollo de alergia en niños.</p></li>
+<li><p>Especificación del modelo</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(allergyc <span class="sc">~</span> smokem <span class="sc">+</span> smokef <span class="sc">+</span> allergym <span class="sc">+</span> allergyf, </span>
+<span id="cb15-2"><a href="#cb15-2"></a>           <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>), </span>
+<span id="cb15-3"><a href="#cb15-3"></a>           <span class="at">data =</span> datos_allergy)</span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = allergyc ~ smokem + smokef + allergym + allergyf, 
+    family = poisson(link = "log"), data = datos_allergy)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.0643  -0.8186  -0.6807   0.7641   1.3707  
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)  -1.7689     0.1247 -14.181  &lt; 2e-16 ***
+smokem        0.3181     0.1217   2.613  0.00899 ** 
+smokef        0.3687     0.1178   3.130  0.00175 ** 
+allergym      0.3066     0.1146   2.674  0.00749 ** 
+allergyf      0.2070     0.1096   1.888  0.05904 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 815.58  on 1124  degrees of freedom
+Residual deviance: 782.50  on 1120  degrees of freedom
+AIC: 1482.5
+
+Number of Fisher Scoring iterations: 5</code></pre>
+</div>
+</div>
+<ul>
+<li>Presentación con intervalos de confianza y exponenciada (RR):</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="fu">library</span>(sandwich)</span>
+<span id="cb17-3"><a href="#cb17-3"></a>mod <span class="sc">%&gt;%</span> </span>
+<span id="cb17-4"><a href="#cb17-4"></a>  <span class="fu">tidy</span>(<span class="at">conf.int =</span> <span class="cn">TRUE</span>, <span class="at">exponentiate =</span> <span class="cn">TRUE</span>, <span class="at">vcov =</span> sandwich) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 7
+  term        estimate std.error statistic  p.value conf.low conf.high
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)    0.171     0.125    -14.2  1.21e-45    0.133     0.217
+2 smokem         1.37      0.122      2.61 8.99e- 3    1.08      1.75 
+3 smokef         1.45      0.118      3.13 1.75e- 3    1.15      1.82 
+4 allergym       1.36      0.115      2.67 7.49e- 3    1.08      1.70 
+5 allergyf       1.23      0.110      1.89 5.90e- 2    0.991     1.52 </code></pre>
+</div>
+</div>
+<ul>
+<li><p>Interpretación:</p>
+<ul>
+<li><p><code>smokem</code>: El riesgo de desarrollar alergia en niños de madres fumadoras es 1.37 veces el de niños de madres no fumadoras, controlando por antecedente de fumar de padre, alergia de madre y alergia de padre (RR = 1.37; IC95% 1.08 a 1.75; p &lt; 0.001).</p></li>
+<li><p><code>smokef</code>: El riesgo de desarrollar alergia en niños de papás fumadoras es 1.45 veces el de niños de papás no fumadoras, controlando por antecedente de fumar de madre, alergia de madre y alergia de padre (RR = 1.45; IC95% 1.15 a 1.82; p = 0.009).</p></li>
+<li><p><code>allergym</code>: El riesgo de desarrollar alergia en niños de madres con alergias es 1.36 veces el de niños de madres sin alergia, controlando por antecedente de fumar de madre, antecedente de fumar del papá, y alergia del papá (RR = 1.36; IC95% 1.08 a 1.70; p = 0.007).</p></li>
+<li><p><code>allergyf</code>: El riesgo de desarrollar alergia en niños de papás con alergias es 1.23 veces el de niños de papás sin alergia, controlando por antecedente de fumar de madre, antecedente de fumar del papá, y alergia de la madre (RR = 1.23; IC95% 0.99 a 1.52; p = 0.059).</p></li>
+</ul></li>
+</ul>
+<div class="callout callout-note callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Supuestos</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li><p>Linealidad del <span class="math inline">\(logit(y_i = 1)\)</span> respecto a los predictores.</p></li>
+<li><p>Observaciones son independientes.</p></li>
+<li><p><span class="math inline">\(Y_i\)</span> sigue distribución de bernoulli.</p></li>
+<li><p>No problemas de regresión:</p>
+<ul>
+<li><p>No puntos influyentes</p></li>
+<li><p>No colinealidad: Solo cuando esta es un problema.</p></li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">library</span>(performance)</span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="fu">check_model</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="sesion10_chalkboard_files/figure-revealjs/unnamed-chunk-28-1.png" width="960"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-4-2">
+<ul>
+<li><p>Factores asociados a tener lumbalgia a 5 años de seguimeinto.</p></li>
+<li><p>Especificación del modelo</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(bp5 <span class="sc">~</span> bp0 <span class="sc">+</span> sex <span class="sc">+</span> age <span class="sc">+</span> phyocc <span class="sc">+</span> social, </span>
+<span id="cb20-2"><a href="#cb20-2"></a>           <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>), </span>
+<span id="cb20-3"><a href="#cb20-3"></a>           <span class="at">data =</span> datos_backpain)</span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = bp5 ~ bp0 + sex + age + phyocc + social, family = poisson(link = "log"), 
+    data = datos_backpain)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-0.7792  -0.6056  -0.5246  -0.4424   1.7811  
+
+Coefficients:
+                     Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)         -2.381838   0.606973  -3.924  8.7e-05 ***
+bp0                 -0.064393   0.189777  -0.339   0.7344    
+sexfemale            0.313311   0.151318   2.071   0.0384 *  
+age                  0.010589   0.013120   0.807   0.4196    
+phyocc2 - low       -0.397751   0.288867  -1.377   0.1685    
+phyocc3 - moderate  -0.025682   0.258255  -0.099   0.9208    
+phyocc4 - heavy      0.357670   0.283432   1.262   0.2070    
+socialself employed -0.213537   0.214439  -0.996   0.3194    
+socialwhite collar  -0.009969   0.192679  -0.052   0.9587    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 661.07  on 1123  degrees of freedom
+Residual deviance: 644.08  on 1115  degrees of freedom
+  (195 observations deleted due to missingness)
+AIC: 1024.1
+
+Number of Fisher Scoring iterations: 6</code></pre>
+</div>
+</div>
+<ul>
+<li>Presentación con intervalos de confianza y exponenciada (RP):</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">library</span>(sandwich)</span>
+<span id="cb22-2"><a href="#cb22-2"></a>mod <span class="sc">%&gt;%</span> </span>
+<span id="cb22-3"><a href="#cb22-3"></a>  <span class="fu">tidy</span>(<span class="at">conf.int =</span> <span class="cn">TRUE</span>, <span class="at">exponentiate =</span> <span class="cn">TRUE</span>, <span class="at">vcov =</span> sandwich) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 7
+  term                estimate std.error statistic   p.value conf.low conf.high
+  &lt;chr&gt;                  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)           0.0924    0.607    -3.92   0.0000870   0.0276     0.299
+2 bp0                   0.938     0.190    -0.339  0.734       0.637      1.34 
+3 sexfemale             1.37      0.151     2.07   0.0384      1.02       1.85 
+4 age                   1.01      0.0131    0.807  0.420       0.985      1.04 
+5 phyocc2 - low         0.672     0.289    -1.38   0.169       0.383      1.20 
+6 phyocc3 - moderate    0.975     0.258    -0.0994 0.921       0.598      1.65 
+7 phyocc4 - heavy       1.43      0.283     1.26   0.207       0.832      2.54 
+8 socialself employed   0.808     0.214    -0.996  0.319       0.523      1.22 
+9 socialwhite collar    0.990     0.193    -0.0517 0.959       0.678      1.44 </code></pre>
+</div>
+</div>
+<ul>
+<li><p>Interpretación:</p>
+<ul>
+<li><p><code>bp0</code>: La prevalencia de tener dolor lumbar crónico en quienes reportaron antecedente de lumbalgia fue 6% menor que en quienes negaron antecedente de lumbalgia, luego de controlar por sexo, edad, nivel de actividad física y estatus social. Sin embargo, no se cuenta con suficiente evidencia estadística para concluir que la asociación exista en la población debido a la gran imprecisión de la estimación (RP = 0.94; 95%CI 0.64 a 1.34, p = 0.734).</p></li>
+<li><p><code>sex</code>: La prevalencia de tener dolor lumbar crónica en mujeres fue 1.37 veces el de varones, luego de controlar por antecedente de lumbalgia, edad, nivel de actividad física y estatus social (RP = 1.37; 95%CI 1.02 a 1.85; p = 0.038).</p></li>
+<li><p><code>age</code>: El aumento en un año de edad se asocia a un aumento de 1.1% de la prevalencia de tener dolor lumbar crónico, luego de controlar por sexo, antecedente de lumbalgia, nivel de actividad física y estatus social (RP = 1.01; 95%CI 0.99 a 1.04; p = 0.420). Teniendo en cuenta la incertidumbre de la estimación, no podemos afirmar si esta relación existe en la población.</p></li>
+<li><p><code>phyocc - low</code>: La prevalencia de tener dolor lumbar crónico en quienes reportan niveles bajos de actividad física es 33% menor que en quienes reportan niveles de actividad física muy bajos, luego de controlar por sexo, antecedente de lumbalgia, edad y estatus social (RP = 0.38; 95%CI 0.34 a 1.20; p = 0.169). La gran varibabilidad muestral previene que podamos afirmar la existencia de una relación en la población.</p></li>
+<li><p><code>phyocc - moderate</code>: La prevalencia de tener dolor lumbar crónico en quienes reportan niveles moderados de actividad física es 3% menor que en quienes reportan niveles de actividad física muy bajos, luego de controlar por sexo, antecedente de lumbalgia, edad y estatus social (RP = 0.97; 95%CI 0.60 a 1.65; p = 0.921). Teniendo en cuenta la incertidumbre de la estimación, no podemos afirmar si esta relación existe en la población.</p></li>
+<li><p><code>phyocc - heavy</code>: La prevalencia de tener dolor lumbar crónico en quienes reportan niveles intensos de actividad física es 1.43 veces mayor que en quienes reportan niveles de actividad física muy bajos, luego de controlar por sexo, antecedente de lumbalgia, edad y estatus social (RP = 1.43; 95%CI 0.83 a 2.54; p = 0.207). Teniendo en cuenta la incertidumbre de la estimación, no podemos afirmar si esta relación existe en la población.</p></li>
+<li><p><code>socialself employed</code>: [completar]</p></li>
+<li><p><code>socialwhite collar</code>: [completar]</p></li>
+</ul></li>
+</ul>
+<div class="callout callout-note callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Supuestos</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li><p>Linealidad del <span class="math inline">\(logit(y_i = 1)\)</span> respecto a los predictores.</p></li>
+<li><p>Observaciones son independientes.</p></li>
+<li><p><span class="math inline">\(Y_i\)</span> sigue distribución de bernoulli.</p></li>
+<li><p>No problemas de regresión:</p>
+<ul>
+<li><p>No puntos influyentes</p></li>
+<li><p>No colinealidad: Solo cuando esta es un problema.</p></li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">library</span>(performance)</span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="fu">check_model</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="sesion10_chalkboard_files/figure-revealjs/unnamed-chunk-31-1.png" width="960"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+<div class="r-fit-text">
+<center>
+¡Gracias!
+</center>
+<center>
+¿Preguntas?
+</center>
+</div>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<p><br>
+</p>
+<p><br>
+</p>
+<p><br>
+</p>
+<div class="r-fit-text">
+<center>
+<p><i class="fa-brands fa-twitter" aria-hidden="true"></i></p>
+<p><i class="fa-brands fa-github" aria-hidden="true"></i> https://github.com/psotob91</p>
+<p><i class="fa-solid fa-inbox" aria-hidden="true"></i> percys1991@gmail.com</p>
+</center>
+</div>
+
+<img src="img/icon-512-insnsb.jpg" class="slide-logo r-stretch"><div class="footer footer-default">
+<p>R Aplicado a los Proyectos de Investigación - Sesión 10</p>
+</div>
+</section></section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="sesion10_chalkboard_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="sesion10_chalkboard_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="sesion10_chalkboard_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="sesion10_chalkboard_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="sesion10_chalkboard_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="sesion10_chalkboard_files/libs/revealjs/plugin/multiplex/socket.io.js"></script>
+  <script src="sesion10_chalkboard_files/libs/revealjs/plugin/multiplex/multiplex.js"></script>
+  <script src="sesion10_chalkboard_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="sesion10_chalkboard_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="sesion10_chalkboard_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="sesion10_chalkboard_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="sesion10_chalkboard_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'smaller': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'multiplex': {"secret":null,"id":"8cb6b702d68be7b5","url":"https://reveal-multiplex.glitch.me/"},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: true,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'convex',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'zoom',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1600,
+
+        height: 900,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          // dispatch for htmlwidgets
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for reveal
+        if (window.Reveal) {
+          window.Reveal.addEventListener("slidechanged", function(event) {
+            fireSlideChanged(event.previousSlide, event.currentSlide);
+          });
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        target: function(trigger) {
+          return trigger.previousElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        setTimeout(function() {
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+      function tippyHover(el, contentFn) {
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'quarto-reveal',
+          placement: 'bottom-start'
+        };
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          return note.innerHTML;
+        });
+      }
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+        tippyHover(ref, function() {
+          var popup = window.document.createElement('div');
+          cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+        var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+              // target, if specified
+              link.setAttribute("target", "_blank");
+              // default icon
+              link.classList.add("external");
+          }
+        }
+    });
+    </script>
+    
+
+<script src="https://platform.twitter.com/widgets.js"></script>
+</body></html>

@@ -1,0 +1,3 @@
+"0","library(ggeffects)"
+"0","pr <- ggpredict(mod, ""age [all]"")"
+"0","plot(pr, residuals = TRUE, residuals.line = TRUE)"
