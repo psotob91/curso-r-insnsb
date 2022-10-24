@@ -1,2 +1,0 @@
-"0","datos <- import(""hb.dta"") %>% "
-"0","  characterize()"

@@ -1,0 +1,676 @@
+---
+format: 
+  revealjs: 
+    # self-contained: true
+    theme: [default, theme/theme.scss]
+    footer: "R Aplicado a los Proyectos de Investigación - Sesión 9"
+    logo: img/icon-512-insnsb.jpg
+    transition: convex
+    background-transition: zoom
+    incremental: false
+    slide-number: c/t
+    preview-links: true
+    # width: 1920
+    # height: 1080
+    height: 900
+    width: 1600
+    # parallax-background-image: img/bg-ietsi-slide-first.png
+    # parallax-background-size: "1920px 1080px"
+    chalkboard: true
+    code-block-background: true
+    code-block-border-left: "#31BAE9"
+    highlight-style: ayu-dark
+    echo: true
+    multiplex: true
+    touch: true
+    auto-stretch: true
+    link-external-icon: true
+    link-external-newwindow: true
+    self-contained-math: true
+    
+from: markdown+emoji
+execute:
+  echo: true
+filters:
+  - reveal-auto-agenda
+  - grouped-tabsets
+auto-agenda:
+  bullets: numbered
+  heading: Agenda
+---
+
+\
+
+\
+
+<h1>Sesión 9</h1>
+
+<h2>[Curso: R Aplicado a los Proyectos de Investigación]{.plo}</h2>
+
+<hr>
+
+<h3>[Percy Soto-Becerra, M.D., M.Sc(c)]{.negro}</h3>
+
+<h4>[InkaStats Data Science Solutions \| Medical Branch]{.negro}</h4>
+
+<h4>[2022-10-21]{.negro}</h4>
+
+`r fontawesome::fa("github", "black")`   <https://github.com/psotob91>
+
+![](img/social-image-f22.png){.absolute top="390" left="950" width="600"}
+
+```{r}
+#| echo: false
+#| output: false
+
+# Removing all objects including loaded libraries
+rm(list = ls(all = TRUE))
+gc()
+
+# Installing and loading packages
+if (!require("pacman")) {
+  install.packages("pacman")
+}
+
+pacman::p_unload("all") # Unloading all package except base
+
+pacman::p_load(tidyverse, 
+               tibble, 
+               labelled, 
+               pander, 
+               gt, 
+               kableExtra, 
+               DT, 
+               haven, 
+               skimr, 
+               Hmisc, 
+               janitor, 
+               rio, 
+               gtsummary, 
+               gt, 
+               flextable, 
+               kableExtra, 
+               readxl, 
+               rstatix, 
+               medicaldata, 
+               ggpubr, 
+               car, 
+               performance,
+               see, 
+               lmtest, 
+               sandwich, 
+               splines2, 
+               plotly, 
+               glue) # Loading packages
+
+md_visit <- import("rwm5yr.dta") %>% 
+  characterize()
+
+```
+
+# El Modelo Lineal Generalizado
+
+## Modelo Lineal Generalizado
+
+> Modelo lineal que permite modelar desenlaces de varios tipos de distribuciones.
+
+-   Generaliza el modelo de regresión lineal.
+
+-   Permite que $Y_i$ siga otras distribuciones.
+
+    - Pertenecientes a la familia de distribución exponencial. 
+    
+
+## Modelo Lineal Generalizado: Anatomía
+
+**Componente sistemático:**
+
+$$
+g(E(Y|x_{1i}, ..., x_{pi})) = g(E(Y_i)) = \eta_i = \beta_0 + \beta_1x_{1i} + ...+ \beta_px_{ip}
+$$
+
+-   $g()$ es la `función de enlace`.
+
+-   $\eta_i$ es el `predictor linear`.
+
+- $E(Y|x_{1i}, ..., x_{pi}) = \mu_i$ 
+
+**Componente aleatorio:**
+
+$$
+Y_i \sim Distribucion~de~la~Familia~Exponencial
+$$
+
+## Familia exponencial {.scrollable}
+
+| Variable respuesta    |       Distribución de FE       | Función de enlace canónica $g()$ | Otras funciones de enlace comunes |
+|:----------------|:---------------:|:----------------:|:-----------------:|
+| **Binaria**           | Bernoulli (Binomial con n = 1) |            $logit()$             |              $log()$              |
+| **Conteo**            |     Binomial (con n \> 1)      |            $logit()$             |              $log()$              |
+|                       |            Poisson             |             $log()$              |                                   |
+|                       |       Binomial negativo        |          $log(\mu + k)$          |              $log()$              |
+| **Continua positiva** |             Gamma              |         $\frac{1}{\mu}$          |                                   |
+|                       |        Gausiana inversa        |                                  |                                   |
+
+
+## Estimación de GLM
+
+- Hace uso de `estimación de máxima verosimilitud` (MV).
+
+- Salvo el caso normal (donde MV = MCO), `no existe solución cerrada` para obtener los estimadores de MV.
+    
+    - Hay que hacer uso de `métodos numéricos`: Fisher Scoring, Newton Raphson, etc.
+
+- No siempre la función de verosimilitud tiene un máximo.
+
+    - Solo cuando se usa la función de enlace canónica.
+    
+    - Caso contrario, puede no tener solución única y hay problemas de convergencia.
+
+# La regresión de Poisson
+
+## El modelo de regresión de Poisson {.scrollable}
+
+$$y_i \sim Poisson(\beta_0 + \beta_1x_{1i} + ...+ \beta_px_{ip})$$
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+-   **Componente sistemático:**
+
+$$log(E(y_i)) = \eta_i$$
+
+:::
+
+::: {.column width='50%'}
+
+-   **Función de enlace:**
+
+$$\eta_i = \beta_0 + \beta_1x_{1i} + ...+ \beta_px_{ip}$$
+:::
+
+::::
+
+-   **Componente aleatorio:**
+
+$$y_i \sim Poisson(\eta_i)$$
+
+
+## ¿Por qué usar log? {.scrollable}
+
+- $log()$ es la función de enlace canónica: solución única para MV y no problemas de convergencia por esto.
+
+-   Si usamos la función identidad de la regresión lineal, el modelo quedaría planetado de esta manera:
+
+$$E(y_i) = \beta_0 + \beta_1x_{1i} + ...+ \beta_px_{ip}$$
+
+
+:::{.callout-important collapse=false appearance='default' icon=false}
+## 
+-   Entonces, el modelo predecirá valores fuera del rango natural de la variable $y_i$:
+-   $y_i$ es de conteo (discreto), pero se obtendrían predichos con decimales (continuo).
+-   $y_i$ es positivo siempre, pero se podrían ontener predichos negativos.
+:::
+
+- El inverso de $log()$, $exp()$ devuelve una `razón de medias`, medida interpretable.
+
+## ¿Por qué no asumir normalidad de $y_i$? {.scrollable}
+
+-   Porque la distribución de $y_i$ no es normal, es una variable de conteo.
+
+-   El principal problema de esto, es que al ser Poisson, la $media = varianza = \lambda$, por lo que a mayor valor de la media, la varianza aumentará.
+
+    - Lo que implica que $y_i$ es una v.a. heterocedástica.
+
+    -   El modelo normal necesita homocedasticidad, caso contrario, tiene que corregirse de alguna manera.
+
+    -   Poisson no necesita esto, su modelo es heterocedastico por naturaleza, lo que hace más eficiente la estimación: 
+    
+        - Si el modelo es válido, los intervalos de confianza serán más precisos.
+
+## La regresión de Poisson retorna razón de medias
+
+-   La regresión de Poisson permite retornar directamente `razón de medias` (RM).
+
+-   Los coeficientes de regresión $\beta$ del modelo son $log(RM)$, por lo tanto, podemos exponenciarlos para obtener los OR:
+
+$$\beta = log(RM)$$
+
+<center>entonces</center>
+
+$$e^\beta = RM$$
+
+## [glm()]{.verde-h3} paso a paso
+
+```{r}
+mod <- glm(docvis ~ female + age, 
+           data = md_visit)
+summary(mod)
+```
+
+- Se especifica la ecuación. 
+
+    - Por defecto, regresión lineal normal
+
+## [glm()]{.verde-h3} paso a paso
+
+```{r}
+mod <- glm(docvis ~ female + age, 
+           family = poisson, 
+           data = md_visit)
+summary(mod)
+```
+
+- Se indica la familia de distribución de $y_i$.
+
+    - Por defecto, la función de enlace será la canónica.
+    
+## [glm()]{.verde-h3} paso a paso
+
+```{r}
+mod <- glm(docvis ~ female + age, 
+           family = poisson(link = "log"), 
+           data = md_visit)
+summary(mod)
+```
+
+- Se indica la familia de distribución de $y_i$.
+
+    - Por defecto, la función de enlace será la canónica.
+
+## [glm()]{.verde-h3} paso a paso
+
+```{r}
+mod <- glm(docvis ~ female + age, 
+           family = poisson(link = "identity"), 
+           data = md_visit)
+summary(mod)
+```
+
+- Podemos cambiar la función de enlace.
+        
+        
+## [glm()]{.verde-h3} paso a paso
+
+```{r}
+mod <- glm(docvis ~ female + age, 
+           family = poisson(link = "log"), 
+           data = md_visit)
+mod %>% 
+  tidy() %>% 
+  gt()
+```
+
+- En el caso de la función de enlace [log]{.verde-h3}, los coeficientes son `log(razón de medias)`, para volverlos interpretables, hay que aplicar antilogaritmo: `exp()`.
+    
+## [glm()]{.verde-h3} paso a paso
+
+```{r}
+mod %>% 
+  tidy(exponentiate = TRUE) %>% 
+  gt()
+```
+
+- La función [tidy()]{.verde-h3} de [{broom}]{.verde-h3} permite hacer esto facilmente: `exponentiate = TRUE`.
+
+## [glm()]{.verde-h3} paso a paso
+
+```{r}
+mod %>% 
+  tidy(exponentiate = TRUE, conf.int = TRUE) %>% 
+  gt()
+```
+
+- También podemos agregar intervalos de confianza.
+
+## Casos aplicado {.scrollable}
+
+-   Identificar factores asociados a que el niño tenga alergia.
+
+::: panel-tabset
+### Caso
+
+-   Factores asociados al número de visitas médicas anuales.
+
+``` r
+md_visit <- import("rwm5yr.dta") %>% 
+  characterize()
+```
+
+-   Especificación del modelo
+
+```{r}
+mod <- glm(docvis ~ female + age, 
+           family = poisson(link = "log"), 
+           data = md_visit)
+summary(mod)
+```
+
+-   Presentación con intervalos de confianza y exponenciada (OR):
+
+```{r}
+mod %>% 
+  tidy(conf.int = TRUE, exponentiate = TRUE)
+```
+
+### Interpretación
+
+- `female`: El número medio de visitas anuales al médico en mujeres fue 20% veces más el de los hombres (RM = 1.33; IC95% 1.31 a 1.35; p < 0.001)
+
+- `age`: Por cada incremento de la edad en un año, el número medio de visitas anuales al médico se incrementa en 1% (RM = 1.017; IC95% 1.016 a 1.018; p < 0.001). 
+
+### Supuestos
+
+-   Linealidad del $log(y_i)$ respecto a la combinación lineal de predictores.
+
+-   Observaciones son independientes.
+
+-   $Y_i$ sigue distribución de Poisson.
+
+    - Supuesto de equivarianza.
+
+-   No problemas de regresión:
+
+    -   No puntos influyentes
+
+    -   No colinealidad: Solo cuando esta es un problema.
+
+-   Supuestos específicos si se busca generalizar a poblaciones conocidas, hacer inferencias causales o ambas.
+
+### Evaluación de Supuestos
+
+```{r}
+#| fig-align: center
+#| fig-width: 10
+#| fig-height: 15
+library(performance)
+check_model(mod)
+```
+:::
+
+# La regresión Binomial Negativa
+
+## El modelo de regresión binomial negativa {.scrollable}
+
+- Si asumimos que $y_i$ tienne un segundo nivel de variabilidad:
+
+$y_i|\lambda_i \sim Poisson(\lambda_i)$ y $\lambda_i \sim Gamma(\mu_i, \psi)$ 
+
+- Entonces, es posible mostrar que $y_i$ sigue una `distribución binomial negativa`.
+
+- Asimismo, el modelo:
+
+$$y_i \sim BN(\beta_0 + \beta_1x_{1i} + ...+ \beta_px_{ip}, \psi)$$
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+-   **Componente sistemático:**
+
+$$log(E(y_i)) = \eta_i$$
+
+:::
+
+::: {.column width='50%'}
+
+-   **Función de enlace:**
+
+$$\eta_i = \beta_0 + \beta_1x_{1i} + ...+ \beta_px_{ip}$$
+:::
+
+::::
+
+-   **Componente aleatorio:**
+
+$$y_i \sim BN(\eta_i, \psi)$$
+
+
+## ¿Por qué usar binomial negativa y no poisson? {.scrollable}
+
+- Porque no siempre la variable $y_i$ seguirá una distribución de Poisson.
+
+- Si sigue una distribución BN, entonces la varianza es mayor a la media (sobredispersion).
+
+    - La estimación del error estándar deberá tener esto en cuenta.
+    
+    - Caso contrario, sería inválido en dirección anticorservadora.
+    
+    
+## ¿Por qué usar la función de enlace log?
+
+- La función de enlace de la BN no es `log()`, tampoco `identiy()`.
+
+- Sin embargo, se prefiere usar `log()` para obtener resultados interpretables: `razón de medias`.
+
+- Esto conlleva un problema, no siempre hay convergencia:
+
+    - Cuando hay sobredispersión, regresión binomial negativa no siempre es la opción factible.
+    
+    - Otra opción puede ser usar regresión quasipoisson o un estimador de varianza robusta.
+
+## La regresión BN también retorna razón de medias
+
+-   La regresión BN permite retornar directamente `razón de medias` (RM).
+
+-   Los coeficientes de regresión $\beta$ del modelo son $log(RM)$, por lo tanto, podemos exponenciarlos para obtener las RM:
+
+$$\beta = log(RM)$$
+
+<center>entonces</center>
+
+$$e^\beta = RM$$
+
+## [glm.nb()]{.verde-h3} paso a paso
+
+- Se usa la función [glm.nb()]{.verde-h3} del paquete [MASS]{.verde-h3}:
+
+```{r}
+library(MASS)
+```
+
+## [glm.nb()]{.verde-h3} paso a paso
+
+```{r}
+mod <- glm.nb(docvis ~ female + age, 
+           data = md_visit)
+summary(mod)
+```
+
+- Se especifica la ecuación. 
+
+## [glm.nb()]{.verde-h3} paso a paso
+
+```{r}
+mod <- glm.nb(docvis ~ female + age, 
+           data = md_visit)
+mod %>% 
+  tidy() %>% 
+  gt()
+```
+
+- En el caso de la función de enlace [log]{.verde-h3}, los coeficientes son `log(razón de medias)`, para volverlos interpretables, hay que aplicar antilogaritmo: `exp()`.
+    
+## [glm.nb()]{.verde-h3} paso a paso
+
+```{r}
+mod %>% 
+  tidy(exponentiate = TRUE) %>% 
+  gt()
+```
+
+- La función [tidy()]{.verde-h3} de [{broom}]{.verde-h3} permite hacer esto facilmente: `exponentiate = TRUE`.
+
+## [glm.nb()]{.verde-h3} paso a paso
+
+```{r}
+mod %>% 
+  tidy(exponentiate = TRUE, conf.int = TRUE) %>% 
+  gt()
+```
+
+- También podemos agregar intervalos de confianza.
+
+## Casos aplicado {.scrollable}
+
+-   Identificar factores asociados a que el niño tenga alergia.
+
+::: panel-tabset
+### Caso
+
+-   Factores asociados al número de visitas médicas anuales.
+
+``` r
+md_visit <- import("rwm5yr.dta") %>% 
+  characterize()
+```
+
+-   Especificación del modelo
+
+```{r}
+mod <- glm.nb(docvis ~ female + age, 
+           data = md_visit)
+summary(mod)
+```
+
+-   Presentación con intervalos de confianza y exponenciada (RM):
+
+```{r}
+mod %>% 
+  tidy(conf.int = TRUE, exponentiate = TRUE)
+```
+
+### Interpretación
+
+- `female`: El número medio de visitas anuales al médico en mujeres fue 20% veces más el de los hombres (RM = 1.40; IC95% 1.34 a 1.46; p < 0.001)
+
+- `age`: Por cada incremento de la edad en un año, el número medio de visitas anuales al médico se incrementa en 2.3% (RM = 1.017; IC95% 1.021 a 1.025; p < 0.001). 
+
+### Supuestos
+
+-   Linealidad del $log(y_i)$ respecto a la combinación lineal de predictores.
+
+-   Observaciones son independientes.
+
+-   $Y_i$ sigue distribución de Poisson.
+
+    - Supuesto de equivarianza.
+
+-   No problemas de regresión:
+
+    -   No puntos influyentes
+
+    -   No colinealidad: Solo cuando esta es un problema.
+
+-   Supuestos específicos si se busca generalizar a poblaciones conocidas, hacer inferencias causales o ambas.
+
+### Evaluación de Supuestos
+
+```{r}
+#| fig-align: center
+#| fig-width: 10
+#| fig-height: 15
+library(performance)
+check_model(mod)
+```
+:::
+
+# Tablas de regresión reproducibles con {gtsummary}
+
+## Tablas de regresión lineal reproducible {.scrollable}
+
+-   Podemos usar la librería {gtsummary} para esto.
+
+-   Veamos un ejemplo.
+
+```{r}
+datos <- import("hb.dta") %>% 
+  characterize()
+```
+
+## Tablas de regresión lineal reproducible {.scrollable}
+
+-   Podemos reportar la tabla de regreion multivarible de la siguiente manera:
+
+    -   Primero realizamos el modelo:
+
+```{r}
+mod <- lm(hb ~ age + sex, data = datos)
+mod %>% 
+  tidy(conf.int = TRUE)
+```
+
+## Tablas de regresión lineal reproducible {.scrollable}
+
+-   Se puede crear una tabla de regresión multivariable con la función `tbl_regression()` de `{gtsummary}`:
+
+```{r}
+tabla_multi <- mod %>%  
+  tbl_regression()
+
+tabla_multi
+```
+
+## Tablas de regresión lineal reproducible {.scrollable}
+
+-   Podemos hacer la tabla de regresiones bivariada con la función `tbl_uvregression()` de `{gtsummary}`:
+
+```{r}
+tabla_univ <- datos %>% 
+  dplyr::select(age, sex, hb) %>% 
+  tbl_uvregression(
+    method = lm, 
+    y = hb
+  ) 
+
+tabla_univ
+```
+
+## Tablas de regresión lineal reproducible {.scrollable}
+
+-   Luego, podemos fusionar ambas tablas en una sola con la función `tbl_merge()`:
+
+```{r}
+tabla_final <- tbl_merge(list(tabla_univ, tabla_multi), tab_spanner = c("Modelos crudos", "Modelo ajustado")) 
+
+tabla_final
+```
+
+## Tablas de regresión lineal reproducible {.scrollable}
+
+-   Podemos exportarlo a MS Word para post-procesamiento y reporte:
+
+```{r}
+tabla_final %>% 
+  as_flex_table() %>% 
+  save_as_docx(path = "Tabla_Final.docx")
+```
+
+## 
+
+::: r-fit-text
+<center>¡Gracias!</center>
+
+<center>¿Preguntas?</center>
+:::
+
+## 
+
+\
+
+\
+
+\
+
+::: r-fit-text
+<center>
+
+{{< fa brands twitter >}}
+
+{{< fa brands github >}} https://github.com/psotob91
+
+{{< fa inbox >}} percys1991@gmail.com
+
+</center>
+:::

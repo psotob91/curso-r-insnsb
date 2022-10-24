@@ -186,7 +186,7 @@
     "href": "content/08-content.html",
     "title": "Sesión 08",
     "section": "",
-    "text": "En esta sesión se buscará abordar los siguientes temas:\n\nRegresión para datos numéricos: Regresión lineal, de Poisson y Binomial Negativa con R.\nEvaluación de supuestos, interpretación de resultados y reporte reproducible con gt_summary().\nCaso aplicado de análisis en efectividad clínica comparativa."
+    "text": "En esta sesión se buscará abordar los siguientes temas:\n\nRegresión para datos numéricos: Regresión lineal\nCaso aplicado de análisis en efectividad clínica comparativa."
   },
   {
     "objectID": "content/08-content.html#materiales",
@@ -200,21 +200,21 @@
     "href": "content/09-content.html",
     "title": "Sesión 09",
     "section": "",
-    "text": "En esta sesión se buscará abordar los siguientes temas:\n\nRegresión para datos binarios para estimar OR y RR/RP: Regresión Logística Binaria, Log-Binomial y Poisson con R.\nEvaluación de supuestos, interpretación y reporte reproducible con gt_summary().\nCasos aplicado de análisis en efectividad clínica comparativa."
+    "text": "En esta sesión se buscará abordar los siguientes temas:\n\nRegresión para datos numéricos: Regresión de Poisson y Binomial Negativa con R.\nEvaluación de supuestos, interpretación de resultados y reporte reproducible con gt_summary().\nEvaluación de supuestos, interpretación y reporte reproducible con gt_summary()."
   },
   {
     "objectID": "content/09-content.html#materiales",
     "href": "content/09-content.html#materiales",
     "title": "Sesión 09",
     "section": "Materiales",
-    "text": "Materiales\n\nClase grabadaSlidesTalleres\n\n\nSe colgará cuando esté disponible.\n\n\n\n\n\n\nPuede descargar los archivos generados en la carpeta taller09 en el siguiente enlace: Aquí."
+    "text": "Materiales\n\nClase grabadaSlidesTalleres\n\n\n\n\n\n\n\n\n\n\n Ver diapositivas en una nueva ventana\n\n\n\n\n\nPuede descargar los archivos generados en la carpeta taller09 en el siguiente enlace: Aquí."
   },
   {
     "objectID": "content/10-content.html",
     "href": "content/10-content.html",
     "title": "Sesión 10",
     "section": "",
-    "text": "En esta sesión se buscará abordar los siguientes temas:\n\nEstrategias de regresión en modelado explicativo 1: Confusión y ajuste.\nUso de DAG para seleccionar variables.\nCaso aplicado de análisis en efectividad clínica comparativa."
+    "text": "En esta sesión se buscará abordar los siguientes temas:\n\nRegresión para datos binarios para estimar OR y RR/RP: Regresión Logística Binaria, Log-Binomial y Poisson modificado con R.\nEstrategias de regresión en modelado explicativo 1: Confusión y ajuste.\nUso de DAG para seleccionar variables.\nCaso aplicado de análisis en efectividad clínica comparativa."
   },
   {
     "objectID": "content/10-content.html#materiales",

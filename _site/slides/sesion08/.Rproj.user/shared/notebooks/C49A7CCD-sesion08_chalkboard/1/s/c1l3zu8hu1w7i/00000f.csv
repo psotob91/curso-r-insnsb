@@ -1,5 +1,0 @@
-"0","#| echo: false"
-"0","datos %>% "
-"0","  ggplot(aes(x = x1, y = y)) + "
-"0","  geom_point() + "
-"0","  theme_bw()"
