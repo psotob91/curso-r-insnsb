@@ -1,0 +1,406 @@
+---
+title: "<img data-src='images/logo-essalud.png' height='72' width='250'/> <img data-src='images/logo-pueblo.jpg' height='72' width='250'/> <img data-src='images/logo-ietsi.png' height='72' width='250'/> <FONT color='#232429'><br>Sesión 2a</FONT>"
+subtitle: "<FONT color='#636363' size='7'>Programa de Formación Científica:<br>Análisis Estadístico 2022</FONT>"
+author: "<FONT color='#232429' size='30'>Percy Soto-Becerra</FONT>"
+institute: "<FONT color='#232429' size='5'>Instituto de Evaluación de Tecnologías en Salud e Investigación - IETSI, EsSalud<br>@github/psotob91</FONT>"
+date: "<FONT color='#232429' size='6'>Junio 22, 2022</FONT>"
+format: 
+  revealjs: 
+    theme: default
+    footer: "Programa de Formación Científica: Análisis Estadístico 2022 - Sesión 2a"
+    logo: images/logo-ietsi.png
+    transition: convex
+    background-transition: zoom
+    incremental: false
+    slide-number: true
+    preview-links: true
+    # parallax-background-image: images/bg-ietsi-slide-first.png
+    # parallax-background-size: "1920px 1080px"
+    chalkboard: true
+    code-block-background: true
+    code-block-border-left: "#31BAE9"
+    highlight-style: solarized
+    echo: true
+    multiplex: true
+    touch: true
+    auto-stretch: true
+    link-external-icon: true
+    link-external-newwindow: true
+---
+
+```{r}
+#| echo: false
+#| output: false
+
+# Removing all objects including loaded libraries
+rm(list = ls(all = TRUE))
+gc()
+
+# Installing and loading packages
+if (!require("pacman")) {
+  install.packages("pacman")
+}
+
+pacman::p_unload("all") # Unloading all package except base
+
+pacman::p_load(tidyverse, janitor, gt, gtsummary, flextable, kableExtra, skimr, Hmisc, readxl) # Loading packages
+
+# icons::download_fontawesome()
+```
+
+# Introducción a la inferencia estadística
+
+## Inferencia Estadística
+
+-   Rama de la Estadística que trata sobre procedimientos que permiten obtener conclusiones de la población basándonos en los datos de una sola muestra.
+
+-   Hay dos enfoques predominantes: <FONT size='6'>
+
+    -   Frecuentista</FONT><FONT size='6'>
+    -   Bayesianismo</FONT>
+
+-   En este curso, como en la mayoría de cursos básicos, seguiremos el enfoque frecuentista.
+
+## Inferencia Estadística bajo la lupa frecuentista
+
+-   Los procedimientos de prueba de hipóteis y de estimación de intervalos de confianza trabajan bajo el enfoque frecuentista.
+
+-   Es la estadística de pre-grado (y post-grado).
+
+-   Trabaja bajo la idea que puedes repetir infnitas o muchísimas veces el mismo estudio, pero sobre una nueva muestra aleatoria obtenida.
+
+## Estimación
+
+![](images/estimacion.png)
+
+## Estimación (cont.)
+
+![](images/estimacion2.png)
+
+## Prueba de hipótesis
+
+![](images/ph.png)
+
+## Lógica frecuentista
+
+![](images/logica-frecuentista.png)
+
+## La distribución muestral es lo importante!
+
+-   No importa tanto la distribución de la muestra o de la población.
+
+-   Si no que la distribución de todas las muestras posibles siga cierto comportamiento!
+
+## La distribución muestral es lo importante
+
+![](images/dist-muestral.png)
+
+::: aside
+Entrar: <https://onlinestatbook.com/stat_sim/sampling_dist/>
+:::
+
+# Pruebas de hipótesis
+## Prueba de Hipótesis (PH)
+
+-   *"Método para evaluar una afirmación o hipótesis sobre un parámetro poblacional usando datos de una muestra."*
+
+-   Usar métodos estadísticos para determinar la probabilidad de que nuestras hipótesis sean consistentes con los datos. <FONT size='6'>
+
+    -   Bajo ciertas suposiciones y puntos de corte, podemos tomar decisiones acerca de en qué creemos o no.</FONT><FONT size='6'>
+    -   Como toda decisión, esta se mantiene hasta encontrar nueva evidencia en contra. Son decisiones 'temporales'.</FONT>
+
+## PH (cont.)
+
+-   Depende del tipo de variables incluidas, de su distribución, del pareamiento, etc.
+
+-   Los métodos de prueba de hipótesis que veremos hoy se basan en la Hipótesis Nula, por ende, su nombre completo (a menudo obviado) es: **Prueba de Significancia de Hipótesis Nula**.
+
+## PH (cont.)
+
+::: callout-warning
+## Alerta terminológica!
+
+-   Cuando nos referimos a 'probar' una hipótesis nos estamos refiriendo a la traducción del inglés 'test', que significa 'evaluar', 'someter a prueba'.
+
+-   Esta es una evaluación empírica: basada en los dato que tenemos disponibles.
+
+-   Los datos provienen a menudo de muestras, ergo, parte de lo que observamos podría deberse a que nos tocó 'por azar' una muestra extrema o 'rara'.
+
+-   A menudo, confundimos 'probar' con 'demostrar'.
+
+-   En estadística no demostramos nunca.
+
+-   Solo comprobamos, es decir, vemos datos y confirmamos nuestros hallazgos si son parecidos o los falseamos si son diferentes.</FONT>
+:::
+
+## PH (cont.)
+
+::: callout-warning
+## Otra alerta terminológica!
+
+-   Nos interesan hipótesis estadísticas acerca de la población, no sobre la muestra.
+
+-   Usamos un estadístico calculado de los datos de la muestra para probar una hipótesis acerca de un parámetro de la población.
+
+-   Nunca probamos hipótesis sobre individuos de la población (p. ej., el peso de un individuo), si no sobre parámetros de la población (p. ej., el promedio de peso de la población).
+
+-   Para una misma variable pueden interesarnos parámetros diferentes (p. ej., mediana de peso versus media de peso versus desviación estándar de peso).
+:::
+
+## ¿Qué solemos probar o estimar? {.scrollable}
+
+-   **Acerca de un parámetro:** PH contra valor hipotético o estimar el parámetro de una población.
+
+::: callout-note
+**Ej. 1.** Tengo dudas acerca de si una prueba de laboratorio de anticuerpos mide bien o no: *¿El promedio de anticuerpos en mis pocillos control es igual o diferente que el especificado en el inserto?*
+:::
+
+::: callout-note
+**Ej. 2.** La adherencia a una guía de práctica clínica se evalúa de acuerdo a un punto de corte establecido: *¿El porcentaje de cumplimiento de la GPC es mayor a 80%?*
+:::
+
+## ¿Qué solemos probar o estimar? (cont.) {.scrollable}
+
+-   **Acerca de dos o más parámetros:**
+
+::: callout-note
+**Ej. 1.** Quiero saber si un nuevo medicamento reduce la presión arterial: *¿El promedio de presión arterial de la población que toma el medicamento es menor o mayor igual que el promedio de presión arterial de la población que no toma el medicamento?*
+:::
+
+::: callout-note
+**Ej. 2.** Tengo dudas acerca de si un medicamento aumenta la incidencia de cura de COVID-19: *¿La incidencia acumulada de cura a 1 mes de la población que toma el medicamento es mayor o menor igual que la incidencia acumulada de cura a 1 mes de la población que no toma el medicamento?*
+:::
+
+## La inferencia estadística puede tener 2 usos: {.scrollable}
+
+1.  `Describir diferencias entre dos poblaciones usando datos de muestra.`
+
+    -   Ejemplo: Comparar prevalencia de anemia por regiones. Las regiones no `causan` anemia, pero saber estas diferencias regionales nos permite conocer las inequidades. Estamos comparando dos poblaciones diferentes.
+
+2.  `Hacer inferencias causales.`
+
+    -   Ejemplo: Estimar la eficacia o efectividad de las vacunas. Queremos inferir qué le hubiera pasado a una población si tomara un tratamiento contrafactual. Estamos comparando la misma población contra sigo misma en un universo contrafactual.
+
+## Procedimiento de prueba de hipótesis
+
+1.  Formular las `hipótesis nula` y `alterna`.
+
+2.  Establecer los `criterios de decisión` para evaluar la veracidad de la hipótesis nula.
+
+3.  Asumir que la `H0 es verdadera` y `estimar` la `probabilidad` de observar un `valor igual o más extremo` que el valor observado si pudieramos `repetir el estudio infinitas veces` (o al menso un número muy grande!). Esto es el `valor p`.
+
+4.  Tomar una decisión respecto a si creemos o no en la hipótesis nula.
+
+## ¿Qué es el valor p?
+
+-   Probabilidad de...
+
+-   Observar un determinado valor o más extremo.
+
+-   En una muestra aleatoria de tamaño "n".
+
+-   Dado que asumimos que la hipótesis nula es verdadera.
+
+## Criterios de decisión {.scrollable}
+
+-   Basado en el nivel de significancia estadístico (usualmente 5%, pero puede cambiar y a menudo cambia).
+
+> Valor p mide la probabilidad de observar, en una muestra, un determinado valor o más extremo que este valor si la muestra proviniera de una población donde la hipótesis nula es verdadero.
+
+::: callout-note
+## Ejemplo 1
+
+-   Si p = 30%, quiere decir que en 100 muestras al azar de una población donde la H0 es verdadera, en 30 encontraríamos un estadístico igual o más extremo que el observado en la muestra.
+
+-   Es decir, es muy común encontrar estos valores en muestras tomadas de una población donde la H0 es verdadera.
+
+-   Por lo tanto decido suponer que no tengo evidencia suficiente para concluir que la H0 sea falsa.
+
+-   Esta decisión, si es errónea, puede tener consecuencias.
+:::
+
+## Criterios de decisión (cont.) {.scrollable}
+
+> Valor p mide la probabilidad de observar, en una muestra, un determinado valor o más extremo que este valor si la muestra proviniera de una población donde la hipótesis nula es verdadero.
+
+::: callout-note
+## Ejemplo 2
+
+-   Si p = 1%, quiere decir que en 100 muestras al azar de una población donde la H0 es verdadera, solo en 1 encontraríamos un estadístico igual o más extremo al observado.
+
+-   Es decir, es muy raro encontrar estos valores en muestras tomadas de una población de una población donde la H0 es verdadera. Es posible, pero improbable.
+
+-   Por lo tanto, pensamos mal, y decidimos suponer que es más probable que la H0 sea falsa a que nos haya tocado una muestra extrema siendo la H0 verdadera.
+
+-   Decido rechazar la H0.
+
+-   Esta decisión, si es errónea, puede tener consecuencias.
+:::
+
+## Criterios de decisión (cont.)
+
+![](images/criterio.png)
+
+## Errores de decisión
+
+![](images/errores.png)
+
+# Intervalo de confianza
+
+## Definición de intervalo de confianza al P%
+
+-   Rango de valores que contendrían el verdadero valor del parámetro P% de las veces, si pudiera repetir el estudio muchísimas veces con muestras aleatorias diferentes del mismo tamaño.
+
+-   El IC95% significa que si pudiera tuviera 100 estudios similares, con mismo n pero muestras aleatorias diferentes, aprox. 95 estudios tendrían IC que capturarían el verdadero valor.
+
+## Definición de intervalo de confianza al P% (cont.)
+
+-   No significa que el IC95% que yo observo tiene un 95% de obtener el valor del parámetro.
+
+-   De hecho, la probabilidad de que el IC95% que yo observo en mi estudio contenga el valor del parámetro no se puede estimar en estadística frecuentista, pero sabemos que es 1 (lo contiene) o 0 (no lo contiene). No admite valores intermedios.
+
+## Procedimientos para Intervalos de Confianza
+
+-   Use el valor puntual como la mejor estimación del parámetro disponible basada en los datos.
+
+-   Estime un error estándar para la distribución muestral del estadístico de interés.
+
+-   Asuma una distribución muestral conocida para el estaditico de interés.
+
+-   Con estos dos insumos, calcule los límites del intervalo de confianza.
+
+## 12 Errores de concepto acerca del valor p
+
+![](images/doce-errores.png)
+
+## Si la hipótesis nula es cierta, siempre será posible que algunos estudios den valores muy extremos...
+
+![](images/pextremo.png)
+
+## Intervalos de confianza y valor p
+
+-   IC 95% también pueden ser usados para probar hipótesis
+
+-   A menudo complementan información.
+
+-   En algunas revistas, el valor p ha sido baneado.
+
+-   Incluso en revistas donde el valor p no ha sido baneado, el IC95% es indispensable y el valor p un complemento.
+
+-   Adecuadamente interpretado, el IC da más información que el valor p acerca de la imprecisión (incertidumbre asociada) de la estimación.
+
+-   Su lectura es tan útil, que varios instrumentos de valoración de la certeza de la evidencia lo usan (p. ej., GRADE).
+
+## Intervalos de confianza pueden brindar un poco más de información
+
+-   Si se interpretan apropiadamente, pueden "ilustrar" mejor la incertidumbre asociada a la estimación.
+
+![](images/info-intervals.png)
+
+## Ejemplos de importancia del IC para valorar imprecisión (incertidumbre) de las estimaciones
+
+![](images/ejemplo-ic1.png)
+
+## Ejemplos de importancia del IC para valorar imprecisión (incertidumbre) de las estimaciones (cont.)
+
+![](images/ejemplo-ic2.png)
+
+## Otro ejemplo de importancia del IC para valorar imprecisión (incertidumbre) de las estimaciones
+
+![](images/ejemplo-ic3.png)
+
+## Significancia estadística vs Significancia clínica
+
+-   La significancia estadística es solo una probabilidad (una medida de incertidumbre asociada a la estimación); siempre existe la posibilidad de error (tipo I y tipo II).
+
+-   Los intervalos de confianza pueden ayudar a entender mejor esta incertidumbre, si y solo si también se interpretan bien.
+
+-   La incertidumbre que miden no es la que usualmente pensamos (hay muchos errores de conceptos!!).
+
+## Significancia estadística vs Significancia clínica (cont.)
+
+-   Grandes tamaños de muestra permiten detectar diferencias pequeñas.
+
+-   Tamaños de muestra muy grandes resultarán en diferencias estadísticamente significativas; incluso si la diferencia clínica no es significativa.
+
+## Significancia estadística vs Significancia clínica (cont.)
+
+![](images/significancia.png)
+
+## Las pruebas de hipótesis tradicionales a menudo no se usan en la práctica habitual
+
+-   Estas pruebas, son los ladrillos sobre los que se construyen otros métodos que son el estándar actual de análisis estadístico en investigación en salud: Modelos estadísticos
+
+-   Es muy raro encontrar un ejemplo actual donde sea válidas usarlas. Su gran problema es que no permiten controlar el efecto de otras variables.
+
+## Las pruebas de hipótesis tradicionales a menudo no se usan en la práctica habitual (cont.)
+
+-   Usarlas para concluir potenciales efectos puede ser peligroso.
+
+-   Incluso los ensayos clínicos aleatorizados no hacen uso de estas directamente, sino incorporadas como parte de modelos de regresión.
+
+-   Usar pruebas estadísticas cuando no son válidas para responder las preguntas científicas es peligroso.
+
+## Pruebas de hipótesis versus modelos estadísticos (ejemplo en estudio observacional)
+
+![](images/prueba-modelo.png)
+
+## 
+
+::: r-fit-text
+<br>
+
+<center>
+
+slides:
+
+</center>
+
+<center>
+
+[https://bit.ly/3n6Ejzb](https://ietsi-academy-aed.netlify.app/sesiones/sesion-1/sesion-1c)
+
+</center>
+:::
+
+## 
+
+::: r-fit-text
+<center>
+
+**¡Gracias por su atención!**
+
+</center>
+
+<center>
+
+**¡Encantado de responder sus consultas!**
+
+</center>
+
+<br>
+
+<center>
+
+**Percy Soto-Becerra**
+
+</center>
+
+<br>
+
+<center>
+
+`r icons::fontawesome$brands$twitter` `r icons::fontawesome$brands$github` @psotob91
+
+</center>
+
+<center>
+
+`r icons::fontawesome$solid$inbox` **percys1991\@gmail.com**
+
+</center>
+:::
+
+::: aside
+<br> <FONT size='4'>Presentación creada vía `Revealjs` en `Quarto` en `RStudio`.</FONT>
+:::

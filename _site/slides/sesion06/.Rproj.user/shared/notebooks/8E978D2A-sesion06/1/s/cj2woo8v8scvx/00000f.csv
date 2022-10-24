@@ -1,0 +1,3 @@
+"0","df %>% t_test(len ~ supp, "
+"0","              paired = TRUE, "
+"0","              detailed = TRUE) %>% gt()"

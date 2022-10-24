@@ -1,0 +1,28 @@
+{
+    "id": "1B63A3BF",
+    "path": "~/Github_webs/curso-r-insnsb/slides/sesion02/sesion02_chalkboard.qmd",
+    "project_path": "sesion02_chalkboard.qmd",
+    "type": "quarto_markdown",
+    "hash": "2486159498",
+    "contents": "",
+    "dirty": false,
+    "created": 1664760387648.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "18,20",
+        "scrollLine": "0",
+        "docOutlineVisible": "0",
+        "docOutlineSize": "200"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1665049935,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1665049935413,
+    "read_only": false,
+    "read_only_alternatives": []
+}

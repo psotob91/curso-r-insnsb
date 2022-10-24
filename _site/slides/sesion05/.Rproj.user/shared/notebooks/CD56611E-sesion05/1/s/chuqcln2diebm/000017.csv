@@ -1,0 +1,3 @@
+"0","bd_inmuno %>% "
+"0","  group_by(sexo) %>% "
+"0","  summarise(n = n())"

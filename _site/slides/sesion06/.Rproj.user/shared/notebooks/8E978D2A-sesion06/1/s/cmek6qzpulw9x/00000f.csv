@@ -1,0 +1,6 @@
+"0","#| echo: false"
+"0","set.seed(123)"
+"0","datos2 <- data.frame("
+"0","  x = rnorm(53, 100, 5), "
+"0","  grupo = c(rep(""Control"", 26), rep(""Tratado"", 27))"
+"0",")"

@@ -1,0 +1,38 @@
+"0","#| echo: false"
+"0","#| output: asis"
+"0","data.frame("
+"0","  Atajo = c(""<kbd>Alt</kbd> + <kbd>94</kbd>"", "
+"0","            ""<kbd>Alt</kbd> + <kbd>126</kbd>"", "
+"0","            ""<kbd>Alt</kbd> + <kbd>38</kbd>"", "
+"0","            ""<kbd>Alt</kbd> + <kbd>124</kbd>""), "
+"0","  Simbolo = c(""^"", ""~"", ""&"", ""|""), "
+"0","  Uso = c(""Elevado a la potencia ..."", ""En relación a ..."", ""... Y ..."", ""... O ...""), "
+"0","  Comentario = c(""Operador aritmético"", "
+"0","                 ""Operador aritmético"", "
+"0","                 ""Operador booleano"", "
+"0","                 ""Operador booleano"")"
+"0","  ) %>% "
+"0","  pandoc.table(caption = """", "
+"0","               justify = ""llll"", "
+"0","               missing = ""—"", "
+"0","               split.tables = Inf, "
+"0","               col.names = c(""Atajo"", "
+"0","                             ""Símbolo"", "
+"0","                             ""Significado"", "
+"0","                             ""Operador booleano""))"
+"1","
+--------------------------------------------------------------------------------------------
+Atajo                            Símbolo   Significado                 Operador booleano    
+-------------------------------- --------- --------------------------- ---------------------
+<kbd>Alt</kbd> + <kbd>94</kbd>   ^         Elevado a la potencia ...   Operador aritmético  
+
+<kbd>Alt</kbd> +                 ~         En relación a ...           Operador aritmético  
+<kbd>126</kbd>                                                                              
+
+<kbd>Alt</kbd> + <kbd>38</kbd>   &         ... Y ...                   Operador booleano    
+
+<kbd>Alt</kbd> +                 |         ... O ...                   Operador booleano    
+<kbd>124</kbd>                                                                              
+--------------------------------------------------------------------------------------------
+
+"

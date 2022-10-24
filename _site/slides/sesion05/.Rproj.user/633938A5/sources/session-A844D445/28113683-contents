@@ -1,0 +1,126 @@
+---
+title: "<FONT color='#A7D5E8'>Análisis bivariado</FONT>"
+subtitle: "<FONT color='#E9AFA3' size='10'>R para Ciencia de Datos en Salud: <br> Análisis Descriptivo e Inferencia Estadística</FONT>"
+author: "<FONT color='#FFFFFF' size='30'>Percy Soto-Becerra M.D., M.Sc(c)</FONT>"
+institute: "<FONT color='#FFFFFF' size='5'>InkaStats Data Science Solutions | Medical Branch<br>@github/psotob91</FONT>"
+
+format: 
+  revealjs:
+    self-contained: true
+    theme: [simple, theme/theme.scss]
+    footer: "Análisis bivariado"
+    slide-number: c/t
+    logo: img/logo.png
+    width: 1920
+    height: 1080
+    highlight-style: ayu-dark
+    self-contained-math: true
+from: markdown+emoji
+execute:
+  echo: true
+---
+
+```{r}
+#| label: setup
+#| include: false
+library(fontawesome)
+library(tidyverse)
+library(quarto)
+library(gt)
+library(gtExtras)
+library(gtsummary)
+library(showtext)
+
+## Ver QUARTO RSTUDIO CONFERENCE: https://github.com/rstudio-conf-2022/get-started-quarto/blob/main/materials/02-authoring.qmd
+## 
+## blackboard theme: https://github.com/schochastics/quarto-blackboard-theme
+## 
+## https://github.com/schochastics/xaringan-themes
+```
+
+
+# Análisis bivariado
+
+## Terminología
+
+<br/>
+
+- [Análisis univariado de datos]{.hl}
+
+    + Distribución de una sola variable.
+
+- [Análisis bivariado de datos]{.hl}
+
+    + Relación entre dos variables.
+
+- [Análisis multivariado de datos]{.hl}
+
+    + Relacion entre muchas variables a la vez, usualmente se centra en la relación entre dos mientras se condiciona por las otras. 
+    
+## ¿Cómo describimos el comportamiento simultáneo de dos variables?
+
+<br/>
+
+- Evaluando cómo cambia una variable respecto a otra (y viceversa).
+
+- A menudo, suele ser de utilidad definir dos tipos de variables:
+
+    + **[Variable dependiente (VD)]{.hl}**: Variable cuya variación es de interés evaluar, respecto a otra.
+    
+    + **[Variable independiente (VI)]{.hl}**: Variable cuya variación no es de interés evaluar y solo es usada para evaluar la variación de la **VD** en los valores de esta **VI**.
+    
+- La **[VD]{.hl}** es asumida como **[aleatoria]{.hl}**. 
+
+    + Puede describirse con distribuciones de probabilidad.
+
+- La **[VI]{.hl}** es asumida como **[fija]{.hl}**.
+
+    + No necesita describirse con distribución de probabilidad.
+
+    + Aunque otras veces, también se puede asumir como **aleatoria**, dependiendo del método. 
+    
+## Ejemplos
+
+<br/> 
+
+> Se desea conocer la distribución del nivel de hemoglobina respecto al sexo en pacientes con diabetes mellitus. 
+
+- **VD:** Hemoglobina
+
+- **VI:** Sexo
+
+> ¿Qué pasaría si se deseara conocer la distribución del sexo respecto a los niveles de hemoglobina?
+
+- **VD:** Sexo
+
+- **VI:** Hemoglobina
+
+## VD vs. VI
+
+> Desde una perspectiva probabilística, no importa quién es la VD y quién es la VI.
+
+- Podemos intercambiarlas para evaluar la relación desde otro aspecto.
+
+> Sin embargo, en investigación solemos tener una VD y una VI claramente definidas y que NO DEBEN ser intercambiadas.
+
+- [Predicción clínica:]{.hl} La [VD]{.hl} es la variable que queremos predecir y las [VI]{.hl} son las variables que usamos para predecir.
+
+- [Inferencia causal:]{.hl} La [VD]{.hl} es la variable sobre la que se evalúa el efecto de la [VI]{.hl} de interés. Otras [VI]{.hl} pueden usarse también para controlar confusión o tener en cuenta modificación de efecto.
+
+- [Descripción:]{.hl} La [VD]{.hl} es la variable que se desea describir. Las [VI]{.hl} son solo variables en cuyos valores se describirá la [VD]{.hl}.
+
+## Asociaciones descriptivas
+
+<br/> 
+
+- En esta sección nos centraremos en describir asociaciones que ocurren en la muestra de estudio.
+
+    - No nos preocupará si estas asociaciones pueden generalizarse a una población más grande.
+
+    - Tampoco si reflejan o no relaciones causales.
+
+    - Mucho menos si te permiten establecer predicciones en nuevos pacientes.
+
+- Solo describiremos la estructura de los datos observadas en la muestra e identificaremos/resumiremos patrones observadas en esta.
+
+- Por supuesto, veremos varios gráficos que permitirán visualizar y resumir mejor estos patrones.

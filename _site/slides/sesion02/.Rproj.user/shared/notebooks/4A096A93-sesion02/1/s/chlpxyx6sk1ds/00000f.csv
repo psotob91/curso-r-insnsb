@@ -1,0 +1,3 @@
+"0","#| echo: false"
+"0","#| out-width: ""80%"""
+"0","knitr::include_graphics(""img/ggplot2-part-of-tidyverse.png"")"

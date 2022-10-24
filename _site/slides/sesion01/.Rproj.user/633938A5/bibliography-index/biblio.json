@@ -1,0 +1,659 @@
+{
+    "sources": [
+        {
+            "DOI": "10.2307/2533848",
+            "author": [
+                {
+                    "family": "Lin",
+                    "given": "D. Y."
+                },
+                {
+                    "family": "Psaty",
+                    "given": "B. M."
+                },
+                {
+                    "family": "Kronmal",
+                    "given": "R. A."
+                }
+            ],
+            "container-title": "Biometrics",
+            "id": "LinPsatyKronmal:1998",
+            "issue": "3",
+            "issued": {
+                "date-parts": [
+                    [
+                        1998,
+                        9
+                    ]
+                ]
+            },
+            "page": "948-963",
+            "title": "Assessing the sensitivity of regression results to unmeasured confounders in observational studies",
+            "type": "article-journal",
+            "volume": "54"
+        },
+        {
+            "author": [
+                {
+                    "family": "Murnane",
+                    "given": "Richard J."
+                },
+                {
+                    "family": "Willett",
+                    "given": "John B."
+                }
+            ],
+            "id": "MurnaneWillett:2011",
+            "issued": {
+                "date-parts": [
+                    [
+                        2011
+                    ]
+                ]
+            },
+            "publisher": "Oxford University Press",
+            "publisher-place": "Oxford",
+            "title": "Methods matter: Improving causal inference in educational and social science research",
+            "title-short": "Methods matter",
+            "type": "book"
+        },
+        {
+            "DOI": "10.1086/426036",
+            "author": [
+                {
+                    "family": "Altonji",
+                    "given": "Joseph G."
+                },
+                {
+                    "family": "Elder",
+                    "given": "Todd E."
+                },
+                {
+                    "family": "Taber",
+                    "given": "Christopher R."
+                }
+            ],
+            "container-title": "Journal of Political Economy",
+            "id": "AltonjiElderTaber:2005",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        2005,
+                        2
+                    ]
+                ]
+            },
+            "page": "151-184",
+            "title": "Selection on observed and unobserved variables: Assessing the effectiveness of catholic schools",
+            "title-short": "Selection on observed and unobserved variables",
+            "type": "article-journal",
+            "volume": "113"
+        },
+        {
+            "DOI": "10.1111/rssb.12348",
+            "author": [
+                {
+                    "family": "Cinelli",
+                    "given": "Carlos"
+                },
+                {
+                    "family": "Hazlett",
+                    "given": "Chad"
+                }
+            ],
+            "container-title": "Journal of the Royal Statistical Society: Series B (Statistical Methodology)",
+            "id": "CinelliHazlett:2020",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        2020,
+                        2
+                    ]
+                ]
+            },
+            "page": "39-67",
+            "title": "Making sense of sensitivity: Extending omitted variable bias",
+            "title-short": "Making sense of sensitivity",
+            "type": "article-journal",
+            "volume": "82"
+        },
+        {
+            "DOI": "10.1017/psrm.2019.31",
+            "author": [
+                {
+                    "family": "Keele",
+                    "given": "Luke"
+                },
+                {
+                    "family": "Stevenson",
+                    "given": "Randolph T."
+                },
+                {
+                    "family": "Elwert",
+                    "given": "Felix"
+                }
+            ],
+            "container-title": "Political Science Research and Methods",
+            "id": "KeeleStevensonElwert:2020",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        2020,
+                        1
+                    ]
+                ]
+            },
+            "page": "1-13",
+            "title": "The causal interpretation of estimated associations in regression models",
+            "type": "article-journal",
+            "volume": "8"
+        },
+        {
+            "DOI": "10.1257/jep.35.3.157",
+            "author": [
+                {
+                    "family": "Imbens",
+                    "given": "Guido W."
+                }
+            ],
+            "container-title": "Journal of Economic Perspectives",
+            "id": "Imbens:2021",
+            "issue": "3, Summer",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021
+                    ]
+                ]
+            },
+            "page": "157-174",
+            "title": "Statistical significance, <i>p</i>-values, and the reporting of uncertainty",
+            "type": "article-journal",
+            "volume": "35"
+        },
+        {
+            "URL": "https://theeffectbook.net/",
+            "author": [
+                {
+                    "family": "Huntington-Klein",
+                    "given": "Nick"
+                }
+            ],
+            "id": "Huntington-Klein:2021",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021
+                    ]
+                ]
+            },
+            "publisher": "Chapman and Hall / CRC",
+            "publisher-place": "Boca Raton, Florida",
+            "title": "The effect: An introduction to research design and causality",
+            "title-short": "The effect",
+            "type": "book"
+        },
+        {
+            "URL": "https://arxiv.org/abs/2005.10314",
+            "author": [
+                {
+                    "family": "Hünermund",
+                    "given": "Paul"
+                },
+                {
+                    "family": "Louw",
+                    "given": "Beyers"
+                }
+            ],
+            "id": "HunermundLouw:2020",
+            "issued": {
+                "date-parts": [
+                    [
+                        2020,
+                        10,
+                        1
+                    ]
+                ]
+            },
+            "title": "On the nuisance of control variables in regression analysis",
+            "type": "article-journal"
+        },
+        {
+            "DOI": "10.1126/science.1251178",
+            "author": [
+                {
+                    "family": "Gertler",
+                    "given": "Paul"
+                },
+                {
+                    "family": "Heckman",
+                    "given": "James"
+                },
+                {
+                    "family": "Pinto",
+                    "given": "Rodrigo"
+                },
+                {
+                    "family": "Zanolini",
+                    "given": "Arianna"
+                },
+                {
+                    "family": "Vermeersch",
+                    "given": "Christel"
+                },
+                {
+                    "family": "Walker",
+                    "given": "Susan"
+                },
+                {
+                    "family": "Chang",
+                    "given": "Susan M."
+                },
+                {
+                    "family": "Grantham-McGregor",
+                    "given": "Sally"
+                }
+            ],
+            "container-title": "Science",
+            "id": "GertlerHeckmanPinto:2014",
+            "issue": "6187",
+            "issued": {
+                "date-parts": [
+                    [
+                        2014,
+                        5,
+                        14
+                    ]
+                ]
+            },
+            "page": "998-1001",
+            "title": "Labor market returns to an early childhood stimulation intervention in Jamaica",
+            "type": "article-journal",
+            "volume": "344"
+        },
+        {
+            "DOI": "10.1257/000282804322970733",
+            "author": [
+                {
+                    "family": "Di Tella",
+                    "given": "Rafael"
+                },
+                {
+                    "family": "Schargrodsky",
+                    "given": "Ernesto"
+                }
+            ],
+            "container-title": "American Economic Review",
+            "id": "Di-TellaSchargrodsky:2004",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        2004,
+                        3
+                    ]
+                ]
+            },
+            "page": "115-133",
+            "title": "Do police reduce crime? Estimates using the allocation of police forces after a terrorist attack",
+            "type": "article-journal",
+            "volume": "94"
+        },
+        {
+            "DOI": "10.3386/w21229",
+            "URL": "https://www.nber.org/papers/w21229.pdf",
+            "author": [
+                {
+                    "family": "Kearney",
+                    "given": "Melissa S."
+                },
+                {
+                    "family": "Levine",
+                    "given": "Phillip B."
+                }
+            ],
+            "collection-title": "Working paper series",
+            "id": "KearneyLevine:2015",
+            "issued": {
+                "date-parts": [
+                    [
+                        2015,
+                        6
+                    ]
+                ]
+            },
+            "number": "21229",
+            "publisher": "National Bureau of Economic Research",
+            "title": "Early childhood education by MOOC: Lessons from <i>sesame street</i>",
+            "title-short": "Early childhood education by MOOC",
+            "type": "report"
+        },
+        {
+            "DOI": "10.1016/j.jdeveco.2003.12.009",
+            "author": [
+                {
+                    "family": "Schultz",
+                    "given": "T. Paul"
+                }
+            ],
+            "container-title": "Journal of Development Economics",
+            "id": "Schultz:2004",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        2004,
+                        6
+                    ]
+                ]
+            },
+            "page": "199-250",
+            "title": "School subsidies for the poor: Evaluating the Mexican Progresa poverty program",
+            "title-short": "School subsidies for the poor",
+            "type": "article-journal",
+            "volume": "74"
+        },
+        {
+            "URL": "https://arxiv.org/abs/1912.09104",
+            "author": [
+                {
+                    "family": "Hünermund",
+                    "given": "Paul"
+                },
+                {
+                    "family": "Bareinboim",
+                    "given": "Elias"
+                }
+            ],
+            "id": "HunermundBareinboim:2019",
+            "issued": {
+                "date-parts": [
+                    [
+                        2019,
+                        12,
+                        19
+                    ]
+                ]
+            },
+            "title": "Causal inference and data-fusion in econometrics",
+            "type": "article-journal"
+        },
+        {
+            "DOI": "10.31235/osf.io/hbg3m",
+            "URL": "https://osf.io/preprints/socarxiv/hbg3m/",
+            "author": [
+                {
+                    "family": "Schuessler",
+                    "given": "Julian"
+                },
+                {
+                    "family": "Selb",
+                    "given": "Peter"
+                }
+            ],
+            "genre": "Working Paper",
+            "id": "SchuesslerSelb:2019",
+            "issued": {
+                "date-parts": [
+                    [
+                        2019,
+                        12,
+                        17
+                    ]
+                ]
+            },
+            "publisher": "SocArXiv",
+            "title": "Graphical causal models for survey inference",
+            "type": "manuscript"
+        },
+        {
+            "DOI": "10.2105/AJPH.2018.304337",
+            "author": [
+                {
+                    "family": "Hernán",
+                    "given": "Miguel A."
+                }
+            ],
+            "container-title": "American Journal of Public Health",
+            "id": "Hernan:2018",
+            "issue": "5",
+            "issued": {
+                "date-parts": [
+                    [
+                        2018,
+                        5
+                    ]
+                ]
+            },
+            "page": "616-19",
+            "title": "The c-word: Scientific euphemisms do not improve causal inference from observational data",
+            "title-short": "The c-word",
+            "type": "article-journal",
+            "volume": "108"
+        },
+        {
+            "DOI": "10.1177/2515245917745629",
+            "author": [
+                {
+                    "family": "Rohrer",
+                    "given": "Julia M."
+                }
+            ],
+            "container-title": "Advances in Methods and Practices in Psychological Science",
+            "id": "Rohrer:2018",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        2018,
+                        3
+                    ]
+                ]
+            },
+            "page": "27-42",
+            "title": "Thinking clearly about correlations and causation: Graphical causal models for observational data",
+            "title-short": "Thinking clearly about correlations and causation",
+            "type": "article-journal",
+            "volume": "1"
+        },
+        {
+            "author": [
+                {
+                    "family": "Rossi",
+                    "given": "Peter H."
+                },
+                {
+                    "family": "Lipsey",
+                    "given": "Mark W."
+                },
+                {
+                    "family": "Henry",
+                    "given": "Gary T."
+                }
+            ],
+            "edition": "8",
+            "id": "RossiLipseyHenry:2019",
+            "issued": {
+                "date-parts": [
+                    [
+                        2019
+                    ]
+                ]
+            },
+            "publisher": "Sage",
+            "publisher-place": "Los Angeles",
+            "title": "Evaluation: A systematic approach",
+            "title-short": "Evaluation",
+            "type": "book"
+        },
+        {
+            "author": [
+                {
+                    "family": "Angrist",
+                    "given": "Joshua D."
+                },
+                {
+                    "family": "Pischke",
+                    "given": "Jörn-Steffen"
+                }
+            ],
+            "id": "AngristPischke:2015",
+            "issued": {
+                "date-parts": [
+                    [
+                        2015
+                    ]
+                ]
+            },
+            "publisher": "Princeton University Press",
+            "publisher-place": "Princeton, NJ",
+            "title": "Mastering ’metrics: The path from cause to effect",
+            "title-short": "Mastering ’metrics",
+            "type": "book"
+        },
+        {
+            "URL": "https://mixtape.scunning.com/",
+            "author": [
+                {
+                    "family": "Cunningham",
+                    "given": "Scott"
+                }
+            ],
+            "id": "mixtape",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021
+                    ]
+                ]
+            },
+            "publisher": "Yale University Press",
+            "publisher-place": "New Haven, CT",
+            "title": "Causal inference: The mixtape",
+            "title-short": "Causal inference",
+            "type": "book"
+        },
+        {
+            "URL": "https://openknowledge.worldbank.org/handle/10986/25030",
+            "author": [
+                {
+                    "family": "Gertler",
+                    "given": "Paul J."
+                },
+                {
+                    "family": "Martinez",
+                    "given": "Sebastian"
+                },
+                {
+                    "family": "Premand",
+                    "given": "Patrick"
+                },
+                {
+                    "family": "Rawlings",
+                    "given": "Laura B."
+                },
+                {
+                    "family": "Vermeersch",
+                    "given": "Christel M. J."
+                }
+            ],
+            "edition": "2",
+            "id": "wb-eval",
+            "issued": {
+                "date-parts": [
+                    [
+                        2016
+                    ]
+                ]
+            },
+            "publisher": "Inter-American Development Bank; World Bank",
+            "title": "Impact evaluation in practice",
+            "type": "book"
+        },
+        {
+            "URL": "https://www.openintro.org/stat/textbook.php?stat_book=os",
+            "author": [
+                {
+                    "family": "Diez",
+                    "given": "David M."
+                },
+                {
+                    "family": "Barr",
+                    "given": "Christopher D."
+                },
+                {
+                    "family": "Çetinkaya-Rundel",
+                    "given": "Mine"
+                }
+            ],
+            "edition": "3",
+            "id": "DiezBarrCetinkaya-Rundel:2017",
+            "issued": {
+                "date-parts": [
+                    [
+                        2017
+                    ]
+                ]
+            },
+            "title": "OpenIntro statistics",
+            "type": "book"
+        },
+        {
+            "URL": "http://r4ds.had.co.nz/",
+            "author": [
+                {
+                    "family": "Wickham",
+                    "given": "Hadley"
+                },
+                {
+                    "family": "Grolemund",
+                    "given": "Garrett"
+                }
+            ],
+            "id": "WickhamGrolemund:2017",
+            "issued": {
+                "date-parts": [
+                    [
+                        2017
+                    ]
+                ]
+            },
+            "publisher": "O’Reilly Media",
+            "publisher-place": "Sebastopol, California",
+            "title": "R for data science: Import, tidy, transform, visualize, and model data",
+            "title-short": "R for data science",
+            "type": "book"
+        },
+        {
+            "URL": "https://moderndive.com/",
+            "author": [
+                {
+                    "family": "Ismay",
+                    "given": "Chester"
+                },
+                {
+                    "family": "Kim",
+                    "given": "Albert Y."
+                }
+            ],
+            "id": "IsmayKim:2018",
+            "issued": {
+                "date-parts": [
+                    [
+                        2019
+                    ]
+                ]
+            },
+            "publisher": "Chapman and Hall / CRC",
+            "title": "Statistical inference via data science: A ModernDive into R and the tidyverse",
+            "title-short": "Statistical inference via data science",
+            "type": "book"
+        }
+    ],
+    "project_biblios": [
+        "files/bib/references.bib"
+    ]
+}

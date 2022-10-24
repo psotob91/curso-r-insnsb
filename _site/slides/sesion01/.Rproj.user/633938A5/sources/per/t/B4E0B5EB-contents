@@ -1,0 +1,455 @@
+---
+title: "<FONT color='#A7D5E8'>Datos en R</FONT>"
+subtitle: "<FONT color='#8FADA7' size='10'>R para Ciencia de Datos en Salud: <br> Análisis Descriptivo e Inferencia Estadística</FONT>"
+author: "<FONT color='#9DA7A7' size='30'>Percy Soto-Becerra M.D., M.Sc(c)</FONT>"
+institute: "<FONT color='#FFFFFF' size='5'>InkaStats Data Science Solutions | Medical Branch<br>@github/psotob91</FONT>"
+
+format: 
+  revealjs:
+    self-contained: true
+    theme: [simple, theme/theme.scss]
+    footer: "Datos en R"
+    slide-number: true
+    logo: img/logo.png
+    width: 1920
+    height: 1080
+    highlight-style: dracula
+    self-contained-math: true
+    code-line-numbers: true
+from: markdown+emoji
+editor: source
+execute:
+  echo: true
+---
+
+```{r}
+#| label: setup
+#| include: false
+library(fontawesome)
+library(tidyverse)
+library(quarto)
+library(gt)
+library(gtExtras)
+library(gtsummary)
+library(showtext)
+library(kableExtra)
+
+## Ver QUARTO RSTUDIO CONFERENCE: https://github.com/rstudio-conf-2022/get-started-quarto/blob/main/materials/02-authoring.qmd
+## 
+## blackboard theme: https://github.com/schochastics/quarto-blackboard-theme
+## 
+## https://github.com/schochastics/xaringan-themes
+```
+
+# Datos en R
+
+## Conjunto de datos en R
+
+<br/>
+
+- En investigación, las bases de datos se organizan en [tablas rectangulares]{.hl} estructuradas.
+
+    + Cada fila es una [observación]{.hl}
+    + Cada columna es una [variable]{.hl}
+
+- Hay dos clases de objetos que comúnmente usamos para almacenar y manipular datos en R: 
+    + [data.frame]{.hl}
+    + [data.tibble]{.hl}
+
+![<FONT size='4'>*Adaptado de Smit Aj, Abrahams A & Schlegel RW. Intro R Workshop: Data Manipulation, Analysius, and Visualization.*</FONT>](img/table-datos.png)
+
+
+## data.tibble versus data.frame
+
+<br/>
+    
+>[Los [data.tibble]{.hl} también son [data.frame]{.hl}, pero con algunos [poderes adicionales]{.hl}.]{.r-fit-text}
+
+::: columns
+::: {.column width='50%'}
+
+<br/>
+
+<center><h3>[Así se ve un data tibble]{.verd1}</h3></center>
+
+```{r}
+#| echo: false
+library(medicaldata)
+data(covid_testing)
+covid_testing <- covid_testing %>% as_tibble() %>% select(1:5)
+```
+
+```{r}
+covid_testing
+```
+
+- Notar que los [data.tibble]{.hl} son [data.frame aumentados]{.hl}:
+
+```{r}
+class(covid_testing)
+```
+
+:::
+
+::: {.column width='50%'}
+
+<br/>
+
+<center><h3>[Y así un data frame]{.verd1}</h3></center>
+
+```{r}
+#| echo: false
+covid_testing <- as.data.frame(covid_testing)
+```
+
+```{r}
+covid_testing
+```
+
+- Los [data.frame]{.hl} son solo eso, [data.frame]{.hl}:
+
+```{r}
+class(covid_testing)
+```
+
+:::
+
+:::
+
+## ¿De qué están hechos los data.frame y data.tibble?
+
+<br/> 
+
+- Sus unidades básicas son los [vectores]{.hl}.
+- Los vectores son colecciones de datos de un solo tipo:
+
+<br/>
+
+```{r}
+#| echo: false
+tipo_vector <- data.frame(
+  tipo = c("Entero", "Doble", "Caracter", "Lógicos", "Factor"), 
+  tipo_ingles = c("Integer", "Double", "Character", "Logical", "Factor"), 
+  desc = c("Solo números enteros", "Números", "Texto o cadenas ('strings')", "Verdadero o Falso", "Categorías"), 
+  ejem = c("c(1, 2, 3, 4)", "c(1, 2.4, 3.14, 4)", "c('1', 'azul', 'divertido', 'monstruo')", "c(TRUE, FALSE, TRUE, FALSE)", "c('Muy intenso', 'Leve', 'Moderado', 'Leve')")
+)
+```
+
+```{r}
+#| echo: false
+#| results: asis
+kbl(tipo_vector, 
+    col.names = c("<FONT color='#9DA7A7'>Tipo de dato</FONT>", "<FONT color='#9DA7A7'>(En inglés)</FONT>", "<FONT color='#9DA7A7'>Descripción</FONT>", "<FONT color='#9DA7A7'>Ejemplo</FONT>"), 
+    format = "markdown") %>% 
+  kable_styling(font_size = 40, 
+                # bootstrap_options = c("striped", "hover", "condensed"), 
+                full_width = T, 
+                position = "center", 
+                htmltable_class = "lightable-minimal")
+```
+
+## Vectores como átomos de R
+
+<br/>
+
+::: columns
+
+::: {.column width='40%'}
+- Vectores se limitan a [un solo tipo de dato]{.hl}.
+
+- Conforman [diversas estructuras]{.hl}: matrices, arreglos, listas, etc.
+
+- Usaremos principalmente data frames y data tibbles.
+
+- Los data frames y tibbles son:
+    
+    + Columnas de vectores.
+    
+    + Cada vector puede ser de distinto tipo.
+    
+    + Almacenan más de un tipo de dato: *integer*, *double*, *character*, *logic*, *factor*, *etc*.
+    
+:::
+
+::: {.column width='60%'}
+
+<br/> 
+
+```{r}
+#| echo: false
+#| fig-align: center
+knitr::include_graphics("img/estructuras-r.png")
+```
+
+:::
+:::
+
+## ¿Cómo podemos ver qué hay en los conjuntos de datos?
+
+<br/> 
+Podemos [hechar un vistazo]{.hl} ([glimpse]{.plo} en inglés) a los datos:
+
+<br/>
+
+```{r}
+#| echo: false
+library(medicaldata)
+data(covid_testing)
+```
+
+```{r}
+glimpse(covid_testing)
+```
+
+## ¿Cómo obtener más información?
+
+::: panel-tabset
+## Diccionario
+
+Como los datos provienen de un paquete en R, se puede usar la función de ayuda [?]{.plo}
+
+```{r}
+#| echo: true
+#| eval: false
+?covid_testing
+```
+
+![](img/help_covid_testing.png){fig-align="center"}
+
+## Dimensiones
+
+<br/> 
+
+- Número de filas: 
+
+```{r}
+nrow(covid_testing)
+```
+
+<br/> 
+
+- Número de columnas: 
+
+```{r}
+ncol(covid_testing)
+```
+
+<br/> 
+
+- Número de filas y columnas: 
+
+```{r}
+dim(covid_testing)
+```
+
+:::
+
+# Importando datos a R
+
+## Importar datos de fuentes externas a R
+
+
+::: {style="margin-top: 100px; font-size: 2em; color: white;"}
+| El paquete [{rio}]{.plo} es la [navaja suiza]{.hl}
+|  de la importación de datos en R.
+
+<br/>
+
+::: columns
+::: {.column width="50%"}
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| out-width: 50%
+knitr::include_graphics("img/rio-hex.png")
+```
+
+:::
+
+::: {.column width="50%"}
+
+|           Su función [import]{.plo} 
+|           permite importar 
+|           prácticamente  
+|           cualquier formato.
+
+:::
+:::
+
+
+:::
+
+## Importando datos con {rio} {.scrollable}
+
+::: panel-tabset
+
+## Instalar {rio} {auto-animate="true"}
+
+- [{rio}]{.plo} debe instalarse de una manera especial
+
+- Pasos: 
+
+    #. Primero se instala como siempre, usando [install.packages]{.plo}
+    #. Adicionalmente, se sugiere correr [install_formats]{.plo}. inmediatamente después de la primera instalación.
+    #. Se carga el paquete usando [library]{.plo}.
+
+```r
+install.packages("rio")
+rio::install_formats()
+library(rio)
+```
+::: {.fragment}
+- [Más detalles sobre el paquete y sus funciones pueden encontrarse en la página web del paquete: <https://thomasleeper.com/rio/index.html>]
+:::
+
+## import
+
+- Se usa [import]{.plo} para importar nuevos datos y [<-]{.plo} para asignar los datos a un nuevo [data.frame]{.hl}
+
+```r
+nuevos_datos <- import(file = "datos_para_importar.fmt")
+```
+
+<br/>
+
+>Podemos omitir los nombres de los argumentos cuando utilizamos funciones.
+
+<br/>
+
+::: columns
+::: {.column width="50%"}
+
+```r
+nuevos_datos <- import(file = "datos_para_importar.fmt")
+```
+
+:::
+
+::: {.column width="50%"}
+
+```r
+nuevos_datos <- import("datos_para_importar.fmt")
+```
+
+:::
+:::
+
+## Archivo plano
+
+- Para archivos de tipo \*.csv o \*.txt
+
+- No importa el tipo de separación de las columnas: comas, puntos y comas, otros caracteres.
+
+    + [import]{.plo} determinará rápidamente el tipo de separación y hará el trabajo.
+    
+```{r}
+#| echo: false
+library(rio)
+```
+
+```{r}
+datos_csv <- import("maca_meno_perclin.csv")
+head(datos_csv)
+```
+
+## MS Excel 
+
+- Útil para archivos con las extensiones \*.xls o \*.xlsx
+
+```{r}
+datos_xlsx <- import("maca_meno_perclin.xlsx")
+head(datos_xlsx)
+```
+
+## Stata (*.dta)
+
+- Permite importar datos de formato Stata.
+
+- En Stata, los valores de las variables suelen estar etiquetados, por lo que es importante también recuperar esta información.
+
+- Si importamos una tabla de datos en formato Stata, vemos que algunas variables categóricas como [married]{.verd1} o [married2]{.verd2} se importan como números. ¿Qué significa 1 o 0?
+
+```{r}
+datos_dta <- import("maca_meno_fase1.dta")
+head(datos_dta)
+```
+
+- Para recuperar los metadatos, es mejor usar [read_stata()]{.plo} de la librería [{haven}]{.plo}:
+
+```{r}
+library(haven)
+datos_dta <- as_factor(read_stata("maca_meno_fase1.dta"))
+head(datos_dta)
+
+```
+- Sin embargo, para recuperar metadatos, hay que usar función [as_factor()]{.plo}
+
+```{r}
+datos_dta <- as_factor(read_stata("maca_meno_fase1.dta"))
+head(datos_dta)
+```
+
+
+## SPSS (*.sav)
+
+```{r}
+datos_sav <- import("RECH0.sav")
+head(datos_sav)
+```
+
+## Otros
+
+- La función [import]{.plo} soporta una gran variedad de formatos.
+
+- Si alguna vez necesita, puede consultar la web del paquete y encontrará tutoriales de cómo importar los formatos que requiera.
+
+<center>[https://thomasleeper.com/rio/index.html]{.big-text2}</center>
+
+:::
+
+# `r fontawesome::fa("laptop-code", "white")` Nuestro turno {background-color="#000000"}
+
+<br/>
+
+- Descargue la carpeta denominada [importar_datos]{.hl} disponible en este enlace: [click aquí]().
+
+- Abra el proyecto denominado [importar_datos.Rproj]{.hl}
+
+- Complete y ejecute el código faltante en los chunk de código.
+
+- Una vez culmine todo el proceso, renderice el archivo .qmd.
+
+<br/><br/><br/>  
+
+```{r}
+#| echo: false
+library(countdown)
+countdown_timer <- function(
+    minutes = 1, 
+    play_sound = TRUE, 
+    font_size = "2em", 
+    ...
+) {
+  countdown(
+    minutes = minutes,
+    # Fanfare when it's over
+    play_sound = play_sound,
+    # Set timer theme to match solarized colors
+    color_border              = "#404041",
+    color_text                = "white",
+    color_background = "#000000",
+    color_running_background  = "#72994E",
+    color_running_text        = "white",
+    color_finished_background = "#EE6331",
+    color_finished_text       = "white",
+    font_size = font_size,
+    ...
+  )
+}
+```
+
+```{R}
+#| echo: false
+countdown_timer(5)
+```

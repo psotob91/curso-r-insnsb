@@ -1,0 +1,3 @@
+"0","#| echo: false"
+"0","bd_inmuno <- import(""boost_inmuno.dta"") %>% "
+"0","  characterize()"

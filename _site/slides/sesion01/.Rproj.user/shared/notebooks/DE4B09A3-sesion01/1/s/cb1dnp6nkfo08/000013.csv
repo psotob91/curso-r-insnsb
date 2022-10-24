@@ -1,0 +1,4 @@
+"0","#| echo: false"
+"0","#| fig-align: center"
+"0","#| out-width: 100%"
+"0","knitr::include_graphics(""img/funcion-R.png"")"

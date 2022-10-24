@@ -1,0 +1,2886 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="sesion03_chalkboard_files/libs/clipboard/clipboard.min.js"></script>
+<script src="sesion03_chalkboard_files/libs/quarto-html/tabby.min.js"></script>
+<script src="sesion03_chalkboard_files/libs/quarto-html/popper.min.js"></script>
+<script src="sesion03_chalkboard_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="sesion03_chalkboard_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="sesion03_chalkboard_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="sesion03_chalkboard_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="sesion03_chalkboard_files/libs/quarto-contrib/reveal-auto-agenda-0.0.1/reveal-auto-agenda.css" rel="stylesheet">
+<link href="sesion03_chalkboard_files/libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="sesion03_chalkboard_files/libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.1.251">
+
+  <title>sesion03_chalkboard</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="sesion03_chalkboard_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="sesion03_chalkboard_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #b3b1ad; background-color: #0a0e14; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #b3b1ad; } /* Normal */
+    code span.al { color: #ff3333; background-color: #2a0f15; font-weight: bold; } /* Alert */
+    code span.an { color: #e6b673; } /* Annotation */
+    code span.at { color: #59c2ff; } /* Attribute */
+    code span.bn { color: #e6b450; } /* BaseN */
+    code span.bu { color: #95e6cb; } /* BuiltIn */
+    code span.cf { color: #ff8f40; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #95e6cb; } /* Char */
+    code span.cn { color: #ffee99; } /* Constant */
+    code span.co { color: #626a73; font-style: italic; } /* Comment */
+    code span.cv { color: #ffee99; } /* CommentVar */
+    code span.do { color: #626a73; } /* Documentation */
+    code span.dt { color: #ff8f40; } /* DataType */
+    code span.dv { color: #e6b450; } /* DecVal */
+    code span.er { color: #ff3333; text-decoration: underline; } /* Error */
+    code span.ex { color: #59c2ff; font-weight: bold; } /* Extension */
+    code span.fl { color: #e6b450; } /* Float */
+    code span.fu { color: #ffb454; } /* Function */
+    code span.im { color: #c2d94c; } /* Import */
+    code span.in { color: #e6b450; } /* Information */
+    code span.kw { color: #ff8f40; font-weight: bold; } /* Keyword */
+    code span.op { color: #f29668; } /* Operator */
+    code span.ot { color: #39bae6; } /* Other */
+    code span.pp { color: #f07178; } /* Preprocessor */
+    code span.re { color: #59c2ff; background-color: #173649; } /* RegionMarker */
+    code span.sc { color: #95e6cb; } /* SpecialChar */
+    code span.ss { color: #95e6cb; } /* SpecialString */
+    code span.st { color: #c2d94c; } /* String */
+    code span.va { color: #39bae6; } /* Variable */
+    code span.vs { color: #c2d94c; } /* VerbatimString */
+    code span.wa { color: #f07178; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="sesion03_chalkboard_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <link href="sesion03_chalkboard_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="sesion03_chalkboard_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="sesion03_chalkboard_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="sesion03_chalkboard_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="sesion03_chalkboard_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="sesion03_chalkboard_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-captioned.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-captioned) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-captioned.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-captioned .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-captioned .callout-caption  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-captioned.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-captioned.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-caption {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-caption {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-caption {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-captioned .callout-body > .callout-content > :last-child {
+    margin-bottom: 0.5rem;
+  }
+
+  .callout.callout-captioned .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-captioned) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-caption {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-caption {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-caption {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-caption {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-caption {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  
+  <link href="sesion03_chalkboard_files/libs/countdown-0.4.0/countdown.css" rel="stylesheet">
+  <script src="sesion03_chalkboard_files/libs/countdown-0.4.0/countdown.js"></script>
+  <script src="sesion03_chalkboard_files/libs/kePrint-0.0.1/kePrint.js"></script>
+  <link href="sesion03_chalkboard_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+
+<section class="slide level2">
+
+<p><br>
+</p>
+<p><br>
+</p>
+<h1>
+Sesión 3
+</h1>
+<h2>
+<span class="plo">Curso: R Aplicado a los Proyectos de Investigación</span>
+</h2>
+<hr>
+<h3>
+<span class="negro">Percy Soto-Becerra, M.D., M.Sc(c)</span>
+</h3>
+<h4>
+<span class="negro">InkaStats Data Science Solutions | Medical Branch</span>
+</h4>
+<h4>
+<span class="negro">2022-10-05</span>
+</h4>
+<p><svg aria-hidden="true" role="img" viewbox="0 0 496 512" style="height:1em;width:0.97em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3 .3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5 .3-6.2 2.3zm44.2-1.7c-2.9 .7-4.9 2.6-4.6 4.9 .3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3 .7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3 .3 2.9 2.3 3.9 1.6 1 3.6 .7 4.3-.7 .7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3 .7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3 .7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg> &nbsp; <a href="https://github.com/psotob91">https://github.com/psotob91</a></p>
+<p><img data-src="img/social-image-f22.png" class="absolute" style="top: 390px; left: 950px; width: 600px; "></p>
+</section>
+<section>
+<section class="title-slide slide level1 agenda-slide center">
+<h1>Importación de datos</h1>
+<div class="agenda-heading">
+<p>Agenda</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-active">
+<p>Importación de datos</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Más verbos de dplyr para manejo de datos</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Otros verbos útiles para manejo de datos</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Uso de helpers</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Análisis Exploratorio de Datos versus Análisis Inicial de Datos</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Pasos para un buen AID / AED</p>
+</div></li>
+</ol>
+</div>
+<div class="cell">
+
+</div>
+</section>
+<section id="importar-datos-de-fuentes-externas-a-r" class="slide level2">
+<h2>Importar datos de fuentes externas a R</h2>
+<hr>
+<div style="margin-top: 100px; font-size: 1.5em; color: black;">
+<p>El paquete <span class="verde-h3">{rio}</span> es la <code>navaja suiza</code><br>
+&nbsp;de la importación de datos en R.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/rio-hex.png" style="width:50.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Su función <span class="verde-h3">import</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;permite importar<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;prácticamente<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cualquier formato.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="importando-datos-con-rio" class="slide level2 scrollable">
+<h2>Importando datos con <span class="verde-h3">{rio}</span></h2>
+<hr>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Instalar <span class="verde-h3">{rio}</span></a></li><li><a href="#tabset-1-2">import</a></li><li><a href="#tabset-1-3">Plano</a></li><li><a href="#tabset-1-4">MS Excel</a></li><li><a href="#tabset-1-5">Stata (*.dta)</a></li><li><a href="#tabset-1-6">SPSS (*.sav)</a></li><li><a href="#tabset-1-7">Otros</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" data-auto-animate="true">
+<ul>
+<li><p><span class="verde-h3">{rio}</span> debe instalarse de una manera especial</p></li>
+<li><p>Pasos:</p>
+<ol>
+<li>Primero se instala como siempre, usando <span class="verde-h3">install.packages</span></li>
+<li>Adicionalmente, se sugiere correr <span class="verde-h3">install_formats</span>. inmediatamente después de la primera instalación.</li>
+<li>Se carga el paquete usando <span class="verde-h3">library</span>.</li>
+</ol></li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">install.packages</span>(<span class="st">"rio"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>rio<span class="sc">::</span><span class="fu">install_formats</span>()</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(rio)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="fragment">
+<ul>
+<li>Más detalles sobre el paquete y sus funciones pueden encontrarse en la página web del paquete: <a href="https://thomasleeper.com/rio/index.html" class="uri">https://thomasleeper.com/rio/index.html</a></li>
+</ul>
+</div>
+</div>
+<div id="tabset-1-2">
+<ul>
+<li>Se usa <span class="verde-h3">import()</span> para importar nuevos datos y <span class="verde-h3">&lt;-</span> para asignar los datos a un nuevo <span class="verde-h3">data.frame</span></li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>nuevos_datos <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="at">file =</span> <span class="st">"datos_para_importar.fmt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><br>
+</p>
+<blockquote>
+<p>Podemos omitir los nombres de los argumentos cuando utilizamos funciones.</p>
+</blockquote>
+<p><br>
+</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>nuevos_datos <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="at">file =</span> <span class="st">"datos_para_importar.fmt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:50%;">
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>nuevos_datos <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"datos_para_importar.fmt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<div id="tabset-1-3">
+<ul>
+<li><p>Para archivos de tipo *.csv o *.txt</p></li>
+<li><p>No importa el tipo de separación de las columnas: comas, puntos y comas, otros caracteres.</p>
+<ul>
+<li><span class="verde-h3">import()</span> determinará rápidamente el tipo de separación y hará el trabajo.</li>
+</ul></li>
+</ul>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>datos_csv <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"maca_meno_perclin.csv"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">head</span>(datos_csv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  id_jaula id_raton tratamiento protocolo peso_inicial peso_final peso_utero
+1        1        1     control       ovx        26.00      33.28      0.089
+2        1        2     control       ovx        24.50      30.50      0.063
+3        1        3     control       ovx        20.40      29.93      0.078
+4        2        4     control   hemiovx        26.59      32.19      0.134
+5        2        5     control       ovx        23.50      30.37      0.052
+6        2        6        maca       ovx        25.00      30.43      0.055
+    chol glucose    tag prot  urea album
+1  85.99  109.97 182.42 5.37 66.27 66.82
+2  94.46   81.62 211.87 4.68 76.73 55.36
+3  99.67  118.37 195.16   NA 52.32    NA
+4  83.38   71.91  98.46   NA 50.71    NA
+5  82.08   95.53 108.13 5.33 26.02    NA
+6 107.49  160.36 141.10   NA    NA 72.14</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-1-4">
+<ul>
+<li>Útil para archivos con las extensiones *.xls o *.xlsx</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>datos_xlsx <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"maca_meno_perclin.xlsx"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">head</span>(datos_xlsx)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  id_jaula id_raton tratamiento protocolo peso_inicial peso_final peso_utero
+1        1        1     control       ovx        26.00      33.28      0.089
+2        1        2     control       ovx        24.50      30.50      0.063
+3        1        3     control       ovx        20.40      29.93      0.078
+4        2        4     control   hemiovx        26.59      32.19      0.134
+5        2        5     control       ovx        23.50      30.37      0.052
+6        2        6        maca       ovx        25.00      30.43      0.055
+    chol glucose    tag prot  urea album
+1  85.99  109.97 182.42 5.37 66.27 66.82
+2  94.46   81.62 211.87 4.68 76.73 55.36
+3  99.67  118.37 195.16   NA 52.32    NA
+4  83.38   71.91  98.46   NA 50.71    NA
+5  82.08   95.53 108.13 5.33 26.02    NA
+6 107.49  160.36 141.10   NA    NA 72.14</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-1-5">
+<ul>
+<li><p>Permite importar datos de formato Stata. Sin embargo, en Stata, los valores de las variables suelen estar etiquetados, por lo que es importante también recuperar esta información.</p></li>
+<li><p>Si importamos una tabla de datos en formato Stata, vemos que algunas variables categóricas como <code>married</code> o <code>married2</code> se importan como números. ¿Qué significa 1 o 0?</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>datos_dta <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"maca_meno_fase1.dta"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="fu">head</span>(datos_dta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  id time treat age    race married married2  procedence weight height     e2
+1  1    0     1  33 Mestiza       1        0      Callao   59.0    1.4  87.30
+2  1    1     1  32 Mestiza       1        0      Callao   59.9    1.3 210.05
+3  2    0     3  27 Mestiza       1        0 Santa Anita   62.0    1.5 169.01
+4  2    1     3  27 Mestiza       1        0 Santa Anita   62.1    1.6  99.91
+5  3    0     2  25 Mestiza       1        0      Callao   62.0    1.6  78.76
+6  3    1     2  25 Mestiza       1        0      Callao   60.0    1.6 155.04
+     lh  fsh  prog
+1  3.28 1.95 14.20
+2 26.85 8.83 12.95
+3  6.34 4.32  0.50
+4  5.77 1.70  9.61
+5 11.86 2.81 10.46
+6 10.14 4.51  5.04</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-1-6">
+<ul>
+<li>Lo mismo que ocurre con Stata, sucede con SPSS: los metadatos se pierden.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>datos_sav <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"RECH0.sav"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="fu">head</span>(datos_sav)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   ID1            HHID HV000 HV001 HV002 HV002A HV003 HV004 HV007 HV008 HV009
+1 2021       000100301   PE6     1     3      1     2     1  2021  1454     6
+2 2021       000100401   PE6     1     4      1     1     1  2021  1454     5
+3 2021       000100801   PE6     1     8      1     2     1  2021  1454     6
+4 2021       000101001   PE6     1    10      1     1     1  2021  1454     5
+5 2021       000102901   PE6     1    29      1     0     1  2021  1454     0
+6 2021       000104201   PE6     1    42      1     2     1  2021  1454     3
+  HV010 HV011 HV012 HV013 HV014 HV015 HV017 HV020 HV021 HV023 HV024 HV025 HV026
+1     2     0     6     5     1     1     1     0     1     1     1     1     1
+2     1     0     5     5     1     1     1     0     1     1     1     1     1
+3     2     0     6     6     2     1     1     0     1     1     1     1     1
+4     1     0     5     5     0     1     1     0     1     1     1     1     1
+5     0     0     0     0     0     3     4     0     1     1     1     1     1
+6     1     0     3     3     1     1     1     0     1     1     1     1     1
+  HV027 HV028 HV030 HV031 HV032 HV033 HV035 HV040 HV041 HV042 HV043 HV044
+1     0    NA     0    NA     0    NA     1  2338     2     1     0     1
+2     0    NA     0    NA     0    NA     1  2338     1     1     0     1
+3     0    NA     0    NA     0    NA     1  2338     2     1     0     1
+4     0    NA     0    NA     0    NA     0  2338     1     1     0     1
+5     0    NA     0    NA     0    NA     0  2338     0     1     0     1
+6     0    NA     0    NA     0    NA     1  2338     1     1     0     1
+  UBIGEO HV022 CODCCPP     NOMCCPP NCONGLOME  HV005 longitudx  latitudy
+1 010101     3    0001 CHACHAPOYAS   0706402 103273 -77.87403 -6.221249
+2 010101     3    0001 CHACHAPOYAS   0706402 103273 -77.87403 -6.221249
+3 010101     3    0001 CHACHAPOYAS   0706402 103273 -77.87403 -6.221249
+4 010101     3    0001 CHACHAPOYAS   0706402 532968 -77.87403 -6.221249
+5 010101     3    0001 CHACHAPOYAS   0706402      0 -77.87403 -6.221249
+6 010101     3    0001 CHACHAPOYAS   0706402 103273 -77.87403 -6.221249</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-1-7">
+<ul>
+<li><p>La función <span class="verde-h3">import</span> soporta una gran variedad de formatos.</p></li>
+<li><p>Si alguna vez necesita, puede consultar la web del paquete y encontrará tutoriales de cómo importar los formatos que requiera.</p></li>
+</ul>
+<center>
+<span class="big-text2">https://thomasleeper.com/rio/index.html</span>
+</center>
+</div>
+</div>
+</div>
+</section>
+<section id="cómo-importar-metadatos-de-stata-o-spss" class="slide level2">
+<h2>¿Cómo importar metadatos de Stata o SPSS?</h2>
+<hr>
+<div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">¿Metadatos?</a></li><li><a href="#tabset-2-2">Stata (*.dta)</a></li><li><a href="#tabset-2-3">SPSS (*.sav)</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1">
+<div class="columns">
+<div class="column" style="width:30%;">
+<ul>
+<li><p>Son los datos de los datos.</p></li>
+<li><p>En bases de datos para análisis estadístico, dos metadatos bastante usados son:</p>
+<ul>
+<li><p>Etiquetas de la variable</p></li>
+<li><p>Etiquetas de los valores de la variable</p></li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:70%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/metadatos.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-2">
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span class="verde-h3">Importar datos Stata solo con import()</span></p>
+<ul>
+<li>Las etiquetas de valor para <code>time</code>, <code>treat</code>, <code>married</code> y <code>married2</code> se pierden.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>datos_dta <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"maca_meno_fase1_v2.dta"</span>)</span>
+<span id="cb13-2"><a href="#cb13-2"></a></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="fu">head</span>(datos_dta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  id time treat age
+1  1    0     1  33
+2  1    1     1  32
+3  2    0     3  27
+4  2    1     3  27
+5  3    0     2  25
+6  3    1     2  25</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><span class="verde-h3">Usar import() más characterize()</span></p>
+<ul>
+<li>Las etiquetas de valor para <code>time</code>, <code>treat</code>, <code>married</code> y <code>married2</code> se recuperan</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>datos_dta <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"maca_meno_fase1_v2.dta"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">characterize</span>()</span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="fu">head</span>(datos_dta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  id     time   treat age
+1  1 Baseline Placebo  33
+2  1 3 months Placebo  32
+3  2 Baseline Dosis 2  27
+4  2 3 months Dosis 2  27
+5  3 Baseline Dosis 1  25
+6  3 3 months Dosis 1  25</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-3">
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span class="verde-h3">Importar datos SPSS solo con import()</span></p>
+<ul>
+<li>Las etiquetas de valor para <code>time</code>, <code>treat</code>, <code>married</code> y <code>married2</code> se pierden.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>datos_sav <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"maca_meno_fase1_v2.sav"</span>)</span>
+<span id="cb17-2"><a href="#cb17-2"></a></span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="fu">head</span>(datos_sav)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  id time treat age
+1  1    0     1  33
+2  1    1     1  32
+3  2    0     3  27
+4  2    1     3  27
+5  3    0     2  25
+6  3    1     2  25</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><span class="verde-h3">Usar import() más characterize()</span></p>
+<ul>
+<li>Las etiquetas de valor para <code>time</code>, <code>treat</code>, <code>married</code> y <code>married2</code> se recuperan</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>datos_sav <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"maca_meno_fase1_v2.sav"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-2"><a href="#cb19-2"></a>  <span class="fu">characterize</span>()</span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="fu">head</span>(datos_sav)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  id     time   treat age
+1  1 Baseline Placebo  33
+2  1 3 months Placebo  32
+3  2 Baseline Dosis 2  27
+4  2 3 months Dosis 2  27
+5  3 Baseline Dosis 1  25
+6  3 3 months Dosis 1  25</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="exportando-datos-con-rio" class="slide level2 scrollable">
+<h2>Exportando datos con <span class="verde-h3">{rio}</span></h2>
+<hr>
+<div class="panel-tabset">
+<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">export()</a></li><li><a href="#tabset-3-2">Ejemplos:</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1">
+<ul>
+<li>Se usa <span class="verde-h3">export()</span> para exportar un objeto <code>data frame</code> o <code>data tibble</code> a otro formato:</li>
+</ul>
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">export</span>(datos_para_importa, <span class="at">file =</span> <span class="st">"datos_exportados.fmt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Los formatos pueden ser:</li>
+</ul>
+<table style="width:65%;">
+<colgroup>
+<col style="width: 38%">
+<col style="width: 26%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Formato</th>
+<th style="text-align: left;">Extensión típica</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Comma-separated data</td>
+<td style="text-align: left;">.csv</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pipe-separated data</td>
+<td style="text-align: left;">.psv</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Tab-separated data</td>
+<td style="text-align: left;">.tsv</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CSVY (CSV + YAML metadata header)</td>
+<td style="text-align: left;">.csvy</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SAS</td>
+<td style="text-align: left;">.sas7bdat</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SPSS</td>
+<td style="text-align: left;">.sav</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SPSS (compressed)</td>
+<td style="text-align: left;">.zsav</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Stata</td>
+<td style="text-align: left;">.dta</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SAS XPORT</td>
+<td style="text-align: left;">.xpt</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SPSS Portable</td>
+<td style="text-align: left;">.por</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Excel</td>
+<td style="text-align: left;">.xls</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Excel</td>
+<td style="text-align: left;">.xlsx</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">R syntax</td>
+<td style="text-align: left;">.R</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Saved R objects</td>
+<td style="text-align: left;">.RData, .rda</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Serialized R objects</td>
+<td style="text-align: left;">.rds</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Epiinfo</td>
+<td style="text-align: left;">.rec</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="tabset-3-2">
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>A formato .rds (sugerido para guardar base de datos individuales en R):</li>
+</ul>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">export</span>(datos, <span class="st">"datos.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>A formato .xlsx:</li>
+</ul>
+<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">export</span>(datos, <span class="st">"datos.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>A formato .csv:</li>
+</ul>
+<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">export</span>(datos, <span class="st">"datos.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>A formato .dta:</li>
+</ul>
+<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">export</span>(datos, <span class="st">"datos.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>A formato .sav:</li>
+</ul>
+<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">export</span>(datos, <span class="st">"datos.sav"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="nuestro-turno" class="slide level2" data-background-color="#000000">
+<h2><svg aria-hidden="true" role="img" viewbox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:white;overflow:visible;position:relative;"><path d="M128 96h384v256h64V80C576 53.63 554.4 32 528 32h-416C85.63 32 64 53.63 64 80V352h64V96zM624 384h-608C7.25 384 0 391.3 0 400V416c0 35.25 28.75 64 64 64h512c35.25 0 64-28.75 64-64v-16C640 391.3 632.8 384 624 384zM365.9 286.2C369.8 290.1 374.9 292 380 292s10.23-1.938 14.14-5.844l48-48c7.812-7.813 7.812-20.5 0-28.31l-48-48c-7.812-7.813-20.47-7.813-28.28 0c-7.812 7.813-7.812 20.5 0 28.31l33.86 33.84l-33.86 33.84C358 265.7 358 278.4 365.9 286.2zM274.1 161.9c-7.812-7.813-20.47-7.813-28.28 0l-48 48c-7.812 7.813-7.812 20.5 0 28.31l48 48C249.8 290.1 254.9 292 260 292s10.23-1.938 14.14-5.844c7.812-7.813 7.812-20.5 0-28.31L240.3 224l33.86-33.84C281.1 182.4 281.1 169.7 274.1 161.9z"></path></svg> Nuestro turno</h2>
+<hr>
+<p><br>
+</p>
+<ul>
+<li><p>Descargue la carpeta denominada <span class="verde-h3">taller03</span> disponible en la carpeta compartida.</p></li>
+<li><p>Abra el proyecto denominado <span class="verde-h3">taller03.Rproj</span></p></li>
+<li><p>Complete y ejecute el código faltante en los chunk de código de la PRIMERA PARTE.</p></li>
+<li><p>Una vez culmine todo el proceso, renderice el archivo .qmd.</p></li>
+</ul>
+<p><br>
+<br>
+&nbsp;</p>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="countdown" id="timer_ba1b0404" data-update-every="1" data-play-sound="true" tabindex="0" style="right:0;bottom:0;font-size:2em;">
+<div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
+<code class="countdown-time"><span class="countdown-digits minutes">10</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+</div>
+</div>
+</section>
+<section id="hagamos-una-pausa" class="slide level2" data-background-color="#00817E">
+<h2><svg aria-hidden="true" role="img" viewbox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:white;overflow:visible;position:relative;"><path d="M512 32H120c-13.25 0-24 10.75-24 24L96.01 288c0 53 43 96 96 96h192C437 384 480 341 480 288h32c70.63 0 128-57.38 128-128S582.6 32 512 32zM512 224h-32V96h32c35.25 0 64 28.75 64 64S547.3 224 512 224zM560 416h-544C7.164 416 0 423.2 0 432C0 458.5 21.49 480 48 480h480c26.51 0 48-21.49 48-48C576 423.2 568.8 416 560 416z"></path></svg> Hagamos una pausa</h2>
+<hr>
+<div class="r-fit-text">
+<center>
+<p>Tomemos un descanso de <code>5 minutos</code>…</p>
+<p>Estire las piernas <svg aria-hidden="true" role="img" viewbox="0 0 320 512" style="height:1em;width:0.62em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:white;overflow:visible;position:relative;"><path d="M256 48C256 74.51 234.5 96 208 96C181.5 96 160 74.51 160 48C160 21.49 181.5 0 208 0C234.5 0 256 21.49 256 48zM126.5 199.3C125.6 199.7 124.6 200.1 123.7 200.5L112.7 205.4C97.41 212.2 85.42 224.6 79.22 240.1L77.71 243.9C71.15 260.3 52.53 268.3 36.12 261.7C19.71 255.1 11.73 236.5 18.29 220.1L19.8 216.3C32.19 185.4 56.18 160.5 86.66 146.9L97.66 142C118.5 132.8 140.1 128 163.7 128C208.3 128 248.5 154.8 265.6 195.9L280.1 232.7L302.3 243.4C318.1 251.3 324.5 270.5 316.6 286.3C308.7 302.1 289.5 308.5 273.7 300.6L247 287.3C236.7 282.1 228.6 273.4 224.2 262.8L214.6 239.8L195.3 305.3L244.8 359.4C250.2 365.3 254.1 372.4 256 380.2L279 472.2C283.3 489.4 272.9 506.8 255.8 511C238.6 515.3 221.2 504.9 216.1 487.8L194.9 399.6L124.3 322.5C109.5 306.4 103.1 283.9 109.6 262.8L126.5 199.3zM68.73 398L93.69 335.6C95.84 338.6 98.16 341.4 100.7 344.2L141.4 388.6L126.9 424.8C124.5 430.9 120.9 436.4 116.3 440.9L54.63 502.6C42.13 515.1 21.87 515.1 9.372 502.6C-3.124 490.1-3.124 469.9 9.372 457.4L68.73 398z"></path></svg>…</p>
+<p>Deje de ver las pantallas <svg aria-hidden="true" role="img" viewbox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:white;overflow:visible;position:relative;"><path d="M128 96h384v256h64v-272c0-26.38-21.62-48-48-48h-416c-26.38 0-48 21.62-48 48V352h64V96zM624 383.1h-608c-8.75 0-16 7.25-16 16v16c0 35.25 28.75 64 64 64h512c35.25 0 64-28.75 64-64v-16C640 391.2 632.8 383.1 624 383.1z"></path></svg>…</p>
+<p>… cualquier <svg aria-hidden="true" role="img" viewbox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:white;overflow:visible;position:relative;"><path d="M128 96h384v256h64v-272c0-26.38-21.62-48-48-48h-416c-26.38 0-48 21.62-48 48V352h64V96zM624 383.1h-608c-8.75 0-16 7.25-16 16v16c0 35.25 28.75 64 64 64h512c35.25 0 64-28.75 64-64v-16C640 391.2 632.8 383.1 624 383.1z"></path></svg>, las del celular <svg aria-hidden="true" role="img" viewbox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:white;overflow:visible;position:relative;"><path d="M320 0H64C37.5 0 16 21.5 16 48v416C16 490.5 37.5 512 64 512h256c26.5 0 48-21.5 48-48v-416C368 21.5 346.5 0 320 0zM240 447.1C240 456.8 232.8 464 224 464H159.1C151.2 464 144 456.8 144 448S151.2 432 160 432h64C232.8 432 240 439.2 240 447.1z"></path></svg> también.</p>
+</center>
+</div>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="countdown" id="timer_bf426e6d" data-update-every="1" data-play-sound="true" tabindex="0" style="right:0;bottom:0;font-size:2em;">
+<div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
+<code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center">
+<h1>Más verbos de dplyr para manejo de datos</h1>
+<div class="agenda-heading">
+<p>Agenda</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Importación de datos</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Más verbos de dplyr para manejo de datos</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Otros verbos útiles para manejo de datos</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Uso de helpers</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Análisis Exploratorio de Datos versus Análisis Inicial de Datos</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Pasos para un buen AID / AED</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section id="creación-de-nuevas-columnas-con-mutate" class="slide level2">
+<h2>Creación de nuevas columnas con <span class="verde-h3">mutate()</span></h2>
+<hr>
+<ul>
+<li>La función <span class="verde-h3">mutate()</span> crea columnas nuevas o modifica existentes.</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><span class="verde-h3">Larga</span></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">mutate</span>(<span class="at">.data =</span> DATA, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span class="verde-h3">Abreviada</span></p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">mutate</span>(DATA, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span class="verde-h3">Se estila usar %&gt;%</span></p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>DATA <span class="sc">%&gt;%</span> </span>
+<span id="cb29-2"><a href="#cb29-2"></a>  <span class="fu">mutate</span>(...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:55%;">
+<p><br>
+</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Argumento </th>
+   <th style="text-align:left;"> Descripción </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> .data </td>
+   <td style="text-align:left;"> Data frame o extensión de data frame (por ejemplo, tibble). </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> ... </td>
+   <td style="text-align:left;"> Columnas existente para modificar o columnas nuevas para crear. </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="mutate-en-acción" class="slide level2 scrollable">
+<h2><span class="verde-h3">mutate()</span> en acción</h2>
+<hr>
+<div class="panel-tabset">
+<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">Crear una nueva variable</a></li><li><a href="#tabset-4-2">Crear varias nuevas variables</a></li><li><a href="#tabset-4-3">Remplazar variable existente</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1">
+<ul>
+<li>Si queremos crear la variable índice de masa corporal:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>datos_fase1 <span class="sc">%&gt;%</span> </span>
+<span id="cb30-2"><a href="#cb30-2"></a>  <span class="fu">select</span>(id, weight, height) <span class="sc">%&gt;%</span> <span class="co"># Nos quedamos con peso y talla </span></span>
+<span id="cb30-3"><a href="#cb30-3"></a>  <span class="fu">mutate</span>(<span class="at">imc =</span> weight <span class="sc">/</span> height <span class="sc">^</span> <span class="dv">2</span>) <span class="co"># Creamos IMC en base a peso y talla</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 106 × 4
+      id weight height   imc
+   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+ 1     1   59      1.4  30.1
+ 2     1   59.9    1.3  35.4
+ 3     2   62      1.5  27.6
+ 4     2   62.1    1.6  24.3
+ 5     3   62      1.6  24.2
+ 6     3   60      1.6  23.4
+ 7     4   60.9    1.5  27.1
+ 8     4   61.4    1.5  27.3
+ 9     5   64      1.5  28.4
+10     5   58.1    1.6  22.7
+# … with 96 more rows</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-4-2">
+<ul>
+<li><p>También podemos crear más de una variable nueva.</p></li>
+<li><p>Incluso, podemos reutilizar la variable recién creada para crear otra nueva dentro del mismo argumento de <span class="verde-h3">mutate()</span></p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>datos_fase1 <span class="sc">%&gt;%</span> </span>
+<span id="cb32-2"><a href="#cb32-2"></a>  <span class="fu">select</span>(id, weight, height) <span class="sc">%&gt;%</span> </span>
+<span id="cb32-3"><a href="#cb32-3"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb32-4"><a href="#cb32-4"></a>    <span class="at">imc =</span> weight <span class="sc">/</span> height <span class="sc">^</span> <span class="dv">2</span>, </span>
+<span id="cb32-5"><a href="#cb32-5"></a>    <span class="at">imc_escalado =</span> imc <span class="sc">/</span> <span class="dv">10</span></span>
+<span id="cb32-6"><a href="#cb32-6"></a>    ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 106 × 5
+      id weight height   imc imc_escalado
+   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt;
+ 1     1   59      1.4  30.1         3.01
+ 2     1   59.9    1.3  35.4         3.54
+ 3     2   62      1.5  27.6         2.76
+ 4     2   62.1    1.6  24.3         2.43
+ 5     3   62      1.6  24.2         2.42
+ 6     3   60      1.6  23.4         2.34
+ 7     4   60.9    1.5  27.1         2.71
+ 8     4   61.4    1.5  27.3         2.73
+ 9     5   64      1.5  28.4         2.84
+10     5   58.1    1.6  22.7         2.27
+# … with 96 more rows</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-4-3">
+<ul>
+<li><p>Tener cuidado si se quiere reutilizar la variable original, en ese caso es mejor crear columna nueva.</p></li>
+<li><p>Queremos que la edad sea reportada en meses:</p></li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Crear columna nueva:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>datos_fase1 <span class="sc">%&gt;%</span> </span>
+<span id="cb34-2"><a href="#cb34-2"></a>  <span class="fu">select</span>(id, age) <span class="sc">%&gt;%</span> </span>
+<span id="cb34-3"><a href="#cb34-3"></a>  <span class="fu">mutate</span>(<span class="at">age2 =</span> age <span class="sc">*</span> <span class="dv">12</span>) <span class="co"># Columna nueva llamada age2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 106 × 3
+      id   age  age2
+   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1     1    33   396
+ 2     1    32   384
+ 3     2    27   324
+ 4     2    27   324
+ 5     3    25   300
+ 6     3    25   300
+ 7     4    37   444
+ 8     4    38   456
+ 9     5    31   372
+10     5    32   384
+# … with 96 more rows</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><strong>Remplazar la edad:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>datos_fase1 <span class="sc">%&gt;%</span> </span>
+<span id="cb36-2"><a href="#cb36-2"></a>  <span class="fu">select</span>(id, age) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-3"><a href="#cb36-3"></a>  <span class="fu">mutate</span>(<span class="at">age =</span> age <span class="sc">*</span> <span class="dv">12</span>) <span class="co"># Notar que se remplazó age </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 106 × 2
+      id   age
+   &lt;dbl&gt; &lt;dbl&gt;
+ 1     1   396
+ 2     1   384
+ 3     2   324
+ 4     2   324
+ 5     3   300
+ 6     3   300
+ 7     4   444
+ 8     4   456
+ 9     5   372
+10     5   384
+# … with 96 more rows</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center">
+<h1>Otros verbos útiles para manejo de datos</h1>
+<div class="agenda-heading">
+<p>Agenda</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Importación de datos</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Más verbos de dplyr para manejo de datos</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Otros verbos útiles para manejo de datos</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Uso de helpers</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Análisis Exploratorio de Datos versus Análisis Inicial de Datos</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Pasos para un buen AID / AED</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section id="renombrar-variables-con-rename" class="slide level2">
+<h2>Renombrar variables con <span class="verde-h3">rename()</span></h2>
+<hr>
+<ul>
+<li>Cambia los nombres de variables individuales.</li>
+</ul>
+<p>&nbsp;</p>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><span class="verde-h3">Larga</span></p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="fu">rename</span>(<span class="at">.data =</span> DATA, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span class="verde-h3">Abreviada</span></p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="fu">rename</span>(DATA, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span class="verde-h3">Se estila usar %&gt;%</span></p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>DATA <span class="sc">%&gt;%</span> </span>
+<span id="cb40-2"><a href="#cb40-2"></a>  <span class="fu">rename</span>(...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:55%;">
+<p><br>
+</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Argumento </th>
+   <th style="text-align:left;"> Descripción </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> .data </td>
+   <td style="text-align:left;"> Data frame o extensión de data frame (por ejemplo, tibble). </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> ... </td>
+   <td style="text-align:left;"> nuevo_nombre = viejo_nombre </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="rename-en-acción" class="slide level2">
+<h2><span class="verde-h3">rename()</span> en acción</h2>
+<hr>
+<ul>
+<li>Cambiar el nombre de <code>married</code> por <code>casado1</code> y el de <code>age</code> por <code>edad</code>.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a>datos_fase1 <span class="sc">%&gt;%</span> </span>
+<span id="cb41-2"><a href="#cb41-2"></a>  <span class="fu">rename</span>(</span>
+<span id="cb41-3"><a href="#cb41-3"></a>    <span class="at">casado1 =</span> married, </span>
+<span id="cb41-4"><a href="#cb41-4"></a>    <span class="at">edad =</span> age</span>
+<span id="cb41-5"><a href="#cb41-5"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 106 × 14
+      id time     treat   edad race  casado1 marri…¹ proce…² weight height    e2
+   &lt;dbl&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;   &lt;fct&gt;   &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+ 1     1 Baseline Place…    33 Mest… Single  Withou… Callao    59      1.4  87.3
+ 2     1 3 months Place…    32 Mest… Single  Withou… Callao    59.9    1.3 210. 
+ 3     2 Baseline Dosis…    27 Mest… Single  Withou… Santa …   62      1.5 169. 
+ 4     2 3 months Dosis…    27 Mest… Single  Withou… Santa …   62.1    1.6  99.9
+ 5     3 Baseline Dosis…    25 Mest… Single  Withou… Callao    62      1.6  78.8
+ 6     3 3 months Dosis…    25 Mest… Single  Withou… Callao    60      1.6 155. 
+ 7     4 Baseline Dosis…    37 Mest… Divorc… Withou… Callao    60.9    1.5  41.0
+ 8     4 3 months Dosis…    38 Mest… Divorc… Withou… Callao    61.4    1.5 109. 
+ 9     5 Baseline Place…    31 Mest… Single  Withou… La Mol…   64      1.5  43.0
+10     5 3 months Place…    32 Mest… Single  Withou… La Mol…   58.1    1.6  56.0
+# … with 96 more rows, 3 more variables: lh &lt;dbl&gt;, fsh &lt;dbl&gt;, prog &lt;dbl&gt;, and
+#   abbreviated variable names ¹​married2, ²​procedence</code></pre>
+</div>
+</div>
+</section>
+<section id="recodificar-valores-de-variables-con-recode" class="slide level2">
+<h2>Recodificar valores de variables con <span class="verde-h3">recode()</span></h2>
+<hr>
+<ul>
+<li>Cambia los nombres de las etiquetas de valores de las variables.</li>
+</ul>
+<p>&nbsp;</p>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><span class="verde-h3">Larga</span></p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="fu">recode</span>(<span class="at">.data =</span> DATA, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span class="verde-h3">Abreviada</span></p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="fu">recode</span>(DATA, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span class="verde-h3">Se estila usar %&gt;%</span></p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a>DATA <span class="sc">%&gt;%</span> </span>
+<span id="cb45-2"><a href="#cb45-2"></a>  <span class="fu">recode</span>(...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:55%;">
+<p><span class="verde-h3">recode es el raro del grupo: primeo viejo nombre y luego nuevo nombre</span></p>
+<div class="cell">
+<div class="cell-output-display">
+
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Argumento </th>
+   <th style="text-align:left;"> Descripción </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> .data </td>
+   <td style="text-align:left;"> Data frame o extensión de data frame (por ejemplo, tibble). </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> ... </td>
+   <td style="text-align:left;"> viejo_nombre = nuevo_nombre </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="recode-en-acción" class="slide level2">
+<h2><span class="verde-h3">recode()</span> en acción</h2>
+<hr>
+<ul>
+<li>Cambiar los valores de married2 del inglés al español:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a>datos_fase1 <span class="sc">%&gt;%</span> </span>
+<span id="cb46-2"><a href="#cb46-2"></a>  <span class="fu">mutate</span>(<span class="at">married2 =</span> <span class="fu">recode</span>(married2, </span>
+<span id="cb46-3"><a href="#cb46-3"></a>                           <span class="st">"Without couple"</span> <span class="ot">=</span> <span class="st">"Sin pareja"</span>, </span>
+<span id="cb46-4"><a href="#cb46-4"></a>                           <span class="st">"With couple"</span> <span class="ot">=</span> <span class="st">"Con pareja"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 106 × 14
+      id time     treat    age race  married marri…¹ proce…² weight height    e2
+   &lt;dbl&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;   &lt;fct&gt;   &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+ 1     1 Baseline Place…    33 Mest… Single  Sin pa… Callao    59      1.4  87.3
+ 2     1 3 months Place…    32 Mest… Single  Sin pa… Callao    59.9    1.3 210. 
+ 3     2 Baseline Dosis…    27 Mest… Single  Sin pa… Santa …   62      1.5 169. 
+ 4     2 3 months Dosis…    27 Mest… Single  Sin pa… Santa …   62.1    1.6  99.9
+ 5     3 Baseline Dosis…    25 Mest… Single  Sin pa… Callao    62      1.6  78.8
+ 6     3 3 months Dosis…    25 Mest… Single  Sin pa… Callao    60      1.6 155. 
+ 7     4 Baseline Dosis…    37 Mest… Divorc… Sin pa… Callao    60.9    1.5  41.0
+ 8     4 3 months Dosis…    38 Mest… Divorc… Sin pa… Callao    61.4    1.5 109. 
+ 9     5 Baseline Place…    31 Mest… Single  Sin pa… La Mol…   64      1.5  43.0
+10     5 3 months Place…    32 Mest… Single  Sin pa… La Mol…   58.1    1.6  56.0
+# … with 96 more rows, 3 more variables: lh &lt;dbl&gt;, fsh &lt;dbl&gt;, prog &lt;dbl&gt;, and
+#   abbreviated variable names ¹​married2, ²​procedence</code></pre>
+</div>
+</div>
+</section>
+<section id="nuestro-turno-1" class="slide level2" data-background-color="#000000">
+<h2><svg aria-hidden="true" role="img" viewbox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:white;overflow:visible;position:relative;"><path d="M128 96h384v256h64V80C576 53.63 554.4 32 528 32h-416C85.63 32 64 53.63 64 80V352h64V96zM624 384h-608C7.25 384 0 391.3 0 400V416c0 35.25 28.75 64 64 64h512c35.25 0 64-28.75 64-64v-16C640 391.3 632.8 384 624 384zM365.9 286.2C369.8 290.1 374.9 292 380 292s10.23-1.938 14.14-5.844l48-48c7.812-7.813 7.812-20.5 0-28.31l-48-48c-7.812-7.813-20.47-7.813-28.28 0c-7.812 7.813-7.812 20.5 0 28.31l33.86 33.84l-33.86 33.84C358 265.7 358 278.4 365.9 286.2zM274.1 161.9c-7.812-7.813-20.47-7.813-28.28 0l-48 48c-7.812 7.813-7.812 20.5 0 28.31l48 48C249.8 290.1 254.9 292 260 292s10.23-1.938 14.14-5.844c7.812-7.813 7.812-20.5 0-28.31L240.3 224l33.86-33.84C281.1 182.4 281.1 169.7 274.1 161.9z"></path></svg> Nuestro turno</h2>
+<hr>
+<p><br>
+</p>
+<ul>
+<li><p>Descargue la carpeta denominada <span class="verde-h3">taller03</span> disponible en la carpeta compartida.</p></li>
+<li><p>Abra el proyecto denominado <span class="verde-h3">taller03.Rproj</span></p></li>
+<li><p>Complete y ejecute el código faltante en los chunk de código de la SEGUNDA PARTE.</p></li>
+<li><p>Una vez culmine todo el proceso, renderice el archivo .qmd.</p></li>
+</ul>
+<p><br>
+<br>
+&nbsp;</p>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="countdown" id="timer_4a21844b" data-update-every="1" data-play-sound="true" tabindex="0" style="right:0;bottom:0;font-size:2em;">
+<div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
+<code class="countdown-time"><span class="countdown-digits minutes">10</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center">
+<h1>Uso de helpers</h1>
+<div class="agenda-heading">
+<p>Agenda</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Importación de datos</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Más verbos de dplyr para manejo de datos</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Otros verbos útiles para manejo de datos</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Uso de helpers</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Análisis Exploratorio de Datos versus Análisis Inicial de Datos</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Pasos para un buen AID / AED</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section id="selectores-tidy" class="slide level2">
+<h2>Selectores tidy</h2>
+<ul>
+<li><p>Son funciones que ayudan a especificar un grupo específico de columnas.</p></li>
+<li><p>Ejemplos típicos de funciones tidyselect son:</p>
+<ul>
+<li><p><span class="verde-h3">starts_with()</span></p></li>
+<li><p><span class="verde-h3">end_with()</span></p></li>
+<li><p><span class="verde-h3">contains()</span></p></li>
+<li><p><span class="verde-h3">matches()</span></p></li>
+<li><p><span class="verde-h3">last_col()</span></p></li>
+<li><p><span class="verde-h3">num_range()</span></p></li>
+<li><p><span class="verde-h3">where()</span></p></li>
+</ul></li>
+<li><p>Más información sobre tidylsect: <a href="https://dplyr.tidyverse.org/reference/select.html" class="uri">https://dplyr.tidyverse.org/reference/select.html</a></p></li>
+</ul>
+</section>
+<section id="nuestro-turno-2" class="slide level2" data-background-color="#000000">
+<h2><svg aria-hidden="true" role="img" viewbox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:white;overflow:visible;position:relative;"><path d="M128 96h384v256h64V80C576 53.63 554.4 32 528 32h-416C85.63 32 64 53.63 64 80V352h64V96zM624 384h-608C7.25 384 0 391.3 0 400V416c0 35.25 28.75 64 64 64h512c35.25 0 64-28.75 64-64v-16C640 391.3 632.8 384 624 384zM365.9 286.2C369.8 290.1 374.9 292 380 292s10.23-1.938 14.14-5.844l48-48c7.812-7.813 7.812-20.5 0-28.31l-48-48c-7.812-7.813-20.47-7.813-28.28 0c-7.812 7.813-7.812 20.5 0 28.31l33.86 33.84l-33.86 33.84C358 265.7 358 278.4 365.9 286.2zM274.1 161.9c-7.812-7.813-20.47-7.813-28.28 0l-48 48c-7.812 7.813-7.812 20.5 0 28.31l48 48C249.8 290.1 254.9 292 260 292s10.23-1.938 14.14-5.844c7.812-7.813 7.812-20.5 0-28.31L240.3 224l33.86-33.84C281.1 182.4 281.1 169.7 274.1 161.9z"></path></svg> Nuestro turno</h2>
+<hr>
+<p><br>
+</p>
+<ul>
+<li><p>Descargue la carpeta denominada <span class="verde-h3">taller03</span> disponible en la carpeta compartida.</p></li>
+<li><p>Abra el proyecto denominado <span class="verde-h3">taller03.Rproj</span></p></li>
+<li><p>Complete y ejecute el código faltante en los chunk de código de la TERCERA PARTE.</p></li>
+<li><p>Una vez culmine todo el proceso, renderice el archivo .qmd.</p></li>
+</ul>
+<p><br>
+<br>
+&nbsp;</p>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="countdown" id="timer_20d45e6d" data-update-every="1" data-play-sound="true" tabindex="0" style="right:0;bottom:0;font-size:2em;">
+<div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
+<code class="countdown-time"><span class="countdown-digits minutes">10</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center">
+<h1>Análisis Exploratorio de Datos versus Análisis Inicial de Datos</h1>
+<div class="agenda-heading">
+<p>Agenda</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Importación de datos</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Más verbos de dplyr para manejo de datos</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Otros verbos útiles para manejo de datos</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Uso de helpers</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Análisis Exploratorio de Datos versus Análisis Inicial de Datos</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Pasos para un buen AID / AED</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+<p>&nbsp;&nbsp;</p>
+<p><span class="big-text4">El análisis inicial de datos y el análisis exploratorio de datos son dos cosas diferentes!!</span></p>
+</section>
+<section id="análisis-exploratorio-de-datos" class="slide level2">
+<h2>Análisis Exploratorio de Datos</h2>
+<hr>
+<div class="columns">
+<div class="column" style="width:49%;">
+<p><span class="verde-h3">Análisis Exploratorio de Datos</span></p>
+<ul>
+<li><p>El AED es un enfoque de análisis de conjunto de datos para identificar patrones y formular nuevas hipótesis.</p></li>
+<li><p>Se trata de ver qué nos dice los datos más allá de ideas pre-concebidas.</p></li>
+<li><p>Las nuevas hipótesis luego se confirman en otros nuevos estudios rigurosos.</p></li>
+<li><p>Su versión moderna: Minería de Datos (<em>Data Minning</em>)</p></li>
+</ul>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:49%;">
+<p><span class="verde-h3">Análisis Inicial de Datos</span></p>
+<ul>
+<li><p>El AID, a menudo, se confunde erróneamente con el AED:</p>
+<ul>
+<li>Ambos son dos enfoques totalmente diferentes que comparten herramietnas comunes.</li>
+</ul></li>
+<li><p>Objetivo del AID:</p></li>
+</ul>
+<blockquote>
+<p><em>“(…) garantizar principalmente la transparencia y la integridad de las condiciones previas para realizar análisis estadísticos apropiados de manera responsable para responder preguntas de investigación predefinidas.”</em> <br><em>Baillie M, et al.&nbsp;[PLoS Comput Biol, 2022](https://doi.org/10.1371/journal.pcbi.1009819)</em></p>
+</blockquote>
+</div>
+</div>
+</section>
+<section id="análisis-inicial-de-datos-vs.-análisis-exploratorio-de-datos" class="slide level2">
+<h2>Análisis Inicial de Datos vs.&nbsp;Análisis Exploratorio de Datos</h2>
+<hr>
+<p><br>
+</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> AID </th>
+   <th style="text-align:left;"> AED </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> 1. AID es el paso inicial del proceso de confirmación de hipótesis pre-definidas. </td>
+   <td style="text-align:left;"> 1. AED busca generar hipótesis nuevas. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2. En investigación clínico-epidemiológica, a menudo queremos y deberíamos hacer AID. </td>
+   <td style="text-align:left;"> 2. Rara vez queremos AED (p. ej., enfermedades nuevas, fenómenos muy poco conocidos) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 3. Proceso clave para garantizar responder adecuadamente objetivos pre-planeados de estudio. </td>
+   <td style="text-align:left;"> 3. Proceso con alto riesgo de contaminar respuesta a objetivos pre-planeados de estudio. </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</section>
+<section id="mala-práctica-hacer-aed-en-vez-de-aid" class="slide level2">
+<h2>Mala práctica: ¡Hacer AED en vez de AID!</h2>
+<hr>
+<p><br>
+</p>
+<ul>
+<li><p>A menudo, investigadores no realizan AID de manera sistemática.</p></li>
+<li><p>Mezclan actividades de AID con tareas posteriores de análisis de datos, como generación o exploración de hipótesis, análisis formal e interpretación de conclusiones.</p></li>
+<li><p>Como se hacen “informalmente”, no se reportan en detalle generándose análisis ocultos.</p></li>
+<li><p>Estos análisis ocultos generan problemas en la reproducibilidad de los estudios.</p></li>
+<li><p>Generan muchos grados de libertad adicionales ocasionando problemas serios de validez de los análisis: <em>p-hacking</em>, <em>post-selection inference</em>, <em>double-dipping</em>, <em>overfitting</em>, <em>etc</em>.</p></li>
+<li><p>Iniciativa STRATOS ha dado pautas para realizar AID apropiados.</p></li>
+</ul>
+
+<aside><div>
+<p><font size="4"><a href="https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/s12874-020-00942-y"><em>BMC Med Res Methodol 20, 61 (2020)</em></a></font></p>
+</div></aside></section>
+<section id="el-problema-de-los-análisis-ocultos" class="slide level2">
+<h2>El problema de los análisis ocultos</h2>
+<hr>
+
+<img data-src="img/hidden.png" class="r-stretch quarto-figure-center"><p class="caption"><font size="4"><a href="https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/s12874-020-00942-y"><em>BMC Med Res Methodol 20, 61 (2020)</em></a></font></p></section>
+<section id="recomendaciones-de-stratos-para-hacer-un-buen-aid" class="slide level2">
+<h2>Recomendaciones de STRATOS para hacer un buen AID</h2>
+<hr>
+
+<img data-src="img/TenRules.png" class="r-stretch quarto-figure-center"><p class="caption"><font size="4"><a href="https://doi.org/10.1371/journal.pcbi.1009819"><em>PLoS Comput Biol 18(2): e1009819</em></a></font></p></section>
+<section id="aid-es-un-proceso-iterativo" class="slide level2">
+<h2>AID es un proceso iterativo</h2>
+<hr>
+<p><br>
+</p>
+<ul>
+<li><p>Proceso no lineal, al contrario, requiere muchas iteraciones.</p></li>
+<li><p>Riesgo: Puede influir en análisis e inducir conclusiones erróneas.</p>
+<ul>
+<li>Mayor riesgo de restultados falsos positivos.</li>
+</ul></li>
+<li><p>Ser cuidados para:</p>
+<ul>
+<li>Evitar alterar la pregunta de investigación.</li>
+<li>Proveer documentación completa del proceso.</li>
+</ul></li>
+</ul>
+</section>
+<section id="aid-como-parte-del-plan-de-investigación" class="slide level2">
+<h2>AID como parte del plan de investigación</h2>
+<hr>
+
+<img data-src="img/AID_plan.png" class="r-stretch quarto-figure-center"><p class="caption"><font size="4"><a href="https://www.stratos-initiative.org/sites/default/files/2021-11/STRATOS-TG3-BB-initial-data-analysis.pdf"><em>Introducing the Initial Data Analysis Topic Group (TG3)</em></a></font></p></section>
+<section id="aid-como-parte-del-plan-de-investigación-1" class="slide level2">
+<h2>AID como parte del plan de investigación</h2>
+
+<img data-src="img/AID_plan2.png" class="r-stretch quarto-figure-center"><p class="caption"><font size="4"><a href="https://www.jtcvs.org/action/showPdf?pii=S0022-5223%2815%2901794-8"><em>Huebner M, Vach W, et al.</em></a></font></p></section>
+<section id="recomendaciones-de-stratos-para-un-buen-aid" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">10 recomendaciones de STRATOS para un buen AID</h2>
+<hr>
+<ul>
+<li><p><strong>Regla 1</strong>: Desarrolle un plan de AID que respalde el objetivo de la investigación.</p></li>
+<li><p><strong>Regla 2</strong>: AID toma tiempo y recursos.</p></li>
+<li><p><strong>Regla 3</strong>: AID debe ser reproducible.</p></li>
+<li><p><strong>Regla 4</strong>: El contexto importa, conoce tus datos.</p></li>
+<li><p><strong>Regla 5</strong>: Evite los adelantos, AID no toca la pregunta de investigación.</p></li>
+<li><p><strong>Regla 6</strong>: Visualiza tus datos.</p></li>
+<li><p><strong>Regla 7</strong>: Compruebe lo que falte.</p></li>
+<li><p><strong>Regla 8</strong>: Comunicar los hallazgos y considerar las consecuencias.</p></li>
+<li><p><strong>Regla 9</strong>: Reporte los hallazgos del AID en trabajos de investigación (¡adjunte anexos!)</p></li>
+<li><p><strong>Regla 10</strong>: Sea proactivo y riguroso.</p></li>
+</ul>
+</section>
+<section id="recomendaciones-de-stratos-para-un-buen-aid-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">10 recomendaciones de STRATOS para un buen AID</h2>
+<hr>
+<ul>
+<li><p><strong>Regla 1</strong>: Desarrolle un plan de AID que respalde el objetivo de la investigación <span class="ros">→</span> <em><span class="verde-h3">¡Escríbalo en el proyecto o anexe un plan de análisis estadístico detallado!</span></em></p></li>
+<li><p><strong>Regla 2</strong>: AID toma tiempo y recursos.<span class="ros">→</span> <em><span class="verde-h3">Presupueste RRHH y tiempo razonable</span></em></p></li>
+<li><p><strong>Regla 3</strong>: AID debe ser reproducible.<span class="ros">→</span> <em><span class="verde-h3">Use programas que generen código</span></em></p></li>
+<li><p><strong>Regla 4</strong>: El contexto importa, conoce tus datos.<span class="ros">→</span> <em><span class="verde-h3">{dplyr} en R</span></em></p></li>
+<li><p><strong>Regla 5</strong>: Evite los adelantos, AID no toca la pregunta de investigación.<span class="ros">→</span> <em><span class="verde-h3">¡No haga ’análisis perliminar` sin antes inspeccionar y limpiar bien lso datos!</span></em></p></li>
+<li><p><strong>Regla 6</strong>: Visualiza tus datos.<span class="ros">→</span> <em><span class="verde-h3">{ggplot2} en R</span></em></p></li>
+<li><p><strong>Regla 7</strong>: Compruebe lo que falte.<span class="ros">→</span> <em><span class="verde-h3">{tidyverse} para queries en R</span></em></p></li>
+<li><p><strong>Regla 8</strong>: Comunicar los hallazgos y considerar las consecuencias.<span class="ros">→</span> <em><span class="verde-h3">Quarto para programación literaria en R</span></em></p></li>
+<li><p><strong>Regla 9</strong>: Reporte los hallazgos del AID en trabajos de investigación (¡adjunte anexos!).<span class="ros">→</span> <em><span class="verde-h3">Ídem</span></em></p></li>
+<li><p><strong>Regla 10</strong>: Sea proactivo y riguroso.<span class="ros">→</span> <em><span class="verde-h3">¡Los datos son como sus pacientes, use las mejores técnicas y herramientas disponibles!</span></em></p></li>
+</ul>
+</section>
+<section id="regla-4-el-contexto-importa-conoce-tus-datos" class="slide level2 scrollable">
+<h2>Regla 4: El contexto importa, conoce tus datos</h2>
+<hr>
+<p><br>
+</p>
+<ul>
+<li>Dé una primera mirada global a los datos</li>
+<li>Diseñe una lista de validaciones a realizar desde el proyecto.</li>
+<li>Valida tus datos:
+<ul>
+<li>Identifique duplicados y detecte inconsistencias</li>
+<li>Valores extremos no plausibles</li>
+<li>Identifique valores perdidos</li>
+</ul></li>
+<li>En R, use los verbos básicos de {dplyr} para hacer consultas (“queries”) a sus datos: <code>filter()</code>, <code>select()</code>, <code>mutate()</code>, <code>arrange()</code> y <code>summarise()</code>.</li>
+</ul>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center">
+<h1>Pasos para un buen AID / AED</h1>
+<div class="agenda-heading">
+<p>Agenda</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Importación de datos</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Más verbos de dplyr para manejo de datos</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Otros verbos útiles para manejo de datos</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Uso de helpers</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Análisis Exploratorio de Datos versus Análisis Inicial de Datos</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Pasos para un buen AID / AED</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section id="section-1" class="slide level2 scrollable">
+<h2></h2>
+<blockquote>
+<p><strong>Paso 1:</strong> Resumen global de los datos</p>
+</blockquote>
+<div class="panel-tabset">
+<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">¿Qué debo inspeccionar de manera global?</a></li><li><a href="#tabset-5-2">glimpse()</a></li><li><a href="#tabset-5-3">skim()</a></li><li><a href="#tabset-5-4">describe()</a></li></ul>
+<div class="tab-content">
+<div id="tabset-5-1">
+<ul>
+<li><p>Dimensiones: columnas y filas</p></li>
+<li><p>Variables y tipos</p></li>
+<li><p>Datos completos y faltantes</p></li>
+<li><p>Variables numéricas: Mínimos, máximos y valores extremos</p></li>
+<li><p>Variables categóricas: Valores o categorías muy poco frecuentes y datos perdidos encubiertos</p></li>
+</ul>
+</div>
+<div id="tabset-5-2">
+<ul>
+<li>Heche un vistazo de los datos con <span class="plo">glimpse()</span>:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="fu">glimpse</span>(datos)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 26
+Columns: 13
+$ id_jaula     &lt;dbl&gt; 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 5, 5, 5, 5, 8, 8, 9, 9, 9, …
+$ id_raton     &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17…
+$ tratamiento  &lt;chr&gt; "control", "control", "control", "control", "control", "m…
+$ protocolo    &lt;chr&gt; "ovx", "ovx", "ovx", "hemiovx", "ovx", "ovx", "ovx", "ovx…
+$ peso_inicial &lt;dbl&gt; 26.00, 24.50, 20.40, 26.59, 23.50, 25.00, 24.80, 23.20, 2…
+$ peso_final   &lt;dbl&gt; 33.28, 30.50, 29.93, 32.19, 30.37, 30.43, 28.77, 27.30, 2…
+$ peso_utero   &lt;dbl&gt; 0.089, 0.063, 0.078, 0.134, 0.052, 0.055, 0.064, 0.062, 0…
+$ chol         &lt;dbl&gt; 85.990, 94.460, 99.670, 83.380, 82.080, 107.490, 76.870, …
+$ glucose      &lt;dbl&gt; 109.97, 81.62, 118.37, 71.91, 95.53, 160.36, 195.53, 182.…
+$ tag          &lt;dbl&gt; 182.42, 211.87, 195.16, 98.46, 108.13, 141.10, 95.82, 105…
+$ prot         &lt;dbl&gt; 5.37, 4.68, NA, NA, 5.33, NA, 5.02, 6.12, NA, 4.85, NA, N…
+$ urea         &lt;dbl&gt; 66.27, 76.73, 52.32, 50.71, 26.02, NA, 40.78, 66.94, NA, …
+$ album        &lt;dbl&gt; 66.82, 55.36, NA, NA, NA, 72.14, 67.09, 70.64, 66.27, 83.…</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-5-3">
+<ul>
+<li>La función <span class="plo">skim()</span> del paquete [skim]r]{.plo} genera un resumen global de los datos:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="fu">skim</span>(datos)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<table style="width: auto;" class="table table-condensed">
+<caption>
+Data summary
+</caption>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Name
+</td>
+<td style="text-align:left;">
+datos
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Number of rows
+</td>
+<td style="text-align:left;">
+26
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Number of columns
+</td>
+<td style="text-align:left;">
+13
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+_______________________
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Column type frequency:
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+character
+</td>
+<td style="text-align:left;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+numeric
+</td>
+<td style="text-align:left;">
+11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+________________________
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Group variables
+</td>
+<td style="text-align:left;">
+None
+</td>
+</tr>
+</tbody>
+
+</table>
+<p><strong>Variable type: character</strong></p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+skim_variable
+</th>
+<th style="text-align:right;">
+n_missing
+</th>
+<th style="text-align:right;">
+complete_rate
+</th>
+<th style="text-align:right;">
+min
+</th>
+<th style="text-align:right;">
+max
+</th>
+<th style="text-align:right;">
+empty
+</th>
+<th style="text-align:right;">
+n_unique
+</th>
+<th style="text-align:right;">
+whitespace
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+tratamiento
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+protocolo
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+</tbody>
+
+</table>
+<p><strong>Variable type: numeric</strong></p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+skim_variable
+</th>
+<th style="text-align:right;">
+n_missing
+</th>
+<th style="text-align:right;">
+complete_rate
+</th>
+<th style="text-align:right;">
+mean
+</th>
+<th style="text-align:right;">
+sd
+</th>
+<th style="text-align:right;">
+p0
+</th>
+<th style="text-align:right;">
+p25
+</th>
+<th style="text-align:right;">
+p50
+</th>
+<th style="text-align:right;">
+p75
+</th>
+<th style="text-align:right;">
+p100
+</th>
+<th style="text-align:left;">
+hist
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+id_jaula
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+4.92
+</td>
+<td style="text-align:right;">
+3.36
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+2.00
+</td>
+<td style="text-align:right;">
+4.00
+</td>
+<td style="text-align:right;">
+8.75
+</td>
+<td style="text-align:right;">
+10.00
+</td>
+<td style="text-align:left;">
+▇▃▃▂▆
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+id_raton
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+11.19
+</td>
+<td style="text-align:right;">
+6.85
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+5.25
+</td>
+<td style="text-align:right;">
+10.50
+</td>
+<td style="text-align:right;">
+16.75
+</td>
+<td style="text-align:right;">
+23.00
+</td>
+<td style="text-align:left;">
+▇▆▆▅▆
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+peso_inicial
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+23.72
+</td>
+<td style="text-align:right;">
+1.93
+</td>
+<td style="text-align:right;">
+18.90
+</td>
+<td style="text-align:right;">
+22.69
+</td>
+<td style="text-align:right;">
+23.50
+</td>
+<td style="text-align:right;">
+24.95
+</td>
+<td style="text-align:right;">
+27.90
+</td>
+<td style="text-align:left;">
+▂▃▇▆▂
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+peso_final
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+28.77
+</td>
+<td style="text-align:right;">
+2.30
+</td>
+<td style="text-align:right;">
+23.80
+</td>
+<td style="text-align:right;">
+26.97
+</td>
+<td style="text-align:right;">
+28.77
+</td>
+<td style="text-align:right;">
+30.34
+</td>
+<td style="text-align:right;">
+33.28
+</td>
+<td style="text-align:left;">
+▂▇▇▆▃
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+peso_utero
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0.09
+</td>
+<td style="text-align:right;">
+0.10
+</td>
+<td style="text-align:right;">
+0.01
+</td>
+<td style="text-align:right;">
+0.06
+</td>
+<td style="text-align:right;">
+0.07
+</td>
+<td style="text-align:right;">
+0.09
+</td>
+<td style="text-align:right;">
+0.54
+</td>
+<td style="text-align:left;">
+▇▁▁▁▁
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+chol
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+82.25
+</td>
+<td style="text-align:right;">
+12.13
+</td>
+<td style="text-align:right;">
+59.28
+</td>
+<td style="text-align:right;">
+74.91
+</td>
+<td style="text-align:right;">
+82.73
+</td>
+<td style="text-align:right;">
+85.99
+</td>
+<td style="text-align:right;">
+107.49
+</td>
+<td style="text-align:left;">
+▃▃▇▂▂
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+glucose
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+125.35
+</td>
+<td style="text-align:right;">
+37.52
+</td>
+<td style="text-align:right;">
+60.10
+</td>
+<td style="text-align:right;">
+97.30
+</td>
+<td style="text-align:right;">
+116.53
+</td>
+<td style="text-align:right;">
+148.82
+</td>
+<td style="text-align:right;">
+195.53
+</td>
+<td style="text-align:left;">
+▃▇▆▃▅
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tag
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+150.08
+</td>
+<td style="text-align:right;">
+51.70
+</td>
+<td style="text-align:right;">
+90.99
+</td>
+<td style="text-align:right;">
+108.13
+</td>
+<td style="text-align:right;">
+137.80
+</td>
+<td style="text-align:right;">
+184.39
+</td>
+<td style="text-align:right;">
+282.64
+</td>
+<td style="text-align:left;">
+▇▂▅▁▁
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+prot
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+0.54
+</td>
+<td style="text-align:right;">
+5.24
+</td>
+<td style="text-align:right;">
+0.45
+</td>
+<td style="text-align:right;">
+4.68
+</td>
+<td style="text-align:right;">
+4.93
+</td>
+<td style="text-align:right;">
+5.24
+</td>
+<td style="text-align:right;">
+5.36
+</td>
+<td style="text-align:right;">
+6.17
+</td>
+<td style="text-align:left;">
+▇▃▇▁▃
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+urea
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+0.62
+</td>
+<td style="text-align:right;">
+55.60
+</td>
+<td style="text-align:right;">
+31.21
+</td>
+<td style="text-align:right;">
+26.02
+</td>
+<td style="text-align:right;">
+38.16
+</td>
+<td style="text-align:right;">
+48.16
+</td>
+<td style="text-align:right;">
+66.27
+</td>
+<td style="text-align:right;">
+157.89
+</td>
+<td style="text-align:left;">
+▇▃▁▁▁
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+album
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+0.50
+</td>
+<td style="text-align:right;">
+66.21
+</td>
+<td style="text-align:right;">
+7.71
+</td>
+<td style="text-align:right;">
+52.77
+</td>
+<td style="text-align:right;">
+64.64
+</td>
+<td style="text-align:right;">
+66.82
+</td>
+<td style="text-align:right;">
+68.59
+</td>
+<td style="text-align:right;">
+83.73
+</td>
+<td style="text-align:left;">
+▂▂▇▁▁
+</td>
+</tr>
+</tbody>
+
+</table>
+</div>
+</div>
+</div>
+<div id="tabset-5-4">
+<ul>
+<li>La función <span class="plo">describe()</span> del paquete <span class="plo">Hmisc</span> genera un reporte general bien detallado, variable por variable:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="fu">describe</span>(datos)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>datos 
+
+ 13  Variables      26  Observations
+--------------------------------------------------------------------------------
+id_jaula : ID de jaula 
+       n  missing distinct     Info     Mean      Gmd 
+      26        0        7    0.978    4.923    3.815 
+
+lowest :  1  2  3  5  8, highest:  3  5  8  9 10
+                                                    
+Value          1     2     3     5     8     9    10
+Frequency      4     5     4     4     2     4     3
+Proportion 0.154 0.192 0.154 0.154 0.077 0.154 0.115
+--------------------------------------------------------------------------------
+id_raton : ID de ratón 
+       n  missing distinct     Info     Mean      Gmd      .05      .10 
+      26        0       23    0.999    11.19    8.046     1.25     2.50 
+     .25      .50      .75      .90      .95 
+    5.25    10.50    16.75    20.50    21.75 
+
+lowest :  1  2  3  4  5, highest: 19 20 21 22 23
+--------------------------------------------------------------------------------
+tratamiento : Tratamiento asignado 
+       n  missing distinct 
+      26        0        5 
+
+lowest : control                   maca                      maca + critro             sham operated             triple dosis maca + citro
+highest: control                   maca                      maca + critro             sham operated             triple dosis maca + citro
+
+control (7, 0.269), maca (6, 0.231), maca + critro (4, 0.154), sham operated
+(4, 0.154), triple dosis maca + citro (5, 0.192)
+--------------------------------------------------------------------------------
+protocolo : Tipo de protocolo de modelo animal 
+       n  missing distinct 
+      26        0        3 
+                                  
+Value      hemiovx  no ovx     ovx
+Frequency        3       4      19
+Proportion   0.115   0.154   0.731
+--------------------------------------------------------------------------------
+peso_inicial : Peso inicial 
+       n  missing distinct     Info     Mean      Gmd      .05      .10 
+      26        0       19    0.997    23.72    2.171    20.77    21.90 
+     .25      .50      .75      .90      .95 
+   22.69    23.50    24.95    26.00    26.44 
+
+lowest : 18.90 20.40 21.90 22.40 22.50, highest: 25.30 25.50 26.00 26.59 27.90
+                                                                            
+Value      18.90 20.40 21.90 22.40 22.50 22.69 22.90 23.20 23.40 23.50 23.90
+Frequency      1     1     2     1     1     2     1     1     2     3     1
+Proportion 0.038 0.038 0.077 0.038 0.038 0.077 0.038 0.038 0.077 0.115 0.038
+                                                          
+Value      24.50 24.80 25.00 25.30 25.50 26.00 26.59 27.90
+Frequency      2     1     1     1     1     2     1     1
+Proportion 0.077 0.038 0.038 0.038 0.038 0.077 0.038 0.038
+--------------------------------------------------------------------------------
+peso_final : Peso final 
+       n  missing distinct     Info     Mean      Gmd      .05      .10 
+      26        0       21    0.998    28.77    2.616    25.37    26.69 
+     .25      .50      .75      .90      .95 
+   26.97    28.77    30.34    31.34    33.01 
+
+lowest : 23.80 24.93 26.68 26.70 26.86, highest: 30.37 30.43 30.50 32.19 33.28
+--------------------------------------------------------------------------------
+peso_utero : Peso uterino 
+       n  missing distinct     Info     Mean      Gmd      .05      .10 
+      26        0       23    0.999  0.09012  0.07069  0.01750  0.03400 
+     .25      .50      .75      .90      .95 
+ 0.05550  0.06900  0.08875  0.12350  0.16550 
+
+lowest : 0.014 0.016 0.022 0.046 0.052, highest: 0.108 0.113 0.134 0.176 0.535
+--------------------------------------------------------------------------------
+chol : Colesterol 
+       n  missing distinct     Info     Mean      Gmd      .05      .10 
+      26        0       21    0.997    82.25     13.8    64.75    66.44 
+     .25      .50      .75      .90      .95 
+   74.91    82.73    85.99    97.72   103.58 
+
+lowest :  59.28  64.40  65.79  67.10  68.40, highest:  94.46  95.76  99.67 104.88 107.49
+--------------------------------------------------------------------------------
+glucose : Glucosa 
+       n  missing distinct     Info     Mean      Gmd      .05      .10 
+      26        0       23    0.999    125.3    43.48    73.49    79.92 
+     .25      .50      .75      .90      .95 
+   97.30   116.53   148.82   183.46   184.51 
+
+lowest :  60.10  71.91  78.22  81.62  94.23, highest: 160.36 168.50 182.41 184.51 195.53
+--------------------------------------------------------------------------------
+tag : Triglicéridos 
+       n  missing distinct     Info     Mean      Gmd      .05      .10 
+      26        0       22    0.998    150.1     58.3    91.54    94.50 
+     .25      .50      .75      .90      .95 
+  108.13   137.81   184.39   205.94   236.60 
+
+lowest :  90.99  93.19  95.82  98.46 105.49, highest: 199.12 200.00 211.87 244.84 282.64
+--------------------------------------------------------------------------------
+prot : Proteína 
+       n  missing distinct     Info     Mean      Gmd      .05      .10 
+      14       12       10    0.987     5.24   0.4943    4.745    4.801 
+     .25      .50      .75      .90      .95 
+   4.930    5.240    5.360    5.895    6.138 
+
+lowest : 4.68 4.78 4.85 4.93 5.02, highest: 5.15 5.33 5.37 6.12 6.17
+                                                                      
+Value       4.68  4.78  4.85  4.93  5.02  5.15  5.33  5.37  6.12  6.17
+Frequency      1     1     1     2     1     1     3     2     1     1
+Proportion 0.071 0.071 0.071 0.143 0.071 0.071 0.214 0.143 0.071 0.071
+--------------------------------------------------------------------------------
+urea : Urea 
+       n  missing distinct     Info     Mean      Gmd      .05      .10 
+      16       10       14    0.997     55.6     29.8    26.02    30.25 
+     .25      .50      .75      .90      .95 
+   38.16    48.16    66.27    71.84    97.02 
+
+lowest :  26.02  34.48  37.96  38.23  40.78, highest:  60.37  66.27  66.94  76.73 157.89
+                                                                         
+Value       26.02  34.48  37.96  38.23  40.78  43.06  45.61  50.71  52.32
+Frequency       2      1      1      1      1      1      1      1      1
+Proportion  0.125  0.062  0.062  0.062  0.062  0.062  0.062  0.062  0.062
+                                             
+Value       60.37  66.27  66.94  76.73 157.89
+Frequency       1      2      1      1      1
+Proportion  0.062  0.125  0.062  0.062  0.062
+--------------------------------------------------------------------------------
+album : Albuminemia 
+       n  missing distinct     Info     Mean      Gmd      .05      .10 
+      13       13       11    0.995    66.21    8.408    54.32    56.21 
+     .25      .50      .75      .90      .95 
+   64.64    66.82    68.59    71.84    76.78 
+
+lowest : 52.77 55.36 59.59 64.64 66.27, highest: 67.09 68.59 70.64 72.14 83.73
+                                                                            
+Value      52.77 55.36 59.59 64.64 66.27 66.82 67.09 68.59 70.64 72.14 83.73
+Frequency      1     1     1     1     2     2     1     1     1     1     1
+Proportion 0.077 0.077 0.077 0.077 0.154 0.154 0.077 0.077 0.077 0.077 0.077
+--------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="nuestro-turno-3" class="slide level2" data-background-color="#000000">
+<h2><svg aria-hidden="true" role="img" viewbox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:white;overflow:visible;position:relative;"><path d="M128 96h384v256h64V80C576 53.63 554.4 32 528 32h-416C85.63 32 64 53.63 64 80V352h64V96zM624 384h-608C7.25 384 0 391.3 0 400V416c0 35.25 28.75 64 64 64h512c35.25 0 64-28.75 64-64v-16C640 391.3 632.8 384 624 384zM365.9 286.2C369.8 290.1 374.9 292 380 292s10.23-1.938 14.14-5.844l48-48c7.812-7.813 7.812-20.5 0-28.31l-48-48c-7.812-7.813-20.47-7.813-28.28 0c-7.812 7.813-7.812 20.5 0 28.31l33.86 33.84l-33.86 33.84C358 265.7 358 278.4 365.9 286.2zM274.1 161.9c-7.812-7.813-20.47-7.813-28.28 0l-48 48c-7.812 7.813-7.812 20.5 0 28.31l48 48C249.8 290.1 254.9 292 260 292s10.23-1.938 14.14-5.844c7.812-7.813 7.812-20.5 0-28.31L240.3 224l33.86-33.84C281.1 182.4 281.1 169.7 274.1 161.9z"></path></svg> Nuestro turno</h2>
+<hr>
+<p><br>
+</p>
+<ul>
+<li><p>Descargue la carpeta denominada <span class="verde-h3">taller03</span> disponible en la carpeta compartida.</p></li>
+<li><p>Abra el proyecto denominado <span class="verde-h3">taller03.Rproj</span></p></li>
+<li><p>Complete y ejecute el código faltante en los chunk de código de la CUARTA PARTE.</p></li>
+<li><p>Una vez culmine todo el proceso, renderice el archivo .qmd.</p></li>
+</ul>
+<p><br>
+<br>
+&nbsp;</p>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="countdown" id="timer_8535f0be" data-update-every="1" data-play-sound="true" tabindex="0" style="right:0;bottom:0;font-size:2em;">
+<div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
+<code class="countdown-time"><span class="countdown-digits minutes">10</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+</div>
+</div>
+</section>
+<section id="section-2" class="slide level2">
+<h2></h2>
+<div class="r-fit-text">
+<center>
+¡Gracias!
+</center>
+<center>
+¿Preguntas?
+</center>
+</div>
+</section>
+<section id="section-3" class="slide level2">
+<h2></h2>
+<p><br>
+</p>
+<p><br>
+</p>
+<p><br>
+</p>
+<div class="r-fit-text">
+<center>
+<p><i class="fa-brands fa-twitter" aria-hidden="true"></i> <span class="citation" data-cites="psotob91">@psotob91</span></p>
+<p><i class="fa-brands fa-github" aria-hidden="true"></i> https://github.com/psotob91</p>
+<i class="fa-solid fa-inbox" aria-hidden="true"></i> percys1991@gmail.com
+</center>
+</div>
+
+<img src="img/icon-512-insnsb.jpg" class="slide-logo r-stretch"><div class="footer footer-default">
+<p>R Aplicado a los Proyectos de Investigación - Sesión 3</p>
+</div>
+</section></section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="sesion03_chalkboard_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="sesion03_chalkboard_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="sesion03_chalkboard_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="sesion03_chalkboard_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="sesion03_chalkboard_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="sesion03_chalkboard_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="sesion03_chalkboard_files/libs/revealjs/plugin/multiplex/socket.io.js"></script>
+  <script src="sesion03_chalkboard_files/libs/revealjs/plugin/multiplex/multiplex.js"></script>
+  <script src="sesion03_chalkboard_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="sesion03_chalkboard_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="sesion03_chalkboard_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="sesion03_chalkboard_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="sesion03_chalkboard_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'smaller': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'multiplex': {"secret":"1665169252715178000","id":"08f38e9b93a9563d","url":"https://reveal-multiplex.glitch.me/"},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: true,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'convex',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'zoom',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1600,
+
+        height: 900,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          // dispatch for htmlwidgets
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for reveal
+        if (window.Reveal) {
+          window.Reveal.addEventListener("slidechanged", function(event) {
+            fireSlideChanged(event.previousSlide, event.currentSlide);
+          });
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        target: function(trigger) {
+          return trigger.previousElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        setTimeout(function() {
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+      function tippyHover(el, contentFn) {
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'quarto-reveal',
+          placement: 'bottom-start'
+        };
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          return note.innerHTML;
+        });
+      }
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+        tippyHover(ref, function() {
+          var popup = window.document.createElement('div');
+          cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+        var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+              // target, if specified
+              link.setAttribute("target", "_blank");
+              // default icon
+              link.classList.add("external");
+          }
+        }
+    });
+    </script>
+    
+
+</body></html>

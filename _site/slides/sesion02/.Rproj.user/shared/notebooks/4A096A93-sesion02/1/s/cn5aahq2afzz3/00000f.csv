@@ -1,0 +1,2 @@
+"0","gapminder2000 <- gapminder %>% "
+"0","  filter(year == 2000)"

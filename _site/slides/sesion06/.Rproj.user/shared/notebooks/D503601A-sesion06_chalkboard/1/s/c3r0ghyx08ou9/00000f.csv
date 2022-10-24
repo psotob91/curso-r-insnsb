@@ -1,0 +1,3 @@
+"0","library(emmeans)"
+"0","datos %>% "
+"0","  emmeans_test(weight ~ treat, p.adjust.method = ""bonferroni"")"

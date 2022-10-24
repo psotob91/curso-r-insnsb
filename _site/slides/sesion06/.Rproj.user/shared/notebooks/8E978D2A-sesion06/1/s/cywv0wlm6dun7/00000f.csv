@@ -1,0 +1,3 @@
+"0","datos2 %>% "
+"0","  t_test(weight ~ treat, detailed = TRUE, var.equal = FALSE) %>% "
+"0","  gt()"

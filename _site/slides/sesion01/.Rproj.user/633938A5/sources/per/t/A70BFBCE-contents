@@ -1,0 +1,252 @@
+---
+title: Syllabus
+---
+
+```{r}
+#| label: setup
+#| message: false
+#| warning: false
+#| include: false
+library(dplyr)
+library(tibble)
+library(pander)
+library(gt)
+library(kableExtra)
+```
+
+::: {.grid .course-details .course-details-smaller}
+
+::: {.g-col-6}
+### Instructor
+
+- {{< fa user >}} &nbsp; [{{< var instructor.name >}}]({{< var instructor.url >}})
+- {{< fa university >}} &nbsp; {{< var instructor.office >}}
+- {{< fa envelope >}} &nbsp; <a href="mailto:{{< var instructor.email >}}">{{< var instructor.email >}}</a>
+- {{< fa brands twitter >}} &nbsp; [{{< var instructor.twitter >}}](https://www.twitter.com/{{< var instructor.twitter >}})
+- {{< fa calendar-check >}} &nbsp; [Schedule an appointment]({{< var instructor.appointment_url >}})
+:::
+
+::: {.g-col-6}
+### Detalles del curso
+
+- {{< fa calendar >}} &nbsp; {{< var course.days >}}
+- {{< fa calendar-alt >}} &nbsp; {{< var course.dates >}}
+- {{< fa clock >}} &nbsp; {{< var course.time >}}
+- {{< fa location-dot >}} &nbsp; {{< var course.location >}}
+:::
+
+:::
+
+## Presentación
+
+Curso dirigido a `personal de salud` que se encuentre laborando en el `Instituto Nacional de Salud del Niño San Borja (INSNSB)`, que cuente con entrenamiento básico en estadística aplicada a ciencias de la salud, estadística o ciencia de datos. Su propósito es capacitar y brindar herramientas en análisis bioestadístico de datos para preguntas de investigación explicativas. Se revisarán conceptos relacionados al manejo de datos, análisis descriptivo e inferencial y modelado de regresión.
+
+El entrenamiento se realizará de manera `virtual` empleando la plataforma Zoom. Al finalizar el entrenamiento, el alumno estará en la capacidad de llevar a cabo un análisis exploratorio explicativo (factores asociados) o confirmatorio (efectividad clínica comparativa o evaluación de impacto) para desenlaces numéricos continuos, y binarios mediante un enfoque de modelado de regresión. 
+
+## Objetivos
+
+### Objetivo General
+
+Desarrollar capacidades de análisis estadístico de datos para investigación en `profesionales de la salud` del `INSNSB`.
+
+### Objetivos Específicos
+
+Al finalizar las unidades, el personal de salud participante del curso será capaz de:
+
+- Usar R y RStudio para el manejo y limpieza de base de datos de estudios de investigación en salud.
+- Realizar un análisis descriptivo e inferencial con un paquete estadístico de datos para la investigación en salud.
+- Responder preguntas explicativas mediante modelado de regresión para desenlaces numéricos y categóricos binarios.
+- Generar tablas y reporte reproducibles de estos mediante el uso de markdown en R/RStudio.
+
+## Estructura
+
+### Perfil de ingreso
+
+Personal de salud que se encuentre laborando en el Instituto Nacional de Salud del Niño San Borja (INSNSB), que cuente con entrenamiento básico en estadística aplicada a ciencias de la salud, estadística o ciencia de datos, y que deseen utilizar R/RStudio para análisis de datos aplicados a investigación en salud.
+
+### Perfil de egreso
+
+Personal de salud del Instituto Nacional de Salud del Niño con competencias para realizar análisis estadístico de datos para investigación en salud a nivel descriptivo, inferencial y de modelado explicativo en R y RStudio, así como generar los reportes reproducibles en estos.
+
+### Programación del curso
+
+La disribución de horas dedicadas al curso se muestran a continuación:
+
+```{r}
+#| echo: false
+#| output: asis
+tibble::tribble(
+                      ~Componente, ~Horas.Cronológicas, ~Horas.Académicas,
+                  "Teoría",                 12L,               16L,
+                "Práctica",                 12L,               16L,
+  "Trabajo independiente*",                 12L,               16L
+  ) %>%
+  pandoc.table(justify = "lcc", missing = "—", 
+               col.names = c("Componente", "Horas Cronológicas", "Horas Académicas"))
+```
+
+El cronograma detallado del curso se muestra en el siguiente enlace: [Cronograma](). 
+
+## Estrategias de formación
+
+Este curso taller consta de 2 partes; teórica que es utilizando el método expositivo dialogado y la parte práctica es a través de talleres de código en vivo en los que los alumnos siguen, paso a paso, las instrucciones que el profesor muestra en clase para el análisis de datos. Los recursos a utilizar son los siguientes: 
+
+- Computadora personal
+- Aplicativo para conferencias de vídeo y reuniones en línea 
+- Página web del curso
+- Bibliografía recomendada
+
+### Clases teóricas
+
+Los alumnos recibirán las clases teóricas de manera virtual. Inicialmente, el docente dictará las sesiones académicas, y los participantes brindarán comentarios respecto al tema. Posteriormente, se entregarán las diapositivas de las sesiones académicas por correo electrónico y a través de una carpeta en Google Drive que serán leídas por los participantes. Las ponencias serán grabadas y se almacenarán en un repositorio académico virtual que será compartido a los participantes. Las clases teóricas se desarrollarán de manera fluida con los talleres (por eso, taller teórico-práctico). En conjunto, las teorías deberían durar entre 30 minutos a 1 hora.
+
+### Clases prácticas
+
+Los alumnos recibirán las clases prácticas de manera virtual. Previamente, se hará entrega de conjunto de datos de estudios reales publicados en repositorios abiertos o conjunto de datos “juguete” especialmente seleccionados para las clases por su valor didáctico. Durante las clases prácticas, guiados por el docente a cargo, se realizará el análisis de los datos aplicando los métodos enseñados durante la sesión. Los talleres serán grabados y se almacenarán en un repositorio académico virtual que será compartido a los participantes. Los conjuntos de datos y el código de análisis de datos estará disponible para los estudiantes. Adicionalmente, se dispondrá de 15 minutos adicionales por cada clase práctica para poder hacer preguntas directas al docente a cargo, para solucionar cualquier duda o consulta, o si es que algún alumno lo solicita, hacer una revisión específica de algún aspecto del análisis de datos. Las clases teóricas se desarrollarán de manera fluida con los talleres (por eso, taller teórico-práctico). En conjunto, los talleres deberían durar entre 1 hora a 1 hora y media.
+
+
+### Conjunto de datos para analizar en casos aplicados
+
+Siempre que sea posible, trabajaremos con conjunto de datos reales u obtenidos mediante simulación de estudios reales. También haremos uso del conjunto de datos del paquete “medicaldata” de R (). Complementaremos con conjunto de datos “juguete” por motivos didácticos:
+
+::: {.panel-tabset}
+
+### Módulo 1
+
+- Conjunto de datos real del Censo Nacional Penitenciario – Preguntas relacionadas a Salud de los presos. Working Paper titulado: **“Self-reported HIV in male Peruvian inmates: results of the 2016 prison census”**. Datos y código disponibles en: <https://github.com/culquichicon/2016-Peruvian-Prison-Census>. Artículo preliminar en español disponible en: MINJUS. El Fenómeno Criminológico y la Política Criminal en las Regiones. I Convocatoria Nacional de Artículos. Página 33. Enlace: <https://indagaweb.minjus.gob.pe/wp-content/uploads/2019/12/Libro-I-Convocatoria-Nacional-de-Art%C3%ADculos-compilaci%C3%B2n.pdf> 
+
+- Conjunto de datos simulados del estudio: Valdivia M, Soto-Becerra P, Laguna-Barraza R, et al. **Effect of a natural supplement containing glucosinolates, phytosterols and citrus flavonoids on body weight and metabolic parameters in a menopausal murine model induced by bilateral ovariectomy.** Gynecological Endocrinology 36; 2020. doi: <https://doi.org/10.1080/09513590.2020.1821639> 
+
+- Conjunto de datos simulados del estudio: Villar-López M, Soto-Becerra P, Choque R, et al. **Safety and tolerability of a natural supplement containing glucosinolates, phytosterols and citrus flavonoids in adult women: a randomized phase I, placebo-controlled, multi-arm, double-blinded clinical trial.** Gynecological Endocrinology 37; 2021. Doi: <https://doi.org/10.1080/09513590.2021.1960965>  
+
+- Conjunto de datos reales del estudio: Elmunzer JB, Scheiman JM, Lehman GA, et al. **A Randomized Trial of Rectal Indomethacin to Prevent Post-ERCP Pancreatitis.** NEJM 2012; 366. doi: 10.1056/NEJMoa1111103. Dataset: “indo_rct” disponible en: <https://higgi13425.github.io/medicaldata/> 
+
+### Módulo 2
+
+- Conjunto de datos simulados del estudio: Villar-López M, Soto-Becerra P, Choque R, et al. **Safety and tolerability of a natural supplement containing glucosinolates, phytosterols and citrus flavonoids in adult women: a randomized phase I, placebo-controlled, multi-arm, double-blinded clinical trial.** Gynecological Endocrinology 2021; 37. Doi: <https://doi.org/10.1080/09513590.2021.1960965>  
+
+- Conjunto de datos juguetes del libro **“Vach W. Regression Models as a Tool in Medical Research. CRC Press – Taylor & Francis Group. First Edition 2013.”.** Datasets: “hiaa.dta” y “hb.dta”. Disponibles en: <https://www.uniklinik-freiburg.de/imbi/stud-le/regression-models-as-a-tool-in-medical-research/data-sets.html> 
+
+- Conjunto de datos simulados del estudio: Vargas Hererara, Ferández-Navarro, Cabezudo-Pillpe, et al. **“Immunogenicity and reactogenicity of a third dose of BNT162b2 vaccine for COVID-19 after a primary regimen with BBIBP-CorV or BNT162b2 vaccines in Lima, Peru.”** Disponible en: <https://www.medrxiv.org/content/10.1101/2022.05.01.22274548v1>
+
+### Módulo 3
+
+- Conjunto de datos reales del estudio: Ramirez-Ramirez R, Soto-Becerra P. **Dependencia funcional y diabetes mellitus tipo 2 en adultos mayores afiliados al Seguro Social de Salud del Perú: análisis de la ENSSA-2015.** Acta Médica 2020; 37. doi: <http://dx.doi.org/10.35663/amp.2020.374.1075> 
+
+- Conjunto de datos reales del estudio: Elmunzer JB, Scheiman JM, Lehman GA, et al. **A Randomized Trial of Rectal Indomethacin to Prevent Post-ERCP Pancreatitis.** NEJM 2012; 366. doi: 10.1056/NEJMoa1111103. Dataset: “indo_rct” disponible en: <https://higgi13425.github.io/medicaldata/> 
+
+- Conjunto de datos juguetes del libro **“Vach W. Regression Models as a Tool in Medical Research. CRC Press – Taylor & Francis Group. First Edition 2013.”.** Datasets: “allergy2.dta” y “backpain.dta”. Disponibles en: <https://www.uniklinik-freiburg.de/imbi/stud-le/regression-models-as-a-tool-in-medical-research/data-sets.html> 
+
+- Conjunto de datos simulados del estudio: Vargas Hererara, Ferández-Navarro, Cabezudo-Pillpe, et al. **“Immunogenicity and reactogenicity of a third dose of BNT162b2 vaccine for COVID-19 after a primary regimen with BBIBP-CorV or BNT162b2 vaccines in Lima, Peru.”.** Disponible en: <https://www.medrxiv.org/content/10.1101/2022.05.01.22274548v1>
+
+:::
+
+### Problem Sets
+
+Durante todo el curso habrá tres ‘problem sets’ (trad. conjunto de problemas) que corresponderán a un conjunto de datos con una pregunta de investigación y objetivo de análisis pre-establecido. Los alumnos tendrán entre 7 a 10 días para realizar los análisis solicitados y presentarlos como tarea calificada. Asimismo, se compartirá un solucionario al final del cierre de cada entrega. El trabajo deberá realizarse de manera grupal en grupos de entre 4 a 6 participantes o, excepcionalmente, de manera individual. Los grupos deberán confirmarse por correo electrónico a más tardar el 05 de octubre de 2022
+
+## Evaluación de los aprendizajes
+
+Para efectos de evaluar a los participantes se tomarán en cuenta los siguientes criterios:
+
+```{r}
+#| include: false
+assignments <- tribble(
+  ~Puntos,   ~Tarea,
+  3 * 36,    "Problem sets (3 × 36)",
+  12,    "Ver videoclases"
+) %>%
+  mutate(Porcentaje = Puntos / sum(Puntos),
+         Porcentaje = scales::percent(Porcentaje))
+
+grading <- tribble(
+  ~Nota, ~Rango, ~Nota, ~Rango,
+  "A",  "93–100%", "C",  "73–76%",
+  "A−", "90–92%", "C−", "70–72%",
+  "B+", "87–89%", "D+", "67–69%",
+  "B",  "83–86%", "D",  "63–66%",
+  "B−", "80–82%", "D−", "60–62%",
+  "C+", "77–79%", "F",  "< 60%"
+)
+```
+
+<div class="centered-table">
+
+```{r}
+#| echo: false
+#| output: asis
+assignments_total <- tibble(Tarea = "Total",
+                            Puntos = sum(assignments$Puntos),
+                            Porcentaje = NA)
+
+bind_rows(assignments, assignments_total) %>%
+  select(Tarea, Puntos, Porcentaje) %>%
+  pandoc.table(justify = "lcc", missing = "—")
+```
+</div>
+
+Para efectos de evaluar la asistencia, los participantes deberán haber asistido a mínimo    9/12 sesiones académicas. Para aprobar el entrenamiento, los participantes deberán cumplir con dos requisitos: 
+
+-	Cumplir con el requisito de asistencia del entrenamiento (9/12 sesiones académicas).
+-	Aprobar los problema set (calificación mayor o igual a 14.0 en promedio final)
+
+Se otorgará `certificado` como `asistente` a quienes asistan `mínimo al 75% de clases` (equivalente a 9 de las 12), y un certificado como `aprobado` a quienes adicionalmente `aprueben la evaluación final`.
+
+La `nota mínima aprobatoria` para que el participante apruebe el entrenamiento es de `14.00` (trece) en el sistema vigesimal.
+
+La escala de calificación es la siguiente:
+
+<div class="centered-table">
+
+```{r}
+#| echo: false
+#| output: asis
+grading %>%
+  pandoc.table(justify = "lclc",
+               col.names = c("Nota", "Rango", "Nota", "Rango"))
+```
+
+<div>
+
+Puedes encontrar las descripciones de todos los problem sets en la [página de tareas](/assignment/).
+
+
+## Plana Docente
+
+:::{.callout-note collapse=false appearance='default' icon=false}
+## **Percy Soto Becerra, M.D., M.Sc(c)**
+
+Investigador RENACYT con publicaciones en revistas científicas indizadas a SCOPUS, Medline y Web of Science. Médico cirujano por la Universidad Nacional Mayor de San Marcos (UNMSM),  egresado de la Maestría en Ciencias en Investigación Epidemiológica de la Universidad Peruana Cayetano Heredia (UPCH) y maestrando de la maestría de Estadística de la Universidad Nacional Agraria La Molina (UNALM). Cuenta con más de tres años de experiencia en la formulación, implementación, y gestión de proyectos de investigación científica en salud. Posee una sólida formación en métodos cuantitativos para la investigación epidemiológica y redacción científica, asimismo, ha realizado entrenamiento avanzado y cuenta con experiencia en bioestadística y ciencia de datos. Ha obtenido financiamiento internacional como investigador principal junior; así como participar en investigaciones en salud con la aplicación de métodos avanzados en análisis de datos. Ha sido becario del Centro Internacional Fogarty de los Institutos Nacionales de Salud de los Estados Unidos mediante el proyecto D43 TW007393 Peru Epidemiology Research Training Consortium, el cual le permitió recibir entrenamiento en investigación biomédica. Ha colaborado como investigador en el Centro de Investigaciones Económicas y Sociales de la Universidad San Ignacio de Loyola (USIL), el Instituto de Evaluación de Tecnologías en Salud e Investigación (IETSI) del Seguro Social (EsSalud), el Centro Nacional de Salud Ocupacional (CENSOPAS) y el Centro Nacional de Salud Pública (CNSP) del Instituto Nacioanl de Salud (INS)  y el Centro de Salud Global de la UPCH. Actualmente y es investigador asociado a la Universidad Continental. Interesado en aplicar métodos cuantitativos modernos para inferencia causal en epidemiología (efectividad clínica comparativa y evaluación de impacto de programas de salud), investigación clínica pronóstica y diagnóstica con especial énfasis en aplicaciones a medicina de precisión.
+
+- Google Scholar: <https://scholar.google.com/citations?user=lYRCQzYAAAAJ&hl=en> 
+- Github: <https://github.com/psotob91>
+- E-mail: <percys1991@gmail.com>  
+:::
+
+## Duración
+
+El curso taller se llevará a cabo en 12 fechas, con una duración de 03 horas teóricas y 05 horas prácticas.
+
+## Certificación
+
+Se entregará un certificado por el Instituto Nacional de Salud del Niño San Borja, con el auspicio y creditaje académico de una institución universitaria. La certificación se dará a los participantes que hayan culminado y aprobado satisfactoriamente el curso, nota mínima aprobatoria 14. Además de haber cumplido con el 75% de asistencia al curso. La asistencia es obligatoria y con estricta puntualidad. 
+
+
+## Políticas del curso
+
+### Código de Honor 
+
+El presente curso tiene el siguiente **código de honor**:
+
+- Sus respuestas a tareas, cuestionarios y exámenes deben ser su propio trabajo (excepto las tareas que permitan explícitamente la colaboración).
+
+- No puede compartir sus soluciones a la tarea, cuestionarios o exámenes con nadie más a menos que lo permita explícitamente las instrucciones de la actividad. Esto incluye todo lo escrito por usted, así como cualquier solución oficial proporcionada por el personal del curso.
+
+- No puede participar en ninguna otra actividad que deshonestamente mejore sus resultados o deshonestamente mejore o perjudique los resultados de otros.
+
+Asimismo, si bien el syllabus refleja el plan del curso, algunas desviaciones a este podrían tornarse necesarias para alcanzar las metas propuestas.
+
+### Entrega retrasada
+
+Perderá 1 punto por cada día de retraso en al entrega del problema set. 
+

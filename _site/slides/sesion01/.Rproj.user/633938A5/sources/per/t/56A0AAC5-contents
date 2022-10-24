@@ -1,0 +1,125 @@
+project:
+  type: website
+  render:
+    - "*.qmd"
+    - "!slides/"
+  resources:
+    - "files/"
+    - "slides/"
+# See https://quarto.org/docs/projects/code-execution.html#freeze
+execute:
+  freeze: auto  # Re-render only when source changes
+
+bibliography: files/bib/references.bib
+csl: files/bib/chicago-author-date.csl
+
+lang: es
+
+website:
+  title: "R Aplicado a los Proyecto de Investigación"
+  favicon: logo.png
+  twitter-card: true
+  site-url: https://r-insnsb.netlify.app
+  open-graph: true
+
+  navbar:
+    pinned: true
+    background: "#0880BE"
+    right:
+      - syllabus.qmd
+      - schedule.qmd
+      - text: "Contenido"
+        file: content/index.qmd
+      - text: "Problem Sets"
+        file: assignment/index.qmd
+      - text: "Recursos"
+        file: resource/index.qmd
+      - icon: cloud-fill
+        href: "https://drive.google.com/drive/folders/1GY8730XKxAzJVZEe8NcPEElaznI19llz?usp=sharing"
+        aria-label: RStudio.cloud
+
+  sidebar:
+    - title: "Información general"
+      style: "docked"
+      search: false
+      background: dark
+      contents:
+        - section: "Información general"
+          contents:
+            - content/index.qmd
+        - section: "Contenido del curso"
+          contents:
+            - text: "0: Sesion 0"
+              file: content/00-content.qmd
+            - text: "1: Sesion 1"
+              file: content/01-content.qmd
+            - text: "2: Sesion 2"
+              file: content/02-content.qmd
+            - text: "3: Sesion 3"
+              file: content/03-content.qmd
+            - text: "4: Sesion 4"
+              file: content/04-content.qmd
+            - text: "5: Sesion 5"
+              file: content/05-content.qmd
+            - text: "6: Sesion 6"
+              file: content/06-content.qmd
+            - text: "7: Sesion 7"
+              file: content/07-content.qmd
+            - text: "8: Sesion 8"
+              file: content/08-content.qmd
+            - text: "9: Sesion 9"
+              file: content/09-content.qmd
+            - text: "10: Sesion 10"
+              file: content/10-content.qmd
+            - text: "11: Sesion 11"
+              file: content/11-content.qmd
+            - text: "12: Sesion 12"
+              file: content/12-content.qmd
+
+    - title: "Problem Sets"
+      contents:
+        - section: "Información general"
+          contents:
+            - assignment/index.qmd
+        - section: "Problem sets"
+          contents:
+            - assignment/01-problem-set.qmd
+            - assignment/02-problem-set.qmd
+            - assignment/03-problem-set.qmd
+
+    - title: "Recursos"
+      contents:
+        - section: "Información general"
+          contents:
+            - resource/index.qmd
+            - resource/r-recursos.qmd
+            - resource/style.qmd
+            # - resource/data.qmd
+            # - resource/citations.qmd
+        - section: "Guías"
+          contents:
+            - resource/manual_installR/install.qmd
+          #   - resource/markdown.qmd
+          #   - resource/rmarkdown.qmd
+          #   - resource/unzipping.qmd
+  page-footer:
+    left: |
+      Contenido {{< fa brands creative-commons >}} {{< var course.copyright_year >}} por [{{< var instructor.name_no_title >}}]({{< var instructor.url >}}) <br>
+      Todo el contenido está bajo {{< fa brands creative-commons >}}
+      {{< fa brands creative-commons-by >}} {{< fa brands creative-commons-nc >}}
+      [Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/)
+    right: |
+      Hecho con {{< fa brands r-project >}} y [Quarto](https://quarto.org/)<br>
+      [Ver el código fuente en {{< fa brands github >}} GitHub]({{< var course.github >}})
+
+format:
+  html:
+    theme:
+      - litera
+      - html/custom.scss
+    toc: true
+    highlight-style: monokai
+    code-copy: true
+    code-overflow: wrap
+    link-external-newwindow: true
+

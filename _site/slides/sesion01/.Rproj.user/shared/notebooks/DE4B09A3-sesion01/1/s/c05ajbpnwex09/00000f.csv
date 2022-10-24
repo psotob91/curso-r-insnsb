@@ -1,0 +1,3 @@
+"0","#| echo: true"
+"0","library(medicaldata)"
+"0","data(covid_testing)"

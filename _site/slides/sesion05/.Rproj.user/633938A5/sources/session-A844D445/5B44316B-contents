@@ -1,0 +1,1512 @@
+---
+title: "<FONT color='#A7D5E8'>Variables numéricas: Medidas de resumen</FONT>"
+subtitle: "<FONT color='#E9AFA3' size='10'>R para Ciencia de Datos en Salud: <br> Análisis Descriptivo e Inferencia Estadística</FONT>"
+author: "<FONT color='#FFFFFF' size='30'>Percy Soto-Becerra M.D., M.Sc(c)</FONT>"
+institute: "<FONT color='#FFFFFF' size='5'>InkaStats Data Science Solutions | Medical Branch<br>@github/psotob91</FONT>"
+
+format: 
+  revealjs:
+    self-contained: true
+    theme: [simple, theme/theme.scss]
+    footer: "Variables numérica: Medidas de resumen"
+    slide-number: c/t
+    logo: img/logo.png
+    width: 1920
+    height: 1080
+    highlight-style: ayu-dark
+    self-contained-math: true
+from: markdown+emoji
+execute:
+  echo: true
+---
+
+```{r}
+#| label: setup
+#| include: false
+library(fontawesome)
+library(tidyverse)
+library(haven)
+library(quarto)
+library(gt)
+library(gtExtras)
+library(gtsummary)
+library(showtext)
+library(rio)
+library(skimr)
+library(kableExtra)
+library(summarytools)
+library(DescTools)
+
+## Ver QUARTO RSTUDIO CONFERENCE: https://github.com/rstudio-conf-2022/get-started-quarto/blob/main/materials/02-authoring.qmd
+## 
+## blackboard theme: https://github.com/schochastics/quarto-blackboard-theme
+## 
+## https://github.com/schochastics/xaringan-themes
+```
+
+
+# Medidas de resumen para variables numéricas
+
+## Análisis descriptivo de variable numérica {.scrollable}
+
+::: panel-tabset
+### Tend. Central
+-   Medias de tendencia central 
+    -   Media
+    -   Mediana (es también `medida de posición`) 
+    -   Moda (no es usual) 
+    
+
+### Posición 
+-   Medidas de posición 
+    -   Cuantiles (en general)
+    -   Mediana = percentil 50 (es también medida de `tendencia central`)
+    -   Percentil 25 (p25) 
+    -   Percentil 75 (p75) 
+    
+### Dispersión    
+-   Medidas de dispersión 
+    -   Rango (máximo - mínimo) 
+    -   Varianza / Desviación estándar
+    -   Rango intercuartílico (p75 - p25)   
+    
+### Forma
+
+:::: {.columns}
+
+::: {.column width='30%'}
+
+- De acuerdo a moda:
+    - Unimodal (una sola moda)
+    - Multimodal (p. ej, bimodal)
+    - Uniforme (no moda)
+    
+- De acuerdo a simetría
+    - Simétrica
+    - Asimétrica (o 'sesgada')
+      - Positiva (A la derecha) 
+      - Negativa (A la izquierda) 
+      
+- De acuerdo a curtosis:
+    - Leptocúrtica
+    - Mesocúrtica
+    - Platicúrtica
+:::
+
+::: {.column width='70%'}
+
+<br/> <br/>
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| out-width: 100%
+knitr::include_graphics("img/distrib.png")
+```
+
+:::
+
+::::
+
+:::
+
+## Medidas de resumen
+
+>Para una variable de interés $X$, se tiene la muestra conformada por $n$ elementos $x_1, x_2, x_3, ..., x_n$ entonces podemos resumir esta muestra de valores mediante los siguientes estadísticos:
+
+- Media aritmética: $\bar{x}$
+    
+- Media geométrica: $\bar{x}_g$
+    
+- Otras medias: truncada y armónica
+    
+- Mediana: $Med(x)$
+    
+- Moda: $Moda(x)$
+    
+- Percentiles: $P25$ y $P75$
+    
+- Cuartiles: $Q1$, $Q2$ y $Q3$
+    
+- Varianza y desviación estándar: $Var(x)$ y $DE(x)$
+    
+- Rango
+    
+- Rango intercuartílico: $RIQ$
+    
+- Coeficiente de variación: $CV$
+    
+
+## Medidas de resumen: Tendencia central {.scrollable}
+
+::: {.panel-tabset}
+
+### Media aritmética
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+- La media artimética de una lista de números, es la suma de estos números dividida por la cantidad de esto y está dada por la siguiente expresión:
+
+$$\bar{x} = \frac{x_1 + x_2 + x_3 + ... + x_n}{n} = \frac{\sum_{i = 1}^{n}x_i}{n}$$
+
+:::{.callout-note collapse=false appearance='default' icon=true}
+## Ejemplo
+Sean las siguientes edades en años: $36, 4, 75, 45, 50$, su media aritmética es
+
+$$\frac{36 + 4 + 75 + 45 + 50}{5} = \frac{210}{5} = 42$$
+:::
+
+:::
+
+::: {.column width='50%'}
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| out-width: 100%
+knitr::include_graphics("img/media.png")
+```
+
+
+:::
+
+::::
+
+
+
+
+### Media geométrica
+
+- Forma de promedio útil para conjuntos de números positivos que se desean interpretar de acuerdo a su producto en vez de su suma.
+
+- Es la raíz $n-ésima$ del producto de los números y está dada por la siguiente expresión:
+
+$$\bar{x}_{g} = \sqrt[n]{x_1x_2x_3...x_n} = (x_1x_2x_3...x_n)^{\frac{1}{n}} = (\prod_{i = 1}^{n}x_i)^{\frac{1}{n}}$$
+
+:::{.callout-note collapse=false appearance='default' icon=true}
+## Ejemplo
+Sean las siguientes edades en años: $36, 4, 75, 45, 50$, su media geométrica es
+
+$$(36 \times 4 \times 75 \times 45 \times 50) ^ {\frac{1}{5}} = \sqrt[5]{24300000} = 30$$
+:::
+
+
+### Otras medias
+
+[Media truncada]{.hl}
+
+- Media truncada o recortada (en inglés trimmed mean) es una medida de tendencia central similar a la media aritmética que se calcula luego de descartar las partes de ambos extremos de la distribución.
+
+- Típicamente se descartan las mismas proporcions de datos en  los extremos.
+
+- En la mayoría de aplicaciones se descartan entre 5% a 25%.
+
+- En algunas regiones también la conocen como **media windsoriana**.
+
+- La usan mucho en eventos de competición para eliminar la influencia de las calificaciones extremas de los jueces
+
+[Media armónica]{.hl}
+
+- Es un tipo de medida promedio conocida por ser una de las medias pitagóricas.
+
+- Se expresa como el recíproco de las medias aritméticas de los recíprocos de un conjunto dado de observaciones.
+
+$$H = \frac{n}{\frac{1}{x_1} + \frac{1}{x_2} + ... + \frac{1}{x_n}} = \frac{n}{\sum_{i=1}^{n}{\frac{1}{x_i}}} = (\frac{\sum_{i=1}^{n}x_i^{-1}}{n})^{-1} $$
+- Es más útil en situaciones donde se desea promediar tasas o estadístico similares basados en medidas de razón.
+
+### Mediana
+
+:::: {.columns}
+
+::: {.column width='60%'}
+
+- Sean $x_{(1)}, x_{(2)}, x_{(3)}, ..., x_{(i)},..., x_{(n)}$ estadísticos de orden, es decir cada $x_{(i)}$ representa al $i-ésimo$ valor más pequeño de la muestra,  entonces la mediana está dada por la siguiente expresión:
+
+$$
+Med(x) = 
+        \begin{cases}
+        x_{(n+1)/2} & \text{si n es impar} \\
+        \frac{x_{(n/2)}+x_{(n/2+1)}}{2} & \text{si n es par}
+        \end{cases}
+$$
+
+
+:::{.callout-note collapse=false appearance='default' icon=true}
+## Ejemplo
+Luego de ordenar de menor a mayor, tenemos $4, 36, 45, 50, 75$. Como $n = 5$ es impar, entonces
+
+$$Med(x) = x_{(5+1)/2} = x_{(3)} = 45$$
+:::
+
+:::
+
+::: {.column width='40%'}
+
+- En otras palabras, es el valor que separa la mitad superior de la mitad inferior de una muestra de datos.
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| out-width: 80%
+knitr::include_graphics("img/mediana.png")
+```
+
+:::
+
+::::
+
+
+### Moda
+
+- Es el valor que aparece más frecuentemente  en los datos. 
+
+    - De poca utilidad en variables numéricas.
+
+- No necesariamente es única.
+
+:::: {.columns}
+
+::: {.column width='33%'}
+[Unimodal]{.hl}
+
+```{r}
+#| echo: false
+#| fig-align: left
+#| out-width: 80%
+knitr::include_graphics("img/unimodal.png")
+```
+
+:::
+
+::: {.column width='0.5%'}
+:::
+
+::: {.column width='33%'}
+[Multimodal]{.hl}
+
+```{r}
+#| echo: false
+#| fig-align: left
+#| out-width: 100%
+knitr::include_graphics("img/bimodal.png")
+```
+
+:::
+
+::: {.column width='0.5%'}
+:::
+
+::: {.column width='33%'}
+[Multimodal extremo: Uniforme]{.hl}
+
+```{r}
+#| echo: false
+#| fig-align: left
+#| out-width: 90%
+knitr::include_graphics("img/uniforme.png")
+```
+
+:::
+
+::::
+
+
+### En resumen
+
+
+- En resumen, la visualización geométrica de la media, mediana y moda para una distribución unimodal es la siguiente.
+
+    + Moda: Valor más frecuente (punta más alta de distribución)
+    
+    + Mediana: Valor que divide datos en 50% (mitad de la distribución)
+    
+    + Media: Centro de gravedad (punto en el que los "pesos" de ambos lados se igualan)
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| out-width: 50%
+knitr::include_graphics("img/Visualisation_mode_median_mean.png")
+```
+
+### En R base
+
+:::: {.columns}
+
+::: {.column width='33%'}
+
+[Funciones]{.hl}
+
+- Funciones de R base:
+
+    - [mean()]{.plo}
+    
+    - [mean(..., trim = ...)]{.plo}
+    
+    - [median()]{.plo}
+    
+- Funciones extras a R base:
+
+    - [geometric.mean() de {psych}]{.plo}
+
+[Datos para los cálculos]{.hl}
+
+- Sean el vector de edades:
+
+```{r}
+edad <- c(9, 12, 10, 8, 7, 6)
+edad
+```
+    
+:::
+
+::: {.column width='33%'}
+
+- Sea el vector de hemoglobina:
+
+```{r}
+hb <- c(11.2, 10.4, 9.8, NA, 14, 8.1)
+hb
+```
+
+[Media aritmética]{.hl}
+
+- En vector con datos completos:
+
+```{r}
+mean(edad)
+```
+
+- En vector con datos incompletos:
+
+```{r}
+mean(hb)
+```
+
+- Es necesario agregar [na.rm = TRUE]{.plo}
+
+```{r}
+mean(hb, na.rm = TRUE)
+```
+
+:::
+
+::: {.column width='33%'}
+
+[Media geométrica]{.hl}
+
+- Manualemente
+
+```{r}
+exp(log(edad))
+```
+
+- Con librería psych
+
+```{r}
+library(psych)
+geometric.mean(edad)
+```
+
+[Media truncada]{.hl}
+
+- Solo 5% de ambas colas
+
+```{r}
+mean(edad, trim = 0.05)
+```
+ 
+
+[Mediana]{.hl}
+
+```{r}
+median(hb, na.rm = TRUE)
+```
+
+:::
+
+::: {.column width='1%'}
+
+:::
+
+::::
+
+:::
+
+---
+
+
+## Medidas de resumen: Posición
+
+::: {.panel-tabset}
+
+### Cuantiles
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+- Son los valores que funcionana como puntos de corte para dividir el rango de datos en intervalos continuos con igual frecuencia. 
+
+- El $k-ésimo$ $q-cuantil$ es el valor de los datos donde su función de distribución acumulada cruza $k/q$. 
+
+- Es decir, $x$ es el $k-ésimo$ $q-cuantil$ para una variable $X$ si:
+
+$$Pr[X < x] \leq k/q$$ 
+
+<center>y</center> 
+
+$$Pr[X \leq x] \geq k/q $$
+     
+:::
+
+::: {.column width='50%'}
+
+<br/><br/>
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| out-width: 100%
+knitr::include_graphics("img/cuantil1.png")
+```
+
+:::
+
+::::
+
+### Cuantiles: Memotecnia
+
+
+- El nombre del cuantil depende de cuántos grupos se forman. 
+
+- La cantidad de cuantiles es siempre 1 menos.
+
+     + Ejemplo, para formar 4 grupos, necesito solo 3 cortes: 3 cuartiles
+     
+     
+```{r}
+#| echo: false
+#| fig-align: center
+#| out-width: 70%
+knitr::include_graphics("img/cuantil2.png")
+```
+
+
+### Cuantiles notables
+
+:::: {.columns}
+
+::: {.column width='30%'}
+
+- Hay una lista bastante grande de cuantiles.
+
+- Los más famosos son: 
+
+    + Mediana
+    + Terciles
+    + Cuartiles
+    + Quintiles
+    + Deciles
+    + Percentiles.
+
+:::
+
+::: {.column width='70%'}
+
+```{r}
+#| echo: false
+quantiles_list <- data.frame(
+  q_quantile = c("2-cuantil", "3-cuantil", "4-cuantil", "5-cuantil", "6-cuantil", 
+                 "7-cuantil","8-cuantil","10-cuantil", "12-cuantil", "16-cuantil", 
+                 "20-cuantil", "100-cuantil", "1000-cuantil"), 
+  nombre = c("Mediana", "Terciles", "Cuartiles", "Quintiles", "Sextiles", 
+             "Septiles", "Octiles", "Deciles", "Dodeciles", "Hexadeciles", 
+             "Ventiles", "Percentiles", "Permiles o Mililes"), 
+  n_grupos =  c(2, 3, 4, 5, 6, 7, 8, 10, 12, 16, 20, 100, 1000), 
+  n_cuantiles = c(1, 2, 3, 4, 5, 6, 7, 9, 11, 15, 19, 99, 999)
+)
+
+quantiles_list %>% 
+  kbl(col.names = c("Q-cuantil", "Nombre del cuantil", "Número de grupos iguales", "Número de cuantiles")) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+                full_width = F, font_size = 30) 
+```
+
+:::
+
+::::
+
+
+### Cuartiles
+
+:::: {.columns}
+
+::: {.column width='40%'}
+
+- Los cuartiles dividen los datos en cuatro partes iguales
+    + Por lo tanto, hay 3 cuartiles. 
+
+- Los gráficos de cajas utilizan los cuartiles para realizar el dibujo de los elementos de la caja.
+
+    + El segundo cuartil es equivalente a la mediana porque contiene el 50% de los datos.
+    
+:::
+
+::: {.column width='60%'}
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| out-width: 100%
+knitr::include_graphics("img/cuartiles.png")
+```
+
+:::
+
+::::
+
+
+### Percentiles
+
+
+:::: {.columns}
+
+::: {.column width='40%'}
+
+- Los percentiles dividen los datos en 100 partes iguales
+
+    + Por lo tanto, son 99 percentiles.
+    
+- Se usan para construir infinidad de estadísticos: 
+
+    + Tablas de crecimiento, ranking de calificaciones, etc.
+
+- En inferencia estadística, se usan para establecer
+    + Nivel de confianza
+    + Nivel de significancia.
+    
+:::
+
+::: {.column width='60%'}
+
+<br/> 
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| out-width: 100%
+knitr::include_graphics("img/cuantil3.png")
+```
+:::
+
+::::
+
+### En R base
+
+:::: {.columns}
+
+::: {.column width='30%'}
+
+[Funciones]{.hl}
+ 
+- Funciones de R base:
+
+    - [quantile(..., probs = ...)]{.plo}
+    
+[Datos para los cálculos]{.hl}
+
+- Sean el vector de edades:
+
+```{r}
+edad <- c(9, 12, 10, 8, 7, 6)
+edad
+```
+
+- Sea el vector de hemoglobina:
+
+```{r}
+hb <- c(11.2, 10.4, 9.8, NA, 14, 8.1)
+hb
+```
+
+:::
+
+::: {.column width='35%'}
+
+
+[Cuartiles]{.hl}
+
+- Cuartil 1 (25%)
+
+```{r}
+quantile(edad, probs = c(0.25))
+```
+
+- Cuartil 3 (75%)
+
+```{r}
+quantile(edad, probs = c(0.75))
+```
+
+- Cuartiles 1, 2 y 3
+
+```{r}
+quantile(edad, probs = c(0.25, 0.5, 0.75))
+```
+
+:::
+
+::: {.column width='35%'}
+
+[Percentiles]{.hl}
+
+- Percentil 67
+
+```{r}
+quantile(edad, probs = c(0.67))
+```
+
+- Percentiles del 1 al 99
+
+```{r}
+quantile(edad, probs = seq(0, 0.99, 0.01))
+```
+
+:::
+
+::::
+
+:::
+
+## Medidas de resumen: Dispersión
+
+::: {.panel-tabset}
+
+### Desviación Estándar
+
+:::: {.columns}
+
+::: {.column width='60%'}
+
+- Medida de la cantidad de variación o dispersión de los datos. 
+
+    + Mide dispersión según alejamiento de la media.
+
+- Es la raíz cuadrada de la varianza.
+
+- Está en las mismas unidades que la variable.
+
+- Fórmula:
+
+Sea $\bar{x}$ la media de los $n$ datos $x_1, x_2, ..., x_n$, entonces la varianza está definida por:
+
+$$Var(x) = \frac{\sum_{i = 1}^{n}{(x_i - \bar{x})^2}}{n - 1} $$
+Entonces, la desviación estándar de la muestra es:
+
+$$
+DE(x) = \sqrt[]{Var(x)}
+$$
+
+:::
+
+::: {.column width='40%'}
+
+[Varianza muestral]{.hl}
+
+- Con datos completos: 
+
+```{r}
+var(edad)
+```
+
+- Con datos perdidos:
+
+```{r}
+var(hb, na.rm = TRUE)
+```
+
+[Desviación estándar muestral]{.hl}
+
+
+- Con datos completos:
+
+```{r}
+sd(edad)
+```
+
+- Con datos faltantes:
+
+```{r}
+sd(hb, na.rm = TRUE)
+```
+
+
+
+:::
+
+::::
+
+### Rango
+
+::::{.columns}
+
+::: {.column width='33%'}
+
+- Es el tamaño del intervalo más pequeño que contiene a todos los datos.
+
+- Diferencia entre el valor mínimo y máximo.
+
+- Fórmula
+
+$$
+Rango = min(X) - max(X)
+$$
+
+:::
+
+::: {.column width='0.5%'}
+
+:::
+
+::: {.column width='33%'}
+
+[Manualmente]{.hl}
+
+- Con datos completos: 
+
+```{r}
+min(edad)
+```
+
+```{r}
+max(edad)
+```
+
+```{r}
+max(edad) - min(edad)
+```
+
+:::
+
+::: {.column width='0.5%'}
+
+:::
+
+::: {.column width='33%'}
+
+[Usando función]{.hl}
+
+- Con datos completos:
+
+```{r}
+range(edad)
+```
+
+- Con datos faltantes:
+
+```{r}
+range(hb, na.rm = TRUE)
+```
+
+:::
+
+::::
+
+### Rango intercuartílico
+
+::::{.columns}
+
+::: {.column width='33%'}
+
+- Medida de la cantidad de variación de los datos.
+
+- Es la diferencia entre los percentiles 75 y 25 de los datos.
+
+- Contiene el 50% central de los datos.
+
+- El ancho de la caja de un gráfico de cajas es el IQR.
+
+- Fórmula:
+
+$$
+RIQ = Percentil~75 - Percentil~25
+$$
+
+:::
+
+::: {.column width='0.5%'}
+
+:::
+
+::: {.column width='33%'}
+
+[Manualmente]{.hl}
+
+- Calculándolo manualmente
+
+```{r}
+quantile(edad, probs = c(0.25, 0.75))
+```
+
+```{r}
+9.75 - 7.25
+```
+
+- Usando algunos atajos:
+
+Podemos almacenar los resultados en objetos 
+
+```{r}
+p25 <- quantile(edad, probs = c(0.25))
+p25
+```
+
+```{r}
+p75 <- quantile(edad, probs = c(0.75))
+p75
+```
+
+:::
+
+::: {.column width='0.5%'}
+
+:::
+
+::: {.column width='33%'}
+
+Luego podemos usar los objetos par hacer el cálculo final:
+
+```{r}
+p75 - p25
+```
+
+[Usando función]{.hl}
+
+- Con datos completos:
+
+```{r}
+IQR(edad)
+```
+
+- Con datos faltantes:
+
+```{r}
+IQR(hb, na.rm = TRUE)
+```
+
+:::
+
+::::
+
+### Coeficiente de variación
+
+
+:::: {.columns}
+
+::: {.column width='33%'}
+
+- También conocido como desviación estándar relativa.
+
+- Medida estandarizada de dispersión expresada como  porcentaje.
+
+- Es la razón de la desviación estandar sobre la media y mide la extensión de la variabilidad en relación a la media
+
+$$
+CV = \frac{DE(x)}{\bar{x}}
+$$
+:::
+
+::: {.column width='0.5%'}
+
+:::
+
+::: {.column width='33%'}
+
+[Manualmente]{.hl}
+
+
+- Directo
+
+```{r}
+100 * sd(edad) / mean(edad)
+```
+
+- Paso a paso
+
+Media: 
+
+```{r}
+media <- mean(edad)
+```
+
+
+DE: 
+
+```{r}
+sd <- sd(edad)
+```
+
+CV en %
+
+```{r}
+100 * (sd / media)
+```
+
+
+:::
+
+::: {.column width='0.5%'}
+
+:::
+
+::: {.column width='33%'}
+
+[Usando función]{.hl}
+
+- No función específica disponible.
+
+- Existe en funciones que generan varias variables de resumen.
+
+:::
+
+::::
+
+:::
+
+
+## Análisis descriptivo de variable numérica - recomendaciones{.scrollable}
+
+::: panel-tabset
+
+
+### ¿Media versus mediana? (round 1)
+
+- `Media y mediana no son dos medidas que deban entrar en disputa`.
+
+    + Ambas cuentan dos historias complementarias sobre el "centro" de los datos.
+    
+    + Ambas representan a los datos a su manera.
+    
+- `Piensa en lo que quieres hacer`
+
+::: {.panel-tabset}
+
+### Describir
+
+[¿Quiero describir mis datos con el "mejor representante" posible?]{.hl}
+      
+- Recuerda el mantra: `"Media es más sensible a valores extremos"`. La distribución de los datos puede ayudar a elegir.
+        
+- Distribuciones sesgadas: La `mediana` y `medidas de posición` suelen `representar mejor` los datos en términos `descriptivos`.
+        
+- Distribuciones simétricas: `Mediana` y `media` son `buenas`, la `media se prefiere` por sus `propiedades estadísticas` e `interpretación intuitiva`.
+    
+
+### Explicar
+
+[¿Quiero comparar medidas de tendencia central para inferir efectos?]{.hl}
+    
+- La media es una buena candidata, sean las distribuciones sesgadas o no.
+        
+- La mediana no es una mala candidata, sin embargo, sus propiedades estadísticas y menor teoría desarrollada limitan actualmente su uso.
+
+### Predecir
+
+[¿Quiero usar una medida de resumen para establecer predicciones?]{.hl}
+    
+- La media es una de las más usadas, sean las distribuciones sesgadas o no.
+        
+- La mediana tiene teoría menos desarrollada, pero existen algunas aplicaciones.
+
+:::
+
+
+        
+### ¿Media versus mediana? (round 2)
+
+- `¿Tenemos que elegir?`
+
+|                     [No, no tenemos que elegir!!]{.bigtext5}
+
+- En ensayos clínicos es preferible `reportar ambos` es `más transparente` y proporciona `más información`.
+
+    + Si hay `limitaciones de espacio` y tablas en cuerpo del artículo, se suele reportar en `anexos`.
+    + Se sugiere `hacer lo mismo en estudios observacionales`. 
+    + ¿Por qué no? ¡Todas las revistas permiten anexos! No hay excusas.
+    
+- Tengo limitaciones de espacio y debo elegir una medida en la tabla principal:
+    
+    + Elige la opción que mejor se adecue a tu objetivo: `describir`, `explicar`, `predecir`.
+    
+    + `RECUERDA:` Pon en anexos las demás medidas. Es información que podría ser útil para otros fines (p. ej., para calcular tamaño de muestra, evaluar comparabilidad de poblaciones, etc.)
+    
+
+### ¿Qué reportar?
+
+[Si objetivo es **DESCRIBIR**...]{.hl}
+
+- Siempre reporte `máximo` y `mínimo`, preferentemente en `tabla principal` o texto.
+
+    - Es mejor que rango, provee más información.
+    
+    - Si problemas de espacio, usar `tabla anexa`.
+
+- `Media` +/- `Desviación estándar`
+
+    - Cuando meta es describir y la distribución es `simétrica` y `variabilidad es relativamente baja`. 
+    - La distribución normal es un ejemplo de distribución simétrica. 
+    
+- `Mediana` (`percentil 25` - `percentil 75`) 
+
+    - Cuando meta es describir y la distribución es  `asimétrica` o `variabilidad es relativamente alta`. 
+    - Mejor `percentiles 25 y 75` en vez de rango intercuartílico (`más información`de los primeros) 
+
+:::
+
+## Análisis de varias variables numéricas {.scrollable}
+
+::: panel-tabset
+
+### ¿Paquetes?
+
+- Hay varias opciones en R.
+
+- Las más personalizables se basan en [{R base}]{.plo} y [{dplyr}]{.plo} (funciones [summarise()]{.plo}), pero requieren más código.
+
+    + Usar estas si se necesitan elaborar tablas ad hoc para reportes repropducibles muy *sui generis*.
+    
+    + También son necesarias para gráficos en [{ggplot2}]{.plo}
+
+- Las opciones que requieren poco código y son directas tienen el problema de que no son personalizables: 
+
+    + [{summarytools}]{.plo}
+    + [{DescTools}]{.plo} 
+    + [{Hmisc}]{.plo}
+
+    + Usar estas si solo se requiere inspeccionar los datos pero no se hará ningún reporte reproducibl *sui generis*.
+
+### R base
+
+
+```{r}
+#| echo: false
+bd_inmuno <- read_stata("boost_inmuno.dta") %>% 
+  as_factor()
+```
+
+
+- El problema con R base es que solo permite generar medidas de resumen una a la vez. 
+
+- Cuando inspeccionamos datos o los describimos necesitamos hacerlo con varias variables simultáneamnente.
+
+
+- Podemos hacerlo con otras funciones de R. 
+
+- Hay muchas opciones, veremos algunas que se sustentan en R tidy
+
+
+### {dplyr}
+
+- Podemos usar la función [summarise()]{.plo} para solicitar estadísticos de resumen. Se requiere llamar las funciones de R base para medidas de resumen.
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+[Sin etiquetado]{.hl}
+
+```{r}
+bd_inmuno %>% 
+  summarise(mean(edad))
+```
+
+:::
+
+::: {.column width='50%'}
+
+[Mejor con etiquetado]{.hl}
+
+```{r}
+bd_inmuno %>% 
+  summarise(Media = mean(edad))
+```
+
+:::
+
+::::
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+[Varios estadísticos pueden obtenerse]{.hl}
+
+```{r}
+bd_inmuno %>% 
+  summarise(
+    Media = mean(edad), 
+    DE = sd(edad), 
+    Mediana = median(edad), 
+    `Percentil 25` = quantile(edad, 0.25), 
+    `Percentil 75` = quantile(edad, 0.75) 
+    )
+```
+
+:::
+
+::: {.column width='50%'}
+
+[Varias variables pueden analizarse]{.hl}
+
+```{r}
+bd_inmuno %>% 
+  summarise(
+    `Media de edad` = mean(edad), 
+    `DE de edad` = sd(edad), 
+    `Mediana de edad` = median(edad),
+    Mediana_IgG_Final = median(IgG_Basal, na.rm = TRUE), 
+    RIQ_IgG_Final = IQR(IgG_Basal, na.rm = TRUE)
+    )
+```
+
+:::
+
+::::
+
+
+### {summarytools}
+
+- Genera un resumen descriptivo bastante detallado de las variables numéricas.
+
+```{r}
+library(summarytools)
+```
+
+- La función que describe variables numéricas es [descr()]{.plo}
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+[Una sola variable numérica]{.hl}
+
+```{r}
+bd_inmuno %>% 
+  descr(edad)
+```
+
+:::
+
+::: {.column width='50%'}
+
+[Todas las variables numéricas]{.hl}
+
+```{r}
+bd_inmuno %>% 
+  descr()
+```
+
+:::
+
+::::
+
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+[Solo algunas variables numéricas]{.hl}
+
+```{r}
+bd_inmuno %>% 
+  select(edad, IgG_Basal) %>% 
+  descr()
+```
+
+:::
+
+::: {.column width='50%'}
+
+[Solo algunos estadísticos]{.hl}
+
+```{r}
+bd_inmuno %>% 
+  descr(edad, 
+        stats = c("mean", "sd", "min", "max"))
+```
+
+:::
+
+::::
+
+### {Hmisc}
+
+- El paquete [{Hmisc}]{.plo} genera un reporte de resultados similar al de summarytools.
+
+```{r}
+library(Hmisc)
+```
+
+- La función [describe()]{.plo} del paquete [{Hmisc}]{.plo} genera un reporte con los principales estadísticos de resumen:
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+[Modo R base]{.hl}
+
+```{r}
+describe(bd_inmuno$edad)
+```
+
+:::
+
+::: {.column width='50%'}
+
+[Modo R tidy]{.hl}
+
+```{r}
+bd_inmuno %>% 
+  pull(edad) %>% 
+  describe()
+```
+
+:::
+
+::::
+
+### Más info
+
+Más información sobre el análisis de variables numéricas con...
+
++ Tablas para epi: <https://epirhandbook.com/en/descriptive-tables.html>
+     
++ [{dplyr}]{.plo}: <https://dplyr.tidyverse.org/reference/group_by.html>
+    
++ [{janitor}]{.plo}: <http://sfirke.github.io/janitor/articles/tabyls.html>
+    
++ [{summarytools}]{.plo}: <https://htmlpreview.github.io/?https://github.com/dcomtois/summarytools/blob/master/doc/introduction.html>
+    
++ [{Hmisc}]{.plo}: <https://hbiostat.org/rflow/descript.html>
+
+:::
+
+
+## ¿Cómo interpretar .... {.scrollable}
+
+::: panel-tabset
+
+### ... media?
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+- La [media aritmética]{.hl} es una medida que trata de resumir los datos de una variable numérica en un solo valor. 
+
+    + La idea de la media es que este valor [represente]{.hl} o sea el [delegado]{.hl} de todos los datos.
+    + Podemos pensar la media como el [valor más probable que tendría cada individuo si no supieramos qué valores realmente tienen]{.hl}: "si no sabes qué valor tiene, apuesta por el promedio".
+
+- [Propiedad interesante:]{.hl} Es la medida que [más cerca está]{.hl} de  todos los datos.
+
+    + En promedio, el desvío de la media respecto a los datos es nulo.
+    
+:::
+
+::: {.column width='2%'}
+
+:::
+
+::: {.column width='48%'}
+
+- En la práctica, solo se reporta como promedio, sin más interpretación (esta es tácita).
+
+|        [*"La edad media fue de 34 años (...)"*]{.verd1}
+
+[Ejemplo]{.hl}
+
+- Tenemos cuatro notas del curso de Bioestadística: 15, 20, 17 y 12.
+
+```{r}
+#| echo: false
+notas <- c(15, 20, 17, 12)
+```
+
+- El promedio de estas notas es `r mean(notas)`.
+
+- Cada nota se desvía del promedio en lo siguiente:
+
+```{r}
+#| echo: false
+desvio_notas <- notas - mean(notas)
+
+datos <- data.frame(
+  notas = notas, 
+  promedio_notas = mean(notas), 
+  desvio_notas = desvio_notas, 
+  desvio_promedio = mean(desvio_notas)
+)
+
+datos %>% 
+  kbl() %>% 
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+                full_width = T, font_size = 20) 
+```
+
+
+:::
+
+::::
+
+
+### ... percentiles?
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+[Mediana]{.hl}
+
+- Puede dejarse tácita la interpretación (lo más común):
+
+|          [*"La mediana de edad fue de 35 años (...)"*]{.verd1}
+
+- Como representa el 50% de los datos, también puede interpretarse como (para enfatizar un hallazgo relevante):
+
+|          [*"La mitad de los participantes tuvieron niveles de*]{.verd1} 
+|          [*hemoglobina por debajo de 10.2 mg/dl (...)"*]{.verd1}
+
+:::
+
+::: {.column width='50%'}
+
+[Percentiles 25 y 75]{.hl}
+
+- Puede dejarse tácita la interpretación (lo más común):
+
+|          [*"La mediana de edad fue de 35 años*]{.verd1}
+|          [*(20 años - 54 años) (...)"*]{.verd1}
+
+- Como representan % conocidos, también puede interpretarse como (para enfatizar un hallazgo relevante):
+
+|          [*"El 25% de los participantes tuvieron menos de 20*]{.verd1}
+|          [*años y el 75% menos de 54 años (...)"*]{.verd1}
+
+:::
+
+::::
+
+
+### ... variabilidad? 
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+[Varianza]{.hl}
+
+- No se suele interpertar.
+
+- Debido a que está en unidades al cuadrado no se suele reportar, se prefiere a la desviación estándar.
+
+[Desviación estándar]{.hl}
+
+- No se suele interpretar, solo reportar.
+
+- Lo que implica que su interpretación/significado es tácito.
+
+- Es la medida de dispersión que acompaña por defecto a la media:
+
+|          [*"La edad media (desviación estándar) fue de 35*]{.verd1}
+|          [*años (23 años) (...)"*]{.verd1}
+
+[Rango]{.hl}
+
+- Es preferible reportar los valores mínimo y máximo.
+
+- A menudo se parafrasea:
+
+|          [*"La edad media (desviación estándar) fue de 35*]{.verd1}
+|          [*años (23 años) y varió entre 19 y 54 años (...)"*]{.verd1}    
+
+:::
+
+::: {.column width='50%'}
+
+[Rango intercuartílico]{.hl}
+
+- Es preferible reportar el percentil 25 y 75, no la diferencia: Da más información.
+
+- Se parafrasea como el ejemplo de los percentiles 25 y 75.
+
+- También se puede parafrasear de la siguiente manera:
+
+|          [*"La mediana de edad fue de 35 años*]{.verd1}
+|          [*y la mitad de los participantes tuvo*]{.verd1}
+|          [*entre 20 años y 54 años (...)"*]{.verd1}
+
+[Coeficiente de variación]{.hl}
+
+- Cuando se reporta, no se suele interpretar (es tácito).
+
+- Sin embargo, podemos hacer una valoración 'cualitativa' del valor para algun interpretación.
+
+- Algunas reglas del pulgar (según INEI, Perú):
+    + $CV < 5\%$ : Poca variabilidad
+    + $5\% \leq CV \leq 10\%$: Variabilidad regular
+    + $CV > 10\%$: Alta variabilidad (aquí podría ser mejor describir usando medidas de posición)
+:::
+
+::::
+
+:::
+
+```{r}
+#| echo: false
+library(countdown)
+countdown_timer <- function(
+    minutes = 1, 
+    play_sound = TRUE, 
+    font_size = "2em", 
+    ...
+) {
+  countdown(
+    minutes = minutes,
+    # Fanfare when it's over
+    play_sound = play_sound,
+    # Set timer theme to match solarized colors
+    color_border              = "#404041",
+    color_text                = "white",
+    color_background = "#000000",
+    color_running_background  = "#72994E",
+    color_running_text        = "white",
+    color_finished_background = "#EE6331",
+    color_finished_text       = "white",
+    font_size = font_size,
+    ...
+  )
+}
+```
+
+
+# `r fontawesome::fa("laptop-code", "white")` Nuestro turno {background-color="#000000"}
+
+<br/>
+
+-   Descargue la carpeta `var_num_resumen`.
+
+- Abra el proyecto `var_num_resumen.Rproj` y dentro de este, abra el archivo quarto `var_num_resumen_taller.qmd`. 
+
+- Siga las instrucciones indicadas en este.
+
+- Renderice el archivo quarto final.
+
+<br/><br/><br/>  
+
+```{R}
+#| echo: false
+countdown_timer(10)
+```

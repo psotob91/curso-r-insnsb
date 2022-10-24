@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>R Aplicado a los Proyecto de Investigación - Syllabus</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./logo.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Sín resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la busqueda",
+    "search-hide-matches-text": "Esconder resultados adicionales",
+    "search-more-match-text": "hay más resultados en este documento",
+    "search-more-matches-text": "más resultados en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Eviar"
+  }
+}</script>
+
+
+<meta property="og:title" content="R Aplicado a los Proyecto de Investigación - Syllabus">
+<meta property="og:description" content="Curso dirigido a personal de salud que se encuentre laborando en el Instituto Nacional de Salud del Niño San Borja (INSNSB), que cuente con entrenamiento básico en estadística aplicada a ciencias de…">
+<meta property="og:site-name" content="R Aplicado a los Proyecto de Investigación">
+<meta name="twitter:title" content="R Aplicado a los Proyecto de Investigación - Syllabus">
+<meta name="twitter:description" content="Curso dirigido a personal de salud que se encuentre laborando en el Instituto Nacional de Salud del Niño San Borja (INSNSB), que cuente con entrenamiento básico en estadística aplicada a ciencias de…">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">R Aplicado a los Proyecto de Investigación</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./syllabus.html" aria-current="page">Syllabus</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./schedule.html">Cronograma</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./content/index.html">Contenido</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./assignment/index.html">Problem Sets</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./resource/index.html">Recursos</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://drive.google.com/drive/folders/1GY8730XKxAzJVZEe8NcPEElaznI19llz?usp=sharing"><i class="bi bi-cloud-fill" role="img" aria-label="RStudio.cloud">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta página</h2>
+   
+  <ul>
+  <li><a href="#presentación" id="toc-presentación" class="nav-link active" data-scroll-target="#presentación">Presentación</a></li>
+  <li><a href="#objetivos" id="toc-objetivos" class="nav-link" data-scroll-target="#objetivos">Objetivos</a>
+  <ul class="collapse">
+  <li><a href="#objetivo-general" id="toc-objetivo-general" class="nav-link" data-scroll-target="#objetivo-general">Objetivo General</a></li>
+  <li><a href="#objetivos-específicos" id="toc-objetivos-específicos" class="nav-link" data-scroll-target="#objetivos-específicos">Objetivos Específicos</a></li>
+  </ul></li>
+  <li><a href="#estructura" id="toc-estructura" class="nav-link" data-scroll-target="#estructura">Estructura</a>
+  <ul class="collapse">
+  <li><a href="#perfil-de-ingreso" id="toc-perfil-de-ingreso" class="nav-link" data-scroll-target="#perfil-de-ingreso">Perfil de ingreso</a></li>
+  <li><a href="#perfil-de-egreso" id="toc-perfil-de-egreso" class="nav-link" data-scroll-target="#perfil-de-egreso">Perfil de egreso</a></li>
+  <li><a href="#programación-del-curso" id="toc-programación-del-curso" class="nav-link" data-scroll-target="#programación-del-curso">Programación del curso</a></li>
+  </ul></li>
+  <li><a href="#estrategias-de-formación" id="toc-estrategias-de-formación" class="nav-link" data-scroll-target="#estrategias-de-formación">Estrategias de formación</a>
+  <ul class="collapse">
+  <li><a href="#clases-teóricas" id="toc-clases-teóricas" class="nav-link" data-scroll-target="#clases-teóricas">Clases teóricas</a></li>
+  <li><a href="#clases-prácticas" id="toc-clases-prácticas" class="nav-link" data-scroll-target="#clases-prácticas">Clases prácticas</a></li>
+  <li><a href="#conjunto-de-datos-para-analizar-en-casos-aplicados" id="toc-conjunto-de-datos-para-analizar-en-casos-aplicados" class="nav-link" data-scroll-target="#conjunto-de-datos-para-analizar-en-casos-aplicados">Conjunto de datos para analizar en casos aplicados</a></li>
+  <li><a href="#problem-sets" id="toc-problem-sets" class="nav-link" data-scroll-target="#problem-sets">Problem Sets</a></li>
+  </ul></li>
+  <li><a href="#evaluación-de-los-aprendizajes" id="toc-evaluación-de-los-aprendizajes" class="nav-link" data-scroll-target="#evaluación-de-los-aprendizajes">Evaluación de los aprendizajes</a></li>
+  <li><a href="#plana-docente" id="toc-plana-docente" class="nav-link" data-scroll-target="#plana-docente">Plana Docente</a></li>
+  <li><a href="#duración" id="toc-duración" class="nav-link" data-scroll-target="#duración">Duración</a></li>
+  <li><a href="#certificación" id="toc-certificación" class="nav-link" data-scroll-target="#certificación">Certificación</a></li>
+  <li><a href="#políticas-del-curso" id="toc-políticas-del-curso" class="nav-link" data-scroll-target="#políticas-del-curso">Políticas del curso</a>
+  <ul class="collapse">
+  <li><a href="#código-de-honor" id="toc-código-de-honor" class="nav-link" data-scroll-target="#código-de-honor">Código de Honor</a></li>
+  <li><a href="#entrega-retrasada" id="toc-entrega-retrasada" class="nav-link" data-scroll-target="#entrega-retrasada">Entrega retrasada</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Syllabus</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<div class="grid course-details course-details-smaller">
+<section id="instructor" class="level3 g-col-6">
+<h3 class="anchored" data-anchor-id="instructor">Instructor</h3>
+<ul>
+<li><i class="fa-solid fa-user" aria-hidden="true"></i> &nbsp; <a href="https://github.com/psotob91">Percy Soto-Becerra, M.D., M.Sc(c)</a></li>
+<li><i class="fa-solid fa-university" aria-hidden="true"></i> &nbsp; Virtual: Zoom</li>
+<li><i class="fa-solid fa-envelope" aria-hidden="true"></i> &nbsp; <a href="mailto:percys1991@gmail.com">percys1991@gmail.com</a></li>
+<li><i class="fa-brands fa-twitter" aria-hidden="true"></i> &nbsp; <a href="https://www.twitter.com/psotob91">psotob91</a></li>
+<li><i class="fa-solid fa-calendar-check" aria-hidden="true"></i> &nbsp; <a href="https://calendly.com/psotob91/15-minutos-de-reunion?back=1&amp;month=2022-08">Schedule an appointment</a></li>
+</ul>
+</section>
+<section id="detalles-del-curso" class="level3 g-col-6">
+<h3 class="anchored" data-anchor-id="detalles-del-curso">Detalles del curso</h3>
+<ul>
+<li><i class="fa-solid fa-calendar" aria-hidden="true"></i> &nbsp; Lunes, miércoles y viernes</li>
+<li><i class="fa-solid fa-calendar-alt" aria-hidden="true"></i> &nbsp; 03 de octubre al 30 de octubre, 2022</li>
+<li><i class="fa-solid fa-clock" aria-hidden="true"></i> &nbsp; 2-4 pm</li>
+<li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> &nbsp; Zoom</li>
+</ul>
+</section>
+</div>
+<section id="presentación" class="level2">
+<h2 class="anchored" data-anchor-id="presentación">Presentación</h2>
+<p>Curso dirigido a <code>personal de salud</code> que se encuentre laborando en el <code>Instituto Nacional de Salud del Niño San Borja (INSNSB)</code>, que cuente con entrenamiento básico en estadística aplicada a ciencias de la salud, estadística o ciencia de datos. Su propósito es capacitar y brindar herramientas en análisis bioestadístico de datos para preguntas de investigación explicativas. Se revisarán conceptos relacionados al manejo de datos, análisis descriptivo e inferencial y modelado de regresión.</p>
+<p>El entrenamiento se realizará de manera <code>virtual</code> empleando la plataforma Zoom. Al finalizar el entrenamiento, el alumno estará en la capacidad de llevar a cabo un análisis exploratorio explicativo (factores asociados) o confirmatorio (efectividad clínica comparativa o evaluación de impacto) para desenlaces numéricos continuos, y binarios mediante un enfoque de modelado de regresión.</p>
+</section>
+<section id="objetivos" class="level2">
+<h2 class="anchored" data-anchor-id="objetivos">Objetivos</h2>
+<section id="objetivo-general" class="level3">
+<h3 class="anchored" data-anchor-id="objetivo-general">Objetivo General</h3>
+<p>Desarrollar capacidades de análisis estadístico de datos para investigación en <code>profesionales de la salud</code> del <code>INSNSB</code>.</p>
+</section>
+<section id="objetivos-específicos" class="level3">
+<h3 class="anchored" data-anchor-id="objetivos-específicos">Objetivos Específicos</h3>
+<p>Al finalizar las unidades, el personal de salud participante del curso será capaz de:</p>
+<ul>
+<li>Usar R y RStudio para el manejo y limpieza de base de datos de estudios de investigación en salud.</li>
+<li>Realizar un análisis descriptivo e inferencial con un paquete estadístico de datos para la investigación en salud.</li>
+<li>Responder preguntas explicativas mediante modelado de regresión para desenlaces numéricos y categóricos binarios.</li>
+<li>Generar tablas y reporte reproducibles de estos mediante el uso de markdown en R/RStudio.</li>
+</ul>
+</section>
+</section>
+<section id="estructura" class="level2">
+<h2 class="anchored" data-anchor-id="estructura">Estructura</h2>
+<section id="perfil-de-ingreso" class="level3">
+<h3 class="anchored" data-anchor-id="perfil-de-ingreso">Perfil de ingreso</h3>
+<p>Personal de salud que se encuentre laborando en el Instituto Nacional de Salud del Niño San Borja (INSNSB), que cuente con entrenamiento básico en estadística aplicada a ciencias de la salud, estadística o ciencia de datos, y que deseen utilizar R/RStudio para análisis de datos aplicados a investigación en salud.</p>
+</section>
+<section id="perfil-de-egreso" class="level3">
+<h3 class="anchored" data-anchor-id="perfil-de-egreso">Perfil de egreso</h3>
+<p>Personal de salud del Instituto Nacional de Salud del Niño con competencias para realizar análisis estadístico de datos para investigación en salud a nivel descriptivo, inferencial y de modelado explicativo en R y RStudio, así como generar los reportes reproducibles en estos.</p>
+</section>
+<section id="programación-del-curso" class="level3">
+<h3 class="anchored" data-anchor-id="programación-del-curso">Programación del curso</h3>
+<p>La disribución de horas dedicadas al curso se muestran a continuación:</p>
+<table class="table">
+<colgroup>
+<col style="width: 34%">
+<col style="width: 29%">
+<col style="width: 29%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Componente</th>
+<th style="text-align: center;">Horas Cronológicas</th>
+<th style="text-align: center;">Horas Académicas</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Teoría</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">16</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Práctica</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">16</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Trabajo independiente*</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">16</td>
+</tr>
+</tbody>
+</table>
+<p>El cronograma detallado del curso se muestra en el siguiente enlace: <a href="">Cronograma</a>.</p>
+</section>
+</section>
+<section id="estrategias-de-formación" class="level2">
+<h2 class="anchored" data-anchor-id="estrategias-de-formación">Estrategias de formación</h2>
+<p>Este curso taller consta de 2 partes; teórica que es utilizando el método expositivo dialogado y la parte práctica es a través de talleres de código en vivo en los que los alumnos siguen, paso a paso, las instrucciones que el profesor muestra en clase para el análisis de datos. Los recursos a utilizar son los siguientes:</p>
+<ul>
+<li>Computadora personal</li>
+<li>Aplicativo para conferencias de vídeo y reuniones en línea</li>
+<li>Página web del curso</li>
+<li>Bibliografía recomendada</li>
+</ul>
+<section id="clases-teóricas" class="level3">
+<h3 class="anchored" data-anchor-id="clases-teóricas">Clases teóricas</h3>
+<p>Los alumnos recibirán las clases teóricas de manera virtual. Inicialmente, el docente dictará las sesiones académicas, y los participantes brindarán comentarios respecto al tema. Posteriormente, se entregarán las diapositivas de las sesiones académicas por correo electrónico y a través de una carpeta en Google Drive que serán leídas por los participantes. Las ponencias serán grabadas y se almacenarán en un repositorio académico virtual que será compartido a los participantes. Las clases teóricas se desarrollarán de manera fluida con los talleres (por eso, taller teórico-práctico). En conjunto, las teorías deberían durar entre 30 minutos a 1 hora.</p>
+</section>
+<section id="clases-prácticas" class="level3">
+<h3 class="anchored" data-anchor-id="clases-prácticas">Clases prácticas</h3>
+<p>Los alumnos recibirán las clases prácticas de manera virtual. Previamente, se hará entrega de conjunto de datos de estudios reales publicados en repositorios abiertos o conjunto de datos “juguete” especialmente seleccionados para las clases por su valor didáctico. Durante las clases prácticas, guiados por el docente a cargo, se realizará el análisis de los datos aplicando los métodos enseñados durante la sesión. Los talleres serán grabados y se almacenarán en un repositorio académico virtual que será compartido a los participantes. Los conjuntos de datos y el código de análisis de datos estará disponible para los estudiantes. Adicionalmente, se dispondrá de 15 minutos adicionales por cada clase práctica para poder hacer preguntas directas al docente a cargo, para solucionar cualquier duda o consulta, o si es que algún alumno lo solicita, hacer una revisión específica de algún aspecto del análisis de datos. Las clases teóricas se desarrollarán de manera fluida con los talleres (por eso, taller teórico-práctico). En conjunto, los talleres deberían durar entre 1 hora a 1 hora y media.</p>
+</section>
+<section id="conjunto-de-datos-para-analizar-en-casos-aplicados" class="level3">
+<h3 class="anchored" data-anchor-id="conjunto-de-datos-para-analizar-en-casos-aplicados">Conjunto de datos para analizar en casos aplicados</h3>
+<p>Siempre que sea posible, trabajaremos con conjunto de datos reales u obtenidos mediante simulación de estudios reales. También haremos uso del conjunto de datos del paquete “medicaldata” de R (). Complementaremos con conjunto de datos “juguete” por motivos didácticos:</p>
+<div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Módulo 1</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Módulo 2</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Módulo 3</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<ul>
+<li><p>Conjunto de datos real del Censo Nacional Penitenciario – Preguntas relacionadas a Salud de los presos. Working Paper titulado: <strong>“Self-reported HIV in male Peruvian inmates: results of the 2016 prison census”</strong>. Datos y código disponibles en: <a href="https://github.com/culquichicon/2016-Peruvian-Prison-Census" class="uri">https://github.com/culquichicon/2016-Peruvian-Prison-Census</a>. Artículo preliminar en español disponible en: MINJUS. El Fenómeno Criminológico y la Política Criminal en las Regiones. I Convocatoria Nacional de Artículos. Página 33. Enlace: <a href="https://indagaweb.minjus.gob.pe/wp-content/uploads/2019/12/Libro-I-Convocatoria-Nacional-de-Art%C3%ADculos-compilaci%C3%B2n.pdf" class="uri">https://indagaweb.minjus.gob.pe/wp-content/uploads/2019/12/Libro-I-Convocatoria-Nacional-de-Art%C3%ADculos-compilaci%C3%B2n.pdf</a></p></li>
+<li><p>Conjunto de datos simulados del estudio: Valdivia M, Soto-Becerra P, Laguna-Barraza R, et al.&nbsp;<strong>Effect of a natural supplement containing glucosinolates, phytosterols and citrus flavonoids on body weight and metabolic parameters in a menopausal murine model induced by bilateral ovariectomy.</strong> Gynecological Endocrinology 36; 2020. doi: <a href="https://doi.org/10.1080/09513590.2020.1821639" class="uri">https://doi.org/10.1080/09513590.2020.1821639</a></p></li>
+<li><p>Conjunto de datos simulados del estudio: Villar-López M, Soto-Becerra P, Choque R, et al.&nbsp;<strong>Safety and tolerability of a natural supplement containing glucosinolates, phytosterols and citrus flavonoids in adult women: a randomized phase I, placebo-controlled, multi-arm, double-blinded clinical trial.</strong> Gynecological Endocrinology 37; 2021. Doi: <a href="https://doi.org/10.1080/09513590.2021.1960965" class="uri">https://doi.org/10.1080/09513590.2021.1960965</a></p></li>
+<li><p>Conjunto de datos reales del estudio: Elmunzer JB, Scheiman JM, Lehman GA, et al.&nbsp;<strong>A Randomized Trial of Rectal Indomethacin to Prevent Post-ERCP Pancreatitis.</strong> NEJM 2012; 366. doi: 10.1056/NEJMoa1111103. Dataset: “indo_rct” disponible en: <a href="https://higgi13425.github.io/medicaldata/" class="uri">https://higgi13425.github.io/medicaldata/</a></p></li>
+</ul>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<ul>
+<li><p>Conjunto de datos simulados del estudio: Villar-López M, Soto-Becerra P, Choque R, et al.&nbsp;<strong>Safety and tolerability of a natural supplement containing glucosinolates, phytosterols and citrus flavonoids in adult women: a randomized phase I, placebo-controlled, multi-arm, double-blinded clinical trial.</strong> Gynecological Endocrinology 2021; 37. Doi: <a href="https://doi.org/10.1080/09513590.2021.1960965" class="uri">https://doi.org/10.1080/09513590.2021.1960965</a></p></li>
+<li><p>Conjunto de datos juguetes del libro <strong>“Vach W. Regression Models as a Tool in Medical Research. CRC Press – Taylor &amp; Francis Group. First Edition 2013.”.</strong> Datasets: “hiaa.dta” y “hb.dta”. Disponibles en: <a href="https://www.uniklinik-freiburg.de/imbi/stud-le/regression-models-as-a-tool-in-medical-research/data-sets.html" class="uri">https://www.uniklinik-freiburg.de/imbi/stud-le/regression-models-as-a-tool-in-medical-research/data-sets.html</a></p></li>
+<li><p>Conjunto de datos simulados del estudio: Vargas Hererara, Ferández-Navarro, Cabezudo-Pillpe, et al.&nbsp;<strong>“Immunogenicity and reactogenicity of a third dose of BNT162b2 vaccine for COVID-19 after a primary regimen with BBIBP-CorV or BNT162b2 vaccines in Lima, Peru.”</strong> Disponible en: <a href="https://www.medrxiv.org/content/10.1101/2022.05.01.22274548v1" class="uri">https://www.medrxiv.org/content/10.1101/2022.05.01.22274548v1</a></p></li>
+</ul>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<ul>
+<li><p>Conjunto de datos reales del estudio: Ramirez-Ramirez R, Soto-Becerra P. <strong>Dependencia funcional y diabetes mellitus tipo 2 en adultos mayores afiliados al Seguro Social de Salud del Perú: análisis de la ENSSA-2015.</strong> Acta Médica 2020; 37. doi: <a href="http://dx.doi.org/10.35663/amp.2020.374.1075" class="uri">http://dx.doi.org/10.35663/amp.2020.374.1075</a></p></li>
+<li><p>Conjunto de datos reales del estudio: Elmunzer JB, Scheiman JM, Lehman GA, et al.&nbsp;<strong>A Randomized Trial of Rectal Indomethacin to Prevent Post-ERCP Pancreatitis.</strong> NEJM 2012; 366. doi: 10.1056/NEJMoa1111103. Dataset: “indo_rct” disponible en: <a href="https://higgi13425.github.io/medicaldata/" class="uri">https://higgi13425.github.io/medicaldata/</a></p></li>
+<li><p>Conjunto de datos juguetes del libro <strong>“Vach W. Regression Models as a Tool in Medical Research. CRC Press – Taylor &amp; Francis Group. First Edition 2013.”.</strong> Datasets: “allergy2.dta” y “backpain.dta”. Disponibles en: <a href="https://www.uniklinik-freiburg.de/imbi/stud-le/regression-models-as-a-tool-in-medical-research/data-sets.html" class="uri">https://www.uniklinik-freiburg.de/imbi/stud-le/regression-models-as-a-tool-in-medical-research/data-sets.html</a></p></li>
+<li><p>Conjunto de datos simulados del estudio: Vargas Hererara, Ferández-Navarro, Cabezudo-Pillpe, et al.&nbsp;<strong>“Immunogenicity and reactogenicity of a third dose of BNT162b2 vaccine for COVID-19 after a primary regimen with BBIBP-CorV or BNT162b2 vaccines in Lima, Peru.”.</strong> Disponible en: <a href="https://www.medrxiv.org/content/10.1101/2022.05.01.22274548v1" class="uri">https://www.medrxiv.org/content/10.1101/2022.05.01.22274548v1</a></p></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="problem-sets" class="level3">
+<h3 class="anchored" data-anchor-id="problem-sets">Problem Sets</h3>
+<p>Durante todo el curso habrá tres ‘problem sets’ (trad. conjunto de problemas) que corresponderán a un conjunto de datos con una pregunta de investigación y objetivo de análisis pre-establecido. Los alumnos tendrán entre 7 a 10 días para realizar los análisis solicitados y presentarlos como tarea calificada. Asimismo, se compartirá un solucionario al final del cierre de cada entrega. El trabajo deberá realizarse de manera grupal en grupos de entre 4 a 6 participantes o, excepcionalmente, de manera individual. Los grupos deberán confirmarse por correo electrónico a más tardar el 05 de octubre de 2022</p>
+</section>
+</section>
+<section id="evaluación-de-los-aprendizajes" class="level2">
+<h2 class="anchored" data-anchor-id="evaluación-de-los-aprendizajes">Evaluación de los aprendizajes</h2>
+<p>Para efectos de evaluar a los participantes se tomarán en cuenta los siguientes criterios:</p>
+<div class="centered-table">
+<table class="table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 12%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Tarea</th>
+<th style="text-align: center;">Puntos</th>
+<th style="text-align: center;">Porcentaje</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Problem sets (3 × 36)</td>
+<td style="text-align: center;">108</td>
+<td style="text-align: center;">90%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Asistencia a clases</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">10%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Total</td>
+<td style="text-align: center;">120</td>
+<td style="text-align: center;">—</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Para efectos de evaluar la asistencia, los participantes deberán haber asistido a mínimo 9/12 sesiones académicas. Para aprobar el entrenamiento, los participantes deberán cumplir con dos requisitos:</p>
+<ul>
+<li>Cumplir con el requisito de asistencia del entrenamiento (9/12 sesiones académicas).</li>
+<li>Aprobar los problema set (calificación mayor o igual a 14.0 en promedio final)</li>
+</ul>
+<p>Se otorgará <code>certificado</code> como <code>asistente</code> a quienes asistan <code>mínimo al 75% de clases</code> (equivalente a 9 de las 12), y un certificado como <code>aprobado</code> a quienes adicionalmente <code>aprueben la evaluación final</code>.</p>
+<p>La <code>nota mínima aprobatoria</code> para que el participante apruebe el entrenamiento es de <code>14.00</code> (trece) en el sistema vigesimal.</p>
+<p>La escala de calificación es la siguiente:</p>
+
+<div class="centered-table">
+
+
+
+<table class="table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 13%">
+<col style="width: 9%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Nota</th>
+<th style="text-align: center;">Rango</th>
+<th style="text-align: left;">Nota</th>
+<th style="text-align: center;">Rango</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">A</td>
+<td style="text-align: center;">93–100%</td>
+<td style="text-align: left;">C</td>
+<td style="text-align: center;">73–76%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">A−</td>
+<td style="text-align: center;">90–92%</td>
+<td style="text-align: left;">C−</td>
+<td style="text-align: center;">70–72%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">B+</td>
+<td style="text-align: center;">87–89%</td>
+<td style="text-align: left;">D+</td>
+<td style="text-align: center;">67–69%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">B</td>
+<td style="text-align: center;">83–86%</td>
+<td style="text-align: left;">D</td>
+<td style="text-align: center;">63–66%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">B−</td>
+<td style="text-align: center;">80–82%</td>
+<td style="text-align: left;">D−</td>
+<td style="text-align: center;">60–62%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">C+</td>
+<td style="text-align: center;">77–79%</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: center;">&lt; 60%</td>
+</tr>
+</tbody>
+</table>
+<div>
+
+<p>Puedes encontrar las descripciones de todos los problem sets en la <a href="./assignment/">página de tareas</a>.</p>
+</div></div></section>
+<section id="plana-docente" class="level2">
+<h2 class="anchored" data-anchor-id="plana-docente">Plana Docente</h2>
+<div class="callout-note callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<strong>Percy Soto Becerra, M.D., M.Sc(c)</strong>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Investigador RENACYT con publicaciones en revistas científicas indizadas a SCOPUS, Medline y Web of Science. Médico cirujano por la Universidad Nacional Mayor de San Marcos (UNMSM), egresado de la Maestría en Ciencias en Investigación Epidemiológica de la Universidad Peruana Cayetano Heredia (UPCH) y maestrando de la maestría de Estadística de la Universidad Nacional Agraria La Molina (UNALM). Cuenta con más de tres años de experiencia en la formulación, implementación, y gestión de proyectos de investigación científica en salud. Posee una sólida formación en métodos cuantitativos para la investigación epidemiológica y redacción científica, asimismo, ha realizado entrenamiento avanzado y cuenta con experiencia en bioestadística y ciencia de datos. Ha obtenido financiamiento internacional como investigador principal junior; así como participar en investigaciones en salud con la aplicación de métodos avanzados en análisis de datos. Ha sido becario del Centro Internacional Fogarty de los Institutos Nacionales de Salud de los Estados Unidos mediante el proyecto D43 TW007393 Peru Epidemiology Research Training Consortium, el cual le permitió recibir entrenamiento en investigación biomédica. Ha colaborado como investigador en el Centro de Investigaciones Económicas y Sociales de la Universidad San Ignacio de Loyola (USIL), el Instituto de Evaluación de Tecnologías en Salud e Investigación (IETSI) del Seguro Social (EsSalud), el Centro Nacional de Salud Ocupacional (CENSOPAS) y el Centro Nacional de Salud Pública (CNSP) del Instituto Nacioanl de Salud (INS) y el Centro de Salud Global de la UPCH. Actualmente y es investigador asociado a la Universidad Continental. Interesado en aplicar métodos cuantitativos modernos para inferencia causal en epidemiología (efectividad clínica comparativa y evaluación de impacto de programas de salud), investigación clínica pronóstica y diagnóstica con especial énfasis en aplicaciones a medicina de precisión.</p>
+<ul>
+<li>Google Scholar: <a href="https://scholar.google.com/citations?user=lYRCQzYAAAAJ&amp;hl=en" class="uri">https://scholar.google.com/citations?user=lYRCQzYAAAAJ&amp;hl=en</a></li>
+<li>Github: <a href="https://github.com/psotob91" class="uri">https://github.com/psotob91</a></li>
+<li>E-mail: <a href="mailto:percys1991@gmail.com" class="email">percys1991@gmail.com</a><br>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="duración" class="level2">
+<h2 class="anchored" data-anchor-id="duración">Duración</h2>
+<p>El curso taller se llevará a cabo en 12 fechas, con una duración de 03 horas teóricas y 05 horas prácticas.</p>
+</section>
+<section id="certificación" class="level2">
+<h2 class="anchored" data-anchor-id="certificación">Certificación</h2>
+<p>Se entregará un certificado por el Instituto Nacional de Salud del Niño San Borja, con el auspicio y creditaje académico de una institución universitaria. La certificación se dará a los participantes que hayan culminado y aprobado satisfactoriamente el curso, nota mínima aprobatoria 14. Además de haber cumplido con el 75% de asistencia al curso. La asistencia es obligatoria y con estricta puntualidad.</p>
+</section>
+<section id="políticas-del-curso" class="level2">
+<h2 class="anchored" data-anchor-id="políticas-del-curso">Políticas del curso</h2>
+<section id="código-de-honor" class="level3">
+<h3 class="anchored" data-anchor-id="código-de-honor">Código de Honor</h3>
+<p>El presente curso tiene el siguiente <strong>código de honor</strong>:</p>
+<ul>
+<li><p>Sus respuestas a tareas, cuestionarios y exámenes deben ser su propio trabajo (excepto las tareas que permitan explícitamente la colaboración).</p></li>
+<li><p>No puede compartir sus soluciones a la tarea, cuestionarios o exámenes con nadie más a menos que lo permita explícitamente las instrucciones de la actividad. Esto incluye todo lo escrito por usted, así como cualquier solución oficial proporcionada por el personal del curso.</p></li>
+<li><p>No puede participar en ninguna otra actividad que deshonestamente mejore sus resultados o deshonestamente mejore o perjudique los resultados de otros.</p></li>
+</ul>
+<p>Asimismo, si bien el syllabus refleja el plan del curso, algunas desviaciones a este podrían tornarse necesarias para alcanzar las metas propuestas.</p>
+</section>
+<section id="entrega-retrasada" class="level3">
+<h3 class="anchored" data-anchor-id="entrega-retrasada">Entrega retrasada</h3>
+<p>Perderá 1 punto por cada día de retraso en al entrega del problema set.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiada");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/https:\/\/r-insnsb\.netlify\.app/);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Contenido <i class="fa-brands fa-creative-commons" aria-hidden="true"></i> 2022 por <a href="https://github.com/psotob91">Percy Soto-Becerra</a> <br> Todo el contenido está bajo <i class="fa-brands fa-creative-commons" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-by" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-nc" aria-hidden="true"></i> <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)</a></div>   
+    <div class="nav-footer-right">Hecho con <i class="fa-brands fa-r-project" aria-hidden="true"></i> y <a href="https://quarto.org/">Quarto</a><br> <a href="https://github.com/psotob91/curso-r-insnsb">Ver el código fuente en <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub</a></div>
+  </div>
+</footer>
+
+
+
+</body></html>

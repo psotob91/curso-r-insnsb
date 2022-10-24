@@ -1,0 +1,1263 @@
+---
+format: 
+  revealjs: 
+    # self-contained: true
+    theme: [default, theme/theme.scss]
+    footer: "R Aplicado a los Proyectos de Investigación - Sesión 3"
+    logo: img/icon-512-insnsb.jpg
+    transition: convex
+    background-transition: zoom
+    incremental: false
+    slide-number: c/t
+    preview-links: true
+    # width: 1920
+    # height: 1080
+    height: 900
+    width: 1600
+    # parallax-background-image: images/bg-ietsi-slide-first.png
+    # parallax-background-size: "1920px 1080px"
+    chalkboard: true
+    code-block-background: true
+    code-block-border-left: "#31BAE9"
+    highlight-style: ayu-dark
+    echo: true
+    multiplex: true
+    touch: true
+    auto-stretch: true
+    link-external-icon: true
+    link-external-newwindow: true
+    self-contained-math: true
+    
+from: markdown+emoji
+execute:
+  echo: true
+filters:
+  - reveal-auto-agenda
+  - grouped-tabsets
+auto-agenda:
+  bullets: numbered
+  heading: Agenda
+---
+
+\
+
+\
+
+<h1>Sesión 3</h1>
+
+<h2>[Curso: R Aplicado a los Proyectos de Investigación]{.plo}</h2>
+
+<hr>
+
+<h3>[Percy Soto-Becerra, M.D., M.Sc(c)]{.negro}</h3>
+
+<h4>[InkaStats Data Science Solutions | Medical Branch]{.negro}</h4>
+
+<h4>[2022-10-05]{.negro}</h4>
+
+`r fontawesome::fa("github", "black")` &nbsp; [https://github.com/psotob91](https://github.com/psotob91)
+
+![](img/social-image-f22.png){.absolute top=390 left=950 width="600"}
+
+# Importación de datos
+
+```{r}
+#| echo: false
+#| output: false
+
+# Removing all objects including loaded libraries
+rm(list = ls(all = TRUE))
+gc()
+
+# Installing and loading packages
+if (!require("pacman")) {
+  install.packages("pacman")
+}
+
+pacman::p_unload("all") # Unloading all package except base
+
+pacman::p_load(tidyverse, 
+               tibble, 
+               labelled, 
+               pander, 
+               gt, 
+               kableExtra, 
+               DT, 
+               haven, 
+               skimr, 
+               Hmisc) # Loading packages
+
+datos_fase1 <- read_stata("maca_meno_fase1.dta") %>% 
+  as_factor()
+```
+
+## Importar datos de fuentes externas a R
+<hr>
+
+::: {style="margin-top: 100px; font-size: 1.5em; color: black;"}
+| El paquete [{rio}]{.verde-h3} es la `navaja suiza`
+|  de la importación de datos en R.
+
+::: columns
+::: {.column width="50%"}
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| out-width: 50%
+knitr::include_graphics("img/rio-hex.png")
+```
+
+:::
+
+::: {.column width="50%"}
+
+|           Su función [import]{.verde-h3} 
+|           permite importar 
+|           prácticamente  
+|           cualquier formato.
+
+:::
+:::
+
+
+:::
+
+## Importando datos con [{rio}]{.verde-h3} {.scrollable}
+<hr>
+
+::: panel-tabset
+
+## Instalar [{rio}]{.verde-h3} {auto-animate="true"}
+
+- [{rio}]{.verde-h3} debe instalarse de una manera especial
+
+- Pasos: 
+
+    #. Primero se instala como siempre, usando [install.packages]{.verde-h3}
+    #. Adicionalmente, se sugiere correr [install_formats]{.verde-h3}. inmediatamente después de la primera instalación.
+    #. Se carga el paquete usando [library]{.verde-h3}.
+
+```r
+install.packages("rio")
+rio::install_formats()
+library(rio)
+```
+::: {.fragment}
+- Más detalles sobre el paquete y sus funciones pueden encontrarse en la página web del paquete: <https://thomasleeper.com/rio/index.html>
+:::
+
+## import
+
+- Se usa [import()]{.verde-h3} para importar nuevos datos y [<-]{.verde-h3} para asignar los datos a un nuevo [data.frame]{.verde-h3}
+
+```r
+nuevos_datos <- import(file = "datos_para_importar.fmt")
+```
+
+\
+
+>Podemos omitir los nombres de los argumentos cuando utilizamos funciones.
+
+\
+
+::: columns
+::: {.column width="50%"}
+
+```r
+nuevos_datos <- import(file = "datos_para_importar.fmt")
+```
+
+:::
+
+::: {.column width="50%"}
+
+```r
+nuevos_datos <- import("datos_para_importar.fmt")
+```
+
+:::
+:::
+
+## Plano
+
+- Para archivos de tipo \*.csv o \*.txt
+
+- No importa el tipo de separación de las columnas: comas, puntos y comas, otros caracteres.
+
+    + [import()]{.verde-h3} determinará rápidamente el tipo de separación y hará el trabajo.
+    
+```{r}
+#| echo: false
+library(rio)
+```
+
+```{r}
+datos_csv <- import("maca_meno_perclin.csv")
+head(datos_csv)
+```
+
+## MS Excel 
+
+- Útil para archivos con las extensiones \*.xls o \*.xlsx
+
+```{r}
+datos_xlsx <- import("maca_meno_perclin.xlsx")
+head(datos_xlsx)
+```
+
+## Stata (*.dta)
+
+- Permite importar datos de formato Stata. Sin embargo, en Stata, los valores de las variables suelen estar etiquetados, por lo que es importante también recuperar esta información.
+
+- Si importamos una tabla de datos en formato Stata, vemos que algunas variables categóricas como `married` o `married2` se importan como números. ¿Qué significa 1 o 0?
+
+```{r}
+datos_dta <- import("maca_meno_fase1.dta")
+head(datos_dta)
+```
+
+## SPSS (*.sav)
+
+- Lo mismo que ocurre con Stata, sucede con SPSS: los metadatos se pierden.
+
+```{r}
+datos_sav <- import("RECH0.sav")
+head(datos_sav)
+```
+
+## Otros
+
+- La función [import]{.verde-h3} soporta una gran variedad de formatos.
+
+- Si alguna vez necesita, puede consultar la web del paquete y encontrará tutoriales de cómo importar los formatos que requiera.
+
+<center>[https://thomasleeper.com/rio/index.html]{.big-text2}</center>
+
+:::
+
+## ¿Cómo importar metadatos de Stata o SPSS?
+<hr>
+
+::: {.panel-tabset}
+
+### ¿Metadatos?
+
+:::: {.columns}
+
+::: {.column width='30%'}
+
+- Son los datos de los datos.
+
+- En bases de datos para análisis estadístico, dos metadatos bastante usados son:
+
+    + Etiquetas de la variable
+    
+    + Etiquetas de los valores de la variable
+    
+:::
+
+::: {.column width='70%'}
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| out-width: 100%
+knitr::include_graphics("img/metadatos.png")
+```
+
+:::
+
+::::
+
+### Stata (*.dta)
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+[Importar datos Stata solo con import()]{.verde-h3}
+
+- Las etiquetas de valor para `time`, `treat`, `married` y `married2` se pierden.
+
+```{r}
+datos_dta <- import("maca_meno_fase1_v2.dta")
+
+head(datos_dta)
+```
+:::
+
+::: {.column width='50%'}
+
+[Usar import() más characterize()]{.verde-h3}
+
+- Las etiquetas de valor para `time`, `treat`, `married` y `married2` se recuperan
+
+```{r}
+datos_dta <- import("maca_meno_fase1_v2.dta") %>% 
+  characterize()
+head(datos_dta)
+```
+
+:::
+
+::::
+
+
+### SPSS (*.sav)
+
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+[Importar datos SPSS solo con import()]{.verde-h3}
+
+- Las etiquetas de valor para `time`, `treat`, `married` y `married2` se pierden.
+
+```{r}
+datos_sav <- import("maca_meno_fase1_v2.sav")
+
+head(datos_sav)
+```
+:::
+
+::: {.column width='50%'}
+
+[Usar import() más characterize()]{.verde-h3}
+
+- Las etiquetas de valor para `time`, `treat`, `married` y `married2` se recuperan
+
+```{r}
+datos_sav <- import("maca_meno_fase1_v2.sav") %>% 
+  characterize()
+head(datos_sav)
+```
+
+:::
+
+::::
+
+:::
+
+## Exportando datos con [{rio}]{.verde-h3} {.scrollable}
+<hr>
+
+::: {.panel-tabset}
+
+### export()
+
+- Se usa [export()]{.verde-h3} para exportar un objeto `data frame` o `data tibble` a otro formato:
+
+```r
+export(datos_para_importa, file = "datos_exportados.fmt")
+```
+
+- Los formatos pueden ser:
+
+```{r}
+#| echo: false
+#| output: asis
+tibble::tribble(
+                              ~Format, ~Typical.Extension,
+               "Comma-separated data",             ".csv",
+                "Pipe-separated data",             ".psv",
+                 "Tab-separated data",             ".tsv",
+  "CSVY (CSV + YAML metadata header)",            ".csvy",
+                                "SAS",        ".sas7bdat",
+                               "SPSS",             ".sav",
+                  "SPSS (compressed)",            ".zsav",
+                              "Stata",             ".dta",
+                          "SAS XPORT",             ".xpt",
+                      "SPSS Portable",             ".por",
+                              "Excel",             ".xls",
+                              "Excel",            ".xlsx",
+                           "R syntax",               ".R",
+                    "Saved R objects",     ".RData, .rda",
+               "Serialized R objects",             ".rds",
+                            "Epiinfo",             ".rec"
+  ) %>% 
+  pandoc.table(caption = "", 
+               justify = "ll", 
+               missing = "—", 
+               split.tables = Inf, 
+               col.names = c("Formato", 
+                             "Extensión típica"))
+
+```
+
+### Ejemplos: 
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+- A formato .rds (sugerido para guardar base de datos individuales en R):
+
+```r
+export(datos, "datos.rds")
+```
+
+- A formato .xlsx:
+
+```r
+export(datos, "datos.xlsx")
+```
+
+:::
+
+::: {.column width='50%'}
+
+- A formato .csv:
+
+```r
+export(datos, "datos.csv")
+```
+
+- A formato .dta:
+
+```r
+export(datos, "datos.dta")
+```
+
+- A formato .sav:
+
+```r
+export(datos, "datos.sav")
+```
+
+:::
+
+::::
+
+
+:::
+
+
+## `r fontawesome::fa("laptop-code", "white")` Nuestro turno {background-color="#000000"}
+<hr>
+
+\
+
+- Descargue la carpeta denominada [taller03]{.verde-h3} disponible en la carpeta compartida.
+
+- Abra el proyecto denominado [taller03.Rproj]{.verde-h3}
+
+- Complete y ejecute el código faltante en los chunk de código de la PRIMERA PARTE.
+
+- Una vez culmine todo el proceso, renderice el archivo .qmd.
+
+\
+\
+\  
+
+```{r}
+#| echo: false
+library(countdown)
+countdown_timer <- function(
+    minutes = 1, 
+    play_sound = TRUE, 
+    font_size = "2em", 
+    ...
+) {
+  countdown(
+    minutes = minutes,
+    # Fanfare when it's over
+    play_sound = play_sound,
+    # Set timer theme to match solarized colors
+    color_border              = "#404041",
+    color_text                = "white",
+    color_background = "#000000",
+    color_running_background  = "#72994E",
+    color_running_text        = "white",
+    color_finished_background = "#EE6331",
+    color_finished_text       = "white",
+    font_size = font_size,
+    ...
+  )
+}
+```
+
+```{R}
+#| echo: false
+countdown_timer(10)
+```
+
+## `r fontawesome::fa("mug-saucer", "white")` Hagamos una pausa {background-color="#00817E"}
+<hr>
+
+::: r-fit-text
+
+<center>
+
+Tomemos un descanso de `5 minutos`...
+
+Estire las piernas `r fontawesome::fa("person-walking", "white")`... 
+
+Deje de ver las pantallas `r fontawesome::fa("laptop", "white")`...
+
+... cualquier `r fontawesome::fa("laptop", "white")`, las del celular `r fontawesome::fa("mobile", "white")` también.
+
+</center>
+
+:::
+
+```{r}
+#| echo: false
+library(countdown)
+countdown_timer <- function(
+    minutes = 1, 
+    play_sound = TRUE, 
+    font_size = "2em", 
+    ...
+) {
+  countdown(
+    minutes = minutes,
+    # Fanfare when it's over
+    play_sound = play_sound,
+    # Set timer theme to match solarized colors
+    color_border              = "#404041",
+    color_text                = "white",
+    color_background = "#000000",
+    color_running_background  = "#72994E",
+    color_running_text        = "white",
+    color_finished_background = "#EE6331",
+    color_finished_text       = "white",
+    font_size = font_size,
+    ...
+  )
+}
+```
+
+```{r}
+#| echo: false
+countdown_timer(5)
+```
+
+# Más verbos de dplyr para manejo de datos
+
+## Creación de nuevas columnas con [mutate()]{.verde-h3}
+<hr>
+
+-   La función [mutate()]{.verde-h3} crea columnas nuevas o modifica existentes.
+
+:::: {.columns}
+
+::: {.column width='40%'}
+
+[Larga]{.verde-h3}
+
+```r
+mutate(.data = DATA, ...)
+```
+
+[Abreviada]{.verde-h3}
+
+```r
+mutate(DATA, ...)
+```
+
+[Se estila usar %>%]{.verde-h3}
+
+```r
+DATA %>% 
+  mutate(...)
+```
+
+:::
+
+::: {.column width='5%'}
+
+:::
+
+::: {.column width='55%'}
+
+\
+
+```{r}
+#| echo: false
+datos_mutate <- 
+  data.frame(
+    Argumento = c(".data", "..."), 
+    Descripción = c("Data frame o extensión de data frame (por ejemplo, tibble).", 
+             "Columnas existente para modificar o columnas nuevas para crear."))
+
+datos_mutate %>% 
+  kbl(booktabs = T) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+                full_width = T)
+```
+
+:::
+
+::::
+
+
+## [mutate()]{.verde-h3} en acción {.scrollable}
+<hr>
+
+::: {.panel-tabset}
+
+### Crear una nueva variable
+
+-   Si queremos crear la variable índice de masa corporal:
+
+```{r}
+datos_fase1 %>% 
+  select(id, weight, height) %>% # Nos quedamos con peso y talla 
+  mutate(imc = weight / height ^ 2) # Creamos IMC en base a peso y talla
+```
+
+### Crear varias nuevas variables
+
+- También podemos crear más de una variable nueva.
+
+- Incluso, podemos reutilizar la variable recién creada para crear otra nueva dentro del mismo argumento de [mutate()]{.verde-h3}
+
+```{r}
+datos_fase1 %>% 
+  select(id, weight, height) %>% 
+  mutate(
+    imc = weight / height ^ 2, 
+    imc_escalado = imc / 10
+    ) 
+```
+
+### Remplazar variable existente
+
+-   Tener cuidado si se quiere reutilizar la variable original, en ese caso es mejor crear columna nueva.
+
+-   Queremos que la edad sea reportada en meses:
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+**Crear columna nueva:**
+
+```{r}
+datos_fase1 %>% 
+  select(id, age) %>% 
+  mutate(age2 = age * 12) # Columna nueva llamada age2
+```
+
+:::
+
+::: {.column width='50%'}
+
+**Remplazar la edad:**
+
+```{r}
+datos_fase1 %>% 
+  select(id, age) %>% 
+  mutate(age = age * 12) # Notar que se remplazó age 
+```
+
+:::
+
+::::
+
+:::
+
+# Otros verbos útiles para manejo de datos
+
+## Renombrar variables con [rename()]{.verde-h3}
+<hr>
+
+- Cambia los nombres de variables individuales.
+
+\ 
+
+:::: {.columns}
+
+::: {.column width='40%'}
+
+[Larga]{.verde-h3}
+
+```r
+rename(.data = DATA, ...)
+```
+
+[Abreviada]{.verde-h3}
+
+```r
+rename(DATA, ...)
+```
+
+[Se estila usar %>%]{.verde-h3}
+
+```r
+DATA %>% 
+  rename(...)
+```
+
+:::
+
+::: {.column width='5%'}
+
+:::
+
+::: {.column width='55%'}
+
+\
+
+```{r}
+#| echo: false
+datos_rename <- 
+  data.frame(
+    Argumento = c(".data", "..."), 
+    Descripción = c("Data frame o extensión de data frame (por ejemplo, tibble).", 
+             "nuevo_nombre = viejo_nombre"))
+
+datos_rename %>% 
+  kbl(booktabs = T) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+                full_width = T)
+```
+
+:::
+
+::::
+
+
+## [rename()]{.verde-h3} en acción
+<hr>
+
+- Cambiar el nombre de `married` por `casado1` y el de `age` por `edad`. 
+
+```{r}
+datos_fase1 %>% 
+  rename(
+    casado1 = married, 
+    edad = age
+    )
+```
+
+
+## Recodificar valores de variables con [recode()]{.verde-h3}
+<hr>
+
+- Cambia los nombres de las etiquetas de valores de las variables.
+
+\ 
+
+:::: {.columns}
+
+::: {.column width='40%'}
+
+[Larga]{.verde-h3}
+
+```r
+recode(.data = DATA, ...)
+```
+
+[Abreviada]{.verde-h3}
+
+```r
+recode(DATA, ...)
+```
+
+[Se estila usar %>%]{.verde-h3}
+
+```r
+DATA %>% 
+  recode(...)
+```
+
+:::
+
+::: {.column width='5%'}
+
+:::
+
+::: {.column width='55%'}
+
+[recode es el raro del grupo: primeo viejo nombre y luego nuevo nombre]{.verde-h3}
+
+```{r}
+#| echo: false
+datos_rename <- 
+  data.frame(
+    Argumento = c(".data", "..."), 
+    Descripción = c("Data frame o extensión de data frame (por ejemplo, tibble).", 
+             "viejo_nombre = nuevo_nombre"))
+
+datos_rename %>% 
+  kbl(booktabs = T) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+                full_width = T)
+```
+
+:::
+
+::::
+
+
+## [recode()]{.verde-h3} en acción
+<hr>
+
+- Cambiar los valores de married2 del inglés al español:
+
+```{r}
+datos_fase1 %>% 
+  mutate(married2 = recode(married2, 
+                           "Without couple" = "Sin pareja", 
+                           "With couple" = "Con pareja"))
+```
+
+
+
+## `r fontawesome::fa("laptop-code", "white")` Nuestro turno {background-color="#000000"}
+<hr>
+
+\
+
+- Descargue la carpeta denominada [taller03]{.verde-h3} disponible en la carpeta compartida.
+
+- Abra el proyecto denominado [taller03.Rproj]{.verde-h3}
+
+- Complete y ejecute el código faltante en los chunk de código de la SEGUNDA PARTE.
+
+- Una vez culmine todo el proceso, renderice el archivo .qmd.
+
+\
+\
+\  
+
+```{r}
+#| echo: false
+library(countdown)
+countdown_timer <- function(
+    minutes = 1, 
+    play_sound = TRUE, 
+    font_size = "2em", 
+    ...
+) {
+  countdown(
+    minutes = minutes,
+    # Fanfare when it's over
+    play_sound = play_sound,
+    # Set timer theme to match solarized colors
+    color_border              = "#404041",
+    color_text                = "white",
+    color_background = "#000000",
+    color_running_background  = "#72994E",
+    color_running_text        = "white",
+    color_finished_background = "#EE6331",
+    color_finished_text       = "white",
+    font_size = font_size,
+    ...
+  )
+}
+```
+
+```{R}
+#| echo: false
+countdown_timer(10)
+```
+
+
+# Uso de helpers
+
+## Selectores tidy
+
+- Son funciones que ayudan a especificar un grupo específico de columnas. 
+
+- Ejemplos típicos de funciones tidyselect son:
+
+    + [starts_with()]{.verde-h3}
+    
+    + [end_with()]{.verde-h3}
+    
+    + [contains()]{.verde-h3}
+    
+    + [matches()]{.verde-h3}
+    
+    + [last_col()]{.verde-h3}
+    
+    + [num_range()]{.verde-h3}
+    
+    + [where()]{.verde-h3}
+
+- Más información sobre tidylsect: <https://dplyr.tidyverse.org/reference/select.html>
+
+
+## `r fontawesome::fa("laptop-code", "white")` Nuestro turno {background-color="#000000"}
+<hr>
+
+\
+
+- Descargue la carpeta denominada [taller03]{.verde-h3} disponible en la carpeta compartida.
+
+- Abra el proyecto denominado [taller03.Rproj]{.verde-h3}
+
+- Complete y ejecute el código faltante en los chunk de código de la TERCERA PARTE.
+
+- Una vez culmine todo el proceso, renderice el archivo .qmd.
+
+\
+\
+\  
+
+```{r}
+#| echo: false
+library(countdown)
+countdown_timer <- function(
+    minutes = 1, 
+    play_sound = TRUE, 
+    font_size = "2em", 
+    ...
+) {
+  countdown(
+    minutes = minutes,
+    # Fanfare when it's over
+    play_sound = play_sound,
+    # Set timer theme to match solarized colors
+    color_border              = "#404041",
+    color_text                = "white",
+    color_background = "#000000",
+    color_running_background  = "#72994E",
+    color_running_text        = "white",
+    color_finished_background = "#EE6331",
+    color_finished_text       = "white",
+    font_size = font_size,
+    ...
+  )
+}
+```
+
+```{R}
+#| echo: false
+countdown_timer(10)
+```
+
+
+# Análisis Exploratorio de Datos versus Análisis Inicial de Datos 
+
+
+## 
+
+\ \ 
+
+[El análisis inicial de datos y el análisis exploratorio de datos son dos cosas diferentes!!]{.big-text4}
+
+## Análisis Exploratorio de Datos
+<hr>
+
+:::: {.columns}
+
+::: {.column width='49%'}
+
+[Análisis Exploratorio de Datos]{.verde-h3}
+
+-   El AED es un enfoque de análisis de conjunto de datos para identificar patrones y formular nuevas hipótesis.
+
+-   Se trata de ver qué nos dice los datos más allá de ideas pre-concebidas.
+
+-   Las nuevas hipótesis luego se confirman en otros nuevos estudios rigurosos.
+
+-   Su versión moderna: Minería de Datos (*Data Minning*) 
+
+:::
+
+::: {.column width='2%'}
+
+::: 
+
+::: {.column width='49%'}
+
+[Análisis Inicial de Datos]{.verde-h3}
+
+-   El AID, a menudo, se confunde erróneamente con el AED: 
+
+    + Ambos son dos enfoques totalmente diferentes que comparten herramietnas comunes.
+
+-   Objetivo del AID:
+
+> *"(...) garantizar principalmente la transparencia y la integridad de las condiciones previas para realizar análisis estadísticos apropiados de manera responsable para responder preguntas de investigación predefinidas."* <br>*Baillie M, et al. [PLoS Comput Biol, 2022]\(https://doi.org/10.1371/journal.pcbi.1009819)*
+
+:::
+
+::::
+
+
+## Análisis Inicial de Datos vs. Análisis Exploratorio de Datos
+<hr>
+
+\
+
+```{r}
+#| echo: false
+aed_aid <- data.frame(
+  AID = c("1. AID es el paso inicial del proceso de confirmación de hipótesis pre-definidas.", "2. En investigación clínico-epidemiológica, a menudo queremos y deberíamos hacer AID.", "3. Proceso clave para garantizar responder adecuadamente objetivos pre-planeados de estudio."), 
+  AED = c("1. AED busca generar hipótesis nuevas.", "2. Rara vez queremos AED (p. ej., enfermedades nuevas, fenómenos muy poco conocidos)", "3. Proceso con alto riesgo de contaminar respuesta a objetivos pre-planeados de estudio.")
+)
+
+aed_aid %>% 
+  kbl(booktabs = T) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+                full_width = T)
+```
+
+## Mala práctica: ¡Hacer AED en vez de AID!
+<hr>
+
+\
+
+-   A menudo, investigadores no realizan AID de manera sistemática.
+
+-   Mezclan actividades de AID con tareas posteriores de análisis de datos, como generación o exploración de hipótesis, análisis formal e interpretación de conclusiones.
+
+-   Como se hacen "informalmente", no se reportan en detalle generándose análisis ocultos.
+
+-   Estos análisis ocultos generan problemas en la reproducibilidad de los estudios.
+
+-   Generan muchos grados de libertad adicionales ocasionando problemas serios de validez de los análisis: *p-hacking*, *post-selection inference*, *double-dipping*, *overfitting*, *etc*.
+
+-   Iniciativa STRATOS ha dado pautas para realizar AID apropiados.
+
+::: aside
+<FONT size='4'>[*BMC Med Res Methodol 20, 61 (2020)*](https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/s12874-020-00942-y)</FONT>
+:::
+
+## El problema de los análisis ocultos
+<hr>
+
+![<FONT size='4'>[*BMC Med Res Methodol 20, 61 (2020)*](https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/s12874-020-00942-y)</FONT>](img/hidden.png)
+
+## Recomendaciones de STRATOS para hacer un buen AID
+<hr>
+
+![<FONT size='4'>[*PLoS Comput Biol 18(2): e1009819*](https://doi.org/10.1371/journal.pcbi.1009819)</FONT>](img/TenRules.png)
+
+## AID es un proceso iterativo
+<hr>
+
+\
+
+-   Proceso no lineal, al contrario, requiere muchas iteraciones.
+
+-   Riesgo: Puede influir en análisis e inducir conclusiones erróneas.
+
+    -   Mayor riesgo de restultados falsos positivos. 
+
+-   Ser cuidados para: 
+
+    -   Evitar alterar la pregunta de investigación. 
+    -   Proveer documentación completa del proceso. 
+
+## AID como parte del plan de investigación
+<hr>
+
+![<FONT size='4'>[*Introducing the Initial Data Analysis Topic Group (TG3)*](https://www.stratos-initiative.org/sites/default/files/2021-11/STRATOS-TG3-BB-initial-data-analysis.pdf)</FONT>](img/AID_plan.png)
+
+## AID como parte del plan de investigación
+
+![<FONT size='4'>[*Huebner M, Vach W, et al.*](https://www.jtcvs.org/action/showPdf?pii=S0022-5223%2815%2901794-8)</FONT>](img/AID_plan2.png)
+
+## 10 recomendaciones de STRATOS para un buen AID {auto-animate=true}
+<hr>
+
+-   **Regla 1**: Desarrolle un plan de AID que respalde el objetivo de la investigación.
+
+-   **Regla 2**: AID toma tiempo y recursos.
+
+-   **Regla 3**: AID debe ser reproducible.
+
+-   **Regla 4**: El contexto importa, conoce tus datos.
+
+-   **Regla 5**: Evite los adelantos, AID no toca la pregunta de investigación.
+
+-   **Regla 6**: Visualiza tus datos.
+
+-   **Regla 7**: Compruebe lo que falte.
+
+-   **Regla 8**: Comunicar los hallazgos y considerar las consecuencias.
+
+-   **Regla 9**: Reporte los hallazgos del AID en trabajos de investigación (¡adjunte anexos!)
+
+-   **Regla 10**: Sea proactivo y riguroso.
+
+## 10 recomendaciones de STRATOS para un buen AID {auto-animate=true}
+<hr>
+
+-   **Regla 1**: Desarrolle un plan de AID que respalde el objetivo de la investigación [→]{.ros} *[¡Escríbalo en el proyecto o anexe un plan de análisis estadístico detallado!]{.verde-h3}*
+
+-   **Regla 2**: AID toma tiempo y recursos.[→]{.ros} *[Presupueste RRHH y tiempo razonable]{.verde-h3}*
+
+-   **Regla 3**: AID debe ser reproducible.[→]{.ros} *[Use programas que generen código]{.verde-h3}*
+
+-   **Regla 4**: El contexto importa, conoce tus datos.[→]{.ros} *[{dplyr} en R]{.verde-h3}*
+
+-   **Regla 5**: Evite los adelantos, AID no toca la pregunta de investigación.[→]{.ros} *[¡No haga 'análisis perliminar` sin antes inspeccionar y limpiar bien lso datos!]{.verde-h3}*
+
+-   **Regla 6**: Visualiza tus datos.[→]{.ros} *[{ggplot2} en R]{.verde-h3}*
+
+-   **Regla 7**: Compruebe lo que falte.[→]{.ros} *[{tidyverse} para queries en R]{.verde-h3}*
+
+-   **Regla 8**: Comunicar los hallazgos y considerar las consecuencias.[→]{.ros} *[Quarto para programación literaria en R]{.verde-h3}*
+
+-   **Regla 9**: Reporte los hallazgos del AID en trabajos de investigación (¡adjunte anexos!).[→]{.ros} *[Ídem]{.verde-h3}*
+
+-   **Regla 10**: Sea proactivo y riguroso.[→]{.ros} *[¡Los datos son como sus pacientes, use las mejores técnicas y herramientas disponibles!]{.verde-h3}*
+
+## Regla 4: El contexto importa, conoce tus datos {.scrollable}
+<hr>
+
+\
+
+-   Dé una primera mirada global a los datos
+-   Diseñe una lista de validaciones a realizar desde el proyecto.
+-   Valida tus datos: 
+    -   Identifique duplicados y detecte inconsistencias 
+    -   Valores extremos no plausibles 
+    -   Identifique valores perdidos 
+    
+-   En R, use los  verbos básicos de {dplyr} para hacer consultas ("queries") a sus datos: `filter()`, `select()`, `mutate()`, `arrange()` y `summarise()`.
+
+```{r}
+#| include: false
+datos_org <- import("maca_meno_perclin.xlsx")
+datos <- rbind(datos_org, datos_org[c(1, 5, 9), ]) %>% 
+  set_variable_labels(
+    id_jaula = "ID de jaula",
+    id_raton = "ID de ratón", 
+    tratamiento = "Tratamiento asignado", 
+    protocolo = "Tipo de protocolo de modelo animal", 
+    peso_inicial = "Peso inicial", 
+    peso_final = "Peso final", 
+    peso_utero = "Peso uterino", 
+    chol = "Colesterol", 
+    glucose = "Glucosa", 
+    tag = "Triglicéridos", 
+    prot = "Proteína", 
+    urea = "Urea", 
+    album = "Albuminemia"
+  )
+```
+
+# Pasos para un buen AID / AED 
+
+## {.scrollable}
+
+> **Paso 1:** Resumen global de los datos
+
+
+::: panel-tabset
+
+### ¿Qué debo inspeccionar de manera global?
+
+- Dimensiones: columnas y filas
+
+- Variables y tipos
+
+- Datos completos y faltantes
+
+- Variables numéricas: Mínimos, máximos y valores extremos
+
+- Variables categóricas: Valores o categorías muy poco frecuentes y datos perdidos encubiertos
+
+### glimpse()
+
+- Heche un vistazo de los datos con [glimpse()]{.plo}:
+
+```{r}
+glimpse(datos)
+```
+
+### skim()
+
+- La función [skim()]{.plo} del paquete [skim]r]{.plo} genera un resumen global de los datos:
+
+```{r}
+skim(datos)
+```
+
+### describe()
+
+- La función [describe()]{.plo} del paquete [Hmisc]{.plo} genera un reporte general bien detallado, variable por variable:
+
+```{r}
+describe(datos)
+```
+:::
+
+
+## `r fontawesome::fa("laptop-code", "white")` Nuestro turno {background-color="#000000"}
+<hr>
+
+\
+
+- Descargue la carpeta denominada [taller03]{.verde-h3} disponible en la carpeta compartida.
+
+- Abra el proyecto denominado [taller03.Rproj]{.verde-h3}
+
+- Complete y ejecute el código faltante en los chunk de código de la CUARTA PARTE.
+
+- Una vez culmine todo el proceso, renderice el archivo .qmd.
+
+\
+\
+\  
+
+```{r}
+#| echo: false
+library(countdown)
+countdown_timer <- function(
+    minutes = 1, 
+    play_sound = TRUE, 
+    font_size = "2em", 
+    ...
+) {
+  countdown(
+    minutes = minutes,
+    # Fanfare when it's over
+    play_sound = play_sound,
+    # Set timer theme to match solarized colors
+    color_border              = "#404041",
+    color_text                = "white",
+    color_background = "#000000",
+    color_running_background  = "#72994E",
+    color_running_text        = "white",
+    color_finished_background = "#EE6331",
+    color_finished_text       = "white",
+    font_size = font_size,
+    ...
+  )
+}
+```
+
+```{R}
+#| echo: false
+countdown_timer(10)
+```
+
+
+## 
+
+::: r-fit-text
+<center>¡Gracias!</center>
+
+<center>¿Preguntas?</center>
+
+:::
+
+## 
+
+\
+
+\
+
+\
+
+::: r-fit-text
+
+<center>
+{{< fa brands twitter >}} @psotob91 
+
+{{< fa brands github >}} https://github.com/psotob91
+
+{{< fa inbox >}} percys1991@gmail.com
+</center>
+
+:::

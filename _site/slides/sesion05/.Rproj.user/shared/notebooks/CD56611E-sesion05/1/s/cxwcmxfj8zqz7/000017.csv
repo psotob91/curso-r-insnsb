@@ -1,0 +1,8 @@
+"0","bd_inmuno %>% "
+"0","  summarise("
+"0","    Media = mean(edad), "
+"0","    DE = sd(edad), "
+"0","    Mediana = median(edad), "
+"0","    `Percentil 25` = quantile(edad, 0.25), "
+"0","    `Percentil 75` = quantile(edad, 0.75) "
+"0","    )"

@@ -1,0 +1,3 @@
+"0","mod %>% "
+"0","  tidy(exponentiate = TRUE, conf.int = TRUE) %>% "
+"0","  gt()"

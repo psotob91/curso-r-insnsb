@@ -1,0 +1,7 @@
+title: Font Awesome support
+author: Carlos Scheidegger
+lang: es
+version: 0.0.1
+contributes:
+  shortcodes:
+    - fontawesome.lua

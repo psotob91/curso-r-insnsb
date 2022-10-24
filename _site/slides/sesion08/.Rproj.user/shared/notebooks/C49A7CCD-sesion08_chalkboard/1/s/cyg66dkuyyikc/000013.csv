@@ -1,0 +1,3 @@
+"0","library(broom)"
+"0","mod %>% "
+"0","  tidy(conf.int = TRUE, exponentiate = TRUE)"

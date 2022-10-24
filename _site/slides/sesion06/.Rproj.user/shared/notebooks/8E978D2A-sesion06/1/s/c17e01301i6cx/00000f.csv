@@ -1,0 +1,5 @@
+"0","#| echo: false"
+"0","library(haven)"
+"0","datos <- read_dta(""maca_meno_fase1.dta"") %>% "
+"0","  as_factor() %>% "
+"0","  filter(time == ""3 months"")"

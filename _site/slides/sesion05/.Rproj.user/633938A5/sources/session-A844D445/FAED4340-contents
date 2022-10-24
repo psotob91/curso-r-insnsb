@@ -1,0 +1,737 @@
+---
+title: "<FONT color='#A7D5E8'>Variables categóricas: Gráficos</FONT>"
+subtitle: "<FONT color='#E9AFA3' size='10'>R para Ciencia de Datos en Salud: <br> Análisis Descriptivo e Inferencia Estadística</FONT>"
+author: "<FONT color='#FFFFFF' size='30'>Percy Soto-Becerra M.D., M.Sc(c)</FONT>"
+institute: "<FONT color='#FFFFFF' size='5'>InkaStats Data Science Solutions | Medical Branch<br>@github/psotob91</FONT>"
+
+format: 
+  revealjs:
+    self-contained: true
+    theme: [simple, theme/theme.scss]
+    footer: "Variables categóricas: Gráficos"
+    slide-number: c/t
+    logo: img/logo.png
+    width: 1920
+    height: 1080
+    highlight-style: ayu-dark
+    self-contained-math: true
+from: markdown+emoji
+execute:
+  echo: true
+---
+
+```{r}
+#| label: setup
+#| include: false
+library(fontawesome)
+library(tidyverse)
+library(quarto)
+library(gt)
+library(gtExtras)
+library(gtsummary)
+library(showtext)
+library(kableExtra)
+library(plotly)
+library(haven)
+library(Hmisc)
+library(janitor)
+library(summarytools)
+library(rio)
+library(treemap)
+## Ver QUARTO RSTUDIO CONFERENCE: https://github.com/rstudio-conf-2022/get-started-quarto/blob/main/materials/02-authoring.qmd
+## 
+## blackboard theme: https://github.com/schochastics/quarto-blackboard-theme
+## 
+## https://github.com/schochastics/xaringan-themes
+```
+
+---
+
+# Gráficas de variables categóricas con R
+
+## ¿Qué graficos podemos hacer para visualizar variables categóricas?
+
+:::: {.columns}
+
+::: {.column width='40%'}
+
+- Se pueden hacer una infinidad de estos.
+
+- El más común para investigación científica es el `gráfico de barras`.
+
+- Una gráfico menos usado en investigación científica, pero sí en reportes o presentaciones podría ser el `gráfico de pái`. 
+
+- Otros gráficos interesantes: 
+
+![](img/lollipop.png){.absolute top=600 left=0 width="400" height="400"}
+
+:::
+
+::: {.column width='60%'}
+
+![](img/circular-barplot.png){.absolute top=600 left=600 width="400" height="400"}
+
+![](img/barplot.png){.absolute top=100 left=1000 width="400" height="400"}
+
+![](img/pie.png){.absolute top=100 left=1500 width="400" height="400"}
+
+
+![](img/treemap.png){.absolute top=600 left=1200 width="400" height="400"}
+
+
+:::
+
+::::
+
+# Gráfico de barras
+
+## Estructura de datos para gráfico de barras
+
+<br/>
+
+<center>[Datos individuales:]{.big-text3}</center>
+
+<center>[geom_bar()]{.big-text2}</center>
+
+<center>[vs.]{.big-text3}</center>
+
+<center>[Datos agrupados:]{.big-text3}</center>
+
+<center>[geom_bar(stat = "identity") o]{.big-text2}</center>
+
+<center>[geom_col()]{.big-text2}</center>
+
+## Gráfico de barras de frecuencias absolutas {.scrollable}
+
+::: {.panel-tabset}
+
+### datos
+
+> Para estos gráficos vamos a trabajar con los datos de pacientes hospitalizados durante una pandemia de Ébola. Los datos pertenecen al libro [The Epidemiologist Handbook](https://epirhandbook.com/en/index.html) descrito en la sección del Syllabus.
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+- Importamos y exploramos los datos que están en formato de R: *.rds
+
+```{r}
+ebola_data <- import("linelist_cleaned.rds")
+ebola_data %>% 
+  glimpse()
+```
+
+:::
+
+::: {.column width='50%'}
+
+- Distribución de pacientes según hospital [tabyl()]{.plo}
+
+```{r}
+ebola_data %>% 
+  tabyl(hospital)
+```
+
+
+- Distribución de pacientes sin datos faltantes [tabyl()]{.plo}
+
+```{r}
+ebola_data %>% 
+  filter(hospital != "Missing") %>% 
+  tabyl(hospital)
+```
+
+:::
+
+::::
+
+### geom_bar()
+
+> Usamos [geom_bar()]{.plo} cuando queremos que la altura de la barra refleje el número de filas relevantes en los datos. Por defecto, las barras son de frecuencias absolutas y se llaman count.
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+[Barplot vertical]{.hl}
+
+```{r}
+ebola_data %>% 
+  ggplot(aes(x = hospital)) + 
+  geom_bar()
+```
+
+:::
+
+::: {.column width='50%'}
+
+[Barplot horizontal]{.hl}
+
+```{r}
+ebola_data %>% 
+  ggplot(aes(y = hospital)) + 
+  geom_bar()
+```
+
+:::
+
+::::
+
+### geom_col()
+
+> Usamos [geom_col()]{.plo} cuando queremos que la altura de la barra refleje valores pre-calculados que existen en los datos. A menudo, los datos son agregads y pueden obtenerse mediante la combinación summarise() y group_by(). 
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+- Te proprocionan una tabla de datos agregada (no tienes valores individuales), solo los totales de casos y6 su prevalencia:
+
+```{r}
+#| echo: false
+datos_agregados <- data.frame(
+  nivel_dolor = c("Leve", "Moderado", "Severo"), 
+  casos = c(234, 123, 21), 
+  prevalencia = c(61.9, 32.5, 5.6)
+)
+
+datos_agregados
+```
+
+
+:::
+
+::: {.column width='50%'}
+
+- Puedes graficarlo usando [geom_col()]{.plo} que no requiere datos individuales.
+
+```{r}
+datos_agregados %>% 
+  ggplot(aes(x = nivel_dolor, y = casos)) + 
+  geom_col()
+```
+
+
+:::
+::::
+
+### _col vs. _bar()
+
+>geom_col() y geom_bar() son equivalentes.
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+```{r}
+datos_agregados %>% 
+  ggplot(aes(x = nivel_dolor, y = casos)) + 
+  geom_col()
+```
+
+
+
+:::
+
+::: {.column width='50%'}
+
+```{r}
+datos_agregados %>% 
+  ggplot(aes(x = nivel_dolor, y = casos)) + 
+  geom_bar(stat = "identity")
+```
+
+:::
+
+::::
+
+
+### agregar datos
+
+>Si tenemos datos individuales, podemos agregarlos y así resulta más fácil pensar en los gráficos de barras desde ggplot()
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+```{r}
+ebola_data %>% 
+  group_by(hospital) %>% 
+  count() %>% 
+  ggplot(aes(x = n, y = hospital)) + 
+  geom_col()
+```
+
+:::
+
+::: {.column width='50%'}
+
+```{r}
+ebola_data %>% 
+  group_by(hospital) %>% 
+  count() %>% 
+  ggplot(aes(x = n, y = hospital)) + 
+  geom_bar(stat = "identity")
+```
+
+:::
+
+::::
+
+### personalizar
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+[Cambiar el orden de las barras arbitrariamente]{.hl}
+
+```{r}
+ebola_data %>% 
+  mutate(
+    hospital = fct_relevel(hospital, 
+                           "St. Mark's Maternity Hospital (SMMH)", 
+                           "Port Hospital", 
+                           "Central Hospital",
+                           "Military Hospital",
+                           "Other",
+                           "Missing")
+    ) %>% 
+  ggplot(aes(y = hospital)) + 
+  geom_bar()
+```
+
+:::
+
+::: {.column width='50%'}
+
+[Editar etiquetas y tema]{.hl}
+
+```{r}
+ebola_data %>% 
+  mutate(
+    hospital = fct_relevel(hospital, 
+                           "St. Mark's Maternity Hospital (SMMH)", "Port Hospital", 
+                           "Central Hospital", "Military Hospital", "Other",
+                           "Missing")
+    ) %>% 
+  ggplot(aes(y = hospital)) + 
+  geom_bar() + 
+  labs(x = "Frecuencia absoluta", y = "Hospitales") + 
+  theme_bw()
+```
+
+:::
+
+::::
+
+:::
+
+
+## Gráfico de barras de frecuencias relativas {.scrollable}
+
+::: {.panel-tabset}
+
+### porcentajes
+
+> Las frecuencias relativas necesitan ser calculadas para reportarse. La forma más fácil de hacerlo es agregando los datos mediante el uso de [count()]{.plo}. Luego usamos [mutate()]{.plo} para crear las proporciones o porcentajes. También podemos trabajar con datos individuales, pero el código puede verse un poco más duro.
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+- Agregamos los datos de hospitalizados
+
+```{r}
+ebola_data %>% 
+  count(hospital)
+```
+
+:::
+
+::: {.column width='50%'}
+
+- Creamos la columna de porcentaje:
+
+```{r}
+ebola_data %>% 
+  count(hospital) %>% 
+  mutate(porcentaje = 100 * n / sum(n))
+```
+
+:::
+
+::::
+
+
+### geom_bar()
+
+> Podemos usar geom_bar() con datos agregados y no agregados para obtener prorporciones. El código puede ser un poco más "extraño" con datos individuales, pero la idea es copiar/pegar y adaptar.
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+[Agregando datos]{.hl}
+
+```{r}
+#| fig-align: center
+ebola_data %>% 
+  count(hospital) %>% 
+  mutate(porcentaje = 100 * n / sum(n)) %>% 
+  ggplot(aes(x = hospital, y = porcentaje)) + 
+  geom_bar(stat = "identity")
+```
+
+
+:::
+
+::: {.column width='50%'}
+
+[Con datos individuales]{.hl}
+
+```{r}
+#| fig-align: center
+ebola_data %>% 
+  ggplot(aes(x = hospital)) + 
+  geom_bar(aes(y = (..count..)/sum(..count..)))
+```
+
+:::
+::::
+
+### geom_col()
+
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+[Orden por defecto]{.hl}
+
+```{r}
+#| fig-align: center
+ebola_data %>% 
+  count(hospital) %>% 
+  mutate(porcentaje = 100 * n / sum(n)) %>% 
+  ggplot(aes(x = hospital, y = porcentaje)) + 
+  geom_col()
+```
+
+
+
+:::
+
+::: {.column width='50%'}
+
+[Orden arbitrario]{.hl}
+
+```{r}
+#| fig-align: center
+ebola_data %>% 
+  mutate(
+    hospital = fct_relevel(hospital, 
+                           "St. Mark's Maternity Hospital (SMMH)", 
+                           "Port Hospital", 
+                           "Central Hospital",
+                           "Military Hospital",
+                           "Other",
+                           "Missing")
+    ) %>% 
+  count(hospital) %>% 
+  mutate(porcentaje = 100 * n / sum(n)) %>% 
+  ggplot(aes(x = hospital, y = porcentaje)) + 
+  geom_col()
+```
+
+:::
+
+::::
+
+
+### reordenar barras
+
+>Podemos querer reordenar las barras de mayor a menoro o viceversa. geom_col() y geom_bar() tiene su propia forma de hacerlo.
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+[Reordenar con geom_bar()]{.hl}
+
+```{r}
+#| fig-align: center
+ebola_data %>% 
+  ggplot(aes(x = fct_infreq(hospital))) + 
+  geom_bar()
+```
+
+:::
+
+::: {.column width='50%'}
+
+[Reordenar con geom_col()]{.hl}
+
+```{r}
+#| fig-align: center
+ebola_data %>% 
+  group_by(hospital) %>% 
+  count() %>% 
+  ggplot(aes(x = n, y = fct_reorder(hospital, n))) + 
+  geom_col()
+```
+
+:::
+
+::::
+
+### etiquetas
+
+>Podemos etiquetar los gráficos usando la función labs() y sus argumentos.
+
+```{r}
+#| fig-align: center
+ebola_data %>% 
+  count(hospital) %>% 
+  mutate(porcentaje = n / sum(n)) %>% 
+  ggplot(aes(x = porcentaje, y = fct_reorder(hospital, porcentaje))) + 
+  geom_col() + 
+  labs(x = "Porcentaje (%)", 
+       y = "Hospital", 
+       title = "Distribución de hospitalizaciones de pacientes de Ébola")
+```
+
+### colores
+
+>También podemos hacer que los colores cambien en base a alguna otra variable
+
+```{r}
+#| fig-align: center
+ebola_data %>% 
+  count(hospital) %>% 
+  mutate(porcentaje = n / sum(n)) %>% 
+  ggplot(aes(x = porcentaje, 
+             y = fct_reorder(hospital, porcentaje), 
+             fill = hospital)) + 
+  geom_col() + 
+  labs(x = "Porcentaje (%)", 
+       y = "Hospital", 
+       title = "Distribución de hospitalizaciones de pacientes de Ébola", 
+       fill = "Hospital") 
+```
+
+### leyenda
+
+> Podemos eliminar la leyenda fácilmente con una capa adicional llamada theme(legend.position="none")
+
+```{r}
+#| fig-align: center
+ebola_data %>% 
+  count(hospital) %>% 
+  mutate(porcentaje = n / sum(n)) %>% 
+  ggplot(aes(x = porcentaje, 
+             y = fct_reorder(hospital, porcentaje), 
+             fill = hospital)) + 
+  geom_col() + 
+  labs(x = "Porcentaje (%)", 
+       y = "Hospital", 
+       title = "Distribución de hospitalizaciones de pacientes de Ébola", 
+       fill = "Hospital")  + 
+  theme(legend.position = "none")
+```
+
+
+
+:::
+
+
+# Otros gráficos
+
+## Gráfico de barras apilada
+
+> En vez de graficar varias barras de manera horizontal, las apilamos todas en una sola barra.
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+[Grafico de barras apiladas de frecuencias absolutas]{.hl}
+
+```{r}
+#| fig-align: center
+ebola_data %>% 
+  count(hospital) %>% 
+  ggplot(aes(x = "", y = n, fill = hospital)) + 
+  geom_bar(stat = "identity", position = "stack")
+```
+
+:::
+
+::: {.column width='50%'}
+
+[Grafico de barras apiladas de frecuencias relativas]{.hl}
+
+```{r}
+#| fig-align: center
+ebola_data %>% 
+  count(hospital) %>% 
+  ggplot(aes(x = "", y = n, fill = hospital)) + 
+  geom_bar(stat = "identity", position = "fill")
+```
+
+:::
+
+::::
+
+
+## Gráfico de pie
+
+> Es un gráfico de barras empaquetado como una torta o pái; por lo que el código en ggplot primero crea el gráfico de barras y luego lo convierte en torta.
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+[Grafico de barras apiladas de frecuencias absolutas]{.hl}
+
+```{r}
+#| fig-align: center
+ebola_data %>% 
+  count(hospital) %>% 
+  ggplot(aes(x = "", y = n, fill = hospital)) + 
+  geom_bar(stat = "identity", width = 1) + 
+  coord_polar("y", start = 0)
+```
+:::
+
+::: {.column width='50%'}
+
+[Grafico de barras apiladas de frecuencias relativas]{.hl}
+
+```{r}
+#| fig-align: center
+ebola_data %>% 
+  count(hospital) %>% 
+  ggplot(aes(x = "", y = n, fill = hospital)) + 
+  geom_bar(stat = "identity", position = "fill", width = 1) + 
+  coord_polar("y", start = 0)
+```
+
+:::
+
+::::
+
+## Lollipop plot
+
+> Gráficos que parecen chupetines ("lollipop"). Son equivalentes a las barras. Pueden usarse también para describir la distribución de variables numéricas discretas y deberían preferirse a los histogramas en este caso.
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+```{r}
+#| fig-align: center
+ebola_data %>% 
+  count(hospital) %>% 
+  ggplot(aes(x = hospital, y = n)) + 
+  geom_segment(aes(x = hospital, xend = hospital, y = 0, yend = n)) + 
+  geom_point() + 
+  theme_minimal()
+```
+
+:::
+
+::: {.column width='50%'}
+
+```{r}
+#| fig-align: center
+ebola_data %>% 
+  count(hospital) %>% 
+  ggplot(aes(x = hospital, y = n)) + 
+  geom_segment(aes(x = hospital, xend = hospital, y = 0, yend = n), color = "skyblue") + 
+  geom_point(color = "blue", alpha = 0.6, size = 4) + 
+  theme_light() + 
+  coord_flip() + 
+  theme(
+  panel.grid.major.y = element_blank(),
+  panel.border = element_blank(),
+  axis.ticks.y = element_blank()
+  )
+```
+
+:::
+
+::::
+
+## Treemap
+
+> Es un gráfico básico que muestra mosaicos. El área de cada polígono refleja su frecuencia absoluta o relativa. Se debe usar el paquete {treemap}
+
+```{r}
+#| fig-align: center
+library(treemap)
+ebola_data %>% 
+  count(hospital) %>% 
+  treemap(index = "hospital", 
+          vSize = "n", 
+          type = "index")
+```
+
+## Más gráficos
+
+> Revisar la web "The R Graph Gallery":
+
+```{r}
+#| echo: false
+#| fig-align: center
+knitr::include_graphics("img/r-gallery.png")
+```
+
+ <center>[Ver más: <https://r-graph-gallery.com/index.html>]{.bigtext2}</center>
+ 
+# `r fontawesome::fa("laptop-code", "white")` Nuestro turno {background-color="#000000"}
+
+<br/>
+
+-   Descargue la carpeta `var_cat_graficos`.
+
+- Abra el proyecto `var_cat_graficos.Rproj` y dentro de este, abra el archivo quarto `var_cat_graficos_taller.qmd`. 
+
+- Siga las instrucciones indicadas en este.
+
+- Renderice el archivo quarto final.
+
+<br/><br/><br/>  
+
+```{r}
+#| echo: false
+library(countdown)
+countdown_timer <- function(
+    minutes = 1, 
+    play_sound = TRUE, 
+    font_size = "2em", 
+    ...
+) {
+  countdown(
+    minutes = minutes,
+    # Fanfare when it's over
+    play_sound = play_sound,
+    # Set timer theme to match solarized colors
+    color_border              = "#404041",
+    color_text                = "white",
+    color_background = "#000000",
+    color_running_background  = "#72994E",
+    color_running_text        = "white",
+    color_finished_background = "#EE6331",
+    color_finished_text       = "white",
+    font_size = font_size,
+    ...
+  )
+}
+```
+
+
+```{R}
+#| echo: false
+countdown_timer(10)
+```

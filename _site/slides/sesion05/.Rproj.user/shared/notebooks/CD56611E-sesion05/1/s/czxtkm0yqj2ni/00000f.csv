@@ -1,0 +1,21 @@
+"0","bd_inmuno %>% "
+"0","  select(sexo, ant_COV) %>% "
+"0","   freq(report.nas = FALSE, "
+"0","        totals = FALSE,"
+"0","        cumul = FALSE, "
+"0","        headings= FALSE)"
+"1","bd_inmuno$sexo  
+
+                  Freq       %
+--------------- ------ -------
+       Femenino    189   66.55
+      Masculino     95   33.45
+"
+"1","
+bd_inmuno$ant_COV  
+
+                        Freq       %
+--------------------- ------ -------
+         No Infection    201   70.53
+      Prior Infection     84   29.47
+"

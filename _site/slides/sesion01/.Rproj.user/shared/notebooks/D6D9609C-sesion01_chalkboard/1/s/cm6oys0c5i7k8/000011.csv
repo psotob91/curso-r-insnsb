@@ -1,0 +1,4 @@
+"0","#| echo: false"
+"0","#| fig-align: center"
+"0","#| out.width: 70%"
+"0","knitr::include_graphics(""img/RStudio.png"")"

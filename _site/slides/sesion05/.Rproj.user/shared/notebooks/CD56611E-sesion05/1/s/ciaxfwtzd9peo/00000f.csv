@@ -1,0 +1,25 @@
+"0","bd_inmuno %>% "
+"0","  descr(edad)"
+"1","Descriptive Statistics  
+bd_inmuno$edad  
+Label: edad  
+N: 285  
+
+                      edad
+----------------- --------
+             Mean    48.25
+          Std.Dev    14.71
+              Min    23.00
+               Q1    36.00
+           Median    46.00
+               Q3    59.00
+              Max    97.00
+              MAD    17.79
+              IQR    23.00
+               CV     0.30
+         Skewness     0.44
+      SE.Skewness     0.14
+         Kurtosis    -0.39
+          N.Valid   285.00
+        Pct.Valid   100.00
+"

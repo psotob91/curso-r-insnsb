@@ -1,0 +1,2 @@
+"0","bd_inmuno %>% "
+"0","  summarise(Media = mean(edad))"

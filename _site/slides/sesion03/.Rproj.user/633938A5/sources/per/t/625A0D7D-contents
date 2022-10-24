@@ -1,0 +1,747 @@
+---
+title: "<FONT color='#A7D5E8'>Análisis Inicial vs Exploratorio de Datos</FONT>"
+subtitle: "<FONT color='#E9AFA3' size='10'>R para Ciencia de Datos en Salud: <br> Análisis Descriptivo e Inferencia Estadística</FONT>"
+author: "<FONT color='#FFFFFF' size='30'>Percy Soto-Becerra M.D., M.Sc(c)</FONT>"
+institute: "<FONT color='#FFFFFF' size='5'>InkaStats Data Science Solutions | Medical Branch<br>@github/psotob91</FONT>"
+
+format: 
+  revealjs:
+    self-contained: true
+    theme: [simple, theme/theme.scss]
+    footer: "Análisis Inicial vs Exploratorio de Datos"
+    slide-number: c/t
+    logo: img/logo.png
+    width: 1920
+    height: 1080
+    highlight-style: ayu-dark
+    self-contained-math: true
+from: markdown+emoji
+execute:
+  echo: true
+---
+```{r}
+#| echo: false
+#| output: false
+
+# Removing all objects including loaded libraries
+rm(list = ls(all = TRUE))
+gc()
+
+# Installing and loading packages
+if (!require("pacman")) {
+  install.packages("pacman")
+}
+
+pacman::p_unload("all") # Unloading all package except base
+
+pacman::p_load(tidyverse, rio, janitor, gt, gtsummary, flextable, kableExtra, skimr, Hmisc, readxl, labelled) # Loading packages
+
+# icons::download_fontawesome()
+```
+
+
+# Análisis Exploratorio de Datos versus Análisis Inicial de Datos 
+
+---
+
+## 
+
+<br/> <br/> 
+
+[El análisis inicial de datos y el análisis exploratorio de datos son dos cosas diferentes!!]{.big-text4}
+
+---
+
+## Análisis Exploratorio de Datos
+
+<br/>
+
+:::: {.columns}
+
+::: {.column width='49%'}
+
+[Análisis Exploratorio de Datos]{.hl}
+
+-   El AED es un enfoque de análisis de conjunto de datos para identificar patrones y formular nuevas hipótesis.
+
+-   Se trata de ver qué nos dice los datos más allá de ideas pre-concebidas.
+
+-   Las nuevas hipótesis luego se confirman en otros nuevos estudios rigurosos.
+
+-   Su versión moderna: Minería de Datos (*Data Minning*) 
+
+:::
+
+::: {.column width='2%'}
+
+::: 
+
+::: {.column width='49%'}
+
+[Análisis Inicial de Datos]{.hl}
+
+-   El AID, a menudo, se confunde erróneamente con el AED: 
+
+    + Ambos son dos enfoques totalmente diferentes que comparten herramietnas comunes.
+
+-   Objetivo del AID:
+
+> *"(...) garantizar principalmente la transparencia y la integridad de las condiciones previas para realizar análisis estadísticos apropiados de manera responsable para responder preguntas de investigación predefinidas."* <br>*Baillie M, et al. [PLoS Comput Biol, 2022]<br/>(https://doi.org/10.1371/journal.pcbi.1009819)*
+
+:::
+
+::::
+
+
+## Análisis Inicial de Datos vs. Análisis Exploratorio de Datos
+
+<br/>
+
+```{r}
+#| echo: false
+aed_aid <- data.frame(
+  AID = c("1. AID es el paso inicial del proceso de confirmación de hipótesis pre-definidas.", "2. En investigación clínico-epidemiológica, a menudo queremos y deberíamos hacer AID.", "3. Proceso clave para garantizar responder adecuadamente objetivos pre-planeados de estudio."), 
+  AED = c("1. AED busca generar hipótesis nuevas.", "2. Rara vez queremos AED (p. ej., enfermedades nuevas, fenómenos muy poco conocidos)", "3. Proceso con alto riesgo de contaminar respuesta a objetivos pre-planeados de estudio.")
+)
+
+aed_aid %>% 
+  kbl(booktabs = T) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+                full_width = T)
+```
+
+## Mala práctica: ¡Hacer AED en vez de AID!
+
+<br/>
+
+-   A menudo, investigadores no realizan AID de manera sistemática.
+
+-   Mezclan actividades de AID con tareas posteriores de análisis de datos, como generación o exploración de hipótesis, análisis formal e interpretación de conclusiones.
+
+-   Como se hacen "informalmente", no se reportan en detalle generándose análisis ocultos.
+
+-   Estos análisis ocultos generan problemas en la reproducibilidad de los estudios.
+
+-   Generan muchos grados de libertad adicionales ocasionando problemas serios de validez de los análisis: *p-hacking*, *post-selection inference*, *double-dipping*, *overfitting*, *etc*.
+
+-   Iniciativa STRATOS ha dado pautas para realizar AID apropiados.
+
+::: aside
+<FONT size='4'>[*BMC Med Res Methodol 20, 61 (2020)*](https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/s12874-020-00942-y)</FONT>
+:::
+
+## El problema de los análisis ocultos
+
+![<FONT size='4'>[*BMC Med Res Methodol 20, 61 (2020)*](https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/s12874-020-00942-y)</FONT>](img/hidden.png)
+
+## Recomendaciones de STRATOS para hacer un buen AID
+
+![<FONT size='4'>[*PLoS Comput Biol 18(2): e1009819*](https://doi.org/10.1371/journal.pcbi.1009819)</FONT>](img/TenRules.png)
+
+## AID es un proceso iterativo
+
+<br/>
+
+-   Proceso no lineal, al contrario, requiere muchas iteraciones.
+
+-   Riesgo: Puede influir en análisis e inducir conclusiones erróneas.
+
+    -   Mayor riesgo de restultados falsos positivos. 
+
+-   Ser cuidados para: 
+
+    -   Evitar alterar la pregunta de investigación. 
+    -   Proveer documentación completa del proceso. 
+
+## AID como parte del plan de investigación
+
+![<FONT size='4'>[*Introducing the Initial Data Analysis Topic Group (TG3)*](https://www.stratos-initiative.org/sites/default/files/2021-11/STRATOS-TG3-BB-initial-data-analysis.pdf)</FONT>](img/AID_plan.png)
+
+## AID como parte del plan de investigación
+
+![<FONT size='4'>[*Huebner M, Vach W, et al.*](https://www.jtcvs.org/action/showPdf?pii=S0022-5223%2815%2901794-8)</FONT>](img/AID_plan2.png)
+
+## 10 recomendaciones de STRATOS para un buen AID {auto-animate=true}
+
+<br/>
+
+-   **Regla 1**: Desarrolle un plan de AID que respalde el objetivo de la investigación.
+
+-   **Regla 2**: AID toma tiempo y recursos.
+
+-   **Regla 3**: AID debe ser reproducible.
+
+-   **Regla 4**: El contexto importa, conoce tus datos.
+
+-   **Regla 5**: Evite los adelantos, AID no toca la pregunta de investigación.
+
+-   **Regla 6**: Visualiza tus datos.
+
+-   **Regla 7**: Compruebe lo que falte.
+
+-   **Regla 8**: Comunicar los hallazgos y considerar las consecuencias.
+
+-   **Regla 9**: Reporte los hallazgos del AID en trabajos de investigación (¡adjunte anexos!)
+
+-   **Regla 10**: Sea proactivo y riguroso.
+
+## 10 recomendaciones de STRATOS para un buen AID {auto-animate=true}
+
+<br/>
+
+-   **Regla 1**: Desarrolle un plan de AID que respalde el objetivo de la investigación [→]{.ros} *[¡Escríbalo en el proyecto o anexe un plan de análisis estadístico detallado!]{.hl}*
+
+-   **Regla 2**: AID toma tiempo y recursos.[→]{.ros} *[Presupueste RRHH y tiempo razonable]{.hl}*
+
+-   **Regla 3**: AID debe ser reproducible.[→]{.ros} *[Use programas que generen código]{.hl}*
+
+-   **Regla 4**: El contexto importa, conoce tus datos.[→]{.ros} *[{dplyr} en R]{.hl}*
+
+-   **Regla 5**: Evite los adelantos, AID no toca la pregunta de investigación.[→]{.ros} *[¡No haga 'análisis perliminar` sin antes inspeccionar y limpiar bien lso datos!]{.hl}*
+
+-   **Regla 6**: Visualiza tus datos.[→]{.ros} *[{ggplot2} en R]{.hl}*
+
+-   **Regla 7**: Compruebe lo que falte.[→]{.ros} *[{tidyverse} para queries en R]{.hl}*
+
+-   **Regla 8**: Comunicar los hallazgos y considerar las consecuencias.[→]{.ros} *[Quarto para programación literaria en R]{.hl}*
+
+-   **Regla 9**: Reporte los hallazgos del AID en trabajos de investigación (¡adjunte anexos!).[→]{.ros} *[Ídem]{.hl}*
+
+-   **Regla 10**: Sea proactivo y riguroso.[→]{.ros} *[¡Los datos son como sus pacientes, use las mejores técnicas y herramientas disponibles!]{.hl}*
+
+## Regla 4: El contexto importa, conoce tus datos {.scrollable}
+
+<br/>
+
+-   Dé una primera mirada global a los datos
+-   Diseñe una lista de validaciones a realizar desde el proyecto.
+-   Valida tus datos: 
+    -   Identifique duplicados y detecte inconsistencias 
+    -   Valores extremos no plausibles 
+    -   Identifique valores perdidos 
+    
+-   En R, use los  verbos básicos de {dplyr} para hacer consultas ("queries") a sus datos: `filter()`, `select()`, `mutate()`, `arrange()` y `summarise()`.
+
+```{r}
+#| include: false
+datos_org <- import("maca_meno_perclin.xlsx")
+datos <- rbind(datos_org, datos_org[c(1, 5, 9), ]) %>% 
+  set_variable_labels(
+    id_jaula = "ID de jaula",
+    id_raton = "ID de ratón", 
+    tratamiento = "Tratamiento asignado", 
+    protocolo = "Tipo de protocolo de modelo animal", 
+    peso_inicial = "Peso inicial", 
+    peso_final = "Peso final", 
+    peso_utero = "Peso uterino", 
+    chol = "Colesterol", 
+    glucose = "Glucosa", 
+    tag = "Triglicéridos", 
+    prot = "Proteína", 
+    urea = "Urea", 
+    album = "Albuminemia"
+  )
+```
+
+# Pasos para un buen AID / AED 
+
+## {.scrollable}
+
+> **Paso 1:** Resumen global de los datos
+
+
+::: panel-tabset
+
+### ¿Qué debo inspeccionar de manera global?
+
+- Dimensiones: columnas y filas
+
+- Variables y tipos
+
+- Datos completos y faltantes
+
+- Variables numéricas: Mínimos, máximos y valores extremos
+
+- Variables categóricas: Valores o categorías muy poco frecuentes y datos perdidos encubiertos
+
+### glimpse()
+
+- Heche un vistazo de los datos con [glimpse()]{.plo}:
+
+```{r}
+glimpse(datos)
+```
+
+### skim()
+
+- La función [skim()]{.plo} del paquete [skim]r]{.plo} genera un resumen global de los datos:
+
+```{r}
+skim(datos)
+```
+
+### describe()
+
+- La función [describe()]{.plo} del paquete [Hmisc]{.plo} genera un reporte general bien detallado, variable por variable:
+
+```{r}
+describe(datos)
+```
+:::
+
+## {.scrollable}
+
+> **Paso 2:** Detecte y maneje duplicados 
+
+-   Función `get_dupes` del paquete `{janitor}`.
+
+::: panel-tabset
+### Filas duplicadas
+
+-   Si solo colocamos `get_dupes()`, entonces nos identifica duplicados de fila completa:
+
+```{r}
+library(janitor)
+datos %>% 
+  get_dupes()
+```
+
+### ID duplicados
+
+-   Si colocamos una o más variables dentro de `get_dupes()`, entonces nos identifica duplicados solo de esa variable.
+
+-   A menudo lo hacemos para encontrar individus duplicados.
+
+```{r}
+datos %>% 
+  get_dupes(id_raton)
+```
+
+### Elimine duplicados
+
+-   Si el duplicado es erróneo, lo podemos eliminar con `distinct` y el argumento `.keep_all = TRUE`.
+
+-   Se debde espeficiar si el duplicado es de fila o de alguna variable (p. ej., id).
+
+```{r}
+datos <- datos %>% 
+  distinct(id_raton, .keep_all = TRUE)
+
+datos
+```
+
+### Deduplicación probabilística
+
+- ¿Qué pasa si no se sabe si el duplicado es erróneo?
+
+    + Podemos tener dos o más filas con duplicados y no saber cuál es el correcto.
+    
+    + En estos casos, el problema es complejo. Una solución puede ser la deduplicación probabilística.
+    
+:::
+
+## {.scrollable}
+
+> **Paso 3:** Identifique datos faltantes
+
+- Evalúe número y porcentaje de datos perdidos así como el patrón de estos.
+
+- Hay varios paquetes que permiten manejar datos perdidos:
+    + [{VIM}]{.plo}
+    + [{visdat}]{.plo} 
+    + [{naniar}]{.plo}
+    + [{otros}]{.plo}
+    
+- Usaremos algunas funciones de [{visdat}]{.plo}, [{VIM}]{.plo} y [{naniar}]{.plo}.
+
+- [{visdat}]{.plo} y [{nanair}]{.plo} generan gráficos [{ggplot2}]{.plo}, mientras que {VIM} no lo hace.
+
+## {.scrollable}
+
+> **Paso 3:** Identifique datos faltantes (cont.)
+
+::: panel-tabset
+
+### skim()
+
+- Nuevamente  [skim()]{.plo} nos permite conocer, rápidamente, el número de datos perdidos.
+
+```{r}
+skim(datos)
+```
+
+### Visualizar tipos de datos
+
+- El paquete [visdat]{.plo} te permite visualizar el tipo de dato y si hay o no presencia de datos perdidos
+
+```{r}
+#| fig-align: center
+#| out-width: 90%
+library(visdat)
+datos %>% 
+  vis_dat()
+```
+
+- Es importante verificar si el tipo de dato corresponde con la naturaleza de la variable de estudio.
+
+- Algunos datos faltantes pueden no verse por no configurar apropiadamente el tipo de la variable.
+
+### Visualizar % de datos faltantes
+
+- Podemos también generar gráficos para identificar los datos perdidos y sus combinaciones:
+
+```{r}
+#| fig-align: center
+#| out-width: 90%
+datos %>% 
+  vis_miss()
+```
+
+- Se aprecia que la variable `prot` tiene 47.83% de sus datos faltantes. La variable `urea` tiene 39.13% de sus datos faltantes. 
+
+- La legenda que dice `Missing (10.7%)` indica que el total de datos faltantes en las celdas (no en las filas) es de 10.7%.
+
+- ¿Cuántos datos faltantes en por fila tendremos? ¿Qué combinaciones de datos faltantes tendremos?
+
+### Combinaciones de datos faltantes
+
+- El paquete [VIM()]{.plo} permite identificar datos perdidos por variable y sus combinaciones.
+
+- Podemos visualizar los resultados directamente:
+
+```{r}
+#| fig-align: center
+#| out-width: 90%
+library(VIM)
+datos %>% 
+  aggr(numbers = TRUE)
+```
+
+- También podemos usar la función [gg_miss_upset]{.plo} del paquete [{naniar}]{.plo} para evaluar las combinaciones de datos perdidos:
+ 
+```{r}
+library(naniar)
+datos %>% 
+  gg_miss_upset()
+```
+
+### Recuperar datos faltantes
+
+- Lo primero que uno debe tratar de hacer es recuperar los datos faltantes.
+
+    + Volver a revisar documentos fuentes.
+    
+    + Recontactar sujetos, etc.
+    
+- Podemos identificar a los individuos con datos faltantes en la variable urea usando [filter()]{.plo}:
+
+```{r}
+datos %>% 
+  select(id_jaula, id_raton, urea) %>% 
+  filter(is.na(urea))
+```
+
+
+- Si se recupera la información, uno puede remplazar los valores usando código en R. 
+
+- La función [replace]{.plo} del paquete [{dplyr}]{.plo} es útil para esto. Supongamos que el dato perdido para el ratón 6 es de 65.2, podemos rempalzar el dato usando [replace]{.plo}
+
+```{r}
+datos %>% 
+  select(id_jaula, id_raton, urea) %>% 
+  mutate(
+    urea = replace(urea, id_raton == 6, 65.2)
+  )
+```
+
+### Datos perdidos ocultos
+
+- Los datos perdidos a veces se guardan por defecto con algunos caracteres especiales.
+
+- Pueden ser problemáticas si se guardan con categorías como: -99, 8888, "No aplica", "No sabe", etc.
+
+- Una función muy útil para lidiar con estos datos y convertirlos en `NA` es la función [replace_na()]{.plo} del paquete [{tidyr}]{.plo}
+
+```{r}
+#| echo: false
+datos_perdidos_comun <- 
+  data.frame(
+    edad = c(45, 23, 34, 29, -999, 23, 34,57, 88, -999, -999), 
+    diabetes = c("Sí", "Sí", "No", "N/A", "No", "Sí", "No", "N/A", "N/A", "N/A", "Sí")
+  )
+```
+
+
+```{r}
+library(tidyr)
+datos_perdidos_comun
+```
+
+- Podemos convertir directamente todos estos valores por default a datos perdidos:
+
+```{r}
+datos_perdidos_comun %>% 
+  na_if(list(edad = -999, diabetes = "N/A")) -> datos_perdidos_limpia
+
+datos_perdidos_limpia
+```
+
+:::
+
+## {.scrollable}
+
+> **Paso 4:** Identifique valores extremos no plausibles 
+
+::: panel-tabset
+
+### skim()
+
+-   Revise, variable por variable `valores extremos no plausibles` o `plausibles, pero sospechosamente extremos`. El valor mínimo es `p0` y el valor máximo es `p100`. Deben ser plausibles.
+
+```{r}
+skim(datos)
+```
+
+### describe()
+
+-   Permite hacer algo similar
+
+```{r}
+describe(datos)
+```
+
+### Gráficos R base
+
+- El `gráfico de cajas` nos muestra la disrtibución de la variable numérica en termino de sus cuantiles.
+
+- Los `puntos aislados`, fuera de las cajas y bigotes, son considerados valores extremos. 
+
+- Estos pueden ser `plausibles` o `no plausibles`. 
+
+- El gráfico de cajas permite `identificar`, rápidamente, `valores extremos` potencialmente `no plausibles` o `problemáticos`.
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+```{r}
+boxplot(datos$peso_final)
+```
+
+:::
+
+::: {.column width='50%'}
+
+```{r}
+boxplot(datos$peso_utero)
+```
+
+:::
+
+::::
+
+
+### ¿Qué hacer con datos no plausibles
+
+- Los datos extremos pueden ser valores anómalos válidos.
+
+- En ocasiones, son valores no plausibles, inválidos, producto del mal recojo de información.
+
+- Cuando se tenga valores extremos no plausibles se puede optar por dos acciones:
+
+    + 1) Corregir el valor extremo no plausible por datos que sí sean plausibles.
+
+    + 2) Si no se puede, convertir los valores extremos no plausibles en datos faltantes (veremos esto).
+    
+    + 3) Bonus: A veces puede ser mejor recortar los datos y quedarse con el 1% y 99% percentil más bajo y alto, respectivamente.
+    
+    
+### Corregir el valor extremo no plausible
+
+- Se puede usar la función: [na_if()]{.plo} del paquete [{dplyr}]{.plo}.
+
+```{r}
+#| echo: false
+datos_extremo <- data.frame(
+  peso = c(56, 34, 23, 78, 46, 1450), 
+  hb = c(12, 11, 213, 10, 3124, -4)
+)
+```
+
+- Veamos una base de datos juguete con datos de peso (kg) y hemoglobina (mg/dL) de pacientes en un estudio:
+
+    + El peso de 1450 es un valor extremo no plausible. Igualmente, los valores de hemoglobina 213, 3124 y -4 son valores extremos no plausibles.
+    
+    + Lo primero que debemos hacer es recuperar es tratar de recuperar estos valores.
+    
+    + Supongamos que podemos recuperar los valores: 1450 en realidad es 45 kg; 213, 3124 y -4 son 11.3, 10.44 y 9.2 mg/dL.
+    
+- Podemos usar la función recode para corregir los valores de peso:
+
+```{r}
+datos_extremo %>% 
+  mutate(peso = recode(peso, `1450` = 45))
+```
+
+- También podemos corregir de varias variables simultáneamente:
+
+```{r}
+datos_extremo %>% 
+  mutate(
+    peso = recode(peso, `1450` = 45), 
+    hb = recode(hb, `213` = 11.3, `3124` = 10.44, `-4` = 9.2)
+    ) -> datos_extremo_recodif
+
+datos_extremo_recodif
+```
+
+### Convertir valor extremo no plausible a dato faltante
+
+- Si no podemos recuperar los datos correctos, la otra opción es convertir los valores extremos en datos faltantes:
+
+```{r}
+datos_extremo %>% 
+  mutate(
+    peso = na_if(peso, 1450)
+  )
+```
+
+- Podemos hacerlo de manera simultánea para varias variables
+
+```{r}
+datos_extremo %>% 
+  mutate(
+    peso = na_if(peso, 1450), 
+    hb = na_if(hb, 213), 
+    hb = na_if(hb, 3124), 
+    hb = na_if(hb, -4)
+  )
+```
+
+- O usando [replace()]{.plo} y una condición lógica:
+
+```{r}
+datos_extremo %>% 
+  mutate(
+    peso = na_if(peso, 1450), 
+    hb = replace(hb, hb > 100 | hb < 0, NA)
+  ) -> datos_extremo_recomiss
+
+datos_extremo_recomiss
+```
+:::
+
+##
+
+> **Paso 5:** Detecte y corrija inconsistencias mediante consultas (*queries*) de interés 
+
+::: panel-tabset
+### Consulta 1
+
+Muestre el peso inicial mínimo, máximo y promedio del grupo control:
+
+```{r}
+#| code-line-numbers: "|2|3-7"
+datos %>% 
+  filter(tratamiento == "control") %>% 
+  summarise(
+    minimo_peso = min(peso_inicial), 
+    maximo_peso = max(peso_inicial), 
+    promedio_peso = mean(peso_inicial)
+  )
+```
+
+### Consulta 2
+
+Muestre los pesos inicial máximos, mínimo y promedio según grupo de tratamiento. También muestre el número de ratones por grupo:
+
+```{r}
+#| code-line-numbers: "|2|3-7"
+datos %>% 
+  group_by(tratamiento) %>% 
+  summarise(
+    minimo_peso = min(peso_inicial), 
+    maximo_peso = max(peso_inicial), 
+    promedio_peso = mean(peso_inicial), 
+    n_ratones = n()
+  )
+```
+
+### Consulta 3
+
+Muestre los id_jaula con el número de ratones por jaula
+
+```{r}
+#| code-line-numbers: "|2|3"
+datos %>% 
+  group_by(id_jaula) %>% 
+  summarise(n_ratones_por_jaula = n())
+```
+
+### Consulta 4
+
+Identifique los ID de los ratones del grupo control con una razón glucosa / colesterol \> 1
+
+```{r}
+#| code-line-numbers: "|2"
+datos %>% 
+  filter(tratamiento == "control" & glucose / chol > 1)
+```
+
+Otra forma de hacerlo, es crear primerio la razón glucose / chol y filtrar:
+
+```{r}
+#| code-line-numbers: "|2|3"
+datos %>% 
+  mutate(ratio_gluc_chol = glucose / chol) %>% 
+  filter(tratamiento == "control" & ratio_gluc_chol > 1)
+```
+
+:::
+
+```{r}
+#| echo: false
+library(countdown)
+countdown_timer <- function(
+    minutes = 1, 
+    play_sound = TRUE, 
+    font_size = "2em", 
+    ...
+) {
+  countdown(
+    minutes = minutes,
+    # Fanfare when it's over
+    play_sound = play_sound,
+    # Set timer theme to match solarized colors
+    color_border              = "#404041",
+    color_text                = "white",
+    color_background = "#000000",
+    color_running_background  = "#72994E",
+    color_running_text        = "white",
+    color_finished_background = "#EE6331",
+    color_finished_text       = "white",
+    font_size = font_size,
+    ...
+  )
+}
+```
+
+# `r fontawesome::fa("laptop-code", "white")` Nuestro turno {background-color="#000000"}
+
+<br/>
+
+-   Descargue la carpeta `aid`.
+
+- Abra el proyecto `aid.Rproj` y dentro de este, abra el archivo quarto `aid_taller.qmd`. 
+
+- Siga las instrucciones indicadas en este.
+
+- Renderice el archivo quarto final.
+
+<br/><br/><br/>  
+
+```{R}
+#| echo: false
+countdown_timer(10)
+```
+

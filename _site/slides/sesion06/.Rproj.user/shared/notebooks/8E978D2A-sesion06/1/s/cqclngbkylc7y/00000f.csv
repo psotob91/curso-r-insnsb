@@ -1,0 +1,2 @@
+"0","aov(weight ~ treat, data = datos) %>% "
+"0","  tukey_hsd()"

@@ -1,0 +1,15 @@
+"0","bd_inmuno %>% "
+"0","  descr(edad, "
+"0","        stats = c(""mean"", ""sd"", ""min"", ""max""))"
+"1","Descriptive Statistics  
+bd_inmuno$edad  
+Label: edad  
+N: 285  
+
+                 edad
+------------- -------
+         Mean   48.25
+      Std.Dev   14.71
+          Min   23.00
+          Max   97.00
+"

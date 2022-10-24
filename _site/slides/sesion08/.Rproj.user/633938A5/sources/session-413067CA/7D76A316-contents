@@ -1,0 +1,1103 @@
+---
+format: 
+  revealjs: 
+    # self-contained: true
+    theme: [default, theme/theme.scss]
+    footer: "R Aplicado a los Proyectos de Investigación - Sesión 8"
+    logo: img/icon-512-insnsb.jpg
+    transition: convex
+    background-transition: zoom
+    incremental: false
+    slide-number: c/t
+    preview-links: true
+    # width: 1920
+    # height: 1080
+    height: 900
+    width: 1600
+    # parallax-background-image: img/bg-ietsi-slide-first.png
+    # parallax-background-size: "1920px 1080px"
+    chalkboard: true
+    code-block-background: true
+    code-block-border-left: "#31BAE9"
+    highlight-style: ayu-dark
+    echo: true
+    multiplex: true
+    touch: true
+    auto-stretch: true
+    link-external-icon: true
+    link-external-newwindow: true
+    self-contained-math: true
+    
+from: markdown+emoji
+execute:
+  echo: true
+filters:
+  - reveal-auto-agenda
+  - grouped-tabsets
+auto-agenda:
+  bullets: numbered
+  heading: Agenda
+---
+
+\
+
+\
+
+<h1>Sesión 8</h1>
+
+<h2>[Curso: R Aplicado a los Proyectos de Investigación]{.plo}</h2>
+
+<hr>
+
+<h3>[Percy Soto-Becerra, M.D., M.Sc(c)]{.negro}</h3>
+
+<h4>[InkaStats Data Science Solutions \| Medical Branch]{.negro}</h4>
+
+<h4>[2022-10-19]{.negro}</h4>
+
+`r fontawesome::fa("github", "black")`   <https://github.com/psotob91>
+
+![](img/social-image-f22.png){.absolute top="390" left="950" width="600"}
+
+```{r}
+#| echo: false
+#| output: false
+
+# Removing all objects including loaded libraries
+rm(list = ls(all = TRUE))
+gc()
+
+# Installing and loading packages
+if (!require("pacman")) {
+  install.packages("pacman")
+}
+
+pacman::p_unload("all") # Unloading all package except base
+
+pacman::p_load(tidyverse, 
+               tibble, 
+               labelled, 
+               pander, 
+               gt, 
+               kableExtra, 
+               DT, 
+               haven, 
+               skimr, 
+               Hmisc, 
+               janitor, 
+               rio, 
+               gtsummary, 
+               gt, 
+               flextable, 
+               kableExtra, 
+               readxl, 
+               rstatix, 
+               medicaldata, 
+               ggpubr, 
+               car, 
+               performance,
+               see, 
+               lmtest, 
+               sandwich, 
+               splines2, 
+               plotly) # Loading packages
+
+md_visit <- import("rwm5yr.dta") %>% 
+  characterize()
+
+```
+
+
+# Introducción al modelado de regresión
+
+## Análisis de regresión
+
+
+```{r}
+#| echo
+```
+
+![](img/regresion1.png)
+
+## Modelos de regresión multivariable
+
+![](img/regresion2.png)
+
+## ¿Para qué usamos los modelos de regresión?
+
+\ 
+\ 
+
+-   Según `STRATOS` podemos usar regresión para 3 propósitos diferentes:
+
+    -   <FONT size='6'>Descripción\*</FONT>
+
+    -   <FONT size='6'>Predicción</FONT>
+
+    -   <FONT size='6'>Explicación</FONT>
+
+## Propósitos del modelamiento
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| out-width: 100%
+knitr::include_graphics("img/modelos1.png")
+```
+
+
+::: aside
+<br> <FONT size='4'>Clasificación inspirado en: Miguel A. Hernán, John Hsu & Brian Healy (2019) A Second Chance to Get Causal Inference Right: A Classification of Data Science Tasks, CHANCE, 32:1, 42-49, DOI: 10.1080/09332480.2019.1579578</FONT>
+:::
+
+## Propósitos del modelamiento (cont.)
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| out-width: 100%
+knitr::include_graphics("img/modelos2.png")
+```
+
+
+::: aside
+<br> <FONT size='4'>Clasificación inspirado en: Miguel A. Hernán, John Hsu & Brian Healy (2019) A Second Chance to Get Causal Inference Right: A Classification of Data Science Tasks, CHANCE, 32:1, 42-49, DOI: 10.1080/09332480.2019.1579578</FONT>
+:::
+
+## ¿Para qué usamos los modelos de regresión? (cont.)
+
+-   Este curso se centrará solamente en algunas aplicaciones.
+
+-   No abordaremos modelos de regresión para desarrollar modelos o reglas de predicción clínica.
+
+-   Tampoco para métodos de inferencia causal robusta.
+
+::: {.panel-tabset}
+
+### Descripción
+
+-   "Factores asociados..:" No necesariamente importa que los factores sean causales.
+
+-   Evaluación de la magnitud de desigualdades, magnitud de brechas, etc.
+
+### Explicación
+
+-   "Efecto / Efectividad / Impacto": Busca estimar efectos causales.
+
+-   Explorar potenciales factores causales... (puede clasificarse dentro de descripción)
+
+### Predicción
+
+-   Factores pronóstico o predictores de...": Identifican predictores de interés que luego alimenten mdelos predictivos.
+
+-   Modelos de predicción: Predicción para diagnóstico y pronóstico.
+
+:::
+
+
+# Modelo de Regresión Lineal
+
+## Regresión Lineal
+
+-   Método estadístico que modela la `relación` entre una `variable continua (dependiente)` y otras `variables (independientes)`.
+
+![](img/regresion-lineal.png)
+
+## Relación entre dos variables
+
+::: columns
+::: {.column width="40%"}
+
+-   $Y$ es `variable resultado` (*outcome*), respuesta o dependiente.
+
+-   $X$ es una `variable explicativa`, predictora o regresora.
+
+-   En la figura, a mayor valor de $X$, mayor valor de $Y$.
+
+```{r}
+#| echo: false
+set.seed(123)
+x = rnorm(500, 0, 1)
+y = 4 * x + rnorm(50, 0, 2)
+
+datos <- data.frame(
+  x = x, 
+  y = y)
+```
+
+:::
+
+::: {.column width="60%"}
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| fig-width: 7
+#| fig-height: 7
+ 
+datos %>% 
+  ggplot(aes(x = x, y = y)) + 
+  geom_point() + 
+  labs(x = "X", y = "Y") + 
+  theme_bw()
+```
+
+:::
+:::
+
+## ¿Cómo podemos resumir la relación entre ambas variables?
+
+::: columns
+::: {.column width="50%"}
+-   Podemos tratar de dibujar una `línea recta` que `resuma` la relación.
+
+-   Existen `infinitas rectas posibles` que podríamos trazar: ¿Cuál elegir?
+:::
+
+::: {.column width="50%"}
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 10
+ 
+datos %>% 
+  ggplot(aes(x = x, y = y)) + 
+  geom_point() + 
+  geom_abline(aes(x = x, y = y), intercept = -1, slope = 1, colour = "red") + 
+  geom_abline(aes(x = x, y = y), intercept = 0.07, slope = 4.4 , colour = "green") + 
+    geom_abline(aes(x = x, y = y), intercept = 0.07, slope = 3.9 , colour = "orange") + 
+  labs(x = "X", y = "Y") + 
+  theme_bw()
+```
+:::
+:::
+
+## ¿Cómo podemos resumir la relación entre ambas variables? (cont.)
+
+::: columns
+::: {.column width="50%"}
+-   Una opción sería elegir una `recta` que pase por el `valor más representativo` del $y_i$ en cada valor fijo de $x_1$.
+    -   Una `recta` que `conecte` los `promedios condicionados` en $x_1$
+:::
+
+::: {.column width="50%"}
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 10
+ 
+datos %>% 
+  ggplot(aes(x = x, y = y)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", formula = y ~ x, se = FALSE) + 
+  labs(x = "X", y = "Y") + 
+  theme_bw()
+```
+:::
+:::
+
+## Anatomía de la RLS {.scrollable}
+
+-   Entonces, la `recta que conecta los promedios` de $y_i$ `condiciondos` en $x_{1i}$ se puede expresar mediante la siguiente `combinación lineal`:
+
+$$\beta_0 + \beta_1x_{1i}$$
+
+-   **Componente Sistemático:** Formalmente hablando, para cada observación $i$ en la población, podemos `relacionar` el `valor esperado` (promedio) $E[y_i]$ de $y_i$ (también llamado $\mu_i$) con la `variable explicativa` $x_{1i}$ mediante la siguiente `ecuación lineal`:
+
+$$E[Y | X_1 = x_{1i}] = E[y_i] =  \mu_i = \beta_0 + \beta_1x_{1i}$$
+
+-   Donde:
+    -   $y_i$ son `variables aleatorias` independientes e idénticamente distribuidas (`i.i.d`)
+    -   $x_1$ es una variable cuyas valores son fijos y conocidos: $x_1i$:
+        -   Se asume se `miden sin error`.
+        -   `No importa` su `distribución`.
+    -   $\beta_0$ y $\beta_1$ son `parámetros desconocidos` de una superpoblación infinita.
+        -   Llamados `coeficientes de regresión` y son una `medida de asociación`.
+        -   Es lo que `queremos estimar` con los datos de la muestra!
+
+## Anatomía de la RLS (cont.) {.scrollable}
+
+-   Notar que el `componente sistemático` solo `relaciona` el `promedio condicionado` de $y_i$ con las `variables explicativas`, NO con los valores individuales.
+
+    -   Esta es una manera de obtener una medida que resuma las relaciones individuales en una sola medida.
+
+-   **Componente aleatorio:** Para poder relacionar completamente los valores individuales se agrega un término de error $\epsilon$, el cual se obtiene de restar el valor observado $y_i$ con el valor esperado de este ($\mu_i$):
+
+$$\epsilon_i = y_i - \mu_i$$
+
+-   El problema es que el término de error $\epsilon_i$ no puede predecirse ni estimarse con los datos, se considera que es el componente no explicado por estos.
+
+    -   Para lidiar con este, se asume que su comportamiento puede predecirse a nivel probabilístico: Se asume una distribución de este.
+    -   El error $\epsilon_i$ hereda la distribución de probabilidad de $y_i$.
+
+-   Por lo tanto, el valor individual de cada $y_i$ puede ser denotado por la siguiente expresión:
+
+$$y_i = \beta_0 + \beta_1x_{1i} + \epsilon_i$$
+
+-   Para hacer inferencia estadística, a menudo se asume lo siguiente:
+
+$$y_i \sim N(\beta_0 + \beta_1x_{1i}, \sigma^2)$$
+
+$$\epsilon_i \sim N(0, \sigma^2) $$ \## Regresión Lineal Normal
+
+![](img/regresion-normal.png)
+
+## 
+
+::: callout-note
+### Algunas notas sobre normalidad
+
+-   No es necesario que $\epsilon_i$ o $y_i$ sigan una distribución normal para que los coeficientes de regresión $\beta$ puedan estimarse de manera puntual.
+
+-   Sin embargo, para estimar el `valor p` o los `intervalos de confianza` mediante `inferencia clásica` sí se necesita asumir una distribución conocida. El modelo de regresión lineal normal asume normalidad de estos.
+
+    -   Asimismo, el modelo es robusto a desviaciones leves/moderadas de la normalidad cuando se cumple el TLC (número de observaciones grande).
+
+-   Otros enfoques para inferencia flexibilizan este supuesto: p. ej., bootstrap, varianza robusta, modelo lineal generalizado que asume otras distribuciones, etc.
+:::
+
+## Estimación de ecuación de regresión
+
+-   En la práctica no conocemos los valores de los parámetros, así que los estimamos de nuestros datos.
+
+![](img/regresion-parametro-estim.png)
+
+## ¿Cómo estimamos la ecuación lineal que mejor ajusta a los datos observados?
+
+-   Usamos métodos numéricos:
+
+    -   Método de Mínimos Cuadrados Ordinarios
+
+    -   Método de Máxima Verosimilitud
+
+-   Ambos métodos son equivalentes para el caso de la regresión lineal normal.
+
+## Regresión Lineal Simple sobre variable explicativa categórica
+
+-   Las variables categóricas no son continuas, en cambio son discretas y asumen unos cuantos valores.
+
+-   ¿Cómo estimar una medida de asociación cuando la variable explicativa es categórica?
+
+```{r}
+#| echo: false
+set.seed(123)
+x <- c(rep(0, 25), rep(1, 25))
+y <- 4 * x + rnorm(50, 0, 2)
+
+datos <- data.frame(
+  x1 = factor(x, levels = c(0, 1), labels = c("Placebo", "Tratamiento Nuevo")), 
+  x2 = x, 
+  y = y)
+```
+
+## Regresión Lineal Simple sobre variable explicativa categórica
+
+```{r}
+#| echo: false
+datos %>% 
+  ggplot(aes(x = x1, y = y)) + 
+  geom_point() + 
+  theme_bw()
+```
+
+## Regresión Lineal Simple sobre variable explicativa categórica (cont.)
+
+-   Si la variable es binaria, una forma de abordar el análisis es asignando a una categoría el valor de 1 y a otra el valor de 0.
+
+    -   Entonces, asumiremos que la variable categórica es numérica para los efectos de todo cálculo.
+
+    -   Sin embargo, la interpretación se centrará en la comparación de categorías.
+
+## Regresión Lineal Simple sobre variable explicativa categórica (cont.)
+
+```{r}
+#| echo: false
+datos %>% 
+  ggplot(aes(x = x2, y = y)) +   
+  geom_smooth(method = "lm", se = FALSE) + 
+  geom_point() + 
+  theme_bw()
+```
+
+## Regresión Lineal Simple en R {.scrollable}
+
+```{r}
+#| echo: false
+set.seed(123)
+x <- c(rep(0, 25), rep(1, 25))
+z <- rnorm(50, 15, 1)
+y <- 10 * x - 2 * z + rnorm(50, 0, 2)
+
+datos1 <- data.frame(
+  x1 = factor(x, levels = c(0, 1), labels = c("Placebo", "Tratamiento Nuevo")), 
+  x2 = x, 
+  x3 = z, 
+  y = y)
+```
+
+-   Se usa la función `lm()` de R base. Sin embargo, la salida de esta no es muy informativa:
+
+```{r}
+lm(y ~ x1, data = datos)
+```
+
+-   El modelo puede guardarse para realizar más operaciones sobre este. Por ejemplo, mejorar la salida:
+
+```{r}
+mod <- lm(y ~ x1, data = datos)
+summary(mod)
+```
+
+## Interpretación de salida de RLS {.scrollable}
+
+::: panel-tabset
+### Covariable numérica
+
+-   Usamos la función lm():
+
+```{r}
+#| echo: false
+set.seed(123)
+x <- c(rep(0, 25), rep(1, 25))
+z <- rnorm(1000, 15, 1)
+y <- -10 * x + 1.3 * z + rnorm(100, 0, 2)
+
+datos2 <- data.frame(
+  x1_tto = factor(x, levels = c(0, 1), labels = c("Placebo", "Tratamiento Nuevo")), 
+  x2_ttonum = x, 
+  x3_peso_inicial = z, 
+  y_peso_final = y)
+```
+
+```{r}
+mod <- lm(y_peso_final ~ x3_peso_inicial, data = datos2)
+summary(mod)
+```
+
+-   El modelo estimado sería el siguiente:
+
+$$y\_pesofinal = -5.4317 + 1.3447*x3\_pesoinicial + \epsilon_i$$
+
+$$\epsilon_i \sim Normal(0, 5.535^2)$$
+
+-   Usando el paquete `{broom}` y su función `tidy()` podemos obtener también los intervalos de confianza:
+
+```{r}
+library(broom)
+mod %>% 
+  tidy(conf.int = TRUE) 
+```
+
+-   Interpretación:
+
+    -   $\beta_0$ o `intercepto`: Este viene a ser el valor promedio de $y$ cuando todos los valores de $x$ son 0. En este caso, cuando el peso inicial es cero kg. ¿Esto es posible?, por tal motivo, no se suele interpretar este valor.
+
+    -   $\beta_1$ o coeficiente de regresión de `x3_peso_inicial`: Por `cada 1 kg adicional` de peso inicial, el `valor promedio` del peso final aumenta 1.43 kg (IC95% 1.00 a 1.69; p \< 0.001).
+
+### Covariable categórica
+
+-   Usamos la función lm():
+
+```{r}
+mod <- lm(y_peso_final ~ x1_tto, data = datos2)
+summary(mod)
+```
+
+-   Usando tidy de broom:
+
+```{r}
+mod %>% 
+  tidy(conf.int = TRUE) 
+```
+
+-   Interpretación:
+
+    -   $\beta_0$ (Intercept): A menudo no se interpreta. Es el valor promedio de $y_i$ cuando los valores de $x$ son cero. En este caso, cuando el tratamien es cero (placebo). ¿Esto es posible?, sí es posible pero no es de ayuda para modelos explicativos, por lo que no se interpreta.
+
+    -   $\beta1$ x1Tratamiento Nuevo: El promedio de peso final en quienes recibieron el tratamiento nuevo fue 10.23 kg menor que el de quienes recibieron placebo (Dif. medias = -10.23; IC95% -10.54 a -9.92; p \< 0.001).
+:::
+
+## Regresión Lineal Múltiple {.scrollable}
+
+-   Generaliza la RLS permitiendo evaluar la relación de varias covariables explicativas $x$ sobre $y_i$.
+
+-   Para $p$ variables explicativas, el modelo puede expresarse como:
+
+**Componente sistemático:**
+
+$$E[Y | X_1 = x_{1i}, ..., X_p = x_{pi}] = E[y_i] =  \mu_i = \beta_0 + \beta_1x_{1i} + ... + \beta_px_{pi}$$
+
+**Componente aleatoria:**
+
+$$y_i \sim N(\beta_0 + \beta_1x_{1i} + ... + \beta_px_{pi}, \sigma^2)$$
+
+$$\epsilon_i \sim N(0, \sigma^2) $$
+
+## Regresión Lineal en gráficos {.scrollable}
+
+::: panel-tabset
+### RLS
+
+::: columns
+::: {.column width="40%"}
+-   La ecuación de la RLS representa una línea recta.
+:::
+
+::: {.column width="60%"}
+![](img/regresion-linea.png)
+:::
+:::
+
+### RLM con 2 X
+
+::: columns
+::: {.column width="40%"}
+-   La ecuación de la RLM con dos variables explicativas ya no representa una línea recta, sino un plano recto.
+:::
+
+::: {.column width="60%"}
+![](img/regresion-plano.png)
+:::
+:::
+
+### RLM con 3 o más X
+
+-   Genera un hiperplano recto.
+
+-   No podemos imaginarnos una imagen de esto, pero sí podemos analizarlo a nivel estadístico.
+
+    + Algebra lineal proporciona herramientas para lidiar con esto usando matrices.
+    
+:::
+
+## RLM en R {.scrollable}
+
+-   Usamos la función lm():
+
+```{r}
+#| echo: false
+set.seed(123)
+x <- c(rep(0, 25), rep(1, 25))
+z <- rnorm(1000, 15, 1)
+y <- -10 * x + 1.3 * z + rnorm(100, 0, 2)
+
+datos2 <- data.frame(
+  x1_tto = factor(x, levels = c(0, 1), labels = c("Placebo", "Tratamiento Nuevo")), 
+  x2_ttonum = x, 
+  x3_peso_inicial = z, 
+  y_peso_final = y)
+```
+
+```{r}
+mod <- lm(y_peso_final ~ x1_tto + x3_peso_inicial, data = datos2)
+summary(mod)
+```
+
+-   El modelo estimado sería el siguiente:
+
+$$y\_pesofinal = -0.94719 -10.25530*x1ttoTratamientoNuevo + 1.3875*x3\_pesoinicial + \epsilon_i$$
+
+$$\epsilon_i \sim Normal(0, 2.073^2)$$
+
+-   Usando el paquete `{broom}` y su función `tidy()` podemos obtener también los intervalos de confianza:
+
+```{r}
+library(broom)
+mod %>% 
+  tidy(conf.int = TRUE) 
+```
+
+-   Interpretación:
+
+    -   $\beta_0$ o `intercepto`: Este viene a ser el valor promedio de $y$ cuando todos los valores de $x$ son 0. En este caso, cuando el peso inicial es cero kg y cuando el tratamiento es placebo. ¿Esto es posible?, por tal motivo, no se suele interpretar este valor.
+
+    -   $\beta_2$ o coeficiente de regresión de `x1_ttoTratamiento Nuevo`: El promedio de peso final en quienes recibieron el tratamiento nuevo fue 10.26 kg menor que el de quienes recibieron placebo, luego de ajustar por peso inicial (Dif. medias = -10.26; IC95% -10.51 a -9.99; p \< 0.001).
+
+    -   $\beta_1$ o coeficiente de regresión de `x3_peso_inicial`: Por `cada 1 kg adicional` de peso inicial, el `valor promedio` del peso final aumenta 1.39 kg, luego de ajustar por tatamiento recibido (IC95% 1.26 a 1.52; p \< 0.001).
+
+:::
+
+## Errores y residuos
+
+-   Los `errores` ($\epsilon_i$) son medidas de la población a la que no tenemos acceso.
+
+    -   Sin embargo, varios supuestos de la regresión involucran a los errores inaccesibles por el investigador.
+
+-   Los `residuos` ($e_i$) son el análogo a los `errores` pero obtenidos de la `muestra observada`.
+
+-   Podemos usar los `residuos` para `evaluar` algunos `supuestos` sobre los `errores`.
+
+## Residuos gráficamente
+
+![](img/recta-residuo.png)
+
+## Supuestos de la regresión lineal normal
+
+**Supuestos del modelo**
+-   Linealidad
+
+-   Independencia de observaciones
+
+-   Homocedasticidad de los errores $\epsilon_i$
+
+-   Normalidad de los errores $\epsilon_i$ o de $y_i$.
+
+-   No problemas con la regresión:
+
+    -   Puntos influyentes.
+    -   (Multi) colinealidad: Solo cuando es un problema, no siempre lo es.
+
+## Supuestos adicionales que suelen acompañar a la regresión lineal normal
+
+**Supuestos si queremos generalizar a una población finita bien definida**
+
+- La muestra es representativa de la población.
+
+    + Ideal para alcanzar esto es mediante muestreo probabilístico: representatividad estadística.
+    
+    + Cuando no lo tenemos, solo podemos generalizar a una población que sabemos que existe pero no podemos definir. ¿Qué tan relevante puede ser esto?
+    + Otros consideran que, bajo ciertas condiciones, se puede alcanar una representativadad teórica.
+
+## Supuestos adicionales que suelen acompañar a la regresión lineal normal
+
+**Supuestos si queremos hacer inferencias causales**
+
+- Hay asignación aleatoria
+
+    + Ideal para alcanzar esto es mediante experimento aleatorizado.
+    
+    + Cuando no lo tenemos, tenemos que poder asumir que se puede emular la asignación aleatoria de alguna manera:
+    
+        + El ajuste de regresión por confusores es una manera de pensar en esto.
+    
+##  Algunas notas sobre los errores y residuos
+
+-   En realidad, los supuestos de los modelos lineales son sobre el comportamiento probabilístico de $y_i$.
+
+-   Sin embargo, la idea de la existencia de los `errores` y de sus valores observados en la muestra, `residuos` resulta útil para evaluar supuestos.
+
+    -   Permiten reducir un problema de muchas dimensiones a solo 1 o 2 dimensiones.
+
+    -   Son como las placas radiográficas para el diagnóstico de los modelos.
+
+##  Algunas notas sobre los errores y residuos
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| out-width: 100$
+knitr::include_graphics("img/residuos-placa.png")
+```
+
+
+## ¿Cómo evaluar los supuestos de la regresión lineal? {.scrollable}
+
+-   Se usan los residuos para explorar el comportamiento de los $y_i$ o los errores $\epsilon$.
+
+-   Preferiblemente usar gráficos de residuos.
+
+    -   Pruebas de hipótesis que usan residuos tienen los mismos problemas que discutimos en clases anteriores.
+
+    -   Podríamos usarlas para complementar análisis cuando los tamaños de muestra no son ni muy pequeños ni muy grandes.
+
+-   La función `check_model` del paquete `{performance}` genera un panel de gráficos muy útil para evalur estos supuestos.
+
+-   Podemos complentar el análisis de supuestos con funciones del paquete `{car}`.
+
+::: panel-tabset
+### Panel general
+
+```{r}
+#| fig-width: 10
+#| fig-height: 15
+library(performance)
+check_model(mod)
+```
+
+### Lin. det.
+
+-   Podemos usar gráficos de residuos parciales + Componente:
+
+```{r}
+library(car)
+crPlots(mod)
+```
+
+-   También podemos usar gráficos de variable agregada
+
+```{r}
+avPlots(mod)
+```
+
+### Homo. det.
+
+-   Se puede evaluar si la homocedasticidad es consistente según cada variable predictora.
+
+-   Si no lo es, se puede optar por modelar esta heterogeneidad de varianzas.
+
+-   Se sugiere usar `residuos estudentizados`.
+
+```{r}
+residualPlots(mod, type = "rstudent")
+```
+
+### P. inf. det.
+
+-   En el caso de modelos explicativos, importa determinar si hay un impacto en los coeficientes de regresion.
+
+-   Los `dfbetas` pueden ser útiles para evaluar esto:
+
+```{r}
+dfbetasPlots(model = mod, id.n = 5)
+```
+
+-   Otras medidas también pueden evaluarse:
+
+```{r}
+#| fig-width: 10
+#| fig-height: 15
+influenceIndexPlot(model = mod, id.n = 5)
+```
+:::
+
+## ¿Cómo flexibilizar supuestos? {.scrollable}
+
+::: panel-tabset
+### No linealidad
+
+-   El supuesto de linealidad es sobre los coeficientes de regresión $\beta$, no sobre las covariables.
+
+-   Las variables X deben estar en una forma apropiada para que el supuesto se cumpla.
+
+-   Es bien difícil que exista linealidad en la realida, pero puede ocurrir en raras y excepcionales ocasiones.
+
+    -   Sobre todo cuando la variable está acotada en valores donde la linealidad es plausible.
+
+-   Se sugiere asumir no linealidad y pre-planear un modelamiento no lineal.
+
+-   Entre los métodos que pueden usarse, tenemos:
+
+    -   `Splines`: Bastante usado y sugerido en bioestadística. Útil para ajustar por variables continuas.
+
+    -   `Modelamiento Multivariablede polinomios fraccionales`. También usado y recomendado en literatura biomédica. Útil para modelar forma como objetivo principal.
+
+    -   `Polinomios`. Menos flexible, puede ser útil si se conoce bien la relación o se busca mejorar ajuste.
+
+    -   `Modelos aditivos generalizados`. Útil si se buscar modelar la relación. Complejos y requieren muchos datos.
+
+-   Veamos un ejemplo de modelamiento continuo con `splines`:
+
+::: callout-note
+## Evite categorizar la variable continua
+
+-   Categorizar es muy malo: se pierde información y se corre el riesgo de sesgar resultados.
+
+-   Si se quiere ajustar por variables continuas, use Splines o Polinomios fraccionales. No requiere interpretar sus resultados, pero si ajsutar bien!
+
+-   Si se quiere evaluar la relación de la variable continua, planee un método estadístico para modelar la forma sin asumir linealidad.
+
+    -   Presuponga que la relación no es lineal.
+
+    -   Modelo y responda su pregunta. Si la relación es lineal, el modelo más complejo revelerá una línea recta.
+:::
+
+### Heterocedasticidad
+
+-   No homogeneidad de varianzas
+
+-   Podemos usar una estimación robusta de la varianza.
+
+-   Los paquetes `{sanwich}` y `{lmtest}` proporcionan funciones útiles para esto.
+
+-   Es bien difícil de creer que existe homogeneidad de varianzas en la vida real (salvo muy raras y excepcionales ocasiones).
+
+    -   Se sugiere planear el proyecto asumiendo que no hay homocedasticidad y usar inferencia robusta de manera pre-planeada.
+
+```{r}
+library(lmtest)
+library(sandwich)
+coeftest(mod, vcov = vcovHC) %>% 
+  tidy(conf.int = TRUE)
+```
+
+### No normalidad
+
+-   Si distribución es normal (cosa que no podemos saber con certeza), podemos dejar de preocuparnos por este supuesto.
+
+-   Si se cumple TLC, podemos dejar de preocuparnos por este supuesto.
+
+-   Si no se cumple TLC o hay dudas razonables, podemos optar por alguna de las siguientes alternativas:
+
+    -   Transformar Y para normalizar (p. ej., logaritmo)
+    -   Usar varianza robusta
+    -   Estimar varianza con bootstrapping u otro método de remuestreo.
+:::
+
+# El Modelo Lineal Generalizado
+
+## Modelo Lineal Generalizado
+
+-   Modelo lineal que permite modelar desenlaces de varios tipos.
+
+-   Generaliza el modelo de regresión lineal.
+
+-   Permite que $Y_i$ siga otras distribuciones.
+
+## Modelo Lineal Generalizado: Anatomía
+
+**Componente sistemático:**
+
+$$
+g(E(Y|x_{1i}, ..., x_{pi})) = g(E(Y_i)) = \eta_i = \beta_0 + \beta_1x_{1i} + ...+ \beta_px_{ip}
+$$
+
+-   $g()$ es la `función de enlace`.
+
+-   $\eta_i$ es el `predictor linear`.
+
+## Modelo Lineal Generalizado: Anatomía (cont.) {.scrollable}
+
+**Componente aleatorio:**
+
+$$
+Y_i \sim Distribucion~de~la~Familia~Exponencial
+$$
+
+-   Familia exponencial:
+
++-----------------------+--------------------------------+----------------------------------+-----------------------------------+
+| Variable respuesta    | Distribución de FE             | Función de enlace canónica $g()$ | Otras funciones de enlace comunes |
++:======================+:==============================:+:================================:+:=================================:+
+| **Binaria**           | Bernoulli (Binomial con n = 1) | $logit()$                        | $log()$                           |
++-----------------------+--------------------------------+----------------------------------+-----------------------------------+
+| **Conteo**            | Binomial (con n \> 1)          | $logit()$                        | $log()$                           |
++-----------------------+--------------------------------+----------------------------------+-----------------------------------+
+|                       | Poisson                        | $log()$                          |                                   |
++-----------------------+--------------------------------+----------------------------------+-----------------------------------+
+|                       | Binomial negativo              | $log(\mu + k)$                   | $log()$                           |
++-----------------------+--------------------------------+----------------------------------+-----------------------------------+
+| **Continua positiva** | Gamma                          | $\frac{1}{\mu}$                  |                                   |
++-----------------------+--------------------------------+----------------------------------+-----------------------------------+
+|                       | Gausiana inversa               |                                  |                                   |
++-----------------------+--------------------------------+----------------------------------+-----------------------------------+
+
+# La regresión (log) Poisson
+
+## Regresión de Poisson {.scrollable}
+
+- Caso específico de Modelo Lineal Generalizado. Veamos el caso en el que usamos la función de enlace canónica para la distribución de Poisson: `log()`.
+
+- **Componente sistemático:** 
+
+$$log(E(y_i)) = \eta_i$$
+
+- **Función de enlace:** 
+
+$$\eta_i = \beta_0 + \beta_1x_{1i} + ...+ \beta_px_{ip}$$
+
+## Regresión de Poisson (cont.) {.scrollable}
+
+- **Componente aleatorio:** 
+
+$$y_i \sim Poisson(\eta_i)$$
+
+o, equivalentemente, 
+
+$$y_i \sim Poisson(\beta_0 + \beta_1x_{1i} + ...+ \beta_px_{ip})$$
+
+## ¿Por qué usar log? {.scrollable}
+
+- Si usamos la función identidad de la regresión lineal, el modelo quedaría planetado de esta manera:
+
+$$E(y_i) = \beta_0 + \beta_1x_{1i} + ...+ \beta_px_{ip}$$
+
+- Entonces, el modelo predecirá valores fuera del rango natural de la  variable $y_i$:
+
+    + $y_i$ es de conteo (discreto), pero se obtendrían predichos con decimales (continuo).
+    
+    + $y_i$ es positivo siempre, pero se podrían ontener predichos negativos.
+    
+## ¿Por qué no asumir normalidad de $y_i$? {.scrollable}
+
+- Porque la distribución de $y_i$ no es normal, es una variable de conteo.
+
+- El principal problema de esto, es que al ser Poisson, la media = varianza, por lo que a mayor valor de la media, la varianza aumentará, lo que implica que $y_i$ es heterocedástica.
+
+    + El modelo normal necesita homocedasticidad, caso contrario, tiene que corregirse de alguna manera.
+    
+    + Poisson no necesita esto, su modelo es heterocedastico por naturaleza, lo que hace más eficiente la estimación: si el modelo es válido, los intervalos de confianza serán más precisos.
+
+## La regresión de Poisson retorna razón de medias
+
+- La regresión de Poisson permite retornar directamente `razón de medias` (RM).
+
+- Los coeficientes de regresión $\beta$ del modelo son $log(RM)$, por lo tanto, podemos exponenciarlos para obtener los OR:
+
+$$\beta = log(RM)$$ 
+
+<center>entonces</center>
+
+$$e^\beta = RM$$
+
+## Casos aplicado {.scrollable}
+
+- Identificar factores asociados a que el niño tenga alergia.
+
+::: {.panel-tabset}
+
+### Caso
+
+- Factores asociados al número de visitas médicas anuales.
+
+```r
+md_visit <- import("rwm5yr.dta") %>% 
+  characterize()
+```
+
+- Especificación del modelo 
+
+```{r}
+mod <- glm(numcig ~ female + age + edlevel + outwork + hhninc + year, 
+           family = poisson(link = "log"), 
+           data = md_visit)
+summary(mod)
+```
+
+- Presentación con intervalos de confianza y exponenciada (OR): 
+
+```{r}
+library(broom)
+mod %>% 
+  tidy(conf.int = TRUE, exponentiate = TRUE)
+```
+
+### Interpretación
+
+    + `female`: El número medio de visitas anuales al médico en mujeres fue 20% veces más el de los hombres (RM = 1.25; IC95% 1.22 a 1.28; p < 0.001)
+    
+    + `age`: Por cada incremento de la edad en un año, el número medio de visitas anuales al médico se incrementa en 1% (RM = 1.017; IC95% 1.016 a 1.018; p < 0.001). 
+    
+
+### Supuestos
+
+- Linealidad del $log(y_i)$ respecto a la combinación lineal de predictores.
+
+- Observaciones son independientes.
+
+- $Y_i$ sigue distribución de Poisson.
+
+- No problemas de regresión:
+
+    + No puntos influyentes
+    
+    + No colinealidad: Solo cuando esta es un problema. 
+
+- Supuestos específicos si se busca generalizar a poblaciones conocidas, hacer inferencias causales o ambas.
+
+### Evaluación de Supuestos
+
+```{r}
+#| fig-align: center
+#| out-width: 100%
+library(performance)
+check_model(mod)
+```
+
+:::
+
+# Tablas de regresión reproducibles con {gtsummary}
+
+## Tablas de regresión lineal reproducible {.scrollable}
+
+-   Podemos usar la librería {gtsummary} para esto.
+
+-   Veamos un ejemplo.
+
+```{r}
+datos <- import("hb.dta") %>% 
+  characterize()
+```
+
+-   Podemos reportar la tabla de regreion multivarible de la siguiente manera:
+
+    -   Primero realizamos el modelo:
+
+```{r}
+mod <- lm(hb ~ age + sex, data = datos)
+mod %>% 
+  tidy(conf.int = TRUE)
+```
+
+## Tablas de regresión lineal reproducible {.scrollable}
+
+-   Se puede crear una tabla de regresión multivariable con la función `tbl_regression()` de `{gtsummary}`:
+
+```{r}
+tabla_multi <- mod %>%  
+  tbl_regression()
+
+tabla_multi
+```
+
+## Tablas de regresión lineal reproducible {.scrollable}
+
+-   Podemos hacer la tabla de regresiones bivariada con la función `tbl_uvregression()` de `{gtsummary}`:
+
+```{r}
+tabla_univ <- datos %>% 
+  select(age, sex, hb) %>% 
+  tbl_uvregression(
+    method = lm, 
+    y = hb
+  ) 
+
+tabla_univ
+```
+
+## Tablas de regresión lineal reproducible {.scrollable}
+
+-   Luego, podemos fusionar ambas tablas en una sola con la función `tbl_merge()`:
+
+```{r}
+tabla_final <- tbl_merge(list(tabla_univ, tabla_multi), tab_spanner = c("Modelos crudos", "Modelo ajustado")) 
+
+tabla_final
+```
+
+## Tablas de regresión lineal reproducible {.scrollable}
+
+-   Podemos exportarlo a MS Word para post-procesamiento y reporte:
+
+```{r}
+tabla_final %>% 
+  as_flex_table() %>% 
+  save_as_docx(path = "Tabla_Final.docx")
+```
+
+## 
+
+::: r-fit-text
+<center>¡Gracias!</center>
+
+<center>¿Preguntas?</center>
+:::
+
+## 
+
+\
+
+\
+
+\
+
+::: r-fit-text
+<center>
+
+{{< fa brands twitter >}} 
+
+{{< fa brands github >}} https://github.com/psotob91
+
+{{< fa inbox >}} percys1991\@gmail.com
+
+</center>
+:::

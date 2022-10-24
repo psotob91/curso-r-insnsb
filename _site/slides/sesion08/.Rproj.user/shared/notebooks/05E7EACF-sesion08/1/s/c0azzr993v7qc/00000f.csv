@@ -1,0 +1,5 @@
+"0","mod <- glm.nb(docvis ~ female + age, "
+"0","           data = md_visit)"
+"0","mod %>% "
+"0","  tidy() %>% "
+"0","  gt()"

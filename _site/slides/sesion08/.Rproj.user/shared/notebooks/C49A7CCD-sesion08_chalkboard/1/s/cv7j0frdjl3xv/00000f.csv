@@ -1,0 +1,4 @@
+"0","library(lmtest)"
+"0","library(sandwich)"
+"0","coeftest(mod, vcov = vcovHC) %>% "
+"0","  tidy(conf.int = TRUE)"

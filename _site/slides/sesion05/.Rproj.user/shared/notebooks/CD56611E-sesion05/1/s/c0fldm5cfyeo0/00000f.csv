@@ -1,0 +1,15 @@
+"0","bd_inmuno %>% "
+"0","  select(sexo) %>% "
+"0","  freq()"
+"1","Frequencies  
+bd_inmuno$sexo  
+Label: genero  
+Type: Factor  
+
+                  Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+--------------- ------ --------- -------------- --------- --------------
+       Femenino    189     66.55          66.55     66.32          66.32
+      Masculino     95     33.45         100.00     33.33          99.65
+           <NA>      1                               0.35         100.00
+          Total    285    100.00         100.00    100.00         100.00
+"

@@ -1,0 +1,5 @@
+"0","#| echo: true"
+"0","select("
+"0","  gapminder, "
+"0","  country"
+"0",")"

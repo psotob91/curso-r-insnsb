@@ -1,0 +1,2 @@
+"0","gapminder1980_2000 <- gapminder %>% "
+"0","  filter(year %in% c(1980, 2000))"

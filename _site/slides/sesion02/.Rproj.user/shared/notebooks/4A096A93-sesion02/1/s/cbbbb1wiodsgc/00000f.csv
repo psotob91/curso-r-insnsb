@@ -1,0 +1,3 @@
+"0","#| echo: false"
+"0","gapminder3 <- gapminder %>% "
+"0","  filter(continent %in% c(""Europe"", ""Africa""))"

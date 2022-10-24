@@ -1,0 +1,6 @@
+"0","ggplot(gapminder, "
+"0","       aes(x = gdp, "
+"0","           y = life_expectancy, "
+"0","           colour = continent)) + "
+"0","  geom_point() + "
+"0","  scale_colour_viridis_d()"

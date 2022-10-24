@@ -1,0 +1,6 @@
+"0","library(ggpubr)"
+"0","datos %>% "
+"0","  ggviolin(x = ""treat"", "
+"0","            y = ""weight"", "
+"0","            color = ""treat"", "
+"0","            add = ""boxplot"")"

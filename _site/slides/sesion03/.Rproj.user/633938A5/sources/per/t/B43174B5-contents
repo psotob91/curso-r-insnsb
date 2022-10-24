@@ -1,0 +1,1059 @@
+---
+format: 
+  revealjs: 
+    self-contained: true
+    theme: [default, theme/theme.scss]
+    footer: "R Aplicado a los Proyectos de Investigación - Sesión 3"
+    logo: img/icon-512-insnsb.jpg
+    transition: convex
+    background-transition: zoom
+    incremental: false
+    slide-number: c/t
+    preview-links: true
+    # width: 1920
+    # height: 1080
+    height: 900
+    width: 1600
+    # parallax-background-image: images/bg-ietsi-slide-first.png
+    # parallax-background-size: "1920px 1080px"
+    # chalkboard: true
+    code-block-background: true
+    code-block-border-left: "#31BAE9"
+    highlight-style: ayu-dark
+    echo: true
+    multiplex: true
+    touch: true
+    auto-stretch: true
+    link-external-icon: true
+    link-external-newwindow: true
+    self-contained-math: true
+    
+from: markdown+emoji
+execute:
+  echo: true
+filters:
+  - reveal-auto-agenda
+  - grouped-tabsets
+auto-agenda:
+  bullets: numbered
+  heading: Agenda
+---
+
+\
+
+\
+
+<h1>Sesión 3</h1>
+
+<h2>[Curso: R Aplicado a los Proyectos de Investigación]{.plo}</h2>
+
+<hr>
+
+<h3>[Percy Soto-Becerra, M.D., M.Sc(c)]{.negro}</h3>
+
+<h4>[InkaStats Data Science Solutions | Medical Branch]{.negro}</h4>
+
+<h4>[2022-10-05]{.negro}</h4>
+
+`r fontawesome::fa("github", "black")` &nbsp; [https://github.com/psotob91](https://github.com/psotob91)
+
+![](img/social-image-f22.png){.absolute top=390 left=950 width="600"}
+
+# Importación de datos
+
+```{r}
+#| echo: false
+#| output: false
+
+# Removing all objects including loaded libraries
+rm(list = ls(all = TRUE))
+gc()
+
+# Installing and loading packages
+if (!require("pacman")) {
+  install.packages("pacman")
+}
+
+pacman::p_unload("all") # Unloading all package except base
+
+pacman::p_load(tidyverse, 
+               tibble, 
+               pander, 
+               gt, 
+               kableExtra, 
+               DT, 
+               haven) # Loading packages
+
+datos_fase1 <- read_stata("maca_meno_fase1.dta") %>% 
+  as_factor()
+```
+
+## Importar datos de fuentes externas a R
+<hr>
+
+::: {style="margin-top: 100px; font-size: 1.5em; color: black;"}
+| El paquete [{rio}]{.verde-h3} es la `navaja suiza`
+|  de la importación de datos en R.
+
+::: columns
+::: {.column width="50%"}
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| out-width: 50%
+knitr::include_graphics("img/rio-hex.png")
+```
+
+:::
+
+::: {.column width="50%"}
+
+|           Su función [import]{.verde-h3} 
+|           permite importar 
+|           prácticamente  
+|           cualquier formato.
+
+:::
+:::
+
+
+:::
+
+## Importando datos con [{rio}]{.verde-h3} {.scrollable}
+<hr>
+
+::: panel-tabset
+
+## Instalar [{rio}]{.verde-h3} {auto-animate="true"}
+
+- [{rio}]{.verde-h3} debe instalarse de una manera especial
+
+- Pasos: 
+
+    #. Primero se instala como siempre, usando [install.packages]{.verde-h3}
+    #. Adicionalmente, se sugiere correr [install_formats]{.verde-h3}. inmediatamente después de la primera instalación.
+    #. Se carga el paquete usando [library]{.verde-h3}.
+
+```r
+install.packages("rio")
+rio::install_formats()
+library(rio)
+```
+::: {.fragment}
+- Más detalles sobre el paquete y sus funciones pueden encontrarse en la página web del paquete: <https://thomasleeper.com/rio/index.html>
+:::
+
+## import
+
+- Se usa [import()]{.verde-h3} para importar nuevos datos y [<-]{.verde-h3} para asignar los datos a un nuevo [data.frame]{.verde-h3}
+
+```r
+nuevos_datos <- import(file = "datos_para_importar.fmt")
+```
+
+\
+
+>Podemos omitir los nombres de los argumentos cuando utilizamos funciones.
+
+\
+
+::: columns
+::: {.column width="50%"}
+
+```r
+nuevos_datos <- import(file = "datos_para_importar.fmt")
+```
+
+:::
+
+::: {.column width="50%"}
+
+```r
+nuevos_datos <- import("datos_para_importar.fmt")
+```
+
+:::
+:::
+
+## Plano
+
+- Para archivos de tipo \*.csv o \*.txt
+
+- No importa el tipo de separación de las columnas: comas, puntos y comas, otros caracteres.
+
+    + [import()]{.verde-h3} determinará rápidamente el tipo de separación y hará el trabajo.
+    
+```{r}
+#| echo: false
+library(rio)
+```
+
+```{r}
+datos_csv <- import("maca_meno_perclin.csv")
+head(datos_csv)
+```
+
+## MS Excel 
+
+- Útil para archivos con las extensiones \*.xls o \*.xlsx
+
+```{r}
+datos_xlsx <- import("maca_meno_perclin.xlsx")
+head(datos_xlsx)
+```
+
+## Stata (*.dta)
+
+- Permite importar datos de formato Stata. Sin embargo, en Stata, los valores de las variables suelen estar etiquetados, por lo que es importante también recuperar esta información.
+
+- Si importamos una tabla de datos en formato Stata, vemos que algunas variables categóricas como `married` o `married2` se importan como números. ¿Qué significa 1 o 0?
+
+```{r}
+datos_dta <- import("maca_meno_fase1.dta")
+head(datos_dta)
+```
+
+## SPSS (*.sav)
+
+- Lo mismo que ocurre con Stata, sucede con SPSS: los metadatos se pierden.
+
+```{r}
+datos_sav <- import("RECH0.sav")
+head(datos_sav)
+```
+
+## Otros
+
+- La función [import]{.verde-h3} soporta una gran variedad de formatos.
+
+- Si alguna vez necesita, puede consultar la web del paquete y encontrará tutoriales de cómo importar los formatos que requiera.
+
+<center>[https://thomasleeper.com/rio/index.html]{.big-text2}</center>
+
+:::
+
+## ¿Cómo importar metadatos de Stata o SPSS?
+<hr>
+
+::: {.panel-tabset}
+
+### ¿Metadatos?
+
+:::: {.columns}
+
+::: {.column width='30%'}
+
+- Son los datos de los datos.
+
+- En bases de datos para análisis estadístico, dos metadatos bastante usados son:
+
+    + Etiquetas de la variable
+    
+    + Etiquetas de los valores de la variable
+    
+:::
+
+::: {.column width='70%'}
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| out-width: 100%
+knitr::include_graphics("img/metadatos.png")
+```
+
+:::
+
+::::
+
+### Stata (*.dta)
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+[Importar datos Stata solo con import()]{.verde-h3}
+
+- Las etiquetas de valor para `time`, `treat`, `married` y `married2` se pierden.
+
+```{r}
+datos_dta <- import("maca_meno_fase1_v2.dta")
+
+head(datos_dta)
+```
+:::
+
+::: {.column width='50%'}
+
+[Usar import() más characterize()]{.verde-h3}
+
+- Las etiquetas de valor para `time`, `treat`, `married` y `married2` se recuperan
+
+```{r}
+datos_dta <- import("maca_meno_fase1_v2.dta") %>% 
+  characterize()
+head(datos_dta)
+```
+
+:::
+
+::::
+
+
+### SPSS (*.sav)
+
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+[Importar datos SPSS solo con import()]{.verde-h3}
+
+- Las etiquetas de valor para `time`, `treat`, `married` y `married2` se pierden.
+
+```{r}
+datos_sav <- import("maca_meno_fase1_v2.sav")
+
+head(datos_sav)
+```
+:::
+
+::: {.column width='50%'}
+
+[Usar import() más characterize()]{.verde-h3}
+
+- Las etiquetas de valor para `time`, `treat`, `married` y `married2` se recuperan
+
+```{r}
+datos_sav <- import("maca_meno_fase1_v2.sav") %>% 
+  characterize()
+head(datos_sav)
+```
+
+:::
+
+::::
+
+:::
+
+## Exportando datos con [{rio}]{.verde-h3} {.scrollable}
+<hr>
+
+::: {.panel-tabset}
+
+### export()
+
+- Se usa [export()]{.verde-h3} para exportar un objeto `data frame` o `data tibble` a otro formato:
+
+```r
+export(datos_para_importa, file = "datos_exportados.fmt")
+```
+
+- Los formatos pueden ser:
+
+```{r}
+#| echo: false
+#| output: asis
+tibble::tribble(
+                              ~Format, ~Typical.Extension,
+               "Comma-separated data",             ".csv",
+                "Pipe-separated data",             ".psv",
+                 "Tab-separated data",             ".tsv",
+  "CSVY (CSV + YAML metadata header)",            ".csvy",
+                                "SAS",        ".sas7bdat",
+                               "SPSS",             ".sav",
+                  "SPSS (compressed)",            ".zsav",
+                              "Stata",             ".dta",
+                          "SAS XPORT",             ".xpt",
+                      "SPSS Portable",             ".por",
+                              "Excel",             ".xls",
+                              "Excel",            ".xlsx",
+                           "R syntax",               ".R",
+                    "Saved R objects",     ".RData, .rda",
+               "Serialized R objects",             ".rds",
+                            "Epiinfo",             ".rec"
+  ) %>% 
+  pandoc.table(caption = "", 
+               justify = "ll", 
+               missing = "—", 
+               split.tables = Inf, 
+               col.names = c("Formato", 
+                             "Extensión típica"))
+
+```
+
+### Ejemplos: 
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+- A formato .rds (sugerido para guardar base de datos individuales en R):
+
+```r
+export(datos, "datos.rds")
+```
+
+- A formato .xlsx:
+
+```r
+export(datos, "datos.xlsx")
+```
+
+:::
+
+::: {.column width='50%'}
+
+- A formato .csv:
+
+```r
+export(datos, "datos.csv")
+```
+
+- A formato .dta:
+
+```r
+export(datos, "datos.dta")
+```
+
+- A formato .sav:
+
+```r
+export(datos, "datos.sav")
+```
+
+:::
+
+::::
+
+
+:::
+
+
+## `r fontawesome::fa("laptop-code", "white")` Nuestro turno {background-color="#000000"}
+<hr>
+
+\
+
+- Descargue la carpeta denominada [importar_datos]{.verde-h3} disponible en este enlace: [click aquí]().
+
+- Abra el proyecto denominado [importar_datos.Rproj]{.verde-h3}
+
+- Complete y ejecute el código faltante en los chunk de código.
+
+- Una vez culmine todo el proceso, renderice el archivo .qmd.
+
+\
+\
+\  
+
+```{r}
+#| echo: false
+library(countdown)
+countdown_timer <- function(
+    minutes = 1, 
+    play_sound = TRUE, 
+    font_size = "2em", 
+    ...
+) {
+  countdown(
+    minutes = minutes,
+    # Fanfare when it's over
+    play_sound = play_sound,
+    # Set timer theme to match solarized colors
+    color_border              = "#404041",
+    color_text                = "white",
+    color_background = "#000000",
+    color_running_background  = "#72994E",
+    color_running_text        = "white",
+    color_finished_background = "#EE6331",
+    color_finished_text       = "white",
+    font_size = font_size,
+    ...
+  )
+}
+```
+
+```{R}
+#| echo: false
+countdown_timer(5)
+```
+
+
+## `r fontawesome::fa("mug-saucer", "white")` Hagamos una pausa {background-color="#00817E"}
+<hr>
+
+::: r-fit-text
+
+<center>
+
+Tomemos un descanso de `5 minutos`...
+
+Estire las piernas `r fontawesome::fa("person-walking", "white")`... 
+
+Deje de ver las pantallas `r fontawesome::fa("laptop", "white")`...
+
+... cualquier `r fontawesome::fa("laptop", "white")`, las del celular `r fontawesome::fa("mobile", "white")` también.
+
+</center>
+
+:::
+
+```{r}
+#| echo: false
+library(countdown)
+countdown_timer <- function(
+    minutes = 1, 
+    play_sound = TRUE, 
+    font_size = "2em", 
+    ...
+) {
+  countdown(
+    minutes = minutes,
+    # Fanfare when it's over
+    play_sound = play_sound,
+    # Set timer theme to match solarized colors
+    color_border              = "#404041",
+    color_text                = "white",
+    color_background = "#000000",
+    color_running_background  = "#72994E",
+    color_running_text        = "white",
+    color_finished_background = "#EE6331",
+    color_finished_text       = "white",
+    font_size = font_size,
+    ...
+  )
+}
+```
+
+```{r}
+#| echo: false
+countdown_timer(5)
+```
+
+## Creación de nuevas columnas con [mutate()]{.verde-h3}
+<hr>
+
+-   La función [mutate()]{.verde-h3} crea columnas nuevas o modifica existentes.
+
+:::: {.columns}
+
+::: {.column width='40%'}
+
+[Larga]{.verde-h3}
+
+```r
+mutate(.data = DATA, ...)
+```
+
+[Abreviada]{.verde-h3}
+
+```r
+mutate(DATA, ...)
+```
+
+[Se estila usar %>%]{.verde-h3}
+
+```r
+DATA %>% 
+  mutate(...)
+```
+
+:::
+
+::: {.column width='5%'}
+
+:::
+
+::: {.column width='55%'}
+
+\
+
+```{r}
+#| echo: false
+datos_mutate <- 
+  data.frame(
+    Argumento = c(".data", "..."), 
+    Descripción = c("Data frame o extensión de data frame (por ejemplo, tibble).", 
+             "Columnas existente para modificar o columnas nuevas para crear."))
+
+datos_mutate %>% 
+  kbl(booktabs = T) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+                full_width = T)
+```
+
+:::
+
+::::
+
+
+## [mutate()]{.verde-h3} en acción {.scrollable}
+<hr>
+
+::: {.panel-tabset}
+
+### Crear una nueva variable
+
+-   Si queremos crear la variable índice de masa corporal:
+
+```{r}
+datos_fase1 %>% 
+  select(id, weight, height) %>% # Nos quedamos con peso y talla 
+  mutate(imc = weight / height ^ 2) # Creamos IMC en base a peso y talla
+```
+
+### Crear varias nuevas variables
+
+- También podemos crear más de una variable nueva.
+
+- Incluso, podemos reutilizar la variable recién creada para crear otra nueva dentro del mismo argumento de [mutate()]{.verde-h3}
+
+```{r}
+datos_fase1 %>% 
+  select(id, weight, height) %>% 
+  mutate(
+    imc = weight / height ^ 2, 
+    imc_escalado = imc / 10
+    ) 
+```
+
+### Remplazar variable existente
+
+-   Tener cuidado si se quiere reutilizar la variable original, en ese caso es mejor crear columna nueva.
+
+-   Queremos que la edad sea reportada en meses:
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+**Crear columna nueva:**
+
+```{r}
+datos_fase1 %>% 
+  select(id, age) %>% 
+  mutate(age2 = age * 12) # Columna nueva llamada age2
+```
+
+:::
+
+::: {.column width='50%'}
+
+**Remplazar la edad:**
+
+```{r}
+datos_fase1 %>% 
+  select(id, age) %>% 
+  mutate(age = age * 12) # Notar que se remplazó age 
+```
+
+:::
+
+::::
+
+:::
+
+## Creación de variables con [case_when()]{.verde-h3}
+<hr>
+
+-   Función de apoyo a [mutate()]{.verde-h3} para crear variables según condiciones más complejas.
+
+-   Crea variables de acuerdo a condiciones complejas
+
+```r
+case_when(
+  condición1 ~ resultado1, 
+  condición2 ~ resultado2, 
+  condición3 ~ resultado3
+  )
+```
+
+- Toda transformación o creación de variables en dplyr ocurre por mutate; por tanto, [case_when()]{.verde-h3} se utiliza dentro de un mutate
+
+```r
+datos %>% 
+  mutate(
+    nueva_var = case_when(
+      condición1 ~ resultado1,
+      condición2 ~ resultado2, 
+      condición3 ~ resultado3
+    )
+  )
+```
+
+- Atajo de teclado para obtener `~`: <kbd>Alt</kbd> + <kbd>1</kbd> + <kbd>2</kbd> + <kbd>6</kbd>
+
+## Condición no cumplida en [case_when( )]{.verde-h3}
+
+- Para indicar que todas las condiciones previas no se cumplen, se debe colocar `TRUE`:
+
+```r
+datos %>% 
+  mutate(
+    nueva_var = case_when(
+      condición1 ~ resultado1,
+      condición2 ~ resultado2, 
+      condición3 ~ resultado3, 
+      TRUE ~ resultado_si_condición_no_se_cumple
+    )
+  )
+```
+
+- Es muy importante siempre colocarla al final de cualquier conjunto de condiciones previas.
+
+- Cuando el resultado de no cumplirse es que se asigne valor perdido, es importante usar la función `as.tipo_var()` sobre el indicador de dato perdido `NA`.
+
+    + Si es character: [as.character(NA)]{.verde-h3}
+    
+    + Si es numeric: [as.numeric(NA)]{.verde-h3}
+
+
+## [case_when()]{.verde-h3} en acción {.scrollable}
+<hr>
+
+::: {.panel-tabset}
+
+### Categorizar variable numérica
+
+-   Se quieren crear categorías de edad: "20-30", "31-35" y "36-41"
+
+```{r}
+datos_fase1 %>% 
+  select(id, age) %>% 
+  mutate(agecat = case_when(age >= 20 & age <= 30 ~ "20-30", 
+                            age >= 31 & age <= 35 ~ "31-35", 
+                            age >= 36 & age <= 41 ~ "36-41", 
+                            TRUE ~ as.character(NA))
+         ) 
+```
+
+
+### Variable según condición compleja
+
+- Se desea crear variable indicadora de inclusión en estudio: Solo pacientes sin pareja y que proceden de Callao, Carabayllo, Chorrillos o SJL son elegibles:  
+
+```{r}
+datos_fase1 %>% 
+  mutate(elegible = case_when(
+    married2 == "Without couple" & procedence %in% c("Callao", "Carabayllo", "Chorrillos", "SJL") ~ "Elegible", 
+    TRUE ~ "No elegible"
+    )
+  ) 
+```
+
+
+:::
+
+
+# Otros verbos útiles para manejo de datos
+
+## Renombrar variables con [rename()]{.verde-h3}
+<hr>
+
+- Cambia los nombres de variables individuales.
+
+\ 
+
+:::: {.columns}
+
+::: {.column width='40%'}
+
+[Larga]{.verde-h3}
+
+```r
+rename(.data = DATA, ...)
+```
+
+[Abreviada]{.verde-h3}
+
+```r
+rename(DATA, ...)
+```
+
+[Se estila usar %>%]{.verde-h3}
+
+```r
+DATA %>% 
+  rename(...)
+```
+
+:::
+
+::: {.column width='5%'}
+
+:::
+
+::: {.column width='55%'}
+
+\
+
+```{r}
+#| echo: false
+datos_rename <- 
+  data.frame(
+    Argumento = c(".data", "..."), 
+    Descripción = c("Data frame o extensión de data frame (por ejemplo, tibble).", 
+             "nuevo_nombre = viejo_nombre"))
+
+datos_rename %>% 
+  kbl(booktabs = T) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+                full_width = T)
+```
+
+:::
+
+::::
+
+
+## [rename()]{.verde-h3} en acción
+<hr>
+
+- Cambiar el nombre de `married` por `casado1` y el de `age` por `edad`. 
+
+```{r}
+datos_fase1 %>% 
+  rename(
+    casado1 = married, 
+    edad = age
+    )
+```
+
+
+## Etiquetar variables con [set_var_labels()]{.verde-h3} {.scrollable}
+<hr>
+
+-   La función [set_var_labels()]{.verde-h3} del paquete [labelled()]{.verde-h3} es muy útil para etiquetar columnas.
+
+-   Los datos deben tener metadatos que permitan ser legibles por el ser humano.
+
+- Primero instalar y cargar paquete:
+
+```{r}
+library(labelled)
+```
+
+-  Es preferible usar esta función al final de todo el proceso de limpieza de datos.
+
+:::: {.columns}
+
+::: {.column width='40%'}
+
+[Larga]{.verde-h3}
+
+```r
+set_var_labels(.data = DATA, ...)
+```
+
+[Abreviada]{.verde-h3}
+
+```r
+set_var_labels(DATA, ...)
+```
+
+[Se estila usar %>%]{.verde-h3}
+
+```r
+DATA %>% 
+  set_var_labels(...)
+```
+
+:::
+
+::: {.column width='5%'}
+
+:::
+
+::: {.column width='55%'}
+
+\
+
+```{r}
+#| echo: false
+datos_var_lab <- 
+  data.frame(
+    Argumento = c(".data", "..."), 
+    Descripción = c("Data frame o extensión de data frame (por ejemplo, tibble).", 
+             "variable = 'nueva etiqueta'"))
+
+datos_var_lab %>% 
+  kbl(booktabs = T) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+                full_width = T)
+```
+
+::: 
+
+::::
+
+## [set_var_labels()]{.verde-h3} en acción
+<hr>
+
+::: {.panel-tabset}
+
+### Sin etiqueta de variable
+
+- ¿Qué significan `pas`, `pad` y `pam`?
+
+- Difícil de saber sin una etiqueta
+
+```{r, echo=FALSE, out.width="40%"}
+knitr::include_graphics("img/sin-etiqueta.png")
+```
+
+### Con etiqueta de variable
+
+```{r}
+#| echo: false
+datos <- data.frame(
+  pas = c(122.3, 142.1, 100.2), 
+  pad = c(74, 81, 79), 
+  pam = c(90.1, 101.37, 86.06)
+)
+```
+
+- Usando [set_variable_labels()]{.verde-h3}
+
+```{r}
+datos2 <- datos %>% 
+  set_variable_labels(
+    pam = "Presión Arterial Media", 
+    pas = "Presión Arterial Sistólica", 
+    pad = "Presión Arterial Diastólica"
+  )
+```
+
+```{r, echo=FALSE, out.width="70%"}
+knitr::include_graphics("img/con-etiqueta.png")
+```
+
+:::
+
+```{r}
+#| echo: false
+library(countdown)
+countdown_timer <- function(
+    minutes = 1, 
+    play_sound = TRUE, 
+    font_size = "2em", 
+    ...
+) {
+  countdown(
+    minutes = minutes,
+    # Fanfare when it's over
+    play_sound = play_sound,
+    # Set timer theme to match solarized colors
+    color_border              = "#404041",
+    color_text                = "white",
+    color_background = "#000000",
+    color_running_background  = "#72994E",
+    color_running_text        = "white",
+    color_finished_background = "#EE6331",
+    color_finished_text       = "white",
+    font_size = font_size,
+    ...
+  )
+}
+```
+
+## `r fontawesome::fa("laptop-code", "white")` Nuestro turno {background-color="#000000"}
+<hr>
+
+\
+
+-   Cree una carpeta de trabajo en Documentos, llámela `mi_primer_manejo_datos`.
+-   Cree un proyecto de Rstudio y ubíquelo en la carpeta nueva `mi_primer_manejo_datos`.
+-   Abra el archivo `mi_primer_manejo_datos` y completelo según las indicaciones.
+-   Compile el archivo quarto, verifique que se creó el html, ábralo y explórelo.
+
+\
+\
+\  
+
+```{R}
+#| echo: false
+countdown_timer(5)
+```
+
+
+
+## `r fontawesome::fa("laptop-code", "white")` Nuestro turno {background-color="#000000"}
+<hr>
+
+- Trabaje con el mismo archivo quarto `taller02.qmd`.
+
+- Desarrolle la `TERCERA PARTE` de este taller siguiendo las instrucciones.
+
+- Desarrolle la `CUARTA PARTE` de este taller siguiendo las instrucciones.
+
+- Desarrolle la `QUINTA PARTE` de este taller siguiendo las instrucciones.
+
+- Al finalizar, renderice el archivo quarto.
+
+- Observe el archivo `taller02.html` generado.
+
+\ 
+
+```{r}
+#| echo: false
+library(countdown)
+countdown_timer <- function(
+    minutes = 1, 
+    play_sound = TRUE, 
+    font_size = "2em", 
+    ...
+) {
+  countdown(
+    minutes = minutes,
+    # Fanfare when it's over
+    play_sound = play_sound,
+    # Set timer theme to match solarized colors
+    color_border              = "#404041",
+    color_text                = "white",
+    color_background = "#000000",
+    color_running_background  = "#72994E",
+    color_running_text        = "white",
+    color_finished_background = "#EE6331",
+    color_finished_text       = "white",
+    font_size = font_size,
+    ...
+  )
+}
+```
+
+
+```{r}
+#| echo: false
+countdown_timer(30)
+```
+
+## 
+
+::: r-fit-text
+<center>¡Gracias!</center>
+
+<center>¿Preguntas?</center>
+
+:::
+
+## 
+
+\
+
+\
+
+\
+
+::: r-fit-text
+
+<center>
+{{< fa brands twitter >}} @psotob91 
+
+{{< fa brands github >}} https://github.com/psotob91
+
+{{< fa inbox >}} percys1991@gmail.com
+</center>
+
+:::
