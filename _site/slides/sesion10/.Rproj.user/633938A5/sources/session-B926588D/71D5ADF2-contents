@@ -16,8 +16,8 @@ format:
     width: 1600
     # parallax-background-image: img/bg-ietsi-slide-first.png
     # parallax-background-size: "1920px 1080px"
-    # chalkboard: true
-    # code-block-background: true
+    chalkboard: true
+    code-block-background: true
     code-block-border-left: "#31BAE9"
     highlight-style: ayu-dark
     echo: true

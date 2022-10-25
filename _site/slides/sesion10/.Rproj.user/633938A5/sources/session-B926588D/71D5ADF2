@@ -3,7 +3,7 @@
     "path": "~/Github_webs/curso-r-insnsb/slides/sesion10/sesion10_chalkboard.qmd",
     "project_path": "sesion10_chalkboard.qmd",
     "type": "quarto_markdown",
-    "hash": "1478604778",
+    "hash": "2576191252",
     "contents": "",
     "dirty": false,
     "created": 1666618873970.0,
@@ -12,17 +12,17 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "19,33",
-        "scrollLine": "0",
+        "cursorPosition": "19,31",
+        "scrollLine": "3",
         "docOutlineVisible": "1",
         "docOutlineSize": "247"
     },
     "folds": "",
-    "lastKnownWriteTime": 1666638279,
+    "lastKnownWriteTime": 1666648378,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1666638279358,
+    "last_content_update": 1666648378920,
     "read_only": false,
     "read_only_alternatives": []
 }

@@ -214,21 +214,21 @@
     "href": "content/10-content.html",
     "title": "Sesión 10",
     "section": "",
-    "text": "En esta sesión se buscará abordar los siguientes temas:\n\nRegresión para datos binarios para estimar OR y RR/RP: Regresión Logística Binaria, Log-Binomial y Poisson modificado con R.\nEstrategias de regresión en modelado explicativo 1: Confusión y ajuste.\nUso de DAG para seleccionar variables.\nCaso aplicado de análisis en efectividad clínica comparativa."
+    "text": "En esta sesión se buscará abordar los siguientes temas:\n\nRegresión para datos binarios para estimar OR y RR/RP: Regresión Logística Binaria, Log-Binomial y Poisson modificado con R."
   },
   {
     "objectID": "content/10-content.html#materiales",
     "href": "content/10-content.html#materiales",
     "title": "Sesión 10",
     "section": "Materiales",
-    "text": "Materiales\n\nClase grabadaSlidesTalleres\n\n\nSe colgará cuando esté disponible.\n\n\n\n Ver diapositivas en una nueva ventana\n\n\n\n\n\nPuede descargar los archivos generados en la carpeta taller10 en el siguiente enlace: Aquí."
+    "text": "Materiales\n\nClase grabadaSlidesTalleres\n\n\n\n\n\n\n\n\n\n\n Ver diapositivas en una nueva ventana\n\n\n\n\n\nPuede descargar los archivos generados en la carpeta taller10 en el siguiente enlace: Aquí."
   },
   {
     "objectID": "content/11-content.html",
     "href": "content/11-content.html",
     "title": "Sesión 11",
     "section": "",
-    "text": "En esta sesión se buscará abordar los siguientes temas:\n\nEstrategias de regresión en modelado explicativo 2: Lidiando con incumplimiento de supuestos (no linealidad y no i.i.d) con R.\nCaso aplicado de análisis.\nCasos aplicados de análisis en efectividad clínica comparativa."
+    "text": "En esta sesión se buscará abordar los siguientes temas:\n\nEstrategias de regresión en modelado explicativo 1: Confusión y ajuste.\nUso de DAG para seleccionar variables.\nEstrategias de regresión en modelado explicativo 2: Lidiando con incumplimiento de supuestos (no linealidad y no i.i.d) con R.\nCaso aplicado de análisis.\nCasos aplicados de análisis en efectividad clínica comparativa."
   },
   {
     "objectID": "content/11-content.html#materiales",
