@@ -1,5 +1,0 @@
-"0","#| echo: false"
-"0","mod  %>% "
-"0","  tidy(conf.int = TRUE) %>% "
-"0","  rio::export(""tabla_regresion.xlsx"")"
-"2","Warning: cannot create file 'tabla_regresion.xlsx', reason 'Permission denied'"

@@ -1,0 +1,206 @@
+---
+title: "Taller 12"
+author: "Percy Soto Becerra"
+---
+
+## Cargar paquetes
+
+```{r}
+library(tidyverse)
+library(rio)
+library(broom)
+library(Hmisc)
+library(car)
+library(statmod)
+library(mfp)
+library(rms)
+library(splines2)
+library(ggeffects)  # Crea residuos parciales y graficos de efectos
+```
+
+
+## Cargar base de datos
+
+- Datos sobre 
+
+```{r}
+datos <- import("poiss_nolineal.rds")
+```
+
+
+## Selección de forma funcional
+
+### Basada en teoria
+
+#### Asumiendo linealidad:
+
+- Modelo:
+
+```{r}
+mod_lineal <- glm(y_i ~ x1 + x2, 
+                  family = poisson, 
+                  data  = datos)
+summary(mod_lineal)
+```
+
+```{r}
+mod_lineal %>% 
+  tidy(exponentiate = TRUE)
+```
+
+- Evaluación de linealidad usando residuales parciales:
+
+Para predictor continuo x1:
+
+```{r}
+xb_x1 <- ggpredict(mod_lineal, "x1 [all]")
+plot(xb_x1, residuals = TRUE, residuals.line = TRUE)
+```
+
+Para predictor continuo x2:
+
+```{r}
+xb_x2 <- ggpredict(mod_lineal, "x2 [all]")
+plot(xb_x2, residuals = TRUE, residuals.line = TRUE)
+```
+
+#### Usando polinomios pre definidos:
+
+```{r}
+mod_cuadratico <- glm(y_i ~ x1 + I(x2 ^ 2), family = poisson, data  = datos)
+summary(mod_cuadratico)
+```
+
+- Evaluación de linealidad usando residuales parciales:
+
+Para predictor continuo x1:
+
+```{r}
+xb_x1 <- ggpredict(mod_cuadratico, "x1 [all]")
+plot(xb_x1, residuals = TRUE, residuals.line = TRUE)
+```
+
+Para predictor continuo x2:
+
+```{r}
+xb_x2 <- ggpredict(mod_cuadratico, "x2 [all]")
+plot(xb_x2, residuals = TRUE, residuals.line = TRUE)
+```
+
+#### Otra forma de usar polinomios pre definidos:
+
+- Si queremos incluir $x2$ y $x2^2$ podemos hacer esto: 
+
+```{r}
+mod_cuadratico <- glm(y_i ~ x1 + x2 + I(x2 ^ 2), family = poisson, data  = datos)
+summary(mod_cuadratico)
+```
+
+- También podemos usar el atajo `pol()`: 
+
+```{r}
+mod_cuadratico <- glm(y_i ~ x1 + pol(x2, 2), family = poisson, data  = datos)
+summary(mod_cuadratico)
+```
+
+
+- Evaluación de linealidad usando residuales parciales:
+
+Para predictor continuo x1:
+
+```{r}
+xb_x1 <- ggpredict(mod_cuadratico, "x1 [all]")
+plot(xb_x1, residuals = TRUE, residuals.line = TRUE)
+```
+
+Para predictor continuo x2:
+
+```{r}
+xb_x2 <- ggpredict(mod_cuadratico, "x2 [all]")
+plot(xb_x2, residuals = TRUE, residuals.line = TRUE)
+```
+
+### Basada en datos pero ciega al desenlace
+
+- Usando splines cubicos restringidos 
+
+```{r}
+mod_rcs <- glm(y_i ~ x1 + ns(x2, df = 4), family = poisson, data  = datos)
+summary(mod_rcs)
+```
+
+```{r}
+mod_rcs %>% 
+  tidy(exponentiate = TRUE)
+```
+
+
+- Evaluación de linealidad usando residuales parciales:
+
+Para predictor continuo x1:
+
+```{r}
+xb_x1 <- ggpredict(mod_rcs, "x1 [all]")
+plot(xb_x1, residuals = TRUE, residuals.line = TRUE)
+```
+
+```{r}
+xb_x2 <- ggpredict(mod_rcs, "x2 [all]")
+plot(xb_x2, residuals = TRUE, residuals.line = TRUE)
+```
+### Basada en datos y en el desenlace
+
+```{r}
+mod_mfp <- mfp(y_i ~ fp(x1, df = 4, scale = TRUE) + fp(x2, df = 4, scale = TRUE), 
+    family = poisson,           
+    data = datos, 
+    alpha = 0.05, 
+    select = 1)
+
+mod_mfp
+```
+
+```{r}
+summary(mod_mfp)
+```
+
+```{r}
+mod_mfp <- glm(y_i ~ I((x1 + 2.1)^1) + I((x2 + 2)^1) + I((x2 + 2)^3), 
+               family = poisson, 
+               data = datos)
+```
+
+
+```{r}
+xb_x1 <- ggpredict(mod_mfp, "x1 [all]")
+plot(xb_x1, residuals = TRUE, residuals.line = TRUE)
+```
+
+
+```{r}
+xb_x2 <- ggpredict(mod_mfp, "x2 [all]")
+plot(xb_x2, residuals = TRUE, residuals.line = TRUE)
+```
+
+
+## Selección de variables y forma funcional
+
+
+```{r}
+mod_seleccion_backward <- mfp(y_i ~ fp(x1, df = 4, scale = TRUE) + fp(x2, df = 4, scale = TRUE), 
+    family = poisson,           
+    data = datos, 
+    alpha = 0.05, 
+    select = 0.05)
+
+mod_seleccion_backward
+```
+
+
+```{r}
+prob <- seq(0, 1, by = 0.01)
+entropy <- -log(prob)
+
+plot(prob, entropy)
+```
+

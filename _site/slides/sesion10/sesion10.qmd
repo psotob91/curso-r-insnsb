@@ -33,7 +33,6 @@ execute:
   echo: true
 filters:
   - reveal-auto-agenda
-  - grouped-tabsets
 auto-agenda:
   bullets: numbered
   heading: Agenda

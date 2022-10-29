@@ -1,9 +1,0 @@
-"0","library(gtsummary)"
-"0","datos2 %>%"
-"0","  dplyr::select(treat, age, weight, e2, fsh, lh, race, married) %>% "
-"0","  tbl_summary("
-"0","    by = treat"
-"0","  ) %>%  "
-"0","  add_difference()"
-"2","Error: 'tbl_summary'/'tbl_svysummary' object must have a `by=` value with exactly two levels
-"

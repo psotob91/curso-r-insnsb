@@ -1,8 +1,0 @@
-"0","tabla_univ <- datos %>% "
-"0","  dplyr::select(age, sex, hb) %>% "
-"0","  tbl_uvregression("
-"0","    method = lm, "
-"0","    y = hb"
-"0","  ) "
-"0",""
-"0","tabla_univ"

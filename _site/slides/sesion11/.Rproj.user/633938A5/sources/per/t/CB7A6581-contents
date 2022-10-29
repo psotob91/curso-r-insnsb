@@ -1,0 +1,1142 @@
+---
+format: 
+  revealjs: 
+    # self-contained: true
+    theme: [default, theme/theme.scss]
+    footer: "R Aplicado a los Proyectos de Investigación - Sesión 11"
+    logo: img/icon-512-insnsb.jpg
+    transition: convex
+    background-transition: zoom
+    incremental: false
+    slide-number: c/t
+    preview-links: true
+    # width: 1920
+    # height: 1080
+    height: 900
+    width: 1600
+    # parallax-background-image: img/bg-ietsi-slide-first.png
+    # parallax-background-size: "1920px 1080px"
+    chalkboard: true
+    code-block-background: true
+    code-block-border-left: "#31BAE9"
+    highlight-style: ayu-dark
+    echo: true
+    multiplex: true
+    touch: true
+    auto-stretch: true
+    link-external-icon: true
+    link-external-newwindow: true
+    self-contained-math: true
+    
+from: markdown+emoji
+execute:
+  echo: true
+filters:
+  - reveal-auto-agenda
+auto-agenda:
+  bullets: numbered
+  heading: Agenda
+---
+
+\
+
+\
+
+<h1>Sesión 11</h1>
+
+<h2>[Curso: R Aplicado a los Proyectos de Investigación]{.plo}</h2>
+
+<hr>
+
+<h3>[Percy Soto-Becerra, M.D., M.Sc(c)]{.negro}</h3>
+
+<h4>[InkaStats Data Science Solutions \| Medical Branch]{.negro}</h4>
+
+<h4>[2022-10-26]{.negro}</h4>
+
+`r fontawesome::fa("github", "black")`   <https://github.com/psotob91>
+
+![](img/social-image-f22.png){.absolute top="390" left="950" width="600"}
+
+```{r}
+#| echo: false
+#| output: false
+
+# Removing all objects including loaded libraries
+rm(list = ls(all = TRUE))
+gc()
+
+# Installing and loading packages
+if (!require("pacman")) {
+  install.packages("pacman")
+}
+
+pacman::p_unload("all") # Unloading all package except base
+
+pacman::p_load(tidyverse, 
+               haven, 
+               janitor, 
+               gt, 
+               gtsummary, 
+               flextable, 
+               kableExtra, 
+               skimr, 
+               Hmisc, 
+               readxl, 
+               rstatix, 
+               ggpubr, 
+               car, 
+               performance,
+               see, 
+               lmtest, 
+               sandwich, 
+               splines2, 
+               plotly, 
+               glue, 
+               statmod,
+               ggeffects, 
+               patchwork) # Loading packages
+
+# icons::download_fontawesome()
+```
+
+# Ajuste
+
+## Motivación
+
+> En un estudio que evalúa la relación entre `fumar` (variable independiente) y el `volumen expiratorio forzado` (variable dependiente), se encuentran los siguientes resultados crudos (sin ajustar por otras variables) y ajustado por grupo etario:
+
+::: {.panel-tabset}
+
+### Crudo
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| out-width: 70%
+knitr::include_graphics("img/ajuste1.png")
+```
+
+> El VEF medio en fumadores fue 0.71 L/s más que el VEF medio en no fumadores.
+
+
+### Ajustado
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| out-width: 70%
+knitr::include_graphics("img/ajuste2.png")
+```
+
+> El VEF medio en fumadores fue 0.16 L/s menos que el VEF medio en no fumadores, manteniendo constante el grupo de edad.
+
+### Controversia
+
+- En el análisis crudo, fumar se asocia con mejor función pulmonar en comparación con no fumar.
+
+- En el análisis ajustado, fumar se asocia con peor función pulmonar en comparación con no fumar.
+
+:::
+
+## $\hat{\beta}_1$ crudo
+
+- Veamos el caso de una regresión lineal normal simple: $\hat{\text{VEF}_i} = \hat{\beta_0} + \hat{\beta_1}\text{Fumar}_i$
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| fig-width: 15
+#| fig-height: 5
+knitr::include_graphics("img/ajuste1.png")
+```
+
+
+:::{.callout-tip collapse=false appearance='default' icon=false}
+
+## 
+
+- El coeficiente de regresión estimado $\hat{\beta}_1$ ($b_\text{fumar}$) es una `medida de la asociación cruda` (`univariada`/`bivariada`) entre la variable explicativa `fumar` y la variable respuesta `volumen expiratorio forzado en 1º minuto (VEF)`.
+
+    - Especificamente, es una `diferencia de medias de VEF` entre fumadores y no fumadores en toda la muestra, sin tener en cuenta otras características.
+    
+- En sentido descriptivo, esta asociación `cruda` puede ser útil para describir diferencias clínicas relevantes: 
+
+    - Describe diferencias observadas en el mundo real que observamos.
+:::
+
+
+## $\hat{\beta}_1$ ajustado
+
+- Veamos el caso de una regresión lineal normal múltiple: 
+
+$$\hat{\text{VEF}}_i = \hat{\beta}_0 + \hat{\beta}_1\text{Fumar}_i + \hat{\beta}_kI(\text{Grupo etario} = k)$$
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| fig-width: 15
+#| fig-height: 15
+knitr::include_graphics("img/ajuste3.png")
+```
+
+## $\hat{\beta}_1$ ajustado (cont.)
+
+:::{.callout-tip collapse=false appearance='default' icon=false}
+
+## 
+
+- Cuando se analiza en cada grupo etario ("3-9 años", "10-11 años", "12-19 años"), la relación entre VEF y fumar se invierte en cada grupo. 
+
+- La asociación entre VEF y Fumar se evalúa en cada estrato de la covariable. 
+
+    - Si asumimos que las tres medidas de asociación en realidad provienen de una única medida de asociación cuya realización varía por azar por variabilidad muestral, entonces, podemos resumir las 3 medidas en una sola usando un promedio ponderado de estas:
+    
+$$\hat{\beta}_{1\text{(ajustado)}} = b_{\text{fumar 3-9 años}}\frac{n_\text{fuma 3-9 años}}{n_\text{total}} + b_{\text{fumar 10-11 años}}\frac{n_\text{fuma 10-11 años}}{n_\text{total}} + b_{\text{fumar 12-19 años}}\frac{n_\text{fuma 12-19 años}}{n_\text{total}}$$
+    
+$$\hat{\beta}_{1\text{(ajustado)}} = (-0.08)(\frac{309}{654}) + (-0.26)(\frac{171}{654}) + (-0.18)(\frac{174}{654}) = -0.154$$
+    
+- "Ajustar" en regresión significa obtener una medida de asociación `condicionada` en los valores de una o más covariables de `ajuste`. 
+
+    - Lo que estamos haciendo es evaluar la relación en grupos que son homogéneos en los valores de la covariable de estratificación: `"(...) manteniendo constante (...)"`
+
+:::
+
+## Simulación para entender ajuste - caso 1
+
+```{r}
+#| echo: false
+set.seed(2014)
+n <- 100
+t <- rep(c(0, 1), c(n/2, n/2))
+x <- c(runif(n/2), runif(n/2))
+
+beta0 <- 0
+beta1 <- 2
+tau <- 1
+sigma <- .2
+y <- beta0 + x * beta1 + t * tau + rnorm(n, sd = sigma)
+
+datos <- data.frame(y = y, 
+                    z = t,
+                    z_factor = factor(t),
+                    x = x)
+
+datos %>% 
+  ggplot() + 
+  geom_point(aes(x = z, y = x, color = z_factor),  alpha = 0.3, size = 4) + 
+  geom_smooth(aes(x = z, y = x), method = lm, se = FALSE) + 
+  theme_minimal() + 
+  labs(title = "No relación de covariables x - z", 
+       subtitle = "E(x_i | z)") -> p1
+
+datos %>% 
+  ggplot() + 
+  geom_point(aes(x = z, y = y, color = z_factor),  alpha = 0.3, size = 4) + 
+  geom_smooth(aes(x = z, y = y), method = lm, se = FALSE) + 
+  theme_minimal()  + 
+  labs(title = "Relación + de y - z sin ajustar por x", 
+       subtitle = "E(y_i | z)") -> p2
+
+datos %>% 
+  ggplot() + 
+  geom_point(aes(x = x, y = y, color = z_factor),  alpha = 0.3, size = 4) + 
+  geom_smooth(aes(x = x, y = y), method = lm, se = FALSE) + 
+  theme_minimal() + 
+  labs(title = "Relación + de y - x sin ajustar por z", 
+       subtitle = "E(y_i | x)") -> p3
+
+
+
+datos %>% 
+  ggplot() + 
+  geom_point(aes(x = x, y = y, color = z_factor),  alpha = 0.3, size = 4) + 
+  geom_smooth(aes(x = x, y = y), method = lm, se = FALSE) + 
+  geom_smooth(aes(x = x, y = y, color = z_factor), 
+              linetype = "dashed", 
+              method = lm, 
+              se = FALSE) + 
+  theme_minimal()  + 
+  labs(title = "Relación + de y - x condicionado por z", 
+       subtitle = "E(y_i | x, z)") -> p4
+
+(p1 | p2) / (p3 | p4) + 
+  plot_annotation(tag_levels = 'A') -> plot
+
+ggsave(
+  filename = "simul_ajuste1.png", 
+  plot = plot, 
+  device = "png", 
+  path = "img/", 
+  scale = 2.2, 
+  width = 12,
+  height = 8, 
+  unit = "cm",
+  dpi = 600
+)
+```
+
+:::: {.columns}
+
+::: {.column width='70%'}
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| out-height: 100%
+knitr::include_graphics("img/simul_ajuste1.png")
+```
+
+:::
+
+::: {.column width='30%'}
+
+:::{.callout-important collapse=false appearance='default' icon=false}
+## Algunas cosas que hacer notar
+- **A:** X y Z no están relacionadas.
+- **B:** Z está relacionada a Y bivariadamente.
+- **C:** X está relacionada a Y bivariadamente.
+- **D:** 
+
+    - En cada estrato de Z, X está relacionada con Y, pero intercepto depende de Z.
+    - La magnitud de la relación entre X e Y es la misma en cada estrato de Z.
+    - La relación entre Z e Y es positiva y la misma, manteniendo constante X.
+:::
+
+:::
+
+::::
+
+
+```{r}
+#| echo: false
+# library(htmlwidgets)
+# plot_ly(datos, 
+#         x = ~x, y = ~z, z = ~y, 
+#         type = "scatter3d", 
+#         mode = "markers", 
+#         height = 450, 
+#         width = 400) %>%
+#   add_markers(color = ~z_factor, 
+#               showlegend = F) 
+```
+
+
+## Simulación para entender ajuste - caso 2
+
+```{r}
+#| echo: false
+set.seed(2014)
+n <- 100
+
+t <- rep(c(0, 1), c(n/2, n/2))
+
+x <- c(runif(n/2), 1.5 + runif(n/2))
+
+beta0 <- 0
+beta1 <- 2
+tau <- 0
+sigma <- .2
+y <- beta0 + x * beta1 + t * tau + rnorm(n, sd = sigma)
+
+datos <- data.frame(y = y, 
+                    z = t,
+                    z_factor = factor(t),
+                    x = x)
+
+datos %>% 
+  ggplot() + 
+  geom_point(aes(x = z, y = x, color = z_factor),  alpha = 0.3, size = 4) + 
+  geom_smooth(aes(x = z, y = x), method = lm, se = FALSE) + 
+  theme_minimal() + 
+  labs(title = "Relación + de covariables x - z", 
+       subtitle = "E(x_i | z)") -> p1
+
+datos %>% 
+  ggplot() + 
+  geom_point(aes(x = z, y = y, color = z_factor),  alpha = 0.3, size = 4) + 
+  geom_smooth(aes(x = z, y = y), method = lm, se = FALSE) + 
+  theme_minimal()  + 
+  labs(title = "Relación + de y - z sin ajustar por x", 
+       subtitle = "E(y_i | z)") -> p2
+
+datos %>% 
+  ggplot() + 
+  geom_point(aes(x = x, y = y, color = z_factor),  alpha = 0.3, size = 4) + 
+  geom_smooth(aes(x = x, y = y), method = lm, se = FALSE) + 
+  theme_minimal() + 
+  labs(title = "Relación + de y - x sin ajustar por z", 
+       subtitle = "E(y_i | x)") -> p3
+
+datos %>% 
+  ggplot() + 
+  geom_point(aes(x = x, y = y, color = z_factor),  alpha = 0.3, size = 4) + 
+  geom_smooth(aes(x = x, y = y), method = lm, se = FALSE) + 
+  geom_smooth(aes(x = x, y = y, color = z_factor), 
+              linetype = "dashed", 
+              method = lm, 
+              se = FALSE) +   
+  theme_minimal()  + 
+  labs(title = "Relación + de y - x condicionado por z", 
+       subtitle = "E(y_i | x, z)") -> p4
+
+(p1 | p2) / (p3 | p4) + 
+  plot_annotation(tag_levels = 'A') -> plot
+
+ggsave(
+  filename = "simul_ajuste2.png", 
+  plot = plot, 
+  device = "png", 
+  path = "img/", 
+  scale = 2.2, 
+  width = 12,
+  height = 8, 
+  unit = "cm",
+  dpi = 600
+)
+```
+
+:::: {.columns}
+
+::: {.column width='70%'}
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| out-height: 100%
+knitr::include_graphics("img/simul_ajuste2.png")
+```
+
+:::
+
+::: {.column width='30%'}
+
+:::{.callout-important collapse=false appearance='default' icon=false}
+## Algunas cosas que hacer notar
+- **A:** X y Z altamente relacionados.
+- **B:** Z está relacionada a Y bivariadamente.
+- **C:** X está relacionada a Y bivariadamente.
+- **D:** 
+
+    - En cada estrato de Z, X está relacionada con Y, pero el intercepto NO depende de Z.
+    - La magnitud de la relación entre X e Y es la misma en cada estrato de Z.
+    - No hay relación entre Z e Y, manteniendo constante X.
+    - No es posible obtener el efecto de Z en Y ajustado por X, debido a que no tengo datos para hacer la comparación.
+:::
+
+:::
+
+::::
+
+
+## Simulación para entender ajuste - caso 3
+
+```{r}
+#| echo: false
+set.seed(2014)
+n <- 100
+t <- rep(c(0, 1), c(n/2, n/2))
+x <- c(runif(n/2), .9 + runif(n/2))
+
+beta0 <- 0
+beta1 <- 2
+tau <- -1
+sigma <- .2
+y <- beta0 + x * beta1 + t * tau + rnorm(n, sd = sigma)
+
+datos <- data.frame(y = y, 
+                    z = t,
+                    z_factor = factor(t),
+                    x = x)
+
+datos %>% 
+  ggplot() + 
+  geom_point(aes(x = z, y = x, color = z_factor),  alpha = 0.3, size = 4) + 
+  geom_smooth(aes(x = z, y = x), method = lm, se = FALSE) + 
+  theme_minimal() + 
+  labs(title = "Relación + de covariables x - z", 
+       subtitle = "E(x_i | z)") -> p1
+
+datos %>% 
+  ggplot() + 
+  geom_point(aes(x = z, y = y, color = z_factor),  alpha = 0.3, size = 4) + 
+  geom_smooth(aes(x = z, y = y), method = lm, se = FALSE) + 
+  theme_minimal()  + 
+  labs(title = "Relación + de y - z sin ajustar por x", 
+       subtitle = "E(y_i | z)") -> p2
+
+datos %>% 
+  ggplot() + 
+  geom_point(aes(x = x, y = y, color = z_factor),  alpha = 0.3, size = 4) + 
+  geom_smooth(aes(x = x, y = y), method = lm, se = FALSE) + 
+  theme_minimal() + 
+  labs(title = "Relación + de y - x sin ajustar por z", 
+       subtitle = "E(y_i | x)") -> p3
+
+datos %>% 
+  ggplot() + 
+  geom_point(aes(x = x, y = y, color = z_factor),  alpha = 0.3, size = 4) + 
+  geom_smooth(aes(x = x, y = y), method = lm, se = FALSE) + 
+  geom_smooth(aes(x = x, y = y, color = z_factor), 
+              linetype = "dashed", 
+              method = lm, 
+              se = FALSE) + 
+  theme_minimal()  + 
+  labs(title = "Relación + de y - x condicionado por z", 
+       subtitle = "E(y_i | x, z)") -> p4
+
+(p1 | p2) / (p3 | p4) + 
+  plot_annotation(tag_levels = 'A') -> plot
+
+ggsave(
+  filename = "simul_ajuste3.png", 
+  plot = plot, 
+  device = "png", 
+  path = "img/", 
+  scale = 2.2, 
+  width = 12,
+  height = 8, 
+  unit = "cm",
+  dpi = 600
+)
+```
+
+:::: {.columns}
+
+::: {.column width='70%'}
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| out-height: 100%
+knitr::include_graphics("img/simul_ajuste3.png")
+```
+
+:::
+
+::: {.column width='30%'}
+
+:::{.callout-important collapse=false appearance='default' icon=false}
+## Algunas cosas que hacer notar
+- **A:** X y Z están relacionados positivametne.
+- **B:** Z tiene relación + con Y bivariadamente. 
+- **C:** X tiene relación + con Y bivariadamente.
+- **D:** 
+
+    - En cada estrato de Z, X está relacionada con Y, pero intercepto depende de Z.
+    - La magnitud de la relación entre X e Y es la misma en cada estrato de Z. Efecto ajustado es mayor que efecto no ajustado (pendiente más pronunciada).
+    - La relación entre Z e Y es negativa y la misma, manteniendo constante X.
+:::
+
+:::
+
+::::
+
+## Simulación para entender ajuste - caso 4
+
+```{r}
+#| echo: false
+set.seed(2014)
+n <- 100
+t <- rep(c(0, 1), c(n/2, n/2))
+x <- c(.5 + runif(n/2), runif(n/2))
+beta0 <- 0
+beta1 <- 2
+tau <- 1
+sigma <- .2
+
+y <- beta0 + x * beta1 + t * tau + rnorm(n, sd = sigma)
+
+datos <- data.frame(y = y, 
+                    z = t,
+                    z_factor = factor(t),
+                    x = x)
+
+datos %>% 
+  ggplot() + 
+  geom_point(aes(x = z, y = x, color = z_factor),  alpha = 0.3, size = 4) + 
+  geom_smooth(aes(x = z, y = x), method = lm, se = FALSE) + 
+  theme_minimal() + 
+  labs(title = "Relación + de covariables x - z", 
+       subtitle = "E(x_i | z)") -> p1
+
+datos %>% 
+  ggplot() + 
+  geom_point(aes(x = z, y = y, color = z_factor),  alpha = 0.3, size = 4) + 
+  geom_smooth(aes(x = z, y = y), method = lm, se = FALSE) + 
+  theme_minimal()  + 
+  labs(title = "Relación + de y - z sin ajustar por x", 
+       subtitle = "E(y_i | z)") -> p2
+
+datos %>% 
+  ggplot() + 
+  geom_point(aes(x = x, y = y, color = z_factor),  alpha = 0.3, size = 4) + 
+  geom_smooth(aes(x = x, y = y), method = lm, se = FALSE) + 
+  theme_minimal() + 
+  labs(title = "Relación + de y - x sin ajustar por z", 
+       subtitle = "E(y_i | x)") -> p3
+
+datos %>% 
+  ggplot() + 
+  geom_point(aes(x = x, y = y, color = z_factor),  alpha = 0.3, size = 4) + 
+  geom_smooth(aes(x = x, y = y), method = lm, se = FALSE) + 
+  geom_smooth(aes(x = x, y = y, color = z_factor), 
+              linetype = "dashed", 
+              method = lm, 
+              se = FALSE) + 
+  theme_minimal()  + 
+  labs(title = "Relación + de y - x condicionado por z", 
+       subtitle = "E(y_i | x, z)") -> p4
+
+(p1 | p2) / (p3 | p4) + 
+  plot_annotation(tag_levels = 'A') -> plot
+
+ggsave(
+  filename = "simul_ajuste4.png", 
+  plot = plot, 
+  device = "png", 
+  path = "img/", 
+  scale = 2.2, 
+  width = 12,
+  height = 8, 
+  unit = "cm",
+  dpi = 600
+)
+```
+
+:::: {.columns}
+
+::: {.column width='70%'}
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| out-height: 100%
+knitr::include_graphics("img/simul_ajuste4.png")
+```
+
+:::
+
+::: {.column width='30%'}
+
+:::{.callout-important collapse=false appearance='default' icon=false}
+## Algunas cosas que hacer notar
+- **A:** X y Z  NO están relacionados bivariadamente.
+- **B:** Z e Y NO están relacionados bivariadamente.
+- **C:** X tiene relación + con Y bivariadamente.
+- **D:** 
+
+    - En cada estrato de Z, X está relacionada con Y, pero intercepto depende de Z.
+    - La magnitud de la relación entre X e Y es la misma en cada estrato de Z. Efecto ajustado es mayor que efecto no ajustado (pendiente más pronunciada).
+    - La relación entre Z e Y es positiva y la misma, manteniendo constante X.
+:::
+
+:::
+
+::::
+
+## Simulación para entender ajuste - caso 5
+
+```{r}
+#| echo: false
+set.seed(2014)
+n <- 100
+t <- rep(c(0, 1), c(n/2, n/2))
+x <- c(runif(n/2, -1, 1), runif(n/2, -1, 1))
+beta0 <- 0
+beta1 <- 2
+tau <- 0
+tau1 <- -4
+sigma <- .2
+y <- beta0 + x * beta1 + t * tau + t * x * tau1 + rnorm(n, sd = sigma)
+
+datos <- data.frame(y = y, 
+                    z = t,
+                    z_factor = factor(t),
+                    x = x)
+
+datos %>% 
+  ggplot() + 
+  geom_point(aes(x = z, y = x, color = z_factor),  alpha = 0.3, size = 4) + 
+  geom_smooth(aes(x = z, y = x), method = lm, se = FALSE) + 
+  theme_minimal() + 
+  labs(title = "Relación + de covariables x - z", 
+       subtitle = "E(x_i | z)") -> p1
+
+datos %>% 
+  ggplot() + 
+  geom_point(aes(x = z, y = y, color = z_factor),  alpha = 0.3, size = 4) + 
+  geom_smooth(aes(x = z, y = y), method = lm, se = FALSE) + 
+  theme_minimal()  + 
+  labs(title = "Relación + de y - z sin ajustar por x", 
+       subtitle = "E(y_i | z)") -> p2
+
+datos %>% 
+  ggplot() + 
+  geom_point(aes(x = x, y = y, color = z_factor),  alpha = 0.3, size = 4) + 
+  geom_smooth(aes(x = x, y = y), method = lm, se = FALSE) + 
+  theme_minimal() + 
+  labs(title = "Relación + de y - x sin ajustar por z", 
+       subtitle = "E(y_i | x)") -> p3
+
+datos %>% 
+  ggplot() + 
+  geom_point(aes(x = x, y = y, color = z_factor),  alpha = 0.3, size = 4) + 
+  geom_smooth(aes(x = x, y = y), method = lm, se = FALSE) + 
+  geom_smooth(aes(x = x, y = y, color = z_factor), 
+              linetype = "dashed", 
+              method = lm, 
+              se = FALSE) + 
+  theme_minimal()  + 
+  labs(title = "Relación + de y - x condicionado por z", 
+       subtitle = "E(y_i | x, z)") -> p4
+
+(p1 | p2) / (p3 | p4) + 
+  plot_annotation(tag_levels = 'A') -> plot
+
+ggsave(
+  filename = "simul_ajuste5.png", 
+  plot = plot, 
+  device = "png", 
+  path = "img/", 
+  scale = 2.2, 
+  width = 12,
+  height = 8, 
+  unit = "cm",
+  dpi = 600
+)
+```
+
+:::: {.columns}
+
+::: {.column width='70%'}
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| out-height: 100%
+knitr::include_graphics("img/simul_ajuste5.png")
+```
+
+:::
+
+::: {.column width='30%'}
+
+:::{.callout-important collapse=false appearance='default' icon=false}
+## Algunas cosas que hacer notar
+- **A:** X y Z  NO están relacionados bivariadamente.
+- **B:** Z e Y NO están relacionados bivariadamente.
+- **C:** X no guardan relación lineal con Y bivariadamente.
+- **D:** 
+
+    - Intercepto y pendiente depende del grupo: El efecto ajustado de X en Y depende de Z.
+    - El efecto ajustado de Z en Y depende de X.
+:::
+
+:::
+
+::::
+
+# Inferencia causal y confusión
+
+## ¿Qué busca la inferencia causal?
+
+> Disciplina interdisciplinaria que estudia los métodos que permiten estimar el efecto causal de una intervención o exposición sobre uno o más desenlaces a partir de datos experimentales u observacionales.
+
+- La meta no es cualquier 'efecto' (o 'asociación').
+
+- No busca solo determinar la existencia de un efecto causal, también se busca estimar su magnitud.
+
+
+## Teoría contrafactual y de resultados potenciales
+
+### Contrafactual
+
+>"(...)todo acontecimiento o toda situación que no ha sucedido en el universo actualemnte observable por la investigación humana pero que podría haber ocurrido en otros universos posibles" *Fuente Wikipedia*
+
+- Universo real o factual versus universos posibles o contrafactuales
+
+### Resultado potencial
+
+- Resultado futuro posible
+
+## Contrafactual en una nuez...
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| out-width: 100%
+knitr::include_graphics("img/big-bang-contrafactuales.png")
+```
+
+<center><https://youtu.be/n6MNciSb85E></center>
+
+## Marco de teoria contrafactual y de resultados potenciales (1/2)
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| out-width: 100%
+knitr::include_graphics("img/rubin.png")
+```
+
+## Marco de teoria contrafactual y de resultados potenciales (2/2)
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| out-width: 100%
+knitr::include_graphics("img/causal-nobel.png")
+```
+
+
+## Contrafactuales y resultados potenciales en palabras sencillas...
+
+- ¿Hay una forma de probar irrefutablemente el efecto causal de una intervención en un individuo?
+
+    + No en nuestra realidad, pero sí podemos imaginar el experimento (mental) que compare resultados potenciales de mundos contrafactuales.
+    
+- Existen dos multiversos exactamente iguales, salvo por una sola cosa: 
+
+    + El tratamiento recibido.
+    
+## Contrafactuales y resultados potenciales en palabras sencillas... (cont.)  
+
+- Intervención (o exposición): 
+    
+    + Ivermectina (IVM) + Cuidado Estándar (CE) vs.
+    + Solo Cuidado Estándar
+
+- Resultados Potenciales (*Outcome* o desenlace)
+
+    + Muerte por COVID-19, o 
+    + No Muerte por COVID-19
+
+## Contrafactuales y resultados potenciales en palabras sencillas... (cont.)  
+
+![](img/contrafactual-multiversos.png){fig-align='center'}
+
+## Contrafactuales y resultados potenciales en palabras sencillas... (cont.) 
+
+![](img/contrafactual-ej1.png){fig-align='center'}
+
+## Contrafactuales y resultados potenciales en palabras sencillas... (cont.) 
+
+![](img/contrafactual-ej2.png){fig-align='center'}
+
+## Contrafactuales y resultados potenciales en palabras sencillas... (cont.) 
+
+![](img/contrafactual-ej3.png){fig-align='center'}
+
+## Contrafactuales y resultados potenciales en palabras sencillas... (cont.) 
+
+![](img/contrafactual-ej4.png){fig-align='center'}
+
+## Resultados Potenciales: Efectos individuales {.scrollable}
+
+- Un tratamiento $x = 1$ causa un efecto causal en comparación con un tratamiento $x = 0$ si los resultados potenciales son diferentes en el <u>individuo</u>.
+
+$$Tratamiento ~ X = x ~ causa ~ Y \text{en individuo } i$$
+
+$$\leftrightarrow Y_i^{x = 1} \neq Y_i^{x = 0}$$
+
+- Por lo tanto, la magnitud del **efecto causal individual** es: 
+
+$$\text{Efecto Causal de }X \text{ (1 vs 0) en individuo }i = $$ 
+$$ = Y_i^{x = 1} - Y_i^{x = 0}$$
+
+## Resultados Potenciales: Efectos individuales
+
+![](img/efecto-individual.png)
+
+## Problema Fundamental de la Inferencia Causal
+
+- En la realidad, solo podemos observar un resultado potencial.
+
+- Por lo tanto, es <u>imposible identificar los efectos causales individuales</u>.
+
+![](img/efecto-individual-real.png){fig-align='center'}
+
+## Problema Fundamental de la Inferencia Causal (cont.)
+
+- Si no podemos estimar estimar efectos individuales, ¿qué podemos hacer?
+
+    + Podemos conformarnos con efectos promedio en poblacionales.
+
+- ¡Tampoco tenemos el contrafactual promedio poblacional!
+
+    + Sin embargo, podemos ¡emularlo! bajo ciertas condiciones razonables.
+
+## Meta factible de la inferencia causal
+
+- Estimar efectos causales promedio en poblaciones.
+
+    + Crear un contrafactual sintético que, en promedio, sea equivalente al contrafactual de la población intervenida.
+    
+- No queremos simplemente comprar grupos, queremos hacer algo más radical:
+
+    + Comparar a la población consigio misma en un mundo alternativo donde recibió un tratamiento diferente.
+    
+    + Queremos saber: *"¿Qué hubiera pasado si...? (What if...?)*
+
+## Emulación de contrafactual poblacional
+
+![](img/efecto-poblacional-ind.png){fig-align='center'}
+
+## Emulación de contrafactual pob. (cont.)
+
+![](img/efecto-poblacional-emul.png){fig-align='center'}
+
+## ¿Cómo emulamos contrafactuales poblacionales?
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| out-width: 100%
+"img/emular-contrafactual.png"
+```
+
+## Insumos para estimar efectos causales promedio
+
+1. Desenlace de interés
+
+    + Resultados potenciales
+
+2. Intervenciones bien definidas
+
+    + Deben ser manipulables.
+
+3. Población bien definida cuyos resultados potenciales serán comparados.
+
+4. Suposiciones razonables para realizar inferencia causal.
+
+5. Modelo estadístico bien puesto y estimador computable.
+
+## Tipos de efectos causales promedio
+
+- Efecto Promedio del Tratamiento en Toda la Población
+
+    + *Average Treatment Effect (ATE)*
+    
+    + $ATE = \frac{1}{N} \sum_{i=1}^N (Y_i^1 - Y_i^0)$
+
+- Efecto Promedio del Tratamiento en los Tratados
+
+    + *Average Treatment Effect (ATE)*
+    
+    + $ATT = \frac{1}{N_t} \sum_{i=1}^N (Y_i^1 - Y_i^0 | T_i = 1)$
+
+## Tipos de efectos causales promedio (cont.)
+
+- Efecto Promedio del Tratamiento en los Controles 
+
+    + *Average treatment effect on control (ATC)*
+
+- Efecto Promedio Local del Tratamiento
+
+    + *Local average treatment effect (LATE)*
+    
+    + También conocido como **Efecto causal promedio en adherentes o cumplidores**.
+    
+- Otros: CATE, CATC, etc.
+
+## Inferencia causal es sobre resultados potenciales
+
+- Nótese que aunque tengamos un censo (toda la población de interés evaluada), siempre tendremos una muestra de los resultados potenciales:
+
+    + ¡Siempre tendremos incertidumbre en la estimación del efecto causal!
+    
+    + Debemos estimar el "grado de incertidumbre" para el estimado puntual de efecto causal: valor p e intervalos de confianza válidos son necesarios.
+    
+## Supuestos (no verificables) para identificar efecto causales en inferencia causal {.scrollable}
+
+- Consistencia
+
+    + Requiere *"Stable Unit Treatment Value Assumption (SUTVA)"*
+    
+    + No interferencia entre unidades + Una sola versión de la intervención (intervención bien definida)
+
+- Ignorabilidad 
+
+    + También llamada intercambiabilidad (*excheangbility*)
+
+    + No confusión residual
+
+- Positividad
+
+    + Todos los individuos deben tener una probabilidad > 0 de recibir los tratamientos en comparación.
+
+# Métodos de Control de Confusión
+
+## ¿Controlar o no controlar? He ahí el dilema
+
+- Cuando el sesgo de confusión es una amenaza, podemos optar por dos medidas:
+    
+    + **Opción 1:** No controlar confusión
+    
+        - En cambio usar un diseño que asuma una "asignación aleatoria natural".
+        
+        - El efecto estimado en realidad es "local", no es "global".
+        
+        - Enfoque preferido por economistas. 
+        
+        - En Farmacoepidemiología y en análisis por protocolo de ensayos clínicos se usa para lidiar con el problema de no adherentes o no cumplidores del tratamiento.
+    
+    + **Opción 2:** Controlar directamente la confusión.
+    
+        - Este es el enfoque preferido en investigación clínica.
+
+## Opción 1: No controlar la confusión
+
+- Enfoque de variable instrumental.
+
+- Solo se puede hacer cuando es razonable suponer que se cuenta con un instrumento bueno.
+
+## Opción 2 Control de confusión en el diseño
+
+- Estándar de oro: 
+
+    + Asignación aleatoria física (Ej. experimento controlado aleatorizado)
+
+- En el diseño:
+
+    + Asignación aleatoria física.
+    
+    + Restricción.
+    
+    + Pareamiento (*matching*) en el diseño.
+
+## Opción 2 Control de confusión en el análisis
+
+- En el análisis: 
+
+    + Regresión de deselaces. 
+    
+    + Puntajes de propensión: Matching, Ponderación, Otros.
+
+    + Ponderación por inverso de probabilidad de selección. 
+    
+    + Modelos estructurales marginales. 
+    
+    + Estandarización. 
+    
+    + Fórmula G paramétrica, etc.
+
+
+## Métodos de control de confusión en análisis
+
+- Diversos métodos tienen diferentes supuestos.
+
+    + Esto ocasiona que los resultados puedan diferir entre enfoques de análisis.
+    
+    + Algunos métodos tienen ventajas respecto a otros.
+
+## Métodos de control de confusión en análisis (cont.)
+
+- En general, todos comparten la necesidad de controlar por confusión:
+
+    + Idealmente: Ignorabilidad
+    
+        + No debe haber confusión residual.
+        
+        + No debe haber sesgo de selección (p.ej., estratificación por colisionador o ajuste en mediador)
+    
+    + En la práctica: La confusión residual debe ser despreciable.
+    
+        + No cambiar conclusiones, aunque estimados varíen "un poco".
+        
+## DAG causal
+
+> Herramienta matemática que permite describir las relaciones causa-efecto, evaluar sus condiciones de identificabilidad y orientar la obtención de estimados causales.
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| out-width: 100%
+knitr::include_graphics("img/dag-partes.png")
+```
+
+    
+## DAG ayudan a identificar cómo emular asignación aleatoria 
+
+- DAG (grafos acíclicos dirigidos) ayudan a identificar confusores y evitar colisionadores.
+
+![](img/dag-collider-confusion.png)
+
+## Control por confusores emula asignación aleatoria
+
+- Controlar la confusión, si ciertos supuestos se cumplen, permite emular la asignación aleatoria.
+
+## Condicionamiento por regresión {.scrollable}
+
+-   Se usa una ecuación lineal para relacionar el desenlace $y_i$ con la variable de intervención, condicionado por las otras variables.
+
+![](img/confusor-ajuste.png){fig-align='center'}
+
+## En resumen
+
+![](img/instrumental-dag.png)
+
+
+# Algunos problemas cuando se hacen inferencias causales
+
+## Falacia de la tabla 2
+
+> Falacia que ocurre de interpretar los coeficientes de regresión de las variables confusoras.
+
+- El modelo de regresión está diseñado para estimar efectos causales de una variable de exposición de interés.
+
+- El efecto causal de un confusor sobre el desenlace debe tener su propio conjunto de confusores.
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| out-width: 100%
+knitr::include_graphics("img/falacia_tabla2.png")
+```
+
+## Otro ejemplo interesante de falacia de tabla 2
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| out-width: 100%
+knitr::include_graphics("img/falacia_tabla2_2.png")
+```
+
+## Consenso sobre falacia de tabla 2
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| out-width: 100%
+knitr::include_graphics("img/falacia_tabla2_consenso.png")
+```
+
+## 
+
+::: r-fit-text
+<center>¡Gracias!</center>
+
+<center>¿Preguntas?</center>
+:::
+
+## 
+
+\
+
+\
+
+\
+
+::: r-fit-text
+<center>
+
+{{< fa brands twitter >}}
+
+{{< fa brands github >}} https://github.com/psotob91
+
+{{< fa inbox >}} percys1991@gmail.com
+
+</center>
+:::

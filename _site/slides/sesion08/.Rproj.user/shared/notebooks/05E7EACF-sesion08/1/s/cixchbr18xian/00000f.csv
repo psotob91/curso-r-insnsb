@@ -1,7 +1,0 @@
-"0","#| echo: false"
-"0","mod <- lm(y_peso_final ~ x1_tto + x3_peso_inicial, data = datos2)"
-"0",""
-"0","mod %>% "
-"0","  tidy(conf.int = TRUE) %>% "
-"0","  gt() %>% "
-"0","  tab_options(table.font.size = px(18)) "

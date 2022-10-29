@@ -1,4 +1,0 @@
-"0","#| fig-align: center"
-"0","#| echo: false"
-"0","#| out-width: 100%"
-"0","knitr::include_graphics(""img/strobe-nopvalue.png"")"

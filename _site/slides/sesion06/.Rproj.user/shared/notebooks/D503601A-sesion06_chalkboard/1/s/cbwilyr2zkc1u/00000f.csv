@@ -1,2 +1,0 @@
-"0","datos %>% "
-"0","  t_test(e2 ~ 1, mu = 50, detailed = TRUE) "

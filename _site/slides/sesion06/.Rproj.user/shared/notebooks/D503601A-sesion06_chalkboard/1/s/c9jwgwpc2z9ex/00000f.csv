@@ -1,4 +1,0 @@
-"0","#| echo: false"
-"0","datos2 <- datos %>% "
-"0","  filter(treat != ""WARMI 3 C/D"") %>% "
-"0","  mutate(treat = droplevels(treat))"

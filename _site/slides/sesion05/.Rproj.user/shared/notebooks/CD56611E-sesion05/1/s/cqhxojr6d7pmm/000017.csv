@@ -1,3 +1,0 @@
-"0","bd_inmuno %>% "
-"0","  pull(edad) %>% "
-"0","  describe()"

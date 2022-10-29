@@ -1,8 +1,0 @@
-"0","#| echo: false"
-"0","set.seed(123)"
-"0","x = rnorm(500, 0, 1)"
-"0","y = 4 * x + rnorm(50, 0, 2)"
-"0",""
-"0","datos <- data.frame("
-"0","  x = x, "
-"0","  y = y)"

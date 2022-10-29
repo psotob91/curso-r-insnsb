@@ -1,3 +1,0 @@
-"0","datos %>% "
-"0","  group_by(treat) %>% "
-"0","  get_summary_stats(weight, type = ""median_iqr"")"

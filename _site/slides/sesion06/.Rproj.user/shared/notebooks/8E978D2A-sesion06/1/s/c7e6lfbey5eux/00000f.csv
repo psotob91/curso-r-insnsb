@@ -1,4 +1,0 @@
-"0","library(gt)"
-"0","datos %>% "
-"0","  t_test(weight ~ 1, mu = 100, detailed = TRUE) %>% "
-"0","  gt()"

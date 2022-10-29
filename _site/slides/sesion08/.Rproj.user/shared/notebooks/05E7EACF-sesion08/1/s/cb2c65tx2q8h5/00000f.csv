@@ -1,2 +1,0 @@
-"0","#| echo: false"
-"0","mod <- lm(y ~ x1, data = datos)"

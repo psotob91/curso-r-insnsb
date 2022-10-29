@@ -1,8 +1,0 @@
-"0","bd_inmuno %>% "
-"0","  summarise("
-"0","    `Media de edad` = mean(edad), "
-"0","    `DE de edad` = sd(edad), "
-"0","    `Mediana de edad` = median(edad),"
-"0","    Mediana_IgG_Final = median(IgG_Basal, na.rm = TRUE), "
-"0","    RIQ_IgG_Final = IQR(IgG_Basal, na.rm = TRUE)"
-"0","    )"

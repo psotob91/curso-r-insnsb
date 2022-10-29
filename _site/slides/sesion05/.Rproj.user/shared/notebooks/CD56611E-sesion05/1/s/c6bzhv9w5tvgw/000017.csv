@@ -1,6 +1,0 @@
-"0","library(scales) # Para agregar escalas, p. ej., porcentajes %"
-"0","bd_inmuno %>% "
-"0","  count(sexo) %>% "
-"0","  mutate("
-"0","    Porcentaje = scales::percent(n / sum(n))"
-"0","  )"

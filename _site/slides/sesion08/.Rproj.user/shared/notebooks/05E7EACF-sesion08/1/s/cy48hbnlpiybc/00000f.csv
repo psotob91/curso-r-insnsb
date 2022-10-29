@@ -1,4 +1,0 @@
-"0","tabla_final <- tbl_merge(list(tabla_univ, tabla_multi), tab_spanner = c(""Modelos crudos"", ""Modelo ajustado"")) "
-"2","Error in tbl_merge(list(tabla_univ, tabla_multi), tab_spanner = c(""Modelos crudos"",  : 
-  object 'tabla_multi' not found
-"

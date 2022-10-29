@@ -1,2 +1,0 @@
-"0","datos %>% "
-"0","  sign_test(weight ~ 1, mu = 0, detailed = TRUE) "

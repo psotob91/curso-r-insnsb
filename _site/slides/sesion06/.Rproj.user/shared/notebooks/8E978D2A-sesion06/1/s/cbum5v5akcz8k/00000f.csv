@@ -1,7 +1,0 @@
-"0","#| echo: false"
-"0","data(""ToothGrowth"")"
-"0","df <- ToothGrowth"
-"0","read.csv(""df3.csv"", sep = "";"") -> df2"
-"0",""
-"0","df2 %>% "
-"0","  mutate(dif = VC - OJ) -> df3"

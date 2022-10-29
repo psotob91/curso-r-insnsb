@@ -1,3 +1,0 @@
-"0","datos2 %>% "
-"0","  wilcox_test(e2 ~ treat, detailed = TRUE) %>% "
-"0","  gt()"

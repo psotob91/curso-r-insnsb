@@ -1,4 +1,0 @@
-"0","#| echo: false"
-"0","#| fig-align: center"
-"0","#| out-width: 80%"
-"0","knitr::include_graphics(""img/mediana.png"")"

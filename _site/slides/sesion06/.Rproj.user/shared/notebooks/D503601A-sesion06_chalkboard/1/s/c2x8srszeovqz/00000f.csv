@@ -1,3 +1,0 @@
-"0","library(ggpubr)"
-"0","datos %>% "
-"0","  ggqqplot(""weight"", facet.by = ""treat"")"

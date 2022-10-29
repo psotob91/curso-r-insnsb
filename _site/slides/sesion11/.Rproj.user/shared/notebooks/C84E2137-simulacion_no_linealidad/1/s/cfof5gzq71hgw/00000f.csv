@@ -1,2 +1,0 @@
-"0","xb_x2 <- ggpredict(mod, ""x2 [all]"")"
-"0","plot(xb_x2, residuals = TRUE, residuals.line = TRUE)"

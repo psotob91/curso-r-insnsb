@@ -1,5 +1,0 @@
-"0","#| echo: false"
-"0","mod  %>% "
-"0","  tidy(conf.int = TRUE) %>% "
-"0","  gt() %>%  "
-"0","  tab_options(table.font.size = px(18)) "

@@ -1,1 +1,0 @@
-{"frames":[{"func":"tbl_merge(list(tabla_univ, tabla_multi), tab_spanner = c(\"Modelos crudos\", \n    \"Modelo ajustado\"))","file":"","line_number":0,"end_line_number":0,"character_number":0,"end_character_number":0}],"message":"Error in tbl_merge(list(tabla_univ, tabla_multi), tab_spanner = c(\"Modelos crudos\",  : \n  object 'tabla_multi' not found\n"}
