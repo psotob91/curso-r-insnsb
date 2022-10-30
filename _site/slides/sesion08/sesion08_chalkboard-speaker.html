@@ -953,8 +953,9 @@ F-statistic:  65.5 on 1 and 48 DF,  p-value: 1.594e-10</code></pre>
 </section>
 <section id="interpretación-de-salida-de-rls" class="slide level2 scrollable">
 <h2>Interpretación de salida de RLS</h2>
+<h3 id="regresión-lineal-simple-con-covariable-numérica"><span class="verde-h3">Regresión lineal simple con covariable numérica</span></h3>
 <div class="panel-tabset">
-<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Covariable numérica</a></li><li><a href="#tabset-2-2">Covariable categórica</a></li></ul>
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">lm()</a></li><li><a href="#tabset-2-2">Modelo estimado</a></li><li><a href="#tabset-2-3">Reporte tidy</a></li><li><a href="#tabset-2-4">Interpretación</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1">
 <ul>
@@ -987,41 +988,488 @@ Multiple R-squared:  0.05491,   Adjusted R-squared:  0.05397
 F-statistic: 57.99 on 1 and 998 DF,  p-value: 6.1e-14</code></pre>
 </div>
 </div>
+</div>
+<div id="tabset-2-2">
 <ul>
 <li>El modelo estimado sería el siguiente:</li>
 </ul>
 <p><span class="math display">\[y\_pesofinal = -5.4317 + 1.3447*x3\_pesoinicial + \epsilon_i\]</span></p>
 <p><span class="math display">\[\epsilon_i \sim Normal(0, 5.535^2)\]</span></p>
+</div>
+<div id="tabset-2-3">
 <ul>
 <li>Usando el paquete <code>{broom}</code> y su función <code>tidy()</code> podemos obtener también los intervalos de confianza:</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">library</span>(broom)</span>
 <span id="cb8-2"><a href="#cb8-2"></a>mod <span class="sc">%&gt;%</span> </span>
-<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">tidy</span>(<span class="at">conf.int =</span> <span class="cn">TRUE</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 × 7
-  term            estimate std.error statistic  p.value conf.low conf.high
-  &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-1 (Intercept)        -5.43     2.66      -2.04 4.12e- 2  -10.6      -0.217
-2 x3_peso_inicial     1.34     0.177      7.62 6.10e-14    0.998     1.69 </code></pre>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">tidy</span>(<span class="at">conf.int =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-4"><a href="#cb8-4"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div id="wpqlbesmgx" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+:where(#wpqlbesmgx) .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+:where(#wpqlbesmgx) .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#wpqlbesmgx) .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+:where(#wpqlbesmgx) .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+:where(#wpqlbesmgx) .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+:where(#wpqlbesmgx) .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#wpqlbesmgx) .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+:where(#wpqlbesmgx) .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+:where(#wpqlbesmgx) .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+:where(#wpqlbesmgx) .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+:where(#wpqlbesmgx) .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+:where(#wpqlbesmgx) .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+:where(#wpqlbesmgx) .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+:where(#wpqlbesmgx) .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+:where(#wpqlbesmgx) .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+:where(#wpqlbesmgx) .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+:where(#wpqlbesmgx) .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#wpqlbesmgx) .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+:where(#wpqlbesmgx) .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+:where(#wpqlbesmgx) .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#wpqlbesmgx) .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+:where(#wpqlbesmgx) .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+:where(#wpqlbesmgx) .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+:where(#wpqlbesmgx) .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#wpqlbesmgx) .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+:where(#wpqlbesmgx) .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+:where(#wpqlbesmgx) .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+:where(#wpqlbesmgx) .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#wpqlbesmgx) .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#wpqlbesmgx) .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#wpqlbesmgx) .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#wpqlbesmgx) .gt_left {
+  text-align: left;
+}
+
+:where(#wpqlbesmgx) .gt_center {
+  text-align: center;
+}
+
+:where(#wpqlbesmgx) .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+:where(#wpqlbesmgx) .gt_font_normal {
+  font-weight: normal;
+}
+
+:where(#wpqlbesmgx) .gt_font_bold {
+  font-weight: bold;
+}
+
+:where(#wpqlbesmgx) .gt_font_italic {
+  font-style: italic;
+}
+
+:where(#wpqlbesmgx) .gt_super {
+  font-size: 65%;
+}
+
+:where(#wpqlbesmgx) .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+:where(#wpqlbesmgx) .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+:where(#wpqlbesmgx) .gt_indent_1 {
+  text-indent: 5px;
+}
+
+:where(#wpqlbesmgx) .gt_indent_2 {
+  text-indent: 10px;
+}
+
+:where(#wpqlbesmgx) .gt_indent_3 {
+  text-indent: 15px;
+}
+
+:where(#wpqlbesmgx) .gt_indent_4 {
+  text-indent: 20px;
+}
+
+:where(#wpqlbesmgx) .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">term</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">estimate</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">std.error</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">statistic</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">p.value</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">conf.low</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">conf.high</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">(Intercept)</td>
+<td class="gt_row gt_right">-5.431666</td>
+<td class="gt_row gt_right">2.657423</td>
+<td class="gt_row gt_right">-2.043960</td>
+<td class="gt_row gt_right">4.121962e-02</td>
+<td class="gt_row gt_right">-10.6464437</td>
+<td class="gt_row gt_right">-0.2168874</td></tr>
+    <tr><td class="gt_row gt_left">x3_peso_inicial</td>
+<td class="gt_row gt_right">1.344722</td>
+<td class="gt_row gt_right">0.176587</td>
+<td class="gt_row gt_right">7.615067</td>
+<td class="gt_row gt_right">6.099526e-14</td>
+<td class="gt_row gt_right">0.9981973</td>
+<td class="gt_row gt_right">1.6912461</td></tr>
+  </tbody>
+  
+  
+</table>
 </div>
 </div>
-<ul>
-<li><p>Interpretación:</p>
+</div>
+</div>
+<div id="tabset-2-4">
 <ul>
 <li><p><span class="math inline">\(\beta_0\)</span> o <code>intercepto</code>: Este viene a ser el valor promedio de <span class="math inline">\(y\)</span> cuando todos los valores de <span class="math inline">\(x\)</span> son 0. En este caso, cuando el peso inicial es cero kg. ¿Esto es posible?, por tal motivo, no se suele interpretar este valor.</p></li>
 <li><p><span class="math inline">\(\beta_1\)</span> o coeficiente de regresión de <code>x3_peso_inicial</code>: Por <code>cada 1 kg adicional</code> de peso inicial, el <code>valor promedio</code> del peso final aumenta 1.43 kg (IC95% 1.00 a 1.69; p &lt; 0.001).</p></li>
-</ul></li>
 </ul>
 </div>
-<div id="tabset-2-2">
+</div>
+</div>
+</section>
+<section id="interpretación-de-salida-de-rls-1" class="slide level2 scrollable">
+<h2>Interpretación de salida de RLS</h2>
+<h3 id="regresión-lineal-simple-con-covariable-categórica"><span class="verde-h3">Regresión lineal simple con covariable categórica</span></h3>
+<div class="panel-tabset">
+<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">lm()</a></li><li><a href="#tabset-3-2">Modelo estimado</a></li><li><a href="#tabset-3-3">Reporte tidy</a></li><li><a href="#tabset-3-4">Interpretación</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1">
 <ul>
 <li>Usamos la función lm():</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(y_peso_final <span class="sc">~</span> x1_tto, <span class="at">data =</span> datos2)</span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(y_peso_final <span class="sc">~</span> x1_tto, <span class="at">data =</span> datos2)</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1043,27 +1491,469 @@ Multiple R-squared:  0.8091,    Adjusted R-squared:  0.8089
 F-statistic:  4230 on 1 and 998 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
+</div>
+<div id="tabset-3-2">
 <ul>
-<li>Usando tidy de broom:</li>
+<li>El modelo estimado sería el siguiente:</li>
+</ul>
+<p><span class="math display">\[y\_pesofinal = 19.8771 - 10.2325*x3\_ttoTratamiento_Nuevo + \epsilon_i\]</span></p>
+<p><span class="math display">\[\epsilon_i \sim Normal(0, 2.488^2)\]</span></p>
+</div>
+<div id="tabset-3-3">
+<ul>
+<li>Usando el paquete <code>{broom}</code> y su función <code>tidy()</code> podemos obtener también los intervalos de confianza:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>mod <span class="sc">%&gt;%</span> </span>
-<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">tidy</span>(<span class="at">conf.int =</span> <span class="cn">TRUE</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 × 7
-  term                    estimate std.error statistic p.value conf.low conf.h…¹
-  &lt;chr&gt;                      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-1 (Intercept)                 19.9     0.111     179.        0     19.7    20.1 
-2 x1_ttoTratamiento Nuevo    -10.2     0.157     -65.0       0    -10.5    -9.92
-# … with abbreviated variable name ¹​conf.high</code></pre>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>mod <span class="sc">%&gt;%</span> </span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">tidy</span>(<span class="at">conf.int =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div id="egplksfxzl" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+:where(#egplksfxzl) .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+:where(#egplksfxzl) .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#egplksfxzl) .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+:where(#egplksfxzl) .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+:where(#egplksfxzl) .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+:where(#egplksfxzl) .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#egplksfxzl) .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+:where(#egplksfxzl) .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+:where(#egplksfxzl) .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+:where(#egplksfxzl) .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+:where(#egplksfxzl) .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+:where(#egplksfxzl) .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+:where(#egplksfxzl) .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+:where(#egplksfxzl) .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+:where(#egplksfxzl) .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+:where(#egplksfxzl) .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+:where(#egplksfxzl) .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#egplksfxzl) .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+:where(#egplksfxzl) .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+:where(#egplksfxzl) .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#egplksfxzl) .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+:where(#egplksfxzl) .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+:where(#egplksfxzl) .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+:where(#egplksfxzl) .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#egplksfxzl) .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+:where(#egplksfxzl) .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+:where(#egplksfxzl) .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+:where(#egplksfxzl) .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#egplksfxzl) .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#egplksfxzl) .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#egplksfxzl) .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#egplksfxzl) .gt_left {
+  text-align: left;
+}
+
+:where(#egplksfxzl) .gt_center {
+  text-align: center;
+}
+
+:where(#egplksfxzl) .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+:where(#egplksfxzl) .gt_font_normal {
+  font-weight: normal;
+}
+
+:where(#egplksfxzl) .gt_font_bold {
+  font-weight: bold;
+}
+
+:where(#egplksfxzl) .gt_font_italic {
+  font-style: italic;
+}
+
+:where(#egplksfxzl) .gt_super {
+  font-size: 65%;
+}
+
+:where(#egplksfxzl) .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+:where(#egplksfxzl) .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+:where(#egplksfxzl) .gt_indent_1 {
+  text-indent: 5px;
+}
+
+:where(#egplksfxzl) .gt_indent_2 {
+  text-indent: 10px;
+}
+
+:where(#egplksfxzl) .gt_indent_3 {
+  text-indent: 15px;
+}
+
+:where(#egplksfxzl) .gt_indent_4 {
+  text-indent: 20px;
+}
+
+:where(#egplksfxzl) .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">term</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">estimate</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">std.error</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">statistic</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">p.value</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">conf.low</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">conf.high</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">(Intercept)</td>
+<td class="gt_row gt_right">19.87711</td>
+<td class="gt_row gt_right">0.1112478</td>
+<td class="gt_row gt_right">178.67418</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">19.65880</td>
+<td class="gt_row gt_right">20.095417</td></tr>
+    <tr><td class="gt_row gt_left">x1_ttoTratamiento Nuevo</td>
+<td class="gt_row gt_right">-10.23253</td>
+<td class="gt_row gt_right">0.1573282</td>
+<td class="gt_row gt_right">-65.03938</td>
+<td class="gt_row gt_right">0</td>
+<td class="gt_row gt_right">-10.54126</td>
+<td class="gt_row gt_right">-9.923794</td></tr>
+  </tbody>
+  
+  
+</table>
 </div>
 </div>
-<ul>
-<li><p>Interpretación:</p>
+</div>
+</div>
+<div id="tabset-3-4">
 <ul>
 <li><p><span class="math inline">\(\beta_0\)</span> (Intercept): A menudo no se interpreta. Es el valor promedio de <span class="math inline">\(y_i\)</span> cuando los valores de <span class="math inline">\(x\)</span> son cero. En este caso, cuando el tratamien es cero (placebo). ¿Esto es posible?, sí es posible pero no es de ayuda para modelos explicativos, por lo que no se interpreta.</p></li>
 <li><p><span class="math inline">\(\beta1\)</span> x1Tratamiento Nuevo: El promedio de peso final en quienes recibieron el tratamiento nuevo fue 10.23 kg menor que el de quienes recibieron placebo (Dif. medias = -10.23; IC95% -10.54 a -9.92; p &lt; 0.001).</p></li>
-</ul></li>
 </ul>
 </div>
 </div>
@@ -1115,9 +2005,9 @@ F-statistic:  4230 on 1 and 998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="regresión-lineal-en-gráficos" class="slide level2">
 <h2>Regresión Lineal en gráficos</h2>
 <div class="panel-tabset">
-<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">RLS</a></li><li><a href="#tabset-3-2">RLM con 2 X</a></li><li><a href="#tabset-3-3">RLM con 3 o más X</a></li></ul>
+<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">RLS</a></li><li><a href="#tabset-4-2">RLM con 2 X</a></li><li><a href="#tabset-4-3">RLM con 3 o más X</a></li></ul>
 <div class="tab-content">
-<div id="tabset-3-1">
+<div id="tabset-4-1">
 <div class="columns">
 <div class="column" style="width:40%;">
 <ul>
@@ -1136,7 +2026,7 @@ F-statistic:  4230 on 1 and 998 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </div>
-<div id="tabset-3-2">
+<div id="tabset-4-2">
 <div class="columns">
 <div class="column" style="width:40%;">
 <ul>
@@ -1155,7 +2045,7 @@ F-statistic:  4230 on 1 and 998 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </div>
-<div id="tabset-3-3">
+<div id="tabset-4-3">
 <ul>
 <li><p>Genera un hiperplano recto.</p></li>
 <li><p>No podemos imaginarnos una imagen de esto, pero sí podemos analizarlo a nivel estadístico.</p>
@@ -1204,9 +2094,9 @@ F-statistic:  4230 on 1 and 998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb14-1" class="hljs-ln-code"><a href="#cb14-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(y_peso_final <span class="sc">~</span> x1_tto, </span>
-<span id="cb14-2" class="hljs-ln-code"><a href="#cb14-2"></a>          <span class="at">data =</span> datos2)</span>
-<span id="cb14-3" class="hljs-ln-code"><a href="#cb14-3"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb12-1" class="hljs-ln-code"><a href="#cb12-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(y_peso_final <span class="sc">~</span> x1_tto, </span>
+<span id="cb12-2" class="hljs-ln-code"><a href="#cb12-2"></a>          <span class="at">data =</span> datos2)</span>
+<span id="cb12-3" class="hljs-ln-code"><a href="#cb12-3"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>El modelo RLS solo incluye una covariable.</li>
@@ -1242,9 +2132,9 @@ F-statistic:  4230 on 1 and 998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb16-1" class="hljs-ln-code"><a href="#cb16-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(y_peso_final <span class="sc">~</span> x1_tto <span class="sc">+</span> x3_peso_inicial, </span>
-<span id="cb16-2" class="hljs-ln-code"><a href="#cb16-2"></a>          <span class="at">data =</span> datos2)</span>
-<span id="cb16-3" class="hljs-ln-code"><a href="#cb16-3"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb14-1" class="hljs-ln-code"><a href="#cb14-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(y_peso_final <span class="sc">~</span> x1_tto <span class="sc">+</span> x3_peso_inicial, </span>
+<span id="cb14-2" class="hljs-ln-code"><a href="#cb14-2"></a>          <span class="at">data =</span> datos2)</span>
+<span id="cb14-3" class="hljs-ln-code"><a href="#cb14-3"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li><p>El modelo RLS solo incluye una covariable.</p></li>
@@ -1297,7 +2187,7 @@ F-statistic:  3266 on 2 and 997 DF,  p-value: &lt; 2.2e-16</code></pre>
 <li><p>Primero se carga el paquete:</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb18-1" class="hljs-ln-code"><a href="#cb18-1"></a><span class="fu">library</span>(broom)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb16-1" class="hljs-ln-code"><a href="#cb16-1"></a><span class="fu">library</span>(broom)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="broom-paso-a-paso-2" class="slide level2" data-auto-animate="true">
@@ -1305,8 +2195,8 @@ F-statistic:  3266 on 2 and 997 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="columns">
 <div class="column" style="width:30%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb19-1" class="hljs-ln-code"><a href="#cb19-1"></a>mod  <span class="sc">%&gt;%</span> </span>
-<span id="cb19-2" class="hljs-ln-code"><a href="#cb19-2"></a>  <span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb17-1" class="hljs-ln-code"><a href="#cb17-1"></a>mod  <span class="sc">%&gt;%</span> </span>
+<span id="cb17-2" class="hljs-ln-code"><a href="#cb17-2"></a>  <span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>La función <span class="verde-h3">tidy()</span> genera un resultado en formato <code>tibble()</code> que puede ser manipulado, exportado a excel, y convertido a tabla.</li>
@@ -1330,8 +2220,8 @@ F-statistic:  3266 on 2 and 997 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="columns">
 <div class="column" style="width:30%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb21-1" class="hljs-ln-code"><a href="#cb21-1"></a>mod  <span class="sc">%&gt;%</span> </span>
-<span id="cb21-2" class="hljs-ln-code"><a href="#cb21-2"></a>  <span class="fu">tidy</span>(<span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb19-1" class="hljs-ln-code"><a href="#cb19-1"></a>mod  <span class="sc">%&gt;%</span> </span>
+<span id="cb19-2" class="hljs-ln-code"><a href="#cb19-2"></a>  <span class="fu">tidy</span>(<span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Con el argumento <code>conf.int = TRUE</code> mostramos también los intervalos de confianza.</li>
@@ -1356,9 +2246,9 @@ F-statistic:  3266 on 2 and 997 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="columns">
 <div class="column" style="width:30%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb23-1" class="hljs-ln-code"><a href="#cb23-1"></a>mod  <span class="sc">%&gt;%</span> </span>
-<span id="cb23-2" class="hljs-ln-code"><a href="#cb23-2"></a>  <span class="fu">tidy</span>(<span class="at">conf.int =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb23-3" class="hljs-ln-code"><a href="#cb23-3"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb21-1" class="hljs-ln-code"><a href="#cb21-1"></a>mod  <span class="sc">%&gt;%</span> </span>
+<span id="cb21-2" class="hljs-ln-code"><a href="#cb21-2"></a>  <span class="fu">tidy</span>(<span class="at">conf.int =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-3" class="hljs-ln-code"><a href="#cb21-3"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Podemos convertir en tabla <code>gt()</code> para mejorar visualización</li>
@@ -1822,9 +2712,9 @@ F-statistic:  3266 on 2 and 997 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="columns">
 <div class="column" style="width:40%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb24-1" class="hljs-ln-code"><a href="#cb24-1"></a>mod  <span class="sc">%&gt;%</span> </span>
-<span id="cb24-2" class="hljs-ln-code"><a href="#cb24-2"></a>  <span class="fu">tidy</span>(<span class="at">conf.int =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb24-3" class="hljs-ln-code"><a href="#cb24-3"></a>  rio<span class="sc">::</span><span class="fu">export</span>(<span class="st">"tabla_regresion.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb22-1" class="hljs-ln-code"><a href="#cb22-1"></a>mod  <span class="sc">%&gt;%</span> </span>
+<span id="cb22-2" class="hljs-ln-code"><a href="#cb22-2"></a>  <span class="fu">tidy</span>(<span class="at">conf.int =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb22-3" class="hljs-ln-code"><a href="#cb22-3"></a>  rio<span class="sc">::</span><span class="fu">export</span>(<span class="st">"tabla_regresion.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Otra opción es decargar los resultados en un excel, con la función <span class="verde-h3">export()</span> del paquete <span class="verde-h3">{rio}</span></li>
@@ -1848,17 +2738,17 @@ F-statistic:  3266 on 2 and 997 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="broom-paso-a-paso-6" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">{broom} paso a paso</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb25-1" class="hljs-ln-code"><a href="#cb25-1"></a>mod  <span class="sc">%&gt;%</span> </span>
-<span id="cb25-2" class="hljs-ln-code"><a href="#cb25-2"></a>  <span class="fu">tidy</span>(<span class="at">conf.int =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb25-3" class="hljs-ln-code"><a href="#cb25-3"></a>  <span class="fu">mutate</span>(<span class="at">estimate =</span> <span class="fu">round</span>(estimate, <span class="dv">2</span>), </span>
-<span id="cb25-4" class="hljs-ln-code"><a href="#cb25-4"></a>         <span class="at">conf.low =</span> <span class="fu">round</span>(conf.low, <span class="dv">2</span>), </span>
-<span id="cb25-5" class="hljs-ln-code"><a href="#cb25-5"></a>         <span class="at">conf.high =</span> <span class="fu">round</span>(conf.high, <span class="dv">2</span>), </span>
-<span id="cb25-6" class="hljs-ln-code"><a href="#cb25-6"></a>         <span class="at">p.value2 =</span> <span class="fu">case_when</span>(</span>
-<span id="cb25-7" class="hljs-ln-code"><a href="#cb25-7"></a>           p.value <span class="sc">&lt;</span> <span class="fl">0.001</span> <span class="sc">~</span> <span class="st">"&lt;0.001"</span>, </span>
-<span id="cb25-8" class="hljs-ln-code"><a href="#cb25-8"></a>           p.value <span class="sc">&gt;=</span> <span class="fl">0.001</span> <span class="sc">~</span> <span class="fu">as.character</span>(<span class="fu">round</span>(p.value, <span class="dv">3</span>))</span>
-<span id="cb25-9" class="hljs-ln-code"><a href="#cb25-9"></a>         )) <span class="sc">%&gt;%</span> </span>
-<span id="cb25-10" class="hljs-ln-code"><a href="#cb25-10"></a>  <span class="fu">select</span>(term, estimate, conf.low, conf.high, p.value2) <span class="sc">%&gt;%</span> </span>
-<span id="cb25-11" class="hljs-ln-code"><a href="#cb25-11"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb23-1" class="hljs-ln-code"><a href="#cb23-1"></a>mod  <span class="sc">%&gt;%</span> </span>
+<span id="cb23-2" class="hljs-ln-code"><a href="#cb23-2"></a>  <span class="fu">tidy</span>(<span class="at">conf.int =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-3" class="hljs-ln-code"><a href="#cb23-3"></a>  <span class="fu">mutate</span>(<span class="at">estimate =</span> <span class="fu">round</span>(estimate, <span class="dv">2</span>), </span>
+<span id="cb23-4" class="hljs-ln-code"><a href="#cb23-4"></a>         <span class="at">conf.low =</span> <span class="fu">round</span>(conf.low, <span class="dv">2</span>), </span>
+<span id="cb23-5" class="hljs-ln-code"><a href="#cb23-5"></a>         <span class="at">conf.high =</span> <span class="fu">round</span>(conf.high, <span class="dv">2</span>), </span>
+<span id="cb23-6" class="hljs-ln-code"><a href="#cb23-6"></a>         <span class="at">p.value2 =</span> <span class="fu">case_when</span>(</span>
+<span id="cb23-7" class="hljs-ln-code"><a href="#cb23-7"></a>           p.value <span class="sc">&lt;</span> <span class="fl">0.001</span> <span class="sc">~</span> <span class="st">"&lt;0.001"</span>, </span>
+<span id="cb23-8" class="hljs-ln-code"><a href="#cb23-8"></a>           p.value <span class="sc">&gt;=</span> <span class="fl">0.001</span> <span class="sc">~</span> <span class="fu">as.character</span>(<span class="fu">round</span>(p.value, <span class="dv">3</span>))</span>
+<span id="cb23-9" class="hljs-ln-code"><a href="#cb23-9"></a>         )) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-10" class="hljs-ln-code"><a href="#cb23-10"></a>  <span class="fu">select</span>(term, estimate, conf.low, conf.high, p.value2) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-11" class="hljs-ln-code"><a href="#cb23-11"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
 <div id="egplksfxzl" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -2307,22 +3197,22 @@ F-statistic:  3266 on 2 and 997 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="broom-paso-a-paso-7" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">{broom} paso a paso</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb26-1" class="hljs-ln-code"><a href="#cb26-1"></a>mod  <span class="sc">%&gt;%</span> </span>
-<span id="cb26-2" class="hljs-ln-code"><a href="#cb26-2"></a>  <span class="fu">tidy</span>(<span class="at">conf.int =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb26-3" class="hljs-ln-code"><a href="#cb26-3"></a>  <span class="fu">mutate</span>(<span class="at">estimate =</span> <span class="fu">round</span>(estimate, <span class="dv">2</span>), </span>
-<span id="cb26-4" class="hljs-ln-code"><a href="#cb26-4"></a>         <span class="at">conf.low =</span> <span class="fu">round</span>(conf.low, <span class="dv">2</span>), </span>
-<span id="cb26-5" class="hljs-ln-code"><a href="#cb26-5"></a>         <span class="at">conf.high =</span> <span class="fu">round</span>(conf.high, <span class="dv">2</span>), </span>
-<span id="cb26-6" class="hljs-ln-code"><a href="#cb26-6"></a>         <span class="at">p.value2 =</span> <span class="fu">case_when</span>(</span>
-<span id="cb26-7" class="hljs-ln-code"><a href="#cb26-7"></a>           p.value <span class="sc">&lt;</span> <span class="fl">0.001</span> <span class="sc">~</span> <span class="st">"&lt;0.001"</span>, </span>
-<span id="cb26-8" class="hljs-ln-code"><a href="#cb26-8"></a>           p.value <span class="sc">&gt;=</span> <span class="fl">0.001</span> <span class="sc">~</span> <span class="fu">paste</span>(<span class="st">"= "</span>, <span class="fu">round</span>(p.value, <span class="dv">3</span>))</span>
-<span id="cb26-9" class="hljs-ln-code"><a href="#cb26-9"></a>         )) <span class="sc">%&gt;%</span> </span>
-<span id="cb26-10" class="hljs-ln-code"><a href="#cb26-10"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb26-11" class="hljs-ln-code"><a href="#cb26-11"></a>    <span class="st">`</span><span class="at">Coeficiente (IC95%), p valor</span><span class="st">`</span> <span class="ot">=</span> </span>
-<span id="cb26-12" class="hljs-ln-code"><a href="#cb26-12"></a>      <span class="fu">glue</span>(<span class="st">"{estimate} (IC95% {conf.low} a {conf.high}), p {p.value2}"</span>), </span>
-<span id="cb26-13" class="hljs-ln-code"><a href="#cb26-13"></a>    <span class="at">Variables =</span> <span class="fu">c</span>(<span class="st">"Intercepto"</span>, <span class="st">"Tratamiento nuevo vs. Placebo"</span>, <span class="st">"Peso inicial (kg)"</span>)</span>
-<span id="cb26-14" class="hljs-ln-code"><a href="#cb26-14"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb26-15" class="hljs-ln-code"><a href="#cb26-15"></a>  <span class="fu">select</span>(Variables, <span class="st">`</span><span class="at">Coeficiente (IC95%), p valor</span><span class="st">`</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb26-16" class="hljs-ln-code"><a href="#cb26-16"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb24-1" class="hljs-ln-code"><a href="#cb24-1"></a>mod  <span class="sc">%&gt;%</span> </span>
+<span id="cb24-2" class="hljs-ln-code"><a href="#cb24-2"></a>  <span class="fu">tidy</span>(<span class="at">conf.int =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-3" class="hljs-ln-code"><a href="#cb24-3"></a>  <span class="fu">mutate</span>(<span class="at">estimate =</span> <span class="fu">round</span>(estimate, <span class="dv">2</span>), </span>
+<span id="cb24-4" class="hljs-ln-code"><a href="#cb24-4"></a>         <span class="at">conf.low =</span> <span class="fu">round</span>(conf.low, <span class="dv">2</span>), </span>
+<span id="cb24-5" class="hljs-ln-code"><a href="#cb24-5"></a>         <span class="at">conf.high =</span> <span class="fu">round</span>(conf.high, <span class="dv">2</span>), </span>
+<span id="cb24-6" class="hljs-ln-code"><a href="#cb24-6"></a>         <span class="at">p.value2 =</span> <span class="fu">case_when</span>(</span>
+<span id="cb24-7" class="hljs-ln-code"><a href="#cb24-7"></a>           p.value <span class="sc">&lt;</span> <span class="fl">0.001</span> <span class="sc">~</span> <span class="st">"&lt;0.001"</span>, </span>
+<span id="cb24-8" class="hljs-ln-code"><a href="#cb24-8"></a>           p.value <span class="sc">&gt;=</span> <span class="fl">0.001</span> <span class="sc">~</span> <span class="fu">paste</span>(<span class="st">"= "</span>, <span class="fu">round</span>(p.value, <span class="dv">3</span>))</span>
+<span id="cb24-9" class="hljs-ln-code"><a href="#cb24-9"></a>         )) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-10" class="hljs-ln-code"><a href="#cb24-10"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb24-11" class="hljs-ln-code"><a href="#cb24-11"></a>    <span class="st">`</span><span class="at">Coeficiente (IC95%), p valor</span><span class="st">`</span> <span class="ot">=</span> </span>
+<span id="cb24-12" class="hljs-ln-code"><a href="#cb24-12"></a>      <span class="fu">glue</span>(<span class="st">"{estimate} (IC95% {conf.low} a {conf.high}), p {p.value2}"</span>), </span>
+<span id="cb24-13" class="hljs-ln-code"><a href="#cb24-13"></a>    <span class="at">Variables =</span> <span class="fu">c</span>(<span class="st">"Intercepto"</span>, <span class="st">"Tratamiento nuevo vs. Placebo"</span>, <span class="st">"Peso inicial (kg)"</span>)</span>
+<span id="cb24-14" class="hljs-ln-code"><a href="#cb24-14"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-15" class="hljs-ln-code"><a href="#cb24-15"></a>  <span class="fu">select</span>(Variables, <span class="st">`</span><span class="at">Coeficiente (IC95%), p valor</span><span class="st">`</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-16" class="hljs-ln-code"><a href="#cb24-16"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
 <div id="mfjhjfswqv" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -2759,12 +3649,12 @@ F-statistic:  3266 on 2 and 997 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="en-resumen-1" class="slide level2">
 <h2>En resumen</h2>
 <div class="panel-tabset">
-<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">Modelo estimado</a></li><li><a href="#tabset-4-2">Modelo para interpretación</a></li><li><a href="#tabset-4-3">Interpretación</a></li></ul>
+<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">Modelo estimado</a></li><li><a href="#tabset-5-2">Modelo para interpretación</a></li><li><a href="#tabset-5-3">Interpretación</a></li></ul>
 <div class="tab-content">
-<div id="tabset-4-1">
+<div id="tabset-5-1">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(y_peso_final <span class="sc">~</span> x1_tto <span class="sc">+</span> x3_peso_inicial, <span class="at">data =</span> datos2)</span>
-<span id="cb27-2"><a href="#cb27-2"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(y_peso_final <span class="sc">~</span> x1_tto <span class="sc">+</span> x3_peso_inicial, <span class="at">data =</span> datos2)</span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -2799,7 +3689,7 @@ F-statistic:  3266 on 2 and 997 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </div>
-<div id="tabset-4-2">
+<div id="tabset-5-2">
 <div class="cell">
 <div class="cell-output-display">
 
@@ -3251,14 +4141,14 @@ F-statistic:  3266 on 2 and 997 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(y_peso_final <span class="sc">~</span> x1_tto <span class="sc">+</span> x3_peso_inicial, <span class="at">data =</span> datos2)</span>
-<span id="cb29-2"><a href="#cb29-2"></a></span>
-<span id="cb29-3"><a href="#cb29-3"></a>mod <span class="sc">%&gt;%</span> </span>
-<span id="cb29-4"><a href="#cb29-4"></a>  <span class="fu">tidy</span>(<span class="at">conf.int =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb29-5"><a href="#cb29-5"></a>  <span class="fu">gt</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(y_peso_final <span class="sc">~</span> x1_tto <span class="sc">+</span> x3_peso_inicial, <span class="at">data =</span> datos2)</span>
+<span id="cb27-2"><a href="#cb27-2"></a></span>
+<span id="cb27-3"><a href="#cb27-3"></a>mod <span class="sc">%&gt;%</span> </span>
+<span id="cb27-4"><a href="#cb27-4"></a>  <span class="fu">tidy</span>(<span class="at">conf.int =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-5"><a href="#cb27-5"></a>  <span class="fu">gt</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<div id="tabset-4-3">
+<div id="tabset-5-3">
 <ul>
 <li><p><span class="math inline">\(\beta_0\)</span> o <code>intercepto</code>: Este viene a ser el valor promedio de <span class="math inline">\(y\)</span> cuando todos los valores de <span class="math inline">\(x\)</span> son 0. En este caso, cuando el peso inicial es cero kg y cuando el tratamiento es placebo. ¿Esto es posible?, por tal motivo, no se suele interpretar este valor.</p></li>
 <li><p><span class="math inline">\(\beta_2\)</span> o coeficiente de regresión de <code>x1_ttoTratamiento Nuevo</code>: El promedio de peso final en quienes recibieron el tratamiento nuevo fue 10.26 kg menor que el de quienes recibieron placebo, luego de ajustar por peso inicial (Dif. medias = -10.26; IC95% -10.51 a -9.99; p &lt; 0.001).</p></li>
@@ -3330,9 +4220,9 @@ F-statistic:  3266 on 2 and 997 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="supuestos-adicionales-que-suelen-acompañar-a-la-regresión-lineal-normal" class="slide level2">
 <h2>Supuestos adicionales que suelen acompañar a la regresión lineal normal</h2>
 <div class="panel-tabset">
-<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">Generalizar a población finita conocida</a></li><li><a href="#tabset-5-2">Inferencia causal</a></li></ul>
+<ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">Generalizar a población finita conocida</a></li><li><a href="#tabset-6-2">Inferencia causal</a></li></ul>
 <div class="tab-content">
-<div id="tabset-5-1">
+<div id="tabset-6-1">
 <p><strong>Supuestos si queremos generalizar a una población finita bien definida</strong></p>
 <ul>
 <li><p>La muestra es representativa de la población.</p>
@@ -3345,7 +4235,7 @@ F-statistic:  3266 on 2 and 997 DF,  p-value: &lt; 2.2e-16</code></pre>
 </ul></li>
 </ul>
 </div>
-<div id="tabset-5-2">
+<div id="tabset-6-2">
 <ul>
 <li><p>Hay asignación aleatoria</p>
 <ul>
@@ -3387,50 +4277,84 @@ F-statistic:  3266 on 2 and 997 DF,  p-value: &lt; 2.2e-16</code></pre>
 <li><p>La función <code>check_model</code> del paquete <code>{performance}</code> genera un panel de gráficos muy útil para evalur estos supuestos.</p></li>
 <li><p>Podemos complentar el análisis de supuestos con funciones del paquete <code>{car}</code>.</p></li>
 </ul>
-<div class="panel-tabset">
-<ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">Panel general</a></li><li><a href="#tabset-6-2">Lin. det.</a></li><li><a href="#tabset-6-3">Homo. det.</a></li><li><a href="#tabset-6-4">P. inf. det.</a></li></ul>
-<div class="tab-content">
-<div id="tabset-6-1">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">library</span>(performance)</span>
-<span id="cb30-2"><a href="#cb30-2"></a><span class="fu">check_model</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img data-src="sesion08_chalkboard_files/figure-revealjs/unnamed-chunk-51-1.png" width="960"></p>
-</div>
-</div>
-</div>
-<div id="tabset-6-2">
+</section>
+<section id="función-check_model-para-evaluar-supuestos" class="slide level2 scrollable">
+<h2>Función <span class="verde-h3">check_model()</span> para evaluar supuestos</h2>
+<ul>
+<li><p>Podemos observar un panel general con la evaluación de varios supuestos</p></li>
+<li><p>Primero cargamos el paquete performance:</p></li>
+</ul>
+<div class="sourceCode" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">library</span>(performance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><p>Luego, la función <span class="verde-h3">check_model()</span> aplicada al objeto de modelado genera un panel de gráficos para evaluar diversos supuestos o detectar algunos problemas.</p></li>
+<li><p>Los gráficos de homogeneidad de varianzas, linealidad y de normalidad de residuos usan residuos estandarizados para el caso de <span class="verde-h3">lm()</span></p></li>
+</ul>
+<div class="sourceCode" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">check_model</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="función-check_model-para-evaluar-supuestos-cont." class="slide level2 scrollable">
+<h2>Función <span class="verde-h3">check_model()</span> para evaluar supuestos (cont.)</h2>
+
+<img data-src="img/check_model.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="linealidad" class="slide level2">
+<h2>Linealidad</h2>
+<ul>
+<li><p>La función <span class="verde-h3">check_model()</span> genera un gráfico de residuos versus valores ajustados que permiten evaluar linealidad.</p></li>
+<li><p>Podemos graficar los residuos contra cada variable predictora numérica para identificar si alguna de estas variables es causante de no linealidad e incluso tener una idea de qué forma funcional podría ser apropiada.</p></li>
+<li><p>Los gráficos de residuos crudos, los estandarizados, e incluso los estudentizdos versus cada covariable pueden no generar gráficos donde se visualicen apropiadamente la no linealidad.</p></li>
+<li><p>Los residuos parciales son un tipo de residuo que genera gráficos de mejor “resolución” para diagnosticar problemas de no linealidad.</p></li>
+</ul>
+</section>
+<section id="linealidad-con-el-paquete-car" class="slide level2">
+<h2>Linealidad con el paquete <span class="verde-h3">{car}</span></h2>
 <ul>
 <li>Podemos usar gráficos de residuos parciales + Componente:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">library</span>(car)</span>
-<span id="cb31-2"><a href="#cb31-2"></a><span class="fu">crPlots</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img data-src="sesion08_chalkboard_files/figure-revealjs/unnamed-chunk-52-1.png" width="960"></p>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb30-2"><a href="#cb30-2"></a><span class="fu">crPlots</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
 </div>
-</div>
+<img data-src="sesion08_chalkboard_files/figure-revealjs/unnamed-chunk-52-1.png" width="960" class="r-stretch"></section>
+<section id="linealidad-con-el-paquete-car-cont." class="slide level2">
+<h2>Linealidad con el paquete <span class="verde-h3">{car}</span> (cont.)</h2>
 <ul>
 <li>También podemos usar gráficos de variable agregada</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">avPlots</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img data-src="sesion08_chalkboard_files/figure-revealjs/unnamed-chunk-53-1.png" width="960"></p>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">avPlots</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
 </div>
-</div>
-</div>
-<div id="tabset-6-3">
-<ul>
-<li><p>Se puede evaluar si la homocedasticidad es consistente según cada variable predictora.</p></li>
-<li><p>Si no lo es, se puede optar por modelar esta heterogeneidad de varianzas.</p></li>
-<li><p>Se sugiere usar <code>residuos estudentizados</code>.</p></li>
-</ul>
+<img data-src="sesion08_chalkboard_files/figure-revealjs/unnamed-chunk-53-1.png" width="960" class="r-stretch"></section>
+<section id="linealidad-con-función-termplot-de-paquete-stats-cont." class="slide level2 scrollable">
+<h2>Linealidad con función <span class="verde-h3">termplot()</span> de paquete <span class="verde-h3">{stats}</span> (cont.)</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">residualPlots</span>(mod, <span class="at">type =</span> <span class="st">"rstudent"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">termplot</span>(mod, <span class="at">partial.resid =</span> <span class="cn">TRUE</span>, <span class="at">se =</span> <span class="cn">TRUE</span>, <span class="at">ask =</span> <span class="cn">FALSE</span>, <span class="at">smooth =</span> panel.smooth)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img data-src="sesion08_chalkboard_files/figure-revealjs/unnamed-chunk-54-1.png" width="960"></p>
 </div>
+<div class="cell-output-display">
+<p><img data-src="sesion08_chalkboard_files/figure-revealjs/unnamed-chunk-54-2.png" width="960"></p>
+</div>
+</div>
+</section>
+<section id="linealidad-con-el-paquete-ggeffects-cont." class="slide level2">
+<h2>Linealidad con el paquete <span class="verde-h3">{ggeffects}</span> (cont.)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">library</span>(ggeffects)</span>
+<span id="cb33-2"><a href="#cb33-2"></a>xb <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(mod, <span class="st">"x3_peso_inicial [all]"</span>)</span>
+<span id="cb33-3"><a href="#cb33-3"></a><span class="fu">plot</span>(xb, <span class="at">residuals =</span> <span class="cn">TRUE</span>, <span class="at">residuals.line =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="sesion08_chalkboard_files/figure-revealjs/unnamed-chunk-55-1.png" width="960" class="r-stretch"></section>
+<section id="homogeneidad-de-varianzas-homocedasticidad" class="slide level2 scrollable">
+<h2>Homogeneidad de varianzas (Homocedasticidad)</h2>
+<ul>
+<li><p>Se puede evaluar si la homocedasticidad es consistente según cada variable predictora.</p></li>
+<li><p>Se sugiere usar <code>residuos estudentizados</code>.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">residualPlots</span>(mod, <span class="at">type =</span> <span class="st">"rstudent"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
 <div class="cell-output cell-output-stdout">
 <pre><code>                Test stat Pr(&gt;|Test stat|)
 x1_tto                                    
@@ -3438,45 +4362,67 @@ x3_peso_inicial    1.2180           0.2235
 Tukey test         0.5429           0.5872</code></pre>
 </div>
 </div>
+<img data-src="sesion08_chalkboard_files/figure-revealjs/unnamed-chunk-56-1.png" width="960" class="r-stretch"></section>
+<section id="homogeneidad-de-varianzas-homocedasticidad-1" class="slide level2 scrollable">
+<h2>Homogeneidad de varianzas (Homocedasticidad)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">residualPlots</span>(mod, <span class="at">type =</span> <span class="st">"rstudent"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<div class="cell-output cell-output-stdout">
+<pre><code>                Test stat Pr(&gt;|Test stat|)
+x1_tto                                    
+x3_peso_inicial    1.2180           0.2235
+Tukey test         0.5429           0.5872</code></pre>
 </div>
-<div id="tabset-6-4">
+</div>
+<img data-src="sesion08_chalkboard_files/figure-revealjs/unnamed-chunk-57-1.png" width="960" class="r-stretch"></section>
+<section id="outliers-puntos-influyentes-y-dfbetas" class="slide level2 scrollable">
+<h2>Outliers, puntos influyentes y dfbetas</h2>
+<ul>
+<li><p>Diversas medidas pueden usarse para detectar la existencia de valores extremos y puntos de alto apalancamiento que puedan ser influyentes.</p></li>
+<li><p>La función <span class="verde-h3">influenceIndexPlot()</span> del paquete <span class="verde-h3">{car}</span> es muy útil para generar estos gráficos.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="fu">influenceIndexPlot</span>(<span class="at">model =</span> mod, <span class="at">id.n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="sesion08_chalkboard_files/figure-revealjs/unnamed-chunk-58-1.png" width="960" class="r-stretch"></section>
+<section id="outliers-puntos-influyentes-y-dfbetas-1" class="slide level2 scrollable">
+<h2>Outliers, puntos influyentes y dfbetas</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="fu">influenceIndexPlot</span>(<span class="at">model =</span> mod, <span class="at">id.n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="sesion08_chalkboard_files/figure-revealjs/unnamed-chunk-59-1.png" width="960" class="r-stretch"></section>
+<section id="outliers-puntos-influyentes-y-dfbetas-2" class="slide level2 scrollable">
+<h2>Outliers, puntos influyentes y dfbetas</h2>
 <ul>
 <li><p>En el caso de modelos explicativos, importa determinar si hay un impacto en los coeficientes de regresion.</p></li>
 <li><p>Los <code>dfbetas</code> pueden ser útiles para evaluar esto:</p></li>
 </ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">dfbetasPlots</span>(<span class="at">model =</span> mod, <span class="at">id.n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img data-src="sesion08_chalkboard_files/figure-revealjs/unnamed-chunk-55-1.png" width="960"></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="fu">dfbetasPlots</span>(<span class="at">model =</span> mod, <span class="at">id.n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
 </div>
-</div>
-<ul>
-<li>Otras medidas también pueden evaluarse:</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">influenceIndexPlot</span>(<span class="at">model =</span> mod, <span class="at">id.n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img data-src="sesion08_chalkboard_files/figure-revealjs/unnamed-chunk-56-1.png" width="960"></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
+<img data-src="sesion08_chalkboard_files/figure-revealjs/unnamed-chunk-60-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
 <section id="cómo-flexibilizar-supuestos" class="slide level2 scrollable">
 <h2>¿Cómo flexibilizar supuestos?</h2>
 <div class="panel-tabset">
-<ul id="tabset-7" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-7-1">No linealidad</a></li><li><a href="#tabset-7-2">Heterocedasticidad</a></li><li><a href="#tabset-7-3">No normalidad</a></li></ul>
+<ul id="tabset-7" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-7-1">No linealidad</a></li><li><a href="#tabset-7-2">Forma funcional</a></li><li><a href="#tabset-7-3">NUNCA categorice</a></li></ul>
 <div class="tab-content">
 <div id="tabset-7-1">
 <ul>
 <li><p>El supuesto de linealidad es sobre los coeficientes de regresión <span class="math inline">\(\beta\)</span>, no sobre las covariables.</p></li>
 <li><p>Las variables X deben estar en una forma apropiada para que el supuesto se cumpla.</p></li>
-<li><p>Es bien difícil que exista linealidad en la realida, pero puede ocurrir en raras y excepcionales ocasiones.</p>
+<li><p>Es bien difícil que exista linealidad en la realidad, pero puede ocurrir en raras y excepcionales ocasiones.</p>
 <ul>
 <li>Sobre todo cuando la variable está acotada en valores donde la linealidad es plausible.</li>
 </ul></li>
-<li><p>Se sugiere asumir no linealidad y pre-planear un modelamiento no lineal.</p></li>
+<li><p>Se sugiere asumir no linealidad y pre-planear un modelamiento no lineal de la forma funcional de los predictores.</p></li>
+</ul>
+</div>
+<div id="tabset-7-2">
+<ul>
 <li><p>Entre los métodos que pueden usarse, tenemos:</p>
 <ul>
 <li><p><code>Splines</code>: Bastante usado y sugerido en bioestadística. Útil para ajustar por variables continuas.</p></li>
@@ -3484,8 +4430,9 @@ Tukey test         0.5429           0.5872</code></pre>
 <li><p><code>Polinomios</code>. Menos flexible, puede ser útil si se conoce bien la relación o se busca mejorar ajuste.</p></li>
 <li><p><code>Modelos aditivos generalizados</code>. Útil si se buscar modelar la relación. Complejos y requieren muchos datos.</p></li>
 </ul></li>
-<li><p>Veamos un ejemplo de modelamiento continuo con <code>splines</code>:</p></li>
 </ul>
+</div>
+<div id="tabset-7-3">
 <div class="callout callout-note callout-captioned callout-style-default">
 <div class="callout-body">
 <div class="callout-caption">
@@ -3508,21 +4455,28 @@ Tukey test         0.5429           0.5872</code></pre>
 </div>
 </div>
 </div>
-<div id="tabset-7-2">
+</div>
+</div>
+</section>
+<section id="cómo-flexibilizar-supuestos-cont." class="slide level2 scrollable">
+<h2>¿Cómo flexibilizar supuestos? (cont.)</h2>
+<div class="panel-tabset">
+<ul id="tabset-8" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-8-1">Heterocedasticidad</a></li><li><a href="#tabset-8-2">No normalidad</a></li></ul>
+<div class="tab-content">
+<div id="tabset-8-1">
 <ul>
-<li><p>No homogeneidad de varianzas</p></li>
-<li><p>Podemos usar una estimación robusta de la varianza.</p></li>
-<li><p>Los paquetes <code>{sanwich}</code> y <code>{lmtest}</code> proporcionan funciones útiles para esto.</p></li>
+<li><p>No homogeneidad de varianzas: Podemos usar una estimación robusta de la varianza o modelar directamente la varianza.</p></li>
+<li><p>Los paquetes <code>{sanwich}</code> y <code>{lmtest}</code> proporcionan funciones útiles para estimación robusta de varianza.</p></li>
 <li><p>Es bien difícil de creer que existe homogeneidad de varianzas en la vida real (salvo muy raras y excepcionales ocasiones).</p>
 <ul>
 <li>Se sugiere planear el proyecto asumiendo que no hay homocedasticidad y usar inferencia robusta de manera pre-planeada.</li>
 </ul></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">library</span>(lmtest)</span>
-<span id="cb37-2"><a href="#cb37-2"></a><span class="fu">library</span>(sandwich)</span>
-<span id="cb37-3"><a href="#cb37-3"></a><span class="fu">coeftest</span>(mod, <span class="at">vcov =</span> vcovHC) <span class="sc">%&gt;%</span> </span>
-<span id="cb37-4"><a href="#cb37-4"></a>  <span class="fu">tidy</span>(<span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="fu">library</span>(lmtest)</span>
+<span id="cb41-2"><a href="#cb41-2"></a><span class="fu">library</span>(sandwich)</span>
+<span id="cb41-3"><a href="#cb41-3"></a><span class="fu">coeftest</span>(mod, <span class="at">vcov =</span> vcovHC) <span class="sc">%&gt;%</span> </span>
+<span id="cb41-4"><a href="#cb41-4"></a>  <span class="fu">tidy</span>(<span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 7
   term                    estimate std.error statistic  p.value conf.low conf.…¹
@@ -3534,7 +4488,7 @@ Tukey test         0.5429           0.5872</code></pre>
 </div>
 </div>
 </div>
-<div id="tabset-7-3">
+<div id="tabset-8-2">
 <ul>
 <li><p>Si distribución es normal (cosa que no podemos saber con certeza), podemos dejar de preocuparnos por este supuesto.</p></li>
 <li><p>Si se cumple TLC, podemos dejar de preocuparnos por este supuesto.</p></li>
